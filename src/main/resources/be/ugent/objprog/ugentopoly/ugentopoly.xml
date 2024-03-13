@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<board>
+    <settings balance="1500" start="200" size="40"/>
+
+    <areas>
+        <area id="area1" color="#8b4513" house="50"/>
+        <area id="area2" color="#87cefa" house="50"/>
+        <area id="area3" color="#9932cc" house="100"/>
+        <area id="area4" color="#ff8c00" house="100"/>
+        <area id="area5" color="#ff0000" house="150"/>
+        <area id="area6" color="#ffff00" house="150"/>
+        <area id="area7" color="#006400" house="200"/>
+        <area id="area8" color="#000080" house="200"/>
+    </areas>
+
+    <tiles>
+        <tile type="START" position="0" id="tile.start"/>
+        <tile type="STREET" position="1" area="area1" id="tile.street01" cost="60" rent0="2" rent1="10" rent2="30" rent3="90" rent4="160" rent5="250"/>
+        <tile type="CHEST" position="2" id="tile.chest"/>
+        <tile type="STREET" position="3" area="area1" id="tile.street02" cost="60" rent0="4" rent1="20" rent2="60" rent3="180" rent4="320" rent5="450"/>
+        <tile type="TAX" position="4" id="tile.tax1" amount="200"/>
+        <tile type="RAILWAY" position="5" id="tile.railway1" cost="200"/>
+        <tile type="STREET" position="6" area="area2" id="tile.street03" cost="100" rent0="6" rent1="30" rent2="90" rent3="270" rent4="400" rent5="550"/>
+        <tile type="CHANCE" position="7" id="tile.chance"/>
+        <tile type="STREET" position="8" area="area2" id="tile.street04" cost="100" rent0="6" rent1="30" rent2="90" rent3="270" rent4="400" rent5="550"/>
+        <tile type="STREET" position="9" area="area2" id="tile.street05" cost="120" rent0="8" rent1="40" rent2="100" rent3="300" rent4="450" rent5="600"/>
+        <tile type="JAIL" position="10" id="tile.jail"/>
+        <tile type="STREET" position="11" area="area3" id="tile.street06" cost="140" rent0="10" rent1="50" rent2="150" rent3="450" rent4="625" rent5="750"/>
+        <tile type="UTILITY" position="12" id="tile.utility1" cost="150"/>
+        <tile type="STREET" position="13" area="area3" id="tile.street07" cost="140" rent0="10" rent1="50" rent2="150" rent3="450" rent4="625" rent5="750"/>
+        <tile type="STREET" position="14" area="area3" id="tile.street08" cost="160" rent0="12" rent1="60" rent2="180" rent3="500" rent4="700" rent5="900"/>
+        <tile type="RAILWAY" position="15" id="tile.railway2" cost="200"/>
+        <tile type="STREET" position="16" area="area4" id="tile.street09" cost="180" rent0="14" rent1="70" rent2="200" rent3="550" rent4="750" rent5="950"/>
+        <tile type="CHEST" position="17" id="tile.chest"/>
+        <tile type="STREET" position="18" area="area4" id="tile.street10" cost="180" rent0="14" rent1="70" rent2="200" rent3="550" rent4="750" rent5="950"/>
+        <tile type="STREET" position="19" area="area4" id="tile.street11" cost="200" rent0="16" rent1="80" rent2="220" rent3="600" rent4="800" rent5="1000"/>
+        <tile type="FREE_PARKING" position="20" id="tile.freeparking"/>
+        <tile type="STREET" position="21" area="area5" id="tile.street12" cost="220" rent0="18" rent1="90" rent2="250" rent3="700" rent4="875" rent5="1050"/>
+        <tile type="CHANCE" position="22" id="tile.chance"/>
+        <tile type="STREET" position="23" area="area5" id="tile.street13" cost="220" rent0="18" rent1="90" rent2="250" rent3="700" rent4="875" rent5="1050"/>
+        <tile type="STREET" position="24" area="area5" id="tile.street14" cost="240" rent0="20" rent1="100" rent2="300" rent3="750" rent4="925" rent5="1100"/>
+        <tile type="RAILWAY" position="25" id="tile.railway3" cost="200"/>
+        <tile type="STREET" position="26" area="area6" id="tile.street15" cost="260" rent0="22" rent1="110" rent2="330" rent3="800" rent4="975" rent5="1150"/>
+        <tile type="STREET" position="27" area="area6" id="tile.street16" cost="260" rent0="22" rent1="110" rent2="330" rent3="800" rent4="975" rent5="1150"/>
+        <tile type="UTILITY" position="28" id="tile.utility2" cost="150"/>
+        <tile type="STREET" position="29" area="area6" id="tile.street17" cost="280" rent0="24" rent1="120" rent2="360" rent3="850" rent4="1025" rent5="1200"/>
+        <tile type="GO_TO_JAIL" position="30" id="tile.gotojail"/>
+        <tile type="STREET" position="31" area="area7" id="tile.street18" cost="300" rent0="26" rent1="130" rent2="390" rent3="900" rent4="1100" rent5="1275"/>
+        <tile type="STREET" position="32" area="area7" id="tile.street19" cost="300" rent0="26" rent1="130" rent2="390" rent3="900" rent4="1100" rent5="1275"/>
+        <tile type="CHEST" position="33" id="tile.chest"/>
+        <tile type="STREET" position="34" area="area7" id="tile.street20" cost="320" rent0="28" rent1="150" rent2="450" rent3="1000" rent4="1200" rent5="1400"/>
+        <tile type="RAILWAY" position="35" id="tile.railway4" cost="200"/>
+        <tile type="CHANCE" position="36" id="tile.chance"/>
+        <tile type="STREET" position="37" area="area8" id="tile.street21" cost="350" rent0="35" rent1="175" rent2="500" rent3="1100" rent4="1300" rent5="1500"/>
+        <tile type="TAX" position="38" id="tile.tax2" amount="75"/>
+        <tile type="STREET" position="39" area="area8" id="tile.street22" cost="400" rent0="50" rent1="200" rent2="600" rent3="1400" rent4="1700" rent5="2000"/>
+    </tiles>
+
+    <deck type="CHANCE">
+        <card type="JAIL" id="card.chance.01" />
+        <card type="MOVE" collect="false" position="10" id="card.chance.02" />
+        <card type="MOVE" collect="true" position="19" id="card.chance.03" />
+        <card type="MOVE" collect="true" position="31" id="card.chance.04" />
+        <card type="MOVEREL" relative="-3" id="card.chance.05" />
+        <card type="MONEY" amount="20" id="card.chance.06" />
+        <card type="MONEY" amount="-50" id="card.chance.07" />
+        <card type="PLAYERS_MONEY" amount="5" id="card.chance.08" />
+    </deck>
+
+    <deck type="CHEST">
+        <card type="JAIL" id="card.chest.01" />
+        <card type="MOVE" collect="true" position="26" id="card.chest.02" />
+        <card type="MONEY" amount="-50" id="card.chest.03" />
+        <card type="MONEY" amount="100" id="card.chest.04" />
+        <card type="MOVE" collect="true" position="39" id="card.chest.05" />
+        <card type="MONEY" amount="-10" id="card.chest.06" />
+        <card type="MOVEREL" relative="-3" id="card.chest.07" />
+    </deck>
+</board>
