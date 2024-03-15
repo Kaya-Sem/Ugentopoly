@@ -6,9 +6,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class Board extends VBox {
-    private static final int BOARD_WIDTH = 845;
+    public static final int BOARD_WIDTH = 845;
 
-    private static final int BOARD_HEIGHT = 845;
+    public static final int BOARD_HEIGHT = 845;
     VBox board;
 
 
