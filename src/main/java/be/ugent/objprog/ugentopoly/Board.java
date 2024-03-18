@@ -2,7 +2,7 @@ package be.ugent.objprog.ugentopoly;
 
 import be.ugent.objprog.ugentopoly.tiles.CornerTile;
 import be.ugent.objprog.ugentopoly.tiles.HorizontalTile;
-import be.ugent.objprog.ugentopoly.tiles.MiddleBoard;
+import be.ugent.objprog.ugentopoly.tiles.MiddleSection;
 import be.ugent.objprog.ugentopoly.tiles.VerticalTile;
 import javafx.geometry.Pos;
 import javafx.scene.layout.ColumnConstraints;
@@ -65,9 +65,12 @@ public class Board extends GridPane {
             rightBar.getChildren().add(new HorizontalTile());
         }
 
+        MiddleSection middleBoard = new MiddleSection();
+
         // Add components to the GridPane
         add(upperRow, 0, 0, 3, 1); // Top row spans 3 columns
         add(leftBar, 0, 1, 1, 1);
+        add(middleBoard, 1, 1, 1, 1);
         add(rightBar, 2, 1, 1, 1);
         add(bottomRow, 0, 2, 3, 1); // Bottom row spans 3 columns
     }
