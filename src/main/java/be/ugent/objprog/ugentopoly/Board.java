@@ -16,6 +16,8 @@ public class Board extends GridPane {
         setHeight(BOARD_HEIGHT);
         setWidth(BOARD_WIDTH);
         setPrefSize(BOARD_WIDTH, BOARD_HEIGHT);
+        setMaxHeight(BOARD_HEIGHT);
+        setMaxWidth(BOARD_WIDTH);
         setAlignment(Pos.CENTER);
         setStyle("-fx-background-color: #119dcb;");
 
