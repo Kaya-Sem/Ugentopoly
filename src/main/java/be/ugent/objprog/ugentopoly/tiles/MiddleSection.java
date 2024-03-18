@@ -23,17 +23,19 @@ public class MiddleSection extends StackPane {
         ImageView bottomImageView = new ImageView(bottomImage);
         bottomImageView.setViewport(new Rectangle2D(0, 0, SIZE, SIZE));
 
+        // TODO extract logo or make cleaner
         // Load the top image
         InputStream topImageStream = getClass().getResourceAsStream("/be/ugent/objprog/ugentopoly/assets/logo.png");
         Image topImage = new Image(Objects.requireNonNull(topImageStream));
-        ImageView topImageView = new ImageView(topImage);
+        ImageView logo = new ImageView(topImage);
         //topImageView.setViewport(new Rectangle2D(0, 0, SIZE, SIZE));
 
         // Scale down the logo to fit within the bounds
-        topImageView.setFitWidth(SIZE);
-        topImageView.setFitHeight(SIZE * 0.15);
-        topImageView.setRotate(45.0);
+        logo.setPreserveRatio(true);
+        logo.setFitWidth(845 - 2 * Tile.LONG_SIDE);
+        logo.setFitHeight(SIZE * 0.15);
+        logo.setRotate(45.0);
 
-        getChildren().addAll(bottomImageView, topImageView);
+        getChildren().addAll(bottomImageView, logo);
     }
 }
