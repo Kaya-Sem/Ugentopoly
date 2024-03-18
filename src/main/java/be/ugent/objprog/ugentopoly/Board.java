@@ -2,6 +2,7 @@ package be.ugent.objprog.ugentopoly;
 
 import be.ugent.objprog.ugentopoly.tiles.CornerTile;
 import be.ugent.objprog.ugentopoly.tiles.HorizontalTile;
+import be.ugent.objprog.ugentopoly.tiles.MiddleBoard;
 import be.ugent.objprog.ugentopoly.tiles.VerticalTile;
 import javafx.geometry.Pos;
 import javafx.scene.layout.ColumnConstraints;
@@ -25,24 +26,22 @@ public class Board extends GridPane {
         setMaxHeight(BOARD_HEIGHT);
         setMaxWidth(BOARD_WIDTH);
         setAlignment(Pos.CENTER);
-        setStyle("-fx-background-color: #119dcb;");
+        setStyle("-fx-background-color: #A09ABC;");
 
         HBox upperRow = new HBox();
         HBox bottomRow = new HBox();
-        HBox midSection = new HBox();
         VBox leftBar = new VBox();
         VBox rightBar = new VBox();
 
-        // Set column constraints
-        getColumnConstraints().addAll(
-                new ColumnConstraints(TILE_WIDTH * 2), // Left bar column
-                new ColumnConstraints(TILE_WIDTH * 5) // Mid section column
+
+        getColumnConstraints().addAll( // Set column constraints
+                new ColumnConstraints(TILE_WIDTH ), // Left bar column
+                new ColumnConstraints((845 / 13) * 9) // Mid section column
         );
 
-        // Set row constraints
-        getRowConstraints().addAll(
+        getRowConstraints().addAll( // Set row constraints
                 new RowConstraints(TILE_HEIGHT ), // Top row
-                new RowConstraints((845 / 13) *9) // Mid-section row
+                new RowConstraints((845.0 / 13) *9) // Mid-section row
         );
 
         // fill upper row
@@ -66,11 +65,10 @@ public class Board extends GridPane {
             rightBar.getChildren().add(new HorizontalTile());
         }
 
-        midSection.getChildren().addAll(leftBar, new HBox(), rightBar);
-
         // Add components to the GridPane
         add(upperRow, 0, 0, 3, 1); // Top row spans 3 columns
-        add(midSection, 0, 1, 3, 1); // Mid section spans 3 columns
+        add(leftBar, 0, 1, 1, 1);
+        add(rightBar, 2, 1, 1, 1);
         add(bottomRow, 0, 2, 3, 1); // Bottom row spans 3 columns
     }
 }

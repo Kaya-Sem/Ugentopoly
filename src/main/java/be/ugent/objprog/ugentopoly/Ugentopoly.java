@@ -14,20 +14,15 @@ public class Ugentopoly extends Application {
         final Dice dice = new Dice();
         //Color backgroundColor = Color.rgb(0,  255, 202);
 
-        Board root = new Board();
-
-
-
+        StackPane root = new StackPane(new Board());
 
         Scene scene = new Scene(root, 845, 845 );
         stage.setScene(scene);
 
-
-
         @SuppressWarnings("ConstantConditions")
         Image icon = new Image(getClass().getResourceAsStream("/be/ugent/objprog/ugentopoly/assets/" + ICON));
         stage.getIcons().add(icon);
-        stage.setFullScreen(false);
+        stage.setFullScreen(true);
         stage.setMinWidth(1000); // Set minimum width of the window
         stage.setMinHeight(1000); // Set minimum height of the window
         stage.show();
