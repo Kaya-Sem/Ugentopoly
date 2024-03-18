@@ -4,13 +4,19 @@ import be.ugent.objprog.ugentopoly.tiles.CornerTile;
 import be.ugent.objprog.ugentopoly.tiles.HorizontalTile;
 import be.ugent.objprog.ugentopoly.tiles.VerticalTile;
 import javafx.geometry.Pos;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 
 public class Board extends GridPane {
     public static final int BOARD_WIDTH = 845;
     public static final int BOARD_HEIGHT = 845;
+    public static final int NUM_TILES = 13;
+    public static final int TILE_HEIGHT = (BOARD_HEIGHT / NUM_TILES) * 2;
+    public static final int TILE_WIDTH = (BOARD_WIDTH / NUM_TILES) * 2;
+    public static final int SMALL_TILES = 9;
 
     public Board() {
         setHeight(BOARD_HEIGHT);
@@ -27,33 +33,44 @@ public class Board extends GridPane {
         VBox leftBar = new VBox();
         VBox rightBar = new VBox();
 
+        // Set column constraints
+        getColumnConstraints().addAll(
+                new ColumnConstraints(TILE_WIDTH * 2), // Left bar column
+                new ColumnConstraints(TILE_WIDTH * 5) // Mid section column
+        );
+
+        // Set row constraints
+        getRowConstraints().addAll(
+                new RowConstraints(TILE_HEIGHT ), // Top row
+                new RowConstraints((845 / 13) *9) // Mid-section row
+        );
 
         // fill upper row
         upperRow.getChildren().add(new CornerTile());
-        for (int i = 0; i < 11; i++) {
+        for (int i = 0; i < SMALL_TILES; i++) {
             upperRow.getChildren().add(new VerticalTile());
         }
         upperRow.getChildren().add(new CornerTile());
 
-
         // fill bottom row
         bottomRow.getChildren().add(new CornerTile());
-        for (int i = 0; i < 11; i++) {
+        for (int i = 0; i < SMALL_TILES; i++) {
             bottomRow.getChildren().add(new VerticalTile());
         }
         bottomRow.getChildren().add(new CornerTile());
 
-        for (int i = 0; i < 11; i++) {
+        for (int i = 0; i < SMALL_TILES; i++) {
             leftBar.getChildren().add(new HorizontalTile());
         }
-        for (int i = 0; i < 11; i++) {
+        for (int i = 0; i < SMALL_TILES; i++) {
             rightBar.getChildren().add(new HorizontalTile());
         }
 
+        midSection.getChildren().addAll(leftBar, new HBox(), rightBar);
 
-        midSection.getChildren().addAll(leftBar, new HBox(), rightBar );
-
-        this.getChildren().addAll(upperRow, midSection, bottomRow);
-
+        // Add components to the GridPane
+        add(upperRow, 0, 0, 3, 1); // Top row spans 3 columns
+        add(midSection, 0, 1, 3, 1); // Mid section spans 3 columns
+        add(bottomRow, 0, 2, 3, 1); // Bottom row spans 3 columns
     }
 }

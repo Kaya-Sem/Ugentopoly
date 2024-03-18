@@ -14,7 +14,7 @@ public class Ugentopoly extends Application {
         final Dice dice = new Dice();
         //Color backgroundColor = Color.rgb(0,  255, 202);
 
-        StackPane root = new StackPane(new Board());
+        Board root = new Board();
 
 
 
