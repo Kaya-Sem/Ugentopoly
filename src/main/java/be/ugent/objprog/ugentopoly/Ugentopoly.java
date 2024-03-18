@@ -8,11 +8,11 @@ import javafx.stage.Stage;
 
 public class Ugentopoly extends Application {
     static final String ICON = "tax.png";
+    private static final int WINDOW_SIZE = 1000;
     @Override
     public void start(Stage stage) {
 
         final Dice dice = new Dice();
-        //Color backgroundColor = Color.rgb(0,  255, 202);
 
         StackPane root = new StackPane(new Board());
 
@@ -23,8 +23,8 @@ public class Ugentopoly extends Application {
         Image icon = new Image(getClass().getResourceAsStream("/be/ugent/objprog/ugentopoly/assets/" + ICON));
         stage.getIcons().add(icon);
         stage.setFullScreen(true);
-        stage.setMinWidth(1000); // Set minimum width of the window
-        stage.setMinHeight(1000); // Set minimum height of the window
+        stage.setMinWidth(WINDOW_SIZE); // Set minimum width of the window
+        stage.setMinHeight(WINDOW_SIZE); // Set minimum height of the window
         stage.show();
 
         stage.setTitle("Ugentopoly");

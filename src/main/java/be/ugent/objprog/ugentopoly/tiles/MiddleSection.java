@@ -30,13 +30,9 @@ public class MiddleSection extends StackPane {
         //topImageView.setViewport(new Rectangle2D(0, 0, SIZE, SIZE));
 
         // Scale down the logo to fit within the bounds
-        double scaleFactor = 0.4; // Adjust the scale factor as needed
         topImageView.setFitWidth(SIZE);
         topImageView.setFitHeight(SIZE * 0.15);
         topImageView.setRotate(45.0);
-
-        //topImageView.setFitHeight((845.0 / 13) * 9 * 0.8); // Adjust 0.8 according to your preference
-
 
         getChildren().addAll(bottomImageView, topImageView);
     }
