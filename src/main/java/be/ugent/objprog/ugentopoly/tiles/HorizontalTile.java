@@ -1,6 +1,8 @@
 package be.ugent.objprog.ugentopoly.tiles;
 
-import javafx.scene.layout.ColumnConstraints;
+import javafx.geometry.Insets;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 /* Tile.LONG_SIDE notation for better context. Can be used without but is clearer
 *
 */
@@ -12,9 +14,8 @@ public class HorizontalTile extends Tile{
         setPrefHeight(Tile.SHORT_SIDE);
         //setText("Button");
 
-        getColumnConstraints().addAll( // Set column constraints
-                new ColumnConstraints(Tile.LONG_SIDE /4)
-        );
+
+
 
     }
 }
