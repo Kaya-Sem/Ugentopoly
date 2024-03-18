@@ -4,5 +4,6 @@ public class HorizontalTile extends Tile{
     public HorizontalTile(){
         setPrefHeight(845.0/13);
         setPrefWidth(845.0/13 *2);
+        setText("Button");
     }
 }

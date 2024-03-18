@@ -1,8 +1,6 @@
 package be.ugent.objprog.ugentopoly;
-
 import be.ugent.objprog.dice.Dice;
 import javafx.application.Application;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
@@ -21,7 +19,7 @@ public class Ugentopoly extends Application {
 
 
 
-        Scene scene = new Scene(root, 900, 900 );
+        Scene scene = new Scene(root, 845, 845 );
         stage.setScene(scene);
 
 
@@ -30,8 +28,8 @@ public class Ugentopoly extends Application {
         Image icon = new Image(getClass().getResourceAsStream("/be/ugent/objprog/ugentopoly/assets/" + ICON));
         stage.getIcons().add(icon);
         stage.setFullScreen(false);
-        stage.setMinWidth(845); // Set minimum width of the window
-        stage.setMinHeight(845); // Set minimum height of the window
+        stage.setMinWidth(1000); // Set minimum width of the window
+        stage.setMinHeight(1000); // Set minimum height of the window
         stage.show();
 
         stage.setTitle("Ugentopoly");

@@ -4,16 +4,17 @@ import be.ugent.objprog.ugentopoly.tiles.CornerTile;
 import be.ugent.objprog.ugentopoly.tiles.HorizontalTile;
 import be.ugent.objprog.ugentopoly.tiles.VerticalTile;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-public class Board extends VBox {
+public class Board extends GridPane {
     public static final int BOARD_WIDTH = 845;
-
     public static final int BOARD_HEIGHT = 845;
 
     public Board() {
+        setHeight(BOARD_HEIGHT);
+        setWidth(BOARD_WIDTH);
         setPrefSize(BOARD_WIDTH, BOARD_HEIGHT);
         setAlignment(Pos.CENTER);
         setStyle("-fx-background-color: #119dcb;");
@@ -23,6 +24,7 @@ public class Board extends VBox {
         HBox midSection = new HBox();
         VBox leftBar = new VBox();
         VBox rightBar = new VBox();
+
 
         // fill upper row
         upperRow.getChildren().add(new CornerTile());
