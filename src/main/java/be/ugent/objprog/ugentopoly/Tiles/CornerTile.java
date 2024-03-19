@@ -1,4 +1,4 @@
-package be.ugent.objprog.ugentopoly.tiles;
+package be.ugent.objprog.ugentopoly.Tiles;
 
 public class CornerTile extends Tile{
     public CornerTile() {

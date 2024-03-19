@@ -1,4 +1,4 @@
-package be.ugent.objprog.ugentopoly.tiles;
+package be.ugent.objprog.ugentopoly.Tiles;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
@@ -18,7 +18,7 @@ public class MiddleSection extends StackPane {
         setAlignment(Pos.CENTER); // Center content within the StackPane
 
         // Load the bottom image
-        InputStream bottomImageStream = getClass().getResourceAsStream("/be/ugent/objprog/ugentopoly/gent_plan.jpg");
+        InputStream bottomImageStream = getClass().getResourceAsStream("/be/ugent/objprog/ugentopoly/copy.jpg");
         Image bottomImage = new Image(Objects.requireNonNull(bottomImageStream));
         ImageView bottomImageView = new ImageView(bottomImage);
         bottomImageView.setViewport(new Rectangle2D(0, 0, SIZE, SIZE));
@@ -37,5 +37,9 @@ public class MiddleSection extends StackPane {
         logo.setRotate(45.0);
 
         getChildren().addAll(bottomImageView, logo);
+    }
+
+    public static double getSize(){
+        return SIZE;
     }
 }

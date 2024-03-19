@@ -1,4 +1,4 @@
-package be.ugent.objprog.ugentopoly.tiles;
+package be.ugent.objprog.ugentopoly.Tiles;
 
 import javafx.geometry.Insets;
 import javafx.scene.layout.*;

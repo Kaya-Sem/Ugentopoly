@@ -1,4 +1,4 @@
-package be.ugent.objprog.ugentopoly.tiles;
+package be.ugent.objprog.ugentopoly.Tiles;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
