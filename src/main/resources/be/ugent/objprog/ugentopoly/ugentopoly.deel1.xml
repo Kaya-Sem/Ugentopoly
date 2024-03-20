@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <board>
-    <settings balance="1500" start="200" size="40"/>
+    <settings balance="1500" start="200" />
 
     <areas>
         <area id="area1" color="#8b4513" house="50"/>
@@ -20,7 +20,7 @@
         <tile type="CHEST" position="2" id="tile.chest"/>
         <tile type="STREET" position="3" area="area1" id="tile.street02" cost="60" rent0="4" rent1="20" rent2="60" rent3="180" rent4="320" rent5="450"/>
         <tile type="TAX" position="4" id="tile.tax1" amount="200"/>
-        <tile type="RAILWAY" position="5" id="tile.railway1" cost="200"/>
+        <tile type="RAILWAY" position="5" id="tile.railway1" cost="200" rent="50"/>
         <tile type="STREET" position="6" area="area2" id="tile.street03" cost="100" rent0="6" rent1="30" rent2="90" rent3="270" rent4="400" rent5="550"/>
         <tile type="CHANCE" position="7" id="tile.chance"/>
         <tile type="STREET" position="8" area="area2" id="tile.street04" cost="100" rent0="6" rent1="30" rent2="90" rent3="270" rent4="400" rent5="550"/>
@@ -30,7 +30,7 @@
         <tile type="UTILITY" position="12" id="tile.utility1" cost="150"/>
         <tile type="STREET" position="13" area="area3" id="tile.street07" cost="140" rent0="10" rent1="50" rent2="150" rent3="450" rent4="625" rent5="750"/>
         <tile type="STREET" position="14" area="area3" id="tile.street08" cost="160" rent0="12" rent1="60" rent2="180" rent3="500" rent4="700" rent5="900"/>
-        <tile type="RAILWAY" position="15" id="tile.railway2" cost="200"/>
+        <tile type="RAILWAY" position="15" id="tile.railway2" cost="200" rent="50"/>
         <tile type="STREET" position="16" area="area4" id="tile.street09" cost="180" rent0="14" rent1="70" rent2="200" rent3="550" rent4="750" rent5="950"/>
         <tile type="CHEST" position="17" id="tile.chest"/>
         <tile type="STREET" position="18" area="area4" id="tile.street10" cost="180" rent0="14" rent1="70" rent2="200" rent3="550" rent4="750" rent5="950"/>
@@ -40,7 +40,7 @@
         <tile type="CHANCE" position="22" id="tile.chance"/>
         <tile type="STREET" position="23" area="area5" id="tile.street13" cost="220" rent0="18" rent1="90" rent2="250" rent3="700" rent4="875" rent5="1050"/>
         <tile type="STREET" position="24" area="area5" id="tile.street14" cost="240" rent0="20" rent1="100" rent2="300" rent3="750" rent4="925" rent5="1100"/>
-        <tile type="RAILWAY" position="25" id="tile.railway3" cost="200"/>
+        <tile type="RAILWAY" position="25" id="tile.railway3" cost="200" rent="50"/>
         <tile type="STREET" position="26" area="area6" id="tile.street15" cost="260" rent0="22" rent1="110" rent2="330" rent3="800" rent4="975" rent5="1150"/>
         <tile type="STREET" position="27" area="area6" id="tile.street16" cost="260" rent0="22" rent1="110" rent2="330" rent3="800" rent4="975" rent5="1150"/>
         <tile type="UTILITY" position="28" id="tile.utility2" cost="150"/>
@@ -50,7 +50,7 @@
         <tile type="STREET" position="32" area="area7" id="tile.street19" cost="300" rent0="26" rent1="130" rent2="390" rent3="900" rent4="1100" rent5="1275"/>
         <tile type="CHEST" position="33" id="tile.chest"/>
         <tile type="STREET" position="34" area="area7" id="tile.street20" cost="320" rent0="28" rent1="150" rent2="450" rent3="1000" rent4="1200" rent5="1400"/>
-        <tile type="RAILWAY" position="35" id="tile.railway4" cost="200"/>
+        <tile type="RAILWAY" position="35" id="tile.railway4" cost="200" rent="50"/>
         <tile type="CHANCE" position="36" id="tile.chance"/>
         <tile type="STREET" position="37" area="area8" id="tile.street21" cost="350" rent0="35" rent1="175" rent2="500" rent3="1100" rent4="1300" rent5="1500"/>
         <tile type="TAX" position="38" id="tile.tax2" amount="75"/>
