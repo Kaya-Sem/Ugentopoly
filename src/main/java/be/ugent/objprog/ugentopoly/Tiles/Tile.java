@@ -8,7 +8,6 @@ public abstract class Tile extends GridPane {
     public static final double SHORT_SIDE = ((845.0 / 13));
 
     public Tile(){
-        getChildren().add(new Label("Tile"));
         setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
         // TODO add basic event handler
     }

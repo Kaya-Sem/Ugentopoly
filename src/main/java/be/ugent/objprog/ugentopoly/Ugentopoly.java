@@ -11,7 +11,8 @@ import java.util.Properties;
 public class Ugentopoly extends Application {
     private static final String ICON = "tax.png";
     private static final int WINDOW_SIZE = 1000;
-    public static final int BOARD_SIZE = 845;
+    public static final double BOARD_SIZE = 845.0;
+    public static final int SMALL_TILES = 13;
 
     @Override
     public void start(Stage stage) {

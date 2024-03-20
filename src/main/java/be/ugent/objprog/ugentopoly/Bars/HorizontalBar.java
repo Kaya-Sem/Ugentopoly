@@ -2,7 +2,6 @@ package be.ugent.objprog.ugentopoly.Bars;
 
 import be.ugent.objprog.ugentopoly.Tiles.MiddleSection;
 import be.ugent.objprog.ugentopoly.Tiles.Tile;
-import javafx.geometry.Pos;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 
@@ -22,15 +21,14 @@ public class HorizontalBar extends GridPane implements Bar{
 
 
     public HorizontalBar() {
-        setPrefHeight(Tile.LONG_SIDE);
         setPrefWidth(MiddleSection.getSize());
+        setPrefHeight(Tile.LONG_SIDE);
         getColumnConstraints().addAll(
             COLUMN_CONSTRAINTS
         );
-        setAlignment(Pos.CENTER);
     }
 
-    public void addChildren(List<? extends Tile> tiles){
+    public void populate(List<? extends Tile> tiles){
         for (int i = 0; i < 9; i++) {
             Tile tile = tiles.get(i);
             add(tile, i, 0);
