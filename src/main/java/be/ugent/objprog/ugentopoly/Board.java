@@ -3,7 +3,11 @@ package be.ugent.objprog.ugentopoly;
 import be.ugent.objprog.ugentopoly.Bars.HorizontalBar;
 import be.ugent.objprog.ugentopoly.Bars.VerticalBar;
 import be.ugent.objprog.ugentopoly.Tiles.*;
+import be.ugent.objprog.ugentopoly.Tiles.SmallTiles.HorizontalTile;
+import be.ugent.objprog.ugentopoly.Tiles.SmallTiles.SmallTile;
+import be.ugent.objprog.ugentopoly.Tiles.SmallTiles.VerticalTile;
 import javafx.geometry.Pos;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
@@ -33,24 +37,24 @@ public class Board extends GridPane {
         );
 
         // TODO placeholder lists
-        List<HorizontalTile> hTiles = List.of(
-                new HorizontalTile(),
-                new HorizontalTile(),
-                new HorizontalTile(),
-                new HorizontalTile(),
-                new HorizontalTile(),
-                new HorizontalTile(),
-                new HorizontalTile(),
-                new HorizontalTile(),
-                new HorizontalTile());
+        List<? extends Tile> hTiles = List.of(
+                new SmallTile(),
+                new SmallTile(),
+                new SmallTile(),
+                new SmallTile(),
+                new SmallTile(),
+                new SmallTile(),
+                new SmallTile(),
+                new SmallTile(),
+                new SmallTile());
 
-        List<HorizontalTile> hTiles2 = List.of(
+        List<? extends Tile> hTiles2 = List.of(
                 new HorizontalTile(),
                 new HorizontalTile(),
                 new HorizontalTile(),
                 new HorizontalTile(),
                 new HorizontalTile(),
-                new HorizontalTile(),
+                new SmallTile(),
                 new HorizontalTile(),
                 new HorizontalTile(),
                 new HorizontalTile());
@@ -77,6 +81,20 @@ public class Board extends GridPane {
                 new VerticalTile(),
                 new VerticalTile());
 
+        CornerTile tile1 = new CornerTile();
+        CornerTile tile2 = new CornerTile();
+        CornerTile tile3 = new CornerTile();
+        CornerTile tile4 = new CornerTile();
+
+        List<CornerTile> cornerTiles = List.of(
+                tile1,
+                tile2,
+                tile3,
+                tile4
+        );
+
+        List<List<? extends Tile>> allTiles = List.of(vTiles, vTiles2, hTiles, hTiles2, cornerTiles);
+
         // initialize tileholders
         HorizontalBar topRow = new HorizontalBar();
         HorizontalBar bottomRow = new HorizontalBar();
@@ -89,6 +107,13 @@ public class Board extends GridPane {
         leftBar.populate(hTiles2);
         rightBar.populate(hTiles);
 
+        ToggleGroup toggleGroup = new ToggleGroup();
+        for (List<? extends Tile> tileList : allTiles) {
+            for (Tile tile : tileList) {
+                tile.setToggleGroup(toggleGroup);
+            }
+        }
+
         // TODO make positions constant
         // Add components to the GridPane
         add(topRow,1, 0);
@@ -100,10 +125,10 @@ public class Board extends GridPane {
         add(new MiddleSection(), 1, 1);
 
         // Adding corner tiles
-        add(new CornerTile(), 0, 0); // top left
-        add(new CornerTile(), 2, 0); // top right
-        add(new CornerTile(), 0, 2); // bottom right
-        add(new CornerTile(), 2, 2); // bottom left
+        add(tile1, 0, 0); // top left
+        add(tile2, 2, 0); // top right
+        add(tile3, 0, 2); // bottom right
+        add(tile4, 2, 2); // bottom left
 
 
 

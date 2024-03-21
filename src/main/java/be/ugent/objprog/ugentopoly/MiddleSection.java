@@ -1,5 +1,6 @@
-package be.ugent.objprog.ugentopoly.Tiles;
+package be.ugent.objprog.ugentopoly;
 import be.ugent.objprog.ugentopoly.Board;
+import be.ugent.objprog.ugentopoly.Tiles.Tile;
 import be.ugent.objprog.ugentopoly.Ugentopoly;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
