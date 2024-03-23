@@ -10,7 +10,7 @@ import java.util.Properties;
 
 public class Ugentopoly extends Application {
     private static final String ICON = "tax.png";
-    private static final int WINDOW_SIZE = 1000;
+    private static final int WINDOW_SIZE = 900;
     public static final double BOARD_SIZE = 845.0;
     public static final int SMALL_TILES = 13;
 
@@ -23,10 +23,10 @@ public class Ugentopoly extends Application {
             e.printStackTrace();
         }
 
-
         final Dice dice = new Dice();
         StackPane root = new StackPane(new Board());
         Scene scene = new Scene(root, BOARD_SIZE, BOARD_SIZE );
+        scene.getStylesheets().add("/resources/styles.css");
         stage.setScene(scene);
 
         @SuppressWarnings("ConstantConditions")

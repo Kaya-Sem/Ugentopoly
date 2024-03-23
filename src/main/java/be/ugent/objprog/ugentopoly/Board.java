@@ -36,49 +36,49 @@ public class Board extends GridPane {
         );
 
         // TODO placeholder lists
-        List<? extends Tile> hTiles = List.of(
-                new LotTile(),
-                new LotTile(),
-                new LotTile(),
-                new LotTile(),
-                new LotTile(),
-                new LotTile(),
-                new LotTile(),
-                new LotTile(),
-                new LotTile());
+        List<? extends Tile> rightTiles = List.of(
+                new LotTile(180),
+                new LotTile(180),
+                new LotTile(180),
+                new LotTile(180),
+                new LotTile(180),
+                new LotTile(180),
+                new LotTile(180),
+                new LotTile(180),
+                new LotTile(180));
 
-        List<? extends Tile> hTiles2 = List.of(
-                new LotTile(),
-                new LotTile(),
-                new LotTile(),
-                new LotTile(),
-                new LotTile(),
-                new LotTile(),
-                new LotTile(),
-                new LotTile(),
-                new LotTile());
+        List<? extends Tile> leftTiles = List.of(
+                new LotTile(0),
+                new LotTile(0),
+                new LotTile(0),
+                new LotTile(0),
+                new LotTile(0),
+                new LotTile(0),
+                new LotTile(0),
+                new LotTile(0),
+                new LotTile(0));
 
-        List<LotTile> vTiles = List.of(
-                new LotTile(),
-                new LotTile(),
-                new LotTile(),
-                new LotTile(),
-                new LotTile(),
-                new LotTile(),
-                new LotTile(),
-                new LotTile(),
-                new LotTile());
+        List<LotTile> topTiles = List.of(
+                new LotTile(90),
+                new LotTile(90),
+                new LotTile(90),
+                new LotTile(90),
+                new LotTile(90),
+                new LotTile(90),
+                new LotTile(90),
+                new LotTile(90),
+                new LotTile(90));
 
-        List<LotTile> vTiles2 = List.of(
-                new LotTile(),
-                new LotTile(),
-                new LotTile(),
-                new LotTile(),
-                new LotTile(),
-                new LotTile(),
-                new LotTile(),
-                new LotTile(),
-                new LotTile());
+        List<LotTile> bottomTiles = List.of(
+                new LotTile(270),
+                new LotTile(270),
+                new LotTile(270),
+                new LotTile(270),
+                new LotTile(270),
+                new LotTile(270),
+                new LotTile(270),
+                new LotTile(270),
+                new LotTile(270));
 
         CornerTile tile1 = new CornerTile();
         CornerTile tile2 = new CornerTile();
@@ -92,7 +92,7 @@ public class Board extends GridPane {
                 tile4
         );
 
-        List<List<? extends Tile>> allTiles = List.of(vTiles, vTiles2, hTiles, hTiles2, cornerTiles);
+        List<List<? extends Tile>> allTiles = List.of(topTiles, bottomTiles, rightTiles, leftTiles, cornerTiles);
 
         // initialize tileholders
         HorizontalBar topRow = new HorizontalBar();
@@ -101,10 +101,10 @@ public class Board extends GridPane {
         VerticalBar rightBar = new VerticalBar();
 
         // populate tiles
-        topRow.populate(vTiles);
-        bottomRow.populate(vTiles2);
-        leftBar.populate(hTiles2);
-        rightBar.populate(hTiles);
+        topRow.populate(topTiles);
+        bottomRow.populate(bottomTiles);
+        leftBar.populate(leftTiles);
+        rightBar.populate(rightTiles);
 
         ToggleGroup toggleGroup = new ToggleGroup();
         for (List<? extends Tile> tileList : allTiles) {

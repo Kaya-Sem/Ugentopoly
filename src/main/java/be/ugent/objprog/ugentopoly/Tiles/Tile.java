@@ -12,6 +12,7 @@ public abstract class Tile extends ToggleButton {
     public static final double SHORT_SIDE = ((Ugentopoly.BOARD_SIZE / Ugentopoly.SMALL_TILES));
 
     public Tile(){
+        setOnAction(new ButtonHandler());
         setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
         // TODO add basic event handler
     }

@@ -10,12 +10,14 @@ public class LotTile extends SmallTile {
 
     private static final Color COLOR = Color.BLACK;
     private static final ImageView image = null;
+    protected int rotatie;
 
-    public LotTile(){
-        setOnAction(new ButtonHandler());
+    public LotTile(int rotatie){
+        super(rotatie);
 
         Text text = new Text("hello");
         getChildren().addAll(text);
+        setText("hello");
 
 
     }
