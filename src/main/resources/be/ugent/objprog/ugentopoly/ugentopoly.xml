@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <board>
-    <settings balance="1500" start="200" size="40"/>
+    <settings balance="1500" start="200"/>
 
     <areas>
         <area id="area1" color="#8b4513" house="50"/>
