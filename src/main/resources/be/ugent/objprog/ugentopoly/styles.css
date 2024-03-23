@@ -1,21 +1,15 @@
 
 .toggle-button:selected {
-    -fx-background-color: white; /* Background color */
-    -fx-text-fill: black; /* Text color */
     -fx-font-size: 17px; /* Font size */
-    -fx-padding: 5px 10px; /* Padding */
-    -fx-border-color: black; /* Border color */
-    -fx-font-family: "CaskaydiaCove NFM Bold";
     -fx-border-width: 3px;
 }
 
 .toggle-button:hover {
-    -fx-background-color: white; /* Background color */
-    -fx-text-fill: black; /* Text color */
     -fx-font-size: 17px; /* Font size */
-    -fx-padding: 5px 10px; /* Padding */
-    -fx-border-color: black; /* Border color */
-    -fx-font-family: "CaskaydiaCove NFM SemiBold";
+}
+.toggle-button:hover:armed {
+    -fx-font-size: 14px; /* Font size */
+    -fx-border-width: 5px;
 }
 
 /* Define styles for ToggleButton */
@@ -23,7 +17,6 @@
     -fx-background-color: white; /* Background color */
     -fx-text-fill: black; /* Text color */
     -fx-font-size: 14px; /* Font size */
-    -fx-padding: 5px 10px; /* Padding */
     -fx-border-color: black; /* Border color */
     -fx-font-family: "CaskaydiaCove NFM SemiBold";
 }
