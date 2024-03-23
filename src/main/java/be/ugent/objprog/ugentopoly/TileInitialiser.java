@@ -6,13 +6,12 @@ import java.util.List;
 
 public class TileInitialiser {
 
-    public static List<? extends Tile> tileList(){
+/*    public static List<? extends Tile> tileList(){
 
         XMLParser tileParser = new XMLParser();
 
-        tileParser.
 
         return
 
-    }
+    }*/
 }
