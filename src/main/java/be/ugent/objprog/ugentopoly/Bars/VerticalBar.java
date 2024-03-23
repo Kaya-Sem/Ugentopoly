@@ -2,7 +2,6 @@ package be.ugent.objprog.ugentopoly.Bars;
 
 import be.ugent.objprog.ugentopoly.MiddleSection;
 import be.ugent.objprog.ugentopoly.Tiles.Tile;
-import be.ugent.objprog.ugentopoly.Tiles.SmallTiles.VerticalTile;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 
@@ -10,14 +9,14 @@ import java.util.List;
 
 public class VerticalBar extends GridPane implements Bar {
     private static final RowConstraints[] ROW_CONSTRAINTS = {
-            new RowConstraints(VerticalTile.SHORT_SIDE),
-            new RowConstraints(VerticalTile.SHORT_SIDE),
-            new RowConstraints(VerticalTile.SHORT_SIDE),
-            new RowConstraints(VerticalTile.SHORT_SIDE),
-            new RowConstraints(VerticalTile.SHORT_SIDE),
-            new RowConstraints(VerticalTile.SHORT_SIDE),
-            new RowConstraints(VerticalTile.SHORT_SIDE),
-            new RowConstraints(VerticalTile.SHORT_SIDE),
+            new RowConstraints(Tile.SHORT_SIDE),
+            new RowConstraints(Tile.SHORT_SIDE),
+            new RowConstraints(Tile.SHORT_SIDE),
+            new RowConstraints(Tile.SHORT_SIDE),
+            new RowConstraints(Tile.SHORT_SIDE),
+            new RowConstraints(Tile.SHORT_SIDE),
+            new RowConstraints(Tile.SHORT_SIDE),
+            new RowConstraints(Tile.SHORT_SIDE),
             // TODO maybe create a class or enum for this, too much repetition
     };
 

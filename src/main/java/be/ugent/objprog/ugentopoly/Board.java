@@ -2,11 +2,9 @@ package be.ugent.objprog.ugentopoly;
 
 import be.ugent.objprog.ugentopoly.Bars.HorizontalBar;
 import be.ugent.objprog.ugentopoly.Bars.VerticalBar;
-import be.ugent.objprog.ugentopoly.Tiles.*;
-import be.ugent.objprog.ugentopoly.Tiles.SmallTiles.HorizontalTile;
-import be.ugent.objprog.ugentopoly.Tiles.SmallTiles.LotTile;
-import be.ugent.objprog.ugentopoly.Tiles.SmallTiles.SmallTile;
-import be.ugent.objprog.ugentopoly.Tiles.SmallTiles.VerticalTile;
+import be.ugent.objprog.ugentopoly.Tiles.CornerTile;
+import be.ugent.objprog.ugentopoly.Tiles.LotTile;
+import be.ugent.objprog.ugentopoly.Tiles.Tile;
 import javafx.geometry.Pos;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.ColumnConstraints;
@@ -50,37 +48,37 @@ public class Board extends GridPane {
                 new LotTile());
 
         List<? extends Tile> hTiles2 = List.of(
-                new HorizontalTile(),
-                new HorizontalTile(),
-                new HorizontalTile(),
-                new HorizontalTile(),
-                new HorizontalTile(),
-                new SmallTile(),
-                new HorizontalTile(),
-                new HorizontalTile(),
-                new HorizontalTile());
+                new LotTile(),
+                new LotTile(),
+                new LotTile(),
+                new LotTile(),
+                new LotTile(),
+                new LotTile(),
+                new LotTile(),
+                new LotTile(),
+                new LotTile());
 
-        List<VerticalTile> vTiles = List.of(
-                new VerticalTile(),
-                new VerticalTile(),
-                new VerticalTile(),
-                new VerticalTile(),
-                new VerticalTile(),
-                new VerticalTile(),
-                new VerticalTile(),
-                new VerticalTile(),
-                new VerticalTile());
+        List<LotTile> vTiles = List.of(
+                new LotTile(),
+                new LotTile(),
+                new LotTile(),
+                new LotTile(),
+                new LotTile(),
+                new LotTile(),
+                new LotTile(),
+                new LotTile(),
+                new LotTile());
 
-        List<VerticalTile> vTiles2 = List.of(
-                new VerticalTile(),
-                new VerticalTile(),
-                new VerticalTile(),
-                new VerticalTile(),
-                new VerticalTile(),
-                new VerticalTile(),
-                new VerticalTile(),
-                new VerticalTile(),
-                new VerticalTile());
+        List<LotTile> vTiles2 = List.of(
+                new LotTile(),
+                new LotTile(),
+                new LotTile(),
+                new LotTile(),
+                new LotTile(),
+                new LotTile(),
+                new LotTile(),
+                new LotTile(),
+                new LotTile());
 
         CornerTile tile1 = new CornerTile();
         CornerTile tile2 = new CornerTile();
@@ -122,7 +120,7 @@ public class Board extends GridPane {
         add(leftBar, 0, 1);
         add(bottomRow, 1, 2);
 
-        // add middle board
+        // Add middle board
         add(new MiddleSection(), 1, 1);
 
         // Adding corner tiles
