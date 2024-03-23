@@ -1,8 +1,0 @@
-/* Define styles for ToggleButton */
-.toggle-button {
-    -fx-background-color: #3F51B5; /* Background color */
-    -fx-text-fill: white; /* Text color */
-    -fx-font-size: 14px; /* Font size */
-    -fx-padding: 5px 10px; /* Padding */
-    -fx-border-color: #303F9F; /* Border color */
-}

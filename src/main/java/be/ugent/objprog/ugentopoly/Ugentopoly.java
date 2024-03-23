@@ -26,7 +26,7 @@ public class Ugentopoly extends Application {
         final Dice dice = new Dice();
         StackPane root = new StackPane(new Board());
         Scene scene = new Scene(root, BOARD_SIZE, BOARD_SIZE );
-        scene.getStylesheets().add("/resources/styles.css");
+        scene.getStylesheets().add(getClass().getResource("/be/ugent/objprog/ugentopoly/styles.css").toExternalForm());
         stage.setScene(scene);
 
         @SuppressWarnings("ConstantConditions")
