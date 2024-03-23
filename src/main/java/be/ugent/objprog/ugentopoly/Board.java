@@ -4,6 +4,7 @@ import be.ugent.objprog.ugentopoly.Bars.HorizontalBar;
 import be.ugent.objprog.ugentopoly.Bars.VerticalBar;
 import be.ugent.objprog.ugentopoly.Tiles.*;
 import be.ugent.objprog.ugentopoly.Tiles.SmallTiles.HorizontalTile;
+import be.ugent.objprog.ugentopoly.Tiles.SmallTiles.LotTile;
 import be.ugent.objprog.ugentopoly.Tiles.SmallTiles.SmallTile;
 import be.ugent.objprog.ugentopoly.Tiles.SmallTiles.VerticalTile;
 import javafx.geometry.Pos;
@@ -38,15 +39,15 @@ public class Board extends GridPane {
 
         // TODO placeholder lists
         List<? extends Tile> hTiles = List.of(
-                new SmallTile(),
-                new SmallTile(),
-                new SmallTile(),
-                new SmallTile(),
-                new SmallTile(),
-                new SmallTile(),
-                new SmallTile(),
-                new SmallTile(),
-                new SmallTile());
+                new LotTile(),
+                new LotTile(),
+                new LotTile(),
+                new LotTile(),
+                new LotTile(),
+                new LotTile(),
+                new LotTile(),
+                new LotTile(),
+                new LotTile());
 
         List<? extends Tile> hTiles2 = List.of(
                 new HorizontalTile(),
