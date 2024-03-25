@@ -1,6 +1,6 @@
 package be.ugent.objprog.ugentopoly.TileObjects;
 
-public record CornerTileObject (
+public record CornerObject(
         String position,
         String id
 ) implements TileObject{

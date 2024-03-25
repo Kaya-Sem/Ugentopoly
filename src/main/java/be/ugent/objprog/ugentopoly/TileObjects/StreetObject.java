@@ -1,6 +1,6 @@
 package be.ugent.objprog.ugentopoly.TileObjects;
 
-public record StreetTileObject(
+public record StreetObject(
         String position,
         String area,
         String id,

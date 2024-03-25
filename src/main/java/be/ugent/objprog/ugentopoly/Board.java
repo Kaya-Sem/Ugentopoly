@@ -2,9 +2,11 @@ package be.ugent.objprog.ugentopoly;
 
 import be.ugent.objprog.ugentopoly.Bars.HorizontalBar;
 import be.ugent.objprog.ugentopoly.Bars.VerticalBar;
+import be.ugent.objprog.ugentopoly.MiddleSection;
 import be.ugent.objprog.ugentopoly.TileNodes.CornerTile;
 import be.ugent.objprog.ugentopoly.TileNodes.StreetTile;
 import be.ugent.objprog.ugentopoly.TileNodes.Tile;
+import be.ugent.objprog.ugentopoly.Ugentopoly;
 import javafx.geometry.Pos;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.ColumnConstraints;
