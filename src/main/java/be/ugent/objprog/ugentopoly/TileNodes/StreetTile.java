@@ -1,12 +1,11 @@
-package be.ugent.objprog.ugentopoly.Tiles;
+package be.ugent.objprog.ugentopoly.TileNodes;
 
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Text;
 
-public class LotTile extends SmallTile {
+public class StreetTile extends SmallTile {
     private static final double COLORSTRIP_WIDTH = 33.0;
     private static final double COLORSTRIP_HEIGHT = Tile.SHORT_SIDE;
 
@@ -14,7 +13,11 @@ public class LotTile extends SmallTile {
     private static final ImageView image = null;
     protected int rotatie;
 
-    public LotTile(int rotatie, String lotText){
+    // Constructor
+    public StreetTile(
+            int rotatie,
+            String lotText
+    ){
         super(rotatie);
 
         Rectangle sliver = new Rectangle(5, 0, 10, 20);

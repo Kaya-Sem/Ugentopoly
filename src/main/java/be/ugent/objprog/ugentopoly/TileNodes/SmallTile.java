@@ -1,4 +1,4 @@
-package be.ugent.objprog.ugentopoly.Tiles;
+package be.ugent.objprog.ugentopoly.TileNodes;
 
 public class SmallTile extends Tile {
 

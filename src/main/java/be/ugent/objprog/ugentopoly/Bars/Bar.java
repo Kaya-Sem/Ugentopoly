@@ -1,6 +1,6 @@
 package be.ugent.objprog.ugentopoly.Bars;
 
-import be.ugent.objprog.ugentopoly.Tiles.Tile;
+import be.ugent.objprog.ugentopoly.TileNodes.Tile;
 
 import java.util.List;
 

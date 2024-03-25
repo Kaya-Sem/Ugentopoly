@@ -3,5 +3,4 @@ open module be.ugent.objprog.ugentopoly {
     requires javafx.fxml;
     requires org.jdom2;
     requires be.ugent.objprog.dice;
-    requires jdom;
 }

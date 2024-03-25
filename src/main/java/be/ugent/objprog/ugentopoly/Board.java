@@ -2,9 +2,9 @@ package be.ugent.objprog.ugentopoly;
 
 import be.ugent.objprog.ugentopoly.Bars.HorizontalBar;
 import be.ugent.objprog.ugentopoly.Bars.VerticalBar;
-import be.ugent.objprog.ugentopoly.Tiles.CornerTile;
-import be.ugent.objprog.ugentopoly.Tiles.LotTile;
-import be.ugent.objprog.ugentopoly.Tiles.Tile;
+import be.ugent.objprog.ugentopoly.TileNodes.CornerTile;
+import be.ugent.objprog.ugentopoly.TileNodes.StreetTile;
+import be.ugent.objprog.ugentopoly.TileNodes.Tile;
 import javafx.geometry.Pos;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.ColumnConstraints;
@@ -37,48 +37,48 @@ public class Board extends GridPane {
 
         // TODO placeholder lists
         List<? extends Tile> rightTiles = List.of(
-                new LotTile(180,"button"),
-                new LotTile(180,"button"),
-                new LotTile(180,"button"),
-                new LotTile(180,"button"),
-                new LotTile(180,"button"),
-                new LotTile(180,"button"),
-                new LotTile(180,"button"),
-                new LotTile(180,"button"),
-                new LotTile(180,"button"));
+                new StreetTile(180,"button"),
+                new StreetTile(180,"button"),
+                new StreetTile(180,"button"),
+                new StreetTile(180,"button"),
+                new StreetTile(180,"button"),
+                new StreetTile(180,"button"),
+                new StreetTile(180,"button"),
+                new StreetTile(180,"button"),
+                new StreetTile(180,"button"));
 
         List<? extends Tile> leftTiles = List.of(
-                new LotTile(0,"button"),
-                new LotTile(0,"button"),
-                new LotTile(0,"button"),
-                new LotTile(0,"button"),
-                new LotTile(0,"button"),
-                new LotTile(0,"button"),
-                new LotTile(0,"button"),
-                new LotTile(0,"button"),
-                new LotTile(0,"button"));
+                new StreetTile(0,"button"),
+                new StreetTile(0,"button"),
+                new StreetTile(0,"button"),
+                new StreetTile(0,"button"),
+                new StreetTile(0,"button"),
+                new StreetTile(0,"button"),
+                new StreetTile(0,"button"),
+                new StreetTile(0,"button"),
+                new StreetTile(0,"button"));
 
-        List<LotTile> topTiles = List.of(
-                new LotTile(90,"button"),
-                new LotTile(90,"button"),
-                new LotTile(90,"button"),
-                new LotTile(90,"button"),
-                new LotTile(90,"button"),
-                new LotTile(90,"button"),
-                new LotTile(90,"button"),
-                new LotTile(90,"button"),
-                new LotTile(90,"button"));
+        List<StreetTile> topTiles = List.of(
+                new StreetTile(90,"button"),
+                new StreetTile(90,"button"),
+                new StreetTile(90,"button"),
+                new StreetTile(90,"button"),
+                new StreetTile(90,"button"),
+                new StreetTile(90,"button"),
+                new StreetTile(90,"button"),
+                new StreetTile(90,"button"),
+                new StreetTile(90,"button"));
 
-        List<LotTile> bottomTiles = List.of(
-                new LotTile(270,"button"),
-                new LotTile(270,"button"),
-                new LotTile(270,"button"),
-                new LotTile(270,"button"),
-                new LotTile(270,"button"),
-                new LotTile(270,"button"),
-                new LotTile(270,"button"),
-                new LotTile(270,"button"),
-                new LotTile(270,"button"));
+        List<StreetTile> bottomTiles = List.of(
+                new StreetTile(270,"button"),
+                new StreetTile(270,"button"),
+                new StreetTile(270,"button"),
+                new StreetTile(270,"button"),
+                new StreetTile(270,"button"),
+                new StreetTile(270,"button"),
+                new StreetTile(270,"button"),
+                new StreetTile(270,"button"),
+                new StreetTile(270,"button"));
 
         CornerTile tile1 = new CornerTile();
         CornerTile tile2 = new CornerTile();

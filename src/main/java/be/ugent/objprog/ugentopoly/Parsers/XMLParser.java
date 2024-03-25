@@ -1,6 +1,7 @@
-package be.ugent.objprog.ugentopoly;
+package be.ugent.objprog.ugentopoly.Parsers;
 
-import be.ugent.objprog.ugentopoly.Tiles.Tile;
+import be.ugent.objprog.ugentopoly.Factories.StreetTileObjectFactory;
+import be.ugent.objprog.ugentopoly.TileNodes.Tile;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
@@ -18,6 +19,9 @@ public class XMLParser {
     List<? extends Tile> tiles;
 
 
+    /* When initialized, the XMLParsers will just load and parse a document.
+        More specific return values and behaviour can be specified using its methods.
+     */
     public XMLParser() {
         SAXBuilder saxBuilder = new SAXBuilder();
         InputStream inputStream = getClass().getResourceAsStream("/be/ugent/objprog/ugentopoly/ugentopoly.xml");
@@ -31,9 +35,14 @@ public class XMLParser {
 
 
     // TODO make switch case a dict with a factory
+    // TODO return proper list
     // load tile information
-    public List<? extends Tile> parseTiles(){
+
+    // List<? extends Tile>
+    public void parseTiles(){
          this.tiles =  new ArrayList<>();
+
+         StreetTileObjectFactory streetTileObjectFactory = new StreetTileObjectFactory();
 
          Element tilesElement = rootElement.getChild("tiles");
          List<Element> tileElements = tilesElement.getChildren("tile");
@@ -43,7 +52,19 @@ public class XMLParser {
 
              switch (tileElement.getAttributeValue("type")) {
                  case "START" -> {}
-                 case "STREET" -> {}
+                 /*case "STREET" -> {
+                     streetTileObjectFactory.forge(
+                             "4",
+                             "F",
+                             "id",
+                             "rent0",
+                             "rent1",
+                             "rent3",
+                             "rent 5",
+                             "f",
+                             "f"
+                     );
+                 }*/
                  case "CHEST" -> {}
                  case "TAX" -> {}
                  case "RAILWAY" -> {}
