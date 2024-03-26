@@ -20,6 +20,11 @@ public class TileInitializer {
 
     public static Map<String, List<? extends Tile>> initialiseTiles() {
 
+        XMLParser parser = new XMLParser();
+
+        // TODO implement
+        Map<String, Map<String, String>> map = parser.parseTilesData();
+
         // HACK : do not do this manually -> use XMLParser
         List<? extends Tile> upperBarTiles = List.of(
                 new StreetTile(90, "street", "#9932cc"),
@@ -69,17 +74,15 @@ public class TileInitializer {
                 new CornerTile(),
                 new CornerTile());
 
-        Map<String, List<? extends Tile>> tileMap = new HashMap<>();
-        tileMap.put("top_row", upperBarTiles);
-        tileMap.put("bottom_row", bottomBarTiles);
-        tileMap.put("right_bar", rightBarTiles);
-        tileMap.put("left_bar", leftBarTiles);
-        tileMap.put("corners", cornerTiles);
+        Map<String, List<? extends Tile>> initializedTileMap = new HashMap<>();
+        initializedTileMap.put("top_row", upperBarTiles);
+        initializedTileMap.put("bottom_row", bottomBarTiles);
+        initializedTileMap.put("right_bar", rightBarTiles);
+        initializedTileMap.put("left_bar", leftBarTiles);
+        initializedTileMap.put("corners", cornerTiles);
 
-        // TODO:
-        XMLParser tileParser = new XMLParser();
 
-        return tileMap;
+        return initializedTileMap;
 
     }
 }

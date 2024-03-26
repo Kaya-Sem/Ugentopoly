@@ -13,9 +13,6 @@ public abstract class Tile extends ToggleButton {
 
     public Tile(){
         setOnAction(new ButtonHandler());
-
-        //TODO is this border needed? I think it can be removed -> css styling
-        setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
     }
 
     // TODO add basic event handler. On button press, display card in center of board with the card information

@@ -35,19 +35,19 @@ public class XMLParser {
     // TODO return proper list
     // load tile information
 
-    // List<? extends Tile>
-    public void parseTilesData() {
+    public  Map<String, Map<String, String>> parseTilesData() {
         Map<String, Map<String, String>> tiles = new HashMap<>();
 
-        List<Element> tileElements = root.getChildren("tiles").get(0).getChildren("tile");
+        List<Element> tileElements = root.getChildren("tiles").getFirst().getChildren("tile");
 
         for (Element tileElement : tileElements) {
             // Parse tile attributes and create Tile object
             String tileId = tileElement.getAttributeValue("id");
             Map<String, String> tileAttributes = parseTile(tileElement);
             tiles.put(tileId, tileAttributes);
-
         }
+
+        return tiles;
     }
 
     private static Map<String, String> parseTile(Element tileElement) {
