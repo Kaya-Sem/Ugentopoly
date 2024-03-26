@@ -2,11 +2,7 @@ package be.ugent.objprog.ugentopoly;
 
 import be.ugent.objprog.ugentopoly.Bars.HorizontalBar;
 import be.ugent.objprog.ugentopoly.Bars.VerticalBar;
-import be.ugent.objprog.ugentopoly.MiddleSection;
-import be.ugent.objprog.ugentopoly.TileNodes.CornerTile;
-import be.ugent.objprog.ugentopoly.TileNodes.StreetTile;
 import be.ugent.objprog.ugentopoly.TileNodes.Tile;
-import be.ugent.objprog.ugentopoly.Ugentopoly;
 import javafx.geometry.Pos;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.ColumnConstraints;
@@ -14,6 +10,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 
 import java.util.List;
+import java.util.Map;
 
 public class Board extends GridPane {
     public static final double BOARD_SIZE = Ugentopoly.BOARD_SIZE;
@@ -37,64 +34,18 @@ public class Board extends GridPane {
                 new RowConstraints(MIDDLE_AREA_SIZE) // Mid-section row
         );
 
-        // TODO placeholder lists
-        List<? extends Tile> rightTiles = List.of(
-                new StreetTile(180,"button"),
-                new StreetTile(180,"button"),
-                new StreetTile(180,"button"),
-                new StreetTile(180,"button"),
-                new StreetTile(180,"button"),
-                new StreetTile(180,"button"),
-                new StreetTile(180,"button"),
-                new StreetTile(180,"button"),
-                new StreetTile(180,"button"));
 
-        List<? extends Tile> leftTiles = List.of(
-                new StreetTile(0,"button"),
-                new StreetTile(0,"button"),
-                new StreetTile(0,"button"),
-                new StreetTile(0,"button"),
-                new StreetTile(0,"button"),
-                new StreetTile(0,"button"),
-                new StreetTile(0,"button"),
-                new StreetTile(0,"button"),
-                new StreetTile(0,"button"));
+        /*
+        load a map of initialised tiles
 
-        List<StreetTile> topTiles = List.of(
-                new StreetTile(90,"button"),
-                new StreetTile(90,"button"),
-                new StreetTile(90,"button"),
-                new StreetTile(90,"button"),
-                new StreetTile(90,"button"),
-                new StreetTile(90,"button"),
-                new StreetTile(90,"button"),
-                new StreetTile(90,"button"),
-                new StreetTile(90,"button"));
+        top_row -> top row tiles
+        bottom_row -> bottom row tiles
+        right_row -> right bar tiles
+        left_row -> left bar tiles
+        corners -> corner tiles
 
-        List<StreetTile> bottomTiles = List.of(
-                new StreetTile(270,"button"),
-                new StreetTile(270,"button"),
-                new StreetTile(270,"button"),
-                new StreetTile(270,"button"),
-                new StreetTile(270,"button"),
-                new StreetTile(270,"button"),
-                new StreetTile(270,"button"),
-                new StreetTile(270,"button"),
-                new StreetTile(270,"button"));
-
-        CornerTile tile1 = new CornerTile();
-        CornerTile tile2 = new CornerTile();
-        CornerTile tile3 = new CornerTile();
-        CornerTile tile4 = new CornerTile();
-
-        List<CornerTile> cornerTiles = List.of(
-                tile1,
-                tile2,
-                tile3,
-                tile4
-        );
-
-        List<List<? extends Tile>> allTiles = List.of(topTiles, bottomTiles, rightTiles, leftTiles, cornerTiles);
+        */
+        Map<String, List<? extends Tile>> tileMap = TileInitializer.initialiseTiles();
 
         // initialize tileholders
         HorizontalBar topRow = new HorizontalBar();
@@ -102,14 +53,15 @@ public class Board extends GridPane {
         VerticalBar leftBar = new VerticalBar();
         VerticalBar rightBar = new VerticalBar();
 
-        // populate tiles
-        topRow.populate(topTiles);
-        bottomRow.populate(bottomTiles);
-        leftBar.populate(leftTiles);
-        rightBar.populate(rightTiles);
+        // populate tiles with lists from map
+        topRow.populate(tileMap.get("top_row"));
+        bottomRow.populate(tileMap.get("bottom_row"));
+        leftBar.populate(tileMap.get("left_bar"));
+        rightBar.populate(tileMap.get("right_bar"));
 
+        // create a new toggle group for all the tiles
         ToggleGroup toggleGroup = new ToggleGroup();
-        for (List<? extends Tile> tileList : allTiles) {
+        for (List<? extends Tile> tileList : tileMap.values()) {
             for (Tile tile : tileList) {
                 tile.setToggleGroup(toggleGroup);
             }
@@ -125,11 +77,12 @@ public class Board extends GridPane {
         // Add middle board
         add(new MiddleSection(), 1, 1);
 
-        // Adding corner tiles
-        add(tile1, 0, 0); // top left
-        add(tile2, 2, 0); // top right
-        add(tile3, 0, 2); // bottom right
-        add(tile4, 2, 2); // bottom left
+        // Adding corner tiles by loading the corners from the map for easier access
+        List<? extends Tile> corners = tileMap.get("corners");
+        add(corners.get(0), 0, 0); // top left
+        add(corners.get(1), 2, 0); // top right
+        add(corners.get(2), 0, 2); // bottom right
+        add(corners.get(3), 2, 2); // bottom left
 
 
 

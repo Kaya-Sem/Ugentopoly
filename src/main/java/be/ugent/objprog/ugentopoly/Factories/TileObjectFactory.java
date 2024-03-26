@@ -21,7 +21,7 @@ public class TileObjectFactory implements Factory {
             case "CHEST" -> createChestObject();
             case "TAX" -> createTaxObject();
             case "RAILWAY" -> createRailwayObject();
-            case "CHANCE" -> createChanceObject();
+           // case "CHANCE" -> createChanceObject(); HACK
             case "UTILITY" -> createUtilityObject();
             default -> createStreetObject();
         };
