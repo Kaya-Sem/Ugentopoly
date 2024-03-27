@@ -15,13 +15,15 @@ public class XMLParser {
 
     Document document;
     Element root;
+    private static final String XML_PATH = "/be/ugent/objprog/ugentopoly/ugentopoly.xml";
 
     /*
      * When initialized, the XMLParsers will only load and prepare a document.
      * More specific return values and behaviour can be retrieved using its methods.
+     * NON URGENT: write out XMLParser documentation
      */
     public XMLParser() {
-        InputStream inputStream = getClass().getResourceAsStream("/be/ugent/objprog/ugentopoly/ugentopoly.xml");
+        InputStream inputStream = getClass().getResourceAsStream(XML_PATH);
         try {
             this.document = new SAXBuilder().build(inputStream);
         } catch (JDOMException | IOException e) {
@@ -31,11 +33,10 @@ public class XMLParser {
         this.root = document.getRootElement();
     }
 
-    // TODO make switch case a dict with a factory
-    // TODO return proper list
-    // load tile information
+    // TODO parse make parsers for other xml data .
 
-    public  Map<String, Map<String, String>> parseTilesData() {
+    // load tile information
+    public Map<String, Map<String, String>> parseTileData() {
         Map<String, Map<String, String>> tiles = new HashMap<>();
 
         List<Element> tileElements = root.getChildren("tiles").getFirst().getChildren("tile");
@@ -59,12 +60,24 @@ public class XMLParser {
         // Get other attributes, filling with null if not present
         String[] possibleAttributes = {
                 "area", "cost", "rent0", "rent1", "rent2", "rent3", "rent4", "rent5", "amount",
-                "relative", "collect"
+                "collect"
         };
         for (String attr : possibleAttributes) {
             tileMap.put(attr, tileElement.getAttributeValue(attr));
         }
 
         return tileMap;
+    }
+
+    private static void test() {
+        XMLParser parser = new XMLParser();
+        Map<String, Map<String, String>> tilesData = parser.parseTileData();
+        for (Map.Entry<?, ?> entry : tilesData.entrySet()) {
+            System.out.printf("%-15s : %s%n", entry.getKey(), entry.getValue());
+        }
+    }
+
+    public static void main(String[] args) {
+        test();
     }
 }
