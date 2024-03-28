@@ -13,12 +13,15 @@ import org.jdom2.input.SAXBuilder;
 
 public class XMLParser {
     /*
-      NON URGENT: write out XMLParser documentation
+     * NON URGENT: write out XMLParser documentation
      */
 
     Document document;
     Element root;
     private static final String XML_PATH = "/be/ugent/objprog/ugentopoly/ugentopoly.xml";
+
+    static String[] ATTRIBUTES = {
+            "area", "cost", "rent0", "rent1", "rent2", "rent3", "rent4", "rent5", "amount" };
 
     public XMLParser() {
         InputStream inputStream = getClass().getResourceAsStream(XML_PATH);
@@ -55,18 +58,15 @@ public class XMLParser {
         tileMap.put("position", tileElement.getAttributeValue("position"));
         tileMap.put("id", tileElement.getAttributeValue("id"));
 
-        // Get other attributes, filling with null if not present
-        String[] possibleAttributes = {
-                "area", "cost", "rent0", "rent1", "rent2", "rent3", "rent4", "rent5", "amount"
-        };
-        for (String attr : possibleAttributes) {
+        for (String attr : XMLParser.ATTRIBUTES) {
             tileMap.put(attr, tileElement.getAttributeValue(attr));
         }
 
         return tileMap;
     }
 
-    // TODO maak een testklasse aan hiervoor? hoe specifieer ik correcte return value?
+    // NON URGENT maak een testklasse aan hiervoor? hoe specifieer ik correcte
+    // return value?
     // maak ook voor andere testklassen aan
     private static void parseTilesTest() {
         XMLParser parser = new XMLParser();
