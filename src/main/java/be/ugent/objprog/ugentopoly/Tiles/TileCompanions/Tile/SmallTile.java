@@ -5,11 +5,9 @@ public class SmallTile extends Tile {
     protected int rotatie;
 
     // HACK second constructor to get around rotation. fix with a setRotation
-    public SmallTile() {
-
-    }
 
     public SmallTile(Record companion, String id) {
+        super(companion, id);
         setMinHeight(Tile.SHORT_SIDE);
         setMaxHeight(Tile.SHORT_SIDE);
         setMinWidth(Tile.LONG_SIDE);
@@ -27,6 +25,5 @@ public class SmallTile extends Tile {
             setTranslateY(32.5);
         }
     }
-
 
 }
