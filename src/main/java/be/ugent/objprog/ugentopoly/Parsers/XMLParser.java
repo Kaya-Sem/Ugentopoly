@@ -12,16 +12,14 @@ import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 
 public class XMLParser {
+    /*
+      NON URGENT: write out XMLParser documentation
+     */
 
     Document document;
     Element root;
     private static final String XML_PATH = "/be/ugent/objprog/ugentopoly/ugentopoly.xml";
 
-    /*
-     * When initialized, the XMLParsers will only load and prepare a document.
-     * More specific return values and behaviour can be retrieved using its methods.
-     * NON URGENT: write out XMLParser documentation
-     */
     public XMLParser() {
         InputStream inputStream = getClass().getResourceAsStream(XML_PATH);
         try {
@@ -59,8 +57,7 @@ public class XMLParser {
 
         // Get other attributes, filling with null if not present
         String[] possibleAttributes = {
-                "area", "cost", "rent0", "rent1", "rent2", "rent3", "rent4", "rent5", "amount",
-                "collect"
+                "area", "cost", "rent0", "rent1", "rent2", "rent3", "rent4", "rent5", "amount"
         };
         for (String attr : possibleAttributes) {
             tileMap.put(attr, tileElement.getAttributeValue(attr));
@@ -69,7 +66,9 @@ public class XMLParser {
         return tileMap;
     }
 
-    private static void test() {
+    // TODO maak een testklasse aan hiervoor? hoe specifieer ik correcte return value?
+    // maak ook voor andere testklassen aan
+    private static void parseTilesTest() {
         XMLParser parser = new XMLParser();
         Map<String, Map<String, String>> tilesData = parser.parseTileData();
         for (Map.Entry<?, ?> entry : tilesData.entrySet()) {
@@ -78,6 +77,6 @@ public class XMLParser {
     }
 
     public static void main(String[] args) {
-        test();
+        parseTilesTest();
     }
 }

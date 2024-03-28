@@ -1,7 +1,7 @@
 package be.ugent.objprog.ugentopoly.Bars;
 
-import be.ugent.objprog.ugentopoly.MiddleSection;
-import be.ugent.objprog.ugentopoly.TileNodes.Tile;
+import be.ugent.objprog.ugentopoly.GameBoard.MiddleSection;
+import be.ugent.objprog.ugentopoly.Tiles.TileCompanions.Tile.Tile;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 

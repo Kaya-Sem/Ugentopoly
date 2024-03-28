@@ -1,11 +1,10 @@
-package be.ugent.objprog.ugentopoly.TileNodes;
+package be.ugent.objprog.ugentopoly.Tiles.TileCompanions.Tile;
 
 import javafx.geometry.Pos;
-import javafx.scene.control.Label;
 
 public class CornerTile extends Tile{
-    public CornerTile() {
-        super();
+    public CornerTile(Record companion, String id) {
+        super(companion, id);
         setMinHeight(Tile.LONG_SIDE);
         setMinWidth(Tile.LONG_SIDE);
         setAlignment(Pos.CENTER);

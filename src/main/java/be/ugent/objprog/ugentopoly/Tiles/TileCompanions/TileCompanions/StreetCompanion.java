@@ -1,6 +1,7 @@
-package be.ugent.objprog.ugentopoly.TileObjects;
+package be.ugent.objprog.ugentopoly.Tiles.TileCompanions.TileCompanions;
 
-public record StreetObject(
+public record StreetCompanion(
+        String type,
         String position,
         String area,
         String id,

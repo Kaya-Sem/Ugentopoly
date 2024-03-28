@@ -4,31 +4,37 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import be.ugent.objprog.ugentopoly.Factories.TileFactory;
 import be.ugent.objprog.ugentopoly.Parsers.XMLParser;
-import be.ugent.objprog.ugentopoly.TileNodes.CornerTile;
-import be.ugent.objprog.ugentopoly.TileNodes.RailwayTile;
-import be.ugent.objprog.ugentopoly.TileNodes.StreetTile;
-import be.ugent.objprog.ugentopoly.TileNodes.Tile;
-import be.ugent.objprog.ugentopoly.TileNodes.UtilityTile;
+import be.ugent.objprog.ugentopoly.Tiles.TileCompanions.Tile.CornerTile;
+import be.ugent.objprog.ugentopoly.Tiles.TileCompanions.Tile.RailwayTile;
+import be.ugent.objprog.ugentopoly.Tiles.TileCompanions.Tile.StreetTile;
+import be.ugent.objprog.ugentopoly.Tiles.TileCompanions.Tile.Tile;
+import be.ugent.objprog.ugentopoly.Tiles.TileCompanions.Tile.UtilityTile;
 
 /*
-NON_URGENT write out class documentation
-
- */
+    NON URGENT write out class documentation
+*/
 
 public class TileInitializer {
 
     public static Map<String, List<? extends Tile>> initialiseTiles() {
 
+        // Retrieve a map of tiles with their data.
         XMLParser parser = new XMLParser();
+        Map<String, Map<String, String>> tilesData = parser.parseTileData();
 
-        // TODO implement
-        Map<String, Map<String, String>> map = parser.parseTilesData();
+        TileFactory factory = new TileFactory();
+
+
+        // voor elke entry, geef diens waarde door aan de factory.
+        // de factory moet een
+        // De factory moet een tile teruggeven.
 
         // HACK : do not do this manually -> use XMLParser
         List<? extends Tile> upperBarTiles = List.of(
                 new StreetTile(90, "street", "#9932cc"),
-                new UtilityTile(90, "utility"),
+                new UtilityTile(90),
                 new StreetTile(90, "street", "#9932cc"),
                 new StreetTile(90, "street", "#9932cc"),
                 new RailwayTile(90, "button"),

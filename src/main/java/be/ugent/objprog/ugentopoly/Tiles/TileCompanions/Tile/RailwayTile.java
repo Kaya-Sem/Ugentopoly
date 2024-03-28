@@ -1,4 +1,4 @@
-package be.ugent.objprog.ugentopoly.TileNodes;
+package be.ugent.objprog.ugentopoly.Tiles.TileCompanions.Tile;
 
 import javafx.scene.image.ImageView;
 
@@ -7,12 +7,14 @@ public class RailwayTile extends SmallTile {
     // TODO implement banner image
     private static final ImageView image = null;
 
+
     // Constructor
     public RailwayTile(
-            int rotatie,
-            String text
+            Record companion,
+            String id
     ){
-        super(rotatie);
+
+        super(companion, id);
     }
 }
 

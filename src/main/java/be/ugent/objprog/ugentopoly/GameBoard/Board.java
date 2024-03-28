@@ -1,8 +1,10 @@
-package be.ugent.objprog.ugentopoly;
+package be.ugent.objprog.ugentopoly.GameBoard;
 
 import be.ugent.objprog.ugentopoly.Bars.HorizontalBar;
 import be.ugent.objprog.ugentopoly.Bars.VerticalBar;
-import be.ugent.objprog.ugentopoly.TileNodes.Tile;
+import be.ugent.objprog.ugentopoly.TileInitializer;
+import be.ugent.objprog.ugentopoly.Tiles.TileCompanions.Tile.Tile;
+import be.ugent.objprog.ugentopoly.Ugentopoly;
 import javafx.geometry.Pos;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.ColumnConstraints;

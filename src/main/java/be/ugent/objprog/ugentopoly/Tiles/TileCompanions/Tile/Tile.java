@@ -1,26 +1,25 @@
-package be.ugent.objprog.ugentopoly.TileNodes;
+package be.ugent.objprog.ugentopoly.Tiles.TileCompanions.Tile;
 
 import be.ugent.objprog.ugentopoly.Ugentopoly;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.ToggleButton;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 
 public abstract class Tile extends ToggleButton {
     public final static double LONG_SIDE = ((Ugentopoly.BOARD_SIZE / Ugentopoly.SMALL_TILES) * 2);
     public static final double SHORT_SIDE = ((Ugentopoly.BOARD_SIZE / Ugentopoly.SMALL_TILES));
 
-   Record COMPANION;
+   Record companion;
+   String id;
 
-    public Tile(){
+    public Tile(Record companion, String id){
+
+        this.companion = companion;
+        this.id = id;
+
         setOnAction(new ButtonHandler());
     }
 
-
-    public void setCOMPANION(Record companion) {
-        this.COMPANION = companion;
-    }
 
     // TODO add basic event handler. On button press, display card in center of board with the card information
     // MVC model? set a current present card

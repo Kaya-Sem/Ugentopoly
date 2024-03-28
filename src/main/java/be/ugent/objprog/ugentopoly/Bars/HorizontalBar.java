@@ -1,11 +1,13 @@
 package be.ugent.objprog.ugentopoly.Bars;
 
-import be.ugent.objprog.ugentopoly.MiddleSection;
-import be.ugent.objprog.ugentopoly.TileNodes.Tile;
+import be.ugent.objprog.ugentopoly.GameBoard.MiddleSection;
+import be.ugent.objprog.ugentopoly.Tiles.TileCompanions.Tile.Tile;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 
 import java.util.List;
+
+// TODO implement same logic as vertical bar
 
 public class HorizontalBar extends GridPane implements Bar{
     private static final ColumnConstraints[] COLUMN_CONSTRAINTS = {

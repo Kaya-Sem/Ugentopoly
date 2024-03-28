@@ -1,4 +1,4 @@
-package be.ugent.objprog.ugentopoly.TileNodes;
+package be.ugent.objprog.ugentopoly.Tiles.TileCompanions.Tile;
 
 import javafx.scene.image.ImageView;
 
@@ -9,10 +9,10 @@ public class UtilityTile extends SmallTile {
 
     // Constructor
     public UtilityTile(
-            int rotatie,
-            String text
+            Record companion,
+            String id
     ){
-        super(rotatie);
+        super(companion, id);
     }
 }
 

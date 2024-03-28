@@ -1,15 +1,21 @@
-package be.ugent.objprog.ugentopoly.TileNodes;
+package be.ugent.objprog.ugentopoly.Tiles.TileCompanions.Tile;
 
 public class SmallTile extends Tile {
 
     protected int rotatie;
 
-    public SmallTile(int rotatie) {
-        this.rotatie = rotatie;
+    // HACK second constructor to get around rotation. fix with a setRotation
+    public SmallTile() {
+
+    }
+
+    public SmallTile(Record companion, String id) {
         setMinHeight(Tile.SHORT_SIDE);
         setMaxHeight(Tile.SHORT_SIDE);
         setMinWidth(Tile.LONG_SIDE);
         setMaxWidth(Tile.LONG_SIDE);
+
+        int rotatie = 0;
 
         // set pivot points
         setTranslateX(getWidth() / 2);
@@ -21,4 +27,6 @@ public class SmallTile extends Tile {
             setTranslateY(32.5);
         }
     }
+
+
 }
