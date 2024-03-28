@@ -3,6 +3,7 @@ package be.ugent.objprog.ugentopoly.Parsers;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,6 +16,8 @@ public class XMLParser {
     /*
      * NON URGENT: write out XMLParser documentation
      */
+
+    // TODO parse make parsers for other xml data
 
     Document document;
     Element root;
@@ -34,7 +37,8 @@ public class XMLParser {
         this.root = document.getRootElement();
     }
 
-    // TODO parse make parsers for other xml data .
+
+    // NEED HELP linkedHashMap incorrect order even when XML is correct. 1 element wrong
 
     // load tile information
     public Map<String, Map<String, String>> parseTileData() {

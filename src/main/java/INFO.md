@@ -5,7 +5,10 @@ to be able to give them to the initializer of the bars
 
 Create a class (Model) of the current selected card. On button click -> current card = data selected card (MVC)
 
----
 
-Vragen aan assistenten:
-css styling verlies aan font
+Create a class of game state and data
+class or record for current tile mappings?
+
+
+
+
