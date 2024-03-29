@@ -16,12 +16,12 @@ public class PropertyLoader {
         }
     }
 
-    public static String getTileText(String tileName) {
+    public static String getLabel(String tileName) {
         return properties.getProperty(tileName);
     }
 
     private static void test() {
-        System.out.println(getTileText("tile.street01"));
+        System.out.println(getLabel("tile.street01"));
 
     }
 
