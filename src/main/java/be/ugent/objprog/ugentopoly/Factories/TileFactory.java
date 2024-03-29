@@ -1,7 +1,9 @@
 package be.ugent.objprog.ugentopoly.Factories;
 
-import be.ugent.objprog.ugentopoly.Tiles.TileCompanions.Tile.*;
-import be.ugent.objprog.ugentopoly.Tiles.TileCompanions.TileCompanions.*;
+import be.ugent.objprog.ugentopoly.Parsers.XMLParser;
+import be.ugent.objprog.ugentopoly.Tiles.Tile.*;
+import be.ugent.objprog.ugentopoly.Tiles.TileCompanions.*;
+import javafx.application.Application;
 
 import java.util.Map;
 
@@ -11,18 +13,24 @@ public class TileFactory implements Factory {
     public TileFactory() {}
 
     // CREATOR METHOD
-    // HACK enum klasse?
+    // HACK enum klasse of map/lambda
     public <U extends Tile> U forge(Map<String, String> tileData) {
-        return switch (tileData.get("type")) {
-            case "START", "FREE_PARKING", "JAIL", "GO_TO_JAIL" -> (U) createCorner(tileData);
-            case "STREET" -> (U) createStreet(tileData);
-            case "CHEST" -> (U) createChest(tileData);
-            case "TAX" -> (U) createTax(tileData);
-            case "RAILWAY" -> (U) createRailway(tileData);
-            case "CHANCE" -> (U) createChance(tileData);
-            case "UTILITY" -> (U) createUtility(tileData);
-            default -> (U) createStreet(tileData);
-        };
+        try {
+            return switch (tileData.get("type")) {
+                case "START", "FREE_PARKING", "JAIL", "GO_TO_JAIL" -> (U) createCorner(tileData);
+                case "STREET" -> (U) createStreet(tileData);
+                case "CHEST" -> (U) createChest(tileData);
+                case "TAX" -> (U) createTax(tileData);
+                case "RAILWAY" -> (U) createRailway(tileData);
+                case "CHANCE" -> (U) createChance(tileData);
+                case "UTILITY" -> (U) createUtility(tileData);
+                default -> (U) createStreet(tileData);
+            };
+        } catch (Exception e) {
+            System.err.println("Tile creation went wrong!");
+            e.printStackTrace();
+            return null;
+        }
     }
 
     // TODO create an instance of a properties parser so we can give the tiles their proper name etc
@@ -113,12 +121,21 @@ public class TileFactory implements Factory {
 
 
     private static void test(){
+        XMLParser xmlParser = new XMLParser();
+        Map<String, Map<String, String>> tilesData = xmlParser.parseTileData();
+        System.out.println(tilesData);
+
         TileFactory factory = new TileFactory();
+
+        Application.launch();
+
+        System.out.println(factory.forge(tilesData.get("tile.utility1")));
+
     }
 
     // TODO implement testing
     public static void main(String[] args) {
-        test();
+
     }
 
 }

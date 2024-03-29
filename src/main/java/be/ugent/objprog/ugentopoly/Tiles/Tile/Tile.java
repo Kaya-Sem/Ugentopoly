@@ -1,23 +1,38 @@
-package be.ugent.objprog.ugentopoly.Tiles.TileCompanions.Tile;
+package be.ugent.objprog.ugentopoly.Tiles.Tile;
 
+import be.ugent.objprog.ugentopoly.GameBoard.Board;
 import be.ugent.objprog.ugentopoly.Ugentopoly;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.layout.StackPane;
 
-public abstract class Tile extends ToggleButton {
+public abstract class Tile extends StackPane {
     public final static double LONG_SIDE = ((Ugentopoly.BOARD_SIZE / Ugentopoly.SMALL_TILES) * 2);
-    public static final double SHORT_SIDE = ((Ugentopoly.BOARD_SIZE / Ugentopoly.SMALL_TILES));
+    public final static double SHORT_SIDE = ((Ugentopoly.BOARD_SIZE / Ugentopoly.SMALL_TILES));
+    protected ToggleButton toggleButton;
+    Record companion;
+    String id;
 
-   Record companion;
-   String id;
-
-    public Tile(Record companion, String id){
-
+    public Tile(
+            Record companion,
+            String id
+    ){
         this.companion = companion;
         this.id = id;
 
-        setOnAction(new ButtonHandler());
+        this.toggleButton = new ToggleButton();
+
+        // Button setup
+        toggleButton.setMaxWidth(Double.MAX_VALUE);
+        toggleButton.setMaxHeight(Double.MAX_VALUE);
+        setAlignment(toggleButton, Pos.CENTER);
+        toggleButton.setToggleGroup(Board.TOGGLE_GROUP);
+        toggleButton.setStyle("-fx-background-color: transparent;");
+        toggleButton.setOnAction(new ButtonHandler());
+
+        getChildren().add(toggleButton);
     }
 
 

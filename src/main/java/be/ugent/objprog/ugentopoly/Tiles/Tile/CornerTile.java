@@ -1,4 +1,4 @@
-package be.ugent.objprog.ugentopoly.Tiles.TileCompanions.Tile;
+package be.ugent.objprog.ugentopoly.Tiles.Tile;
 
 import javafx.geometry.Pos;
 

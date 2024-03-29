@@ -1,6 +1,5 @@
 package be.ugent.objprog.ugentopoly.GameBoard;
-import be.ugent.objprog.ugentopoly.GameBoard.Board;
-import be.ugent.objprog.ugentopoly.Tiles.TileCompanions.Tile.Tile;
+import be.ugent.objprog.ugentopoly.Tiles.Tile.Tile;
 import be.ugent.objprog.ugentopoly.Ugentopoly;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;

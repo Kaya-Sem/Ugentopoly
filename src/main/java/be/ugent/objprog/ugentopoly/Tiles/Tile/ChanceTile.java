@@ -1,14 +1,14 @@
-package be.ugent.objprog.ugentopoly.Tiles.TileCompanions.Tile;
+package be.ugent.objprog.ugentopoly.Tiles.Tile;
 
 import javafx.scene.image.ImageView;
 
-public class UtilityTile extends SmallTile {
+public class ChanceTile extends SmallTile {
 
-    // TODO implement banner image
+    // TODO fix images
     private static final ImageView image = null;
 
     // Constructor
-    public UtilityTile(
+    public ChanceTile(
             Record companion,
             String id
     ){

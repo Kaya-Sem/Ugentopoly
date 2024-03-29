@@ -2,111 +2,121 @@ package be.ugent.objprog.ugentopoly;
 
 import be.ugent.objprog.ugentopoly.Factories.TileFactory;
 import be.ugent.objprog.ugentopoly.Parsers.XMLParser;
-import be.ugent.objprog.ugentopoly.Tiles.TileCompanions.Tile.Tile;
+import be.ugent.objprog.ugentopoly.Tiles.Tile.Tile;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-/*
-    NON URGENT write out class documentation
-*/
+// TODO sort on position?
 
 public class TileInitializer {
+    private Tile[] tilesArray;
 
-    public static Map<String, List<? extends Tile>> initialiseTiles() {
+    public TileInitializer() {
+        this.tilesArray = new Tile[40];
+    }
 
-        // Retrieve a map of tiles with their data.
+    /**
+     * Initializes the tiles for the game.
+     * @return A map containing initialized tiles grouped by categories.
+     */
+    public Map<String, ArrayList<? extends Tile>> initialiseTiles() {
         XMLParser parser = new XMLParser();
-        Map<String, Map<String, String>> tilesData = parser.parseTileData();
-
-        // create factory and create all tiles
         TileFactory factory = new TileFactory();
-        Tile[] tilesArray = new Tile[40];
+
+        Map<String, Map<String, String>> tilesData = parser.parseTileData();
 
         for (Map.Entry<String, Map<String, String>> entry : tilesData.entrySet()) {
             Map<String, String> tileProperties = entry.getValue();
-
-            // Create tile using factory
             Tile tile = factory.forge(tileProperties);
-
-            // get the correct tile index
-            int index = Integer.parseInt(tileProperties.get("position"));
-
+            int index = 0;
+            try {
+                index = Integer.parseInt(tileProperties.get("position"));
+            } catch (NumberFormatException e) {
+                System.err.println("Error parsing position as an integer! " + e.getMessage());
+            }
             tilesArray[index] = tile;
+
         }
 
+        if (tilesArray.length == 0) {
+            System.err.println("Error: tilesArray is empty. No tiles initialized.");}
 
+        ArrayList<? extends Tile> upperBarTiles = new ArrayList<>(Arrays.asList(
+                tilesArray[11],
+                tilesArray[12],
+                tilesArray[13],
+                tilesArray[14],
+                tilesArray[15],
+                tilesArray[16],
+                tilesArray[17],
+                tilesArray[18],
+                tilesArray[19]
+        ));
 
+        ArrayList<? extends Tile> bottomBarTiles = new ArrayList<>(Arrays.asList(
+                tilesArray[31],
+                tilesArray[32],
+                tilesArray[33],
+                tilesArray[34],
+                tilesArray[35],
+                tilesArray[36],
+                tilesArray[37],
+                tilesArray[38],
+                tilesArray[39]
+        ));
 
+        ArrayList<? extends Tile> rightBarTiles = new ArrayList<>(Arrays.asList(
+                tilesArray[21],
+                tilesArray[22],
+                tilesArray[23],
+                tilesArray[24],
+                tilesArray[25],
+                tilesArray[26],
+                tilesArray[27],
+                tilesArray[28],
+                tilesArray[29]
+        ));
 
-        // voor elke entry, geef diens waarde door aan de factory.
-        // de factory moet een
-        // De factory moet een tile teruggeven.
+        ArrayList<? extends Tile> leftBarTiles = new ArrayList<>(Arrays.asList(
+                tilesArray[1],
+                tilesArray[2],
+                tilesArray[3],
+                tilesArray[4],
+                tilesArray[5],
+                tilesArray[6],
+                tilesArray[7],
+                tilesArray[8],
+                tilesArray[9]
+        ));
 
-        // HACK : do not do this manually -> use XMLParser
-        /*
-        List<? extends Tile> upperBarTiles = List.of(
-                new StreetTile(90, "street", "#9932cc"),
-                new UtilityTile(90),
-                new StreetTile(90, "street", "#9932cc"),
-                new StreetTile(90, "street", "#9932cc"),
-                new RailwayTile(90, "button"),
-                new StreetTile(90, "button", "#9932cc"),
-                new StreetTile(90, "button", "#9932cc"),
-                new StreetTile(90, "button", "#9932cc"),
-                new StreetTile(90, "button", "#9932cc"));
-        List<? extends Tile> bottomBarTiles = List.of(
-                new StreetTile(270, "button", "#9932cc"),
-                new StreetTile(270, "button", "#9932cc"),
-                new StreetTile(270, "button", "#9932cc"),
-                new StreetTile(270, "button", "#9932cc"),
-                new StreetTile(270, "button", "#9932cc"),
-                new StreetTile(270, "button", "#9932cc"),
-                new StreetTile(270, "button", "#9932cc"),
-                new StreetTile(270, "button", "#9932cc"),
-                new StreetTile(270, "button", "#9932cc"));
+        ArrayList<? extends Tile> cornerTiles = new ArrayList<>(Arrays.asList(
+                tilesArray[0],
+                tilesArray[10],
+                tilesArray[20],
+                tilesArray[30]
+        ));
 
-        List<? extends Tile> leftBarTiles = List.of(
-                new StreetTile(0, "button", "#9932cc"),
-                new StreetTile(0, "button", "#9932cc"),
-                new StreetTile(0, "button", "#9932cc"),
-                new StreetTile(0, "button", "#9932cc"),
-                new StreetTile(0, "button", "#9932cc"),
-                new StreetTile(0, "button", "#9932cc"),
-                new StreetTile(0, "button", "#9932cc"),
-                new StreetTile(0, "button", "#9932cc"),
-                new StreetTile(0, "button", "#9932cc"));
-        List<? extends Tile> rightBarTiles = List.of(
-                new StreetTile(180, "button", "#9932cc"),
-                new StreetTile(180, "button", "#9932cc"),
-                new StreetTile(180, "button", "#9932cc"),
-                new StreetTile(180, "button", "#9932cc"),
-                new StreetTile(180, "button", "#9932cc"),
-                new StreetTile(180, "button", "#9932cc"),
-                new StreetTile(180, "button", "#9932cc"),
-                new StreetTile(180, "button", "#9932cc"),
-                new StreetTile(180, "button", "#9932cc"));
-
-         */
-
-//        List<? extends Tile> cornerTiles = List.of(
-//                new CornerTile(),
-//                new CornerTile(),
-//                new CornerTile(),
-//                new CornerTile());
-//
-        Map<String, List<? extends Tile>> initializedTileMap = new HashMap<>();
-//        initializedTileMap.put("top_row", upperBarTiles);
-//        initializedTileMap.put("bottom_row", bottomBarTiles);
-//        initializedTileMap.put("right_bar", rightBarTiles);
-//        initializedTileMap.put("left_bar", leftBarTiles);
-//        initializedTileMap.put("corners", cornerTiles);
-
-        // TODO implement testing
+        Map<String, ArrayList<? extends Tile>> initializedTileMap = new HashMap<>() {
+            {
+                put("top_row", upperBarTiles);
+                put("bottom_row", bottomBarTiles);
+                put("right_bar", rightBarTiles);
+                put("left_bar", leftBarTiles);
+                put("corners", cornerTiles);
+            }
+        };
 
         return initializedTileMap;
+    }
 
+    // Test method
+    private static void test() {
+        TileInitializer initializer = new TileInitializer();
+        Map<String, ArrayList<? extends Tile>> initializedTiles = initializer.initialiseTiles();
+        // You can perform further testing or assertions here
+    }
+
+    public static void main(String[] args) {
+        test();
     }
 }

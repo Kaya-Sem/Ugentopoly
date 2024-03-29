@@ -2,8 +2,8 @@ package be.ugent.objprog.ugentopoly.GameBoard;
 
 import be.ugent.objprog.ugentopoly.Bars.HorizontalBar;
 import be.ugent.objprog.ugentopoly.Bars.VerticalBar;
-import be.ugent.objprog.ugentopoly.TileInitializer;
-import be.ugent.objprog.ugentopoly.Tiles.TileCompanions.Tile.Tile;
+import be.ugent.objprog.ugentopoly.TempTileSetup;
+import be.ugent.objprog.ugentopoly.Tiles.Tile.Tile;
 import be.ugent.objprog.ugentopoly.Ugentopoly;
 import javafx.geometry.Pos;
 import javafx.scene.control.ToggleGroup;
@@ -12,12 +12,13 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 
 import java.util.List;
-import java.util.Map;
 
 public class Board extends GridPane {
     public static final double BOARD_SIZE = Ugentopoly.BOARD_SIZE;
     public static final int SMALL_TILES = 9;
     protected static final double MIDDLE_AREA_SIZE = (BOARD_SIZE / Ugentopoly.SMALL_TILES) * SMALL_TILES;
+
+    public static final ToggleGroup TOGGLE_GROUP = new ToggleGroup();
 
     public Board() {
         setPrefSize(BOARD_SIZE, BOARD_SIZE);
@@ -47,7 +48,10 @@ public class Board extends GridPane {
         corners -> corner tiles
 
         */
-        Map<String, List<? extends Tile>> tileMap = TileInitializer.initialiseTiles();
+
+        //TODO fix
+        //TileInitializer tileInitializer = new TileInitializer();
+        //Map<String, ArrayList<? extends Tile>> tileMap = tileInitializer.initialiseTiles();
 
         // initialize tileholders
         HorizontalBar topRow = new HorizontalBar();
@@ -56,18 +60,18 @@ public class Board extends GridPane {
         VerticalBar rightBar = new VerticalBar();
 
         // populate tiles with lists from map
-        topRow.populate(tileMap.get("top_row"));
-        bottomRow.populate(tileMap.get("bottom_row"));
-        leftBar.populate(tileMap.get("left_bar"));
-        rightBar.populate(tileMap.get("right_bar"));
+        topRow.populate(TempTileSetup.upperBarTiles);
+        bottomRow.populate(TempTileSetup.bottomBarTiles);
+        leftBar.populate(TempTileSetup.leftBarTiles);
+        rightBar.populate(TempTileSetup.rightBarTiles);
 
         // create a new toggle group for all the tiles
-        ToggleGroup toggleGroup = new ToggleGroup();
-        for (List<? extends Tile> tileList : tileMap.values()) {
+        /*ToggleGroup toggleGroup = new ToggleGroup();
+        for (ArrayList<? extends Tile> tileList : tileMap.values()) {
             for (Tile tile : tileList) {
                 tile.setToggleGroup(toggleGroup);
             }
-        }
+        }*/
 
         // TODO make positions constant
         // Add components to the GridPane
@@ -80,11 +84,12 @@ public class Board extends GridPane {
         add(new MiddleSection(), 1, 1);
 
         // Adding corner tiles by loading the corners from the map for easier access
-        List<? extends Tile> corners = tileMap.get("corners");
-        add(corners.get(0), 0, 0); // top left
-        add(corners.get(1), 2, 0); // top right
-        add(corners.get(2), 0, 2); // bottom right
-        add(corners.get(3), 2, 2); // bottom left
+        List<? extends Tile> corners = List.of();
+
+        add(TempTileSetup.templateCornerTile() , 0, 0); // top left
+        add(TempTileSetup.templateCornerTile(), 2, 0); // top right
+        add(TempTileSetup.templateCornerTile(), 0, 2); // bottom right
+        add(TempTileSetup.templateCornerTile(), 2, 2); // bottom left
 
 
 

@@ -17,7 +17,7 @@ public class Ugentopoly extends Application {
     public void start(Stage stage) {
 
 
-        final Dice dice = new Dice();
+        //final Dice dice = new Dice();
         StackPane root = new StackPane(new Board());
         Scene scene = new Scene(root, BOARD_SIZE, BOARD_SIZE );
         scene.getStylesheets().add(getClass().getResource("/be/ugent/objprog/ugentopoly/styles.css").toExternalForm());
@@ -32,7 +32,7 @@ public class Ugentopoly extends Application {
         stage.show();
 
         stage.setTitle("Ugentopoly");
-        stage.setOnCloseRequest(e -> dice.close());
+        //stage.setOnCloseRequest(e -> dice.close());
         stage.setScene(scene);
         stage.show();
     }
