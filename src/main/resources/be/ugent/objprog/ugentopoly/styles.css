@@ -5,7 +5,7 @@
 }
 
 .toggle-button:hover {
-    -fx-font-size: 17px; /* Font size */
+    -fx-font-size: 15px; /* Font size */
 }
 .toggle-button:hover:armed {
     -fx-font-size: 14px; /* Font size */
