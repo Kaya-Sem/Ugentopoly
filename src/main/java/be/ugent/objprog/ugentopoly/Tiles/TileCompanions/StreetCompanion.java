@@ -1,4 +1,4 @@
-package be.ugent.objprog.ugentopoly.Tiles.TileCompanions.TileCompanions;
+package be.ugent.objprog.ugentopoly.Tiles.TileCompanions;
 
 public record StreetCompanion(
         String type,
@@ -12,5 +12,5 @@ public record StreetCompanion(
         String rent3,
         String rent4,
         String rent5
-) implements TileObject {
+) {
 }

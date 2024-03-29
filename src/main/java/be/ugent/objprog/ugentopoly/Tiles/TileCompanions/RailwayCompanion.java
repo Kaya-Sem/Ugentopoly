@@ -1,4 +1,4 @@
-package be.ugent.objprog.ugentopoly.Tiles.TileCompanions.TileCompanions;
+package be.ugent.objprog.ugentopoly.Tiles.TileCompanions;
 
 public record RailwayCompanion(
         String type,
@@ -6,5 +6,5 @@ public record RailwayCompanion(
         String id,
         String cost,
         String rent
-) implements TileObject {
+) {
 }

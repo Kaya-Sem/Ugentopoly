@@ -1,4 +1,4 @@
-package be.ugent.objprog.ugentopoly.Tiles.TileCompanions.TileCompanions;
+package be.ugent.objprog.ugentopoly.Tiles.TileCompanions;
 
 // TODO implement
 public record CompanionObject(
@@ -16,6 +16,6 @@ public record CompanionObject(
         int rent4,
         int rent5
 
-) implements Companion {
+) {
 
 }
