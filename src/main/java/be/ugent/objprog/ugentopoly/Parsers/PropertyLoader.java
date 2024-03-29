@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class PropertyLoader {
-    private static Properties properties;
+    private static final Properties properties;
 
     static {
         properties = new Properties();
@@ -16,13 +16,17 @@ public class PropertyLoader {
         }
     }
 
-    public static String getLabel(String tileName) {
-        return properties.getProperty(tileName);
+    public static String getLabel(String tileId) {
+        return properties.getProperty(tileId);
+    }
+
+    public static String getImage(String tileId) {
+        return properties.getProperty(tileId);
     }
 
     private static void test() {
         System.out.println(getLabel("tile.street01"));
-
+        System.out.println(getImage("tile.jail"));
     }
 
     public static void main(String[] args) {
