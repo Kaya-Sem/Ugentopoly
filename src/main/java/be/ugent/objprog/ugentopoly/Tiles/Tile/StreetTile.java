@@ -16,8 +16,7 @@ import javafx.scene.text.FontWeight;
 public class StreetTile extends SmallTile {
     private static final int STRIP_WIDTH = 30;
 
-    // TODO set default to white
-    private String color = "#FF5FFF";
+    private String color;
     protected int rotatie;
 
     // Constructor
