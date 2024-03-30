@@ -34,6 +34,20 @@ public class XMLParser {
         this.root = document.getRootElement();
     }
 
+    public Map<String, String> areaColors(){
+        Map<String, String> colors = new HashMap<>();
+        List<Element> colorElements = root.getChildren("areas").getFirst().getChildren("area");
+
+        for (Element colorElement : colorElements) {
+            String colorId = colorElement.getAttributeValue("id");
+            String color = colorElement.getAttributeValue("color");
+            colors.put(colorId, color);
+        }
+
+        return colors;
+    };
+
+
 
     // NEED HELP linkedHashMap incorrect order even when XML is correct. 1 element wrong
 
@@ -53,16 +67,20 @@ public class XMLParser {
     // NON URGENT maak een testklasse aan hiervoor? hoe specifieer ik correcte
     // return value?
     // maak ook voor andere testklassen aan
-    private static void parseTilesTest() {
+    private static void test() {
         XMLParser parser = new XMLParser();
         Map<String, Map<String, String>> tilesData = parser.parseTileData();
         for (Map.Entry<?, ?> entry : tilesData.entrySet()) {
             System.out.printf("%-15s : %s%n", entry.getKey(), entry.getValue());
         }
+
+        System.out.println();
+
+        System.out.println(parser.areaColors());
     }
 
     public static void main(String[] args) {
-        parseTilesTest();
+        test();
     }
 
     // load tile information

@@ -1,7 +1,7 @@
 
 .toggle-button:selected {
     -fx-font-size: 17px; /* Font size */
-    -fx-border-width: 3px;
+    -fx-border-width: 2px;
 }
 
 .toggle-button:hover {
@@ -9,7 +9,7 @@
 }
 .toggle-button:hover:armed {
     -fx-font-size: 14px; /* Font size */
-    -fx-border-width: 5px;
+    -fx-border-width: 2px;
 }
 
 /* Define styles for ToggleButton */

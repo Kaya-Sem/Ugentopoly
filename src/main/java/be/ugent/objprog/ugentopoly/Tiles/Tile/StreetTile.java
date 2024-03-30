@@ -1,7 +1,7 @@
 package be.ugent.objprog.ugentopoly.Tiles.Tile;
 
-import be.ugent.objprog.ugentopoly.TileButton;
 import be.ugent.objprog.ugentopoly.Parsers.PropertyLoader;
+import be.ugent.objprog.ugentopoly.TileButton;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
@@ -16,11 +16,11 @@ import javafx.scene.text.FontWeight;
 public class StreetTile extends SmallTile {
     private static final int STRIP_WIDTH = 30;
 
-    private String color;
+    private static String color = "#FFFFFF";
     protected int rotatie;
 
     // Constructor
-    public StreetTile(Record companion, String id, String color) {
+    public StreetTile(Record companion, String id, String color){
         super(companion, id);
         this.color = color;
 
@@ -28,7 +28,7 @@ public class StreetTile extends SmallTile {
     }
 
     @Override
-    public void setup(String id) {
+    public void setup(String id){
         HBox hbox = new HBox();
 
         Label label = new Label(PropertyLoader.getLabel(id));
@@ -40,7 +40,7 @@ public class StreetTile extends SmallTile {
         pane.setPrefWidth(Tile.LONG_SIDE - 10);
         pane.setPrefHeight(Tile.SHORT_SIDE);
 
-        Rectangle rectangle = new Rectangle();
+        Rectangle rectangle  = new Rectangle();
         rectangle.setFill(Paint.valueOf(color));
         rectangle.setHeight(Tile.SHORT_SIDE);
         rectangle.setWidth(STRIP_WIDTH);
@@ -53,3 +53,4 @@ public class StreetTile extends SmallTile {
         getChildren().addAll(hbox, toggleButton);
     }
 }
+

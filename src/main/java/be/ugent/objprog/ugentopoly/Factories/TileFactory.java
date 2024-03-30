@@ -116,7 +116,7 @@ public class TileFactory implements Factory {
         );
 
         // TODO fix arguments
-        return new StreetTile(companion, tileData.get("id"));
+        return new StreetTile(companion, tileData.get("id"), null);
     }
 
 

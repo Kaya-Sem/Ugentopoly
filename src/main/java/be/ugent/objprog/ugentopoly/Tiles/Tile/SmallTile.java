@@ -1,10 +1,8 @@
 package be.ugent.objprog.ugentopoly.Tiles.Tile;
 
-public class SmallTile extends Tile {
+public abstract class SmallTile extends Tile {
 
     protected int rotatie;
-
-    // HACK second constructor to get around rotation. fix with a setRotation
 
     public SmallTile(Record companion, String id) {
         super(companion, id);
@@ -15,6 +13,7 @@ public class SmallTile extends Tile {
 
         int rotatie = 0;
 
+        // TODO fix rotation
         // set pivot points
         setTranslateX(getWidth() / 2);
         setTranslateY(getHeight() / 2);
@@ -25,5 +24,8 @@ public class SmallTile extends Tile {
             setTranslateY(32.5);
         }
     }
+
+    @Override
+    abstract void setup(String id);
 
 }

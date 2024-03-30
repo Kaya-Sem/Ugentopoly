@@ -27,11 +27,8 @@ public class TileButton extends ToggleButton {
         public void handle(ActionEvent event) {
             ToggleButton source  =(ToggleButton) event.getSource();
             boolean isSelected = source.isSelected();
-            if(isSelected) {
-                System.out.println("Button selected");
-            } else {
-                System.out.println("Button is deselected");
-            }
+
+            System.out.println((isSelected) ? "Button selected" : "Button deselected");
         }
-}
+    }
 }

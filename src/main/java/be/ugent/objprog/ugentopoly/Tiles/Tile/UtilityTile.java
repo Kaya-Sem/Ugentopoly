@@ -14,5 +14,10 @@ public class UtilityTile extends SmallTile {
     ){
         super(companion, id);
     }
+
+    @Override
+    void setup(String id) {
+
+    }
 }
 

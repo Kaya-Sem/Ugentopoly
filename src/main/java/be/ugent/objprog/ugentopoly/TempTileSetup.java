@@ -5,13 +5,17 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import be.ugent.objprog.ugentopoly.Tiles.Tile.CornerTile;
-import be.ugent.objprog.ugentopoly.Tiles.Tile.StreetTile;
-import be.ugent.objprog.ugentopoly.Tiles.Tile.Tile;
+import be.ugent.objprog.ugentopoly.Parsers.XMLParser;
+import be.ugent.objprog.ugentopoly.Tiles.Tile.*;
+import be.ugent.objprog.ugentopoly.Tiles.TileCompanions.ChanceCompanion;
+import be.ugent.objprog.ugentopoly.Tiles.TileCompanions.ChestCompanion;
 import be.ugent.objprog.ugentopoly.Tiles.TileCompanions.CornerCompanion;
 import be.ugent.objprog.ugentopoly.Tiles.TileCompanions.StreetCompanion;
 
 public class TempTileSetup {
+
+    static XMLParser parser = new XMLParser();
+    static Map<String, String> colors = parser.areaColors();
 
     public static CornerTile templateCornerTile() {
         return new CornerTile(
@@ -19,8 +23,32 @@ public class TempTileSetup {
                         "START",
                         "0",
                         "tile.street01"),
-                "tile.street01");
+                "tile.jail");
     }
+
+    public static ChestTile templateChestTile(){
+        return new ChestTile(
+                new ChestCompanion(
+                        "CHEST",
+                        "2",
+                        "tile.chest"
+                ),
+                "tile.chest"
+        );
+    }
+
+    public static ChanceTile templateChanceTile(){
+        return new ChanceTile(
+                new ChanceCompanion(
+                        "CHANCE",
+                        "7",
+                        "tile.chance"
+                ),
+                "tile.chance"
+        );
+    }
+
+
 
     protected static StreetTile templateTile() {
         return new StreetTile(
@@ -36,7 +64,9 @@ public class TempTileSetup {
                         "90",
                         "160",
                         "250"),
-                "tile.street05"
+                "tile.street05",
+                colors.get("area1")
+
                 );
     }
 
@@ -76,12 +106,12 @@ public class TempTileSetup {
     public static ArrayList<? extends Tile> leftBarTiles = new ArrayList<>(Arrays.asList(
             templateTile(),
             templateTile(),
+            templateChanceTile(),
             templateTile(),
             templateTile(),
             templateTile(),
             templateTile(),
-            templateTile(),
-            templateTile(),
+            templateChestTile(),
             templateTile()));
 
     public static ArrayList<? extends Tile> cornerTiles = new ArrayList<>(Arrays.asList(

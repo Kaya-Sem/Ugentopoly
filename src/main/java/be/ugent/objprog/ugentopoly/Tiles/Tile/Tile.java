@@ -13,8 +13,10 @@ public abstract class Tile extends StackPane {
     public Tile(Record companion, String id){
         this.companion = companion;
         this.id = id;
+
+        setup(this.id);
     }
 
-    abstract void setup();
+    abstract void setup(String id);
 }
 

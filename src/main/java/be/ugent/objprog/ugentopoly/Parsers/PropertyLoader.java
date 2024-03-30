@@ -20,13 +20,8 @@ public class PropertyLoader {
         return properties.getProperty(tileId);
     }
 
-    public static String getImage(String tileId) {
-        return properties.getProperty(tileId);
-    }
-
     private static void test() {
         System.out.println(getLabel("tile.street01"));
-        System.out.println(getImage("tile.jail"));
     }
 
     public static void main(String[] args) {

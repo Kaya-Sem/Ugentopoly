@@ -14,6 +14,11 @@ public class TaxTile extends SmallTile {
     ){
         super(companion, id);
     }
+
+    @Override
+    void setup(String id) {
+
+    }
 }
 
 
