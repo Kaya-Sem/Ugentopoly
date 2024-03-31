@@ -10,9 +10,6 @@ import java.util.Objects;
 
 public class UtilityTile extends SmallTile {
 
-    // TODO implement banner image
-    private static final ImageView image = null;
-
     // Constructor
     public UtilityTile(
             Record companion,
