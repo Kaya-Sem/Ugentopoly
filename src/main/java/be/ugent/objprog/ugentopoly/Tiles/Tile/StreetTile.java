@@ -33,7 +33,7 @@ public class StreetTile extends SmallTile {
 
         Label label = new Label(PropertyLoader.getLabel(id));
         label.setAlignment(Pos.CENTER);
-        label.setFont(Font.font("Arial", FontWeight.BOLD, 12));
+        label.setFont(Font.font("Arial", FontWeight.BOLD, 10));
         label.setWrapText(true);
 
         StackPane pane = new StackPane(label);

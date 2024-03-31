@@ -96,7 +96,7 @@ public class TileInitializer {
                 tilesArray[30]
         ));
 
-        Map<String, ArrayList<? extends Tile>> initializedTileMap = new HashMap<>() {
+        return new HashMap<>() {
             {
                 put("top_row", upperBarTiles);
                 put("bottom_row", bottomBarTiles);
@@ -105,8 +105,6 @@ public class TileInitializer {
                 put("corners", cornerTiles);
             }
         };
-
-        return initializedTileMap;
     }
 
     // Test method

@@ -7,18 +7,15 @@ import java.util.Map;
 
 import be.ugent.objprog.ugentopoly.Parsers.XMLParser;
 import be.ugent.objprog.ugentopoly.Tiles.Tile.*;
-import be.ugent.objprog.ugentopoly.Tiles.TileCompanions.ChanceCompanion;
-import be.ugent.objprog.ugentopoly.Tiles.TileCompanions.ChestCompanion;
-import be.ugent.objprog.ugentopoly.Tiles.TileCompanions.CornerCompanion;
-import be.ugent.objprog.ugentopoly.Tiles.TileCompanions.StreetCompanion;
+import be.ugent.objprog.ugentopoly.Tiles.TileCompanions.*;
 
 public class TempTileSetup {
 
     static XMLParser parser = new XMLParser();
     static Map<String, String> colors = parser.areaColors();
 
-    public static CornerTile templateCornerTile() {
-        return new CornerTile(
+    public static StartTile templateCornerTile() {
+        return new StartTile(
                 new CornerCompanion(
                         "START",
                         "0",
@@ -48,7 +45,17 @@ public class TempTileSetup {
         );
     }
 
-
+    public static TaxTile templateTaxTile(){
+        return new TaxTile(
+                new TaxCompanion(
+                        "TAX",
+                        "4",
+                        "tile.tax1",
+                        "200"
+                ),
+                "tile.tax1"
+        );
+    }
 
     protected static StreetTile templateTile() {
         return new StreetTile(
@@ -70,6 +77,41 @@ public class TempTileSetup {
                 );
     }
 
+    protected static RailwayTile templateRailwayTile(){
+     return new RailwayTile(
+             new RailwayCompanion(
+                     "RAILWAY",
+                     "5",
+                     "tile.railway1",
+                     "200",
+                     "50"
+             ),
+             "tile.railway1"
+     );
+    }
+
+    protected static UtilityTile templateUtilityTile(){
+        return new UtilityTile(
+                new UtilityCompanion(
+                       "UTILITY",
+                "12",
+                        "tile.utility1",
+                        "150"),
+                "tile.utility2"
+        );
+    }
+
+    protected static StartTile initStartTile(){
+        return new StartTile(
+                new CornerCompanion(
+                        "START",
+                        "0",
+                        "tile.start"
+                ),
+                "tile.start"
+        );
+    }
+
     public static ArrayList<? extends Tile> upperBarTiles = new ArrayList<>(Arrays.asList(
             templateTile(),
             templateTile(),
@@ -78,7 +120,7 @@ public class TempTileSetup {
             templateTile(),
             templateTile(),
             templateTile(),
-            templateTile(),
+            templateUtilityTile(),
             templateTile()));
 
     public static ArrayList<? extends Tile> bottomBarTiles = new ArrayList<>(Arrays.asList(
@@ -104,18 +146,18 @@ public class TempTileSetup {
             templateTile()));
 
     public static ArrayList<? extends Tile> leftBarTiles = new ArrayList<>(Arrays.asList(
-            templateTile(),
+            templateUtilityTile(),
             templateTile(),
             templateChanceTile(),
-            templateTile(),
-            templateTile(),
+            templateTaxTile(),
+            templateRailwayTile(),
             templateTile(),
             templateTile(),
             templateChestTile(),
             templateTile()));
 
     public static ArrayList<? extends Tile> cornerTiles = new ArrayList<>(Arrays.asList(
-            templateCornerTile(),
+            initStartTile(),
             templateCornerTile(),
             templateCornerTile(),
             templateCornerTile()));

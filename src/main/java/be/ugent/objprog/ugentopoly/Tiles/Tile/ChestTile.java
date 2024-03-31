@@ -2,13 +2,9 @@ package be.ugent.objprog.ugentopoly.Tiles.Tile;
 
 import be.ugent.objprog.ugentopoly.Parsers.PropertyLoader;
 import be.ugent.objprog.ugentopoly.TileButton;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
@@ -34,24 +30,13 @@ public class ChestTile extends SmallTile {
     // OPTIMIZE
     @Override
     void setup(String id) {
-        HBox hbox = new HBox();
-        hbox.setMinWidth(Tile.LONG_SIDE);
-        hbox.setMaxWidth(Tile.LONG_SIDE);
-        hbox.setMinWidth(Tile.LONG_SIDE);
-        hbox.setMaxWidth(Tile.LONG_SIDE);
-        hbox.setPadding(new Insets(10, 10, 10, 10));
-        hbox.setSpacing(10);
-        hbox.setAlignment(Pos.CENTER);
+        TileHBox hbox = new TileHBox();
 
-        ImageView imageView = new ImageView(image);
-        imageView.setFitHeight(ChestTile.SHORT_SIDE / 2);
-        imageView.setFitWidth(ChestTile.SHORT_SIDE / 2);
-        imageView.setPreserveRatio(true);
-
+        TileImageView imageView = new TileImageView(image);
 
         String text = PropertyLoader.getLabel(id);
         Label textLabel = new Label(text);
-        textLabel.setFont(Font.font("Arial", FontWeight.BOLD, 12));
+        textLabel.setFont(Font.font("Arial", FontWeight.BOLD, 10));
         textLabel.setWrapText(true);
 
         hbox.getChildren().addAll(imageView, textLabel);

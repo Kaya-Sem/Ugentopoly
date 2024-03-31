@@ -13,6 +13,8 @@ public class Ugentopoly extends Application {
     public static final double BOARD_SIZE = 845.0;
     public static final int SMALL_TILES = 13;
 
+    public static final String resourcePath = "/be/ugent/objprog/ugentopoly/assets/";
+
     @Override
     public void start(Stage stage) {
 

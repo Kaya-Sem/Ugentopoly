@@ -83,13 +83,11 @@ public class Board extends GridPane {
         // Add middle board
         add(new MiddleSection(), 1, 1);
 
-        // Adding corner tiles by loading the corners from the map for easier access
-        List<? extends Tile> corners = List.of();
 
-        add(TempTileSetup.templateCornerTile() , 0, 0); // top left
-        add(TempTileSetup.templateCornerTile(), 2, 0); // top right
-        add(TempTileSetup.templateCornerTile(), 0, 2); // bottom right
-        add(TempTileSetup.templateCornerTile(), 2, 2); // bottom left
+        add(TempTileSetup.cornerTiles.get(0) , 0, 0); // top left
+        add(TempTileSetup.cornerTiles.get(0), 2, 0); // top right
+        add(TempTileSetup.cornerTiles.get(0), 0, 2); // bottom right
+        add(TempTileSetup.cornerTiles.get(0), 2, 2); // bottom left
 
 
 

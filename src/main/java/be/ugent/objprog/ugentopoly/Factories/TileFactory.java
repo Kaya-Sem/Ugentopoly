@@ -17,7 +17,7 @@ public class TileFactory implements Factory {
     public <U extends Tile> U forge(Map<String, String> tileData) {
         try {
             return switch (tileData.get("type")) {
-                case "START", "FREE_PARKING", "JAIL", "GO_TO_JAIL" -> (U) createCorner(tileData);
+                //case "START", "FREE_PARKING", "JAIL", "GO_TO_JAIL" -> (U) createCorner(tileData); // TODO fix
                 case "STREET" -> (U) createStreet(tileData);
                 case "CHEST" -> (U) createChest(tileData);
                 case "TAX" -> (U) createTax(tileData);
@@ -56,7 +56,7 @@ public class TileFactory implements Factory {
         return new UtilityTile(companion, tileData.get("id"));
     }
 
-    private CornerTile createCorner(Map<String, String> tileData) {
+    /*private CornerTile createCorner(Map<String, String> tileData) {
         Record companion = new CornerCompanion(
                 tileData.get("type"),
                 tileData.get("position"),
@@ -64,7 +64,7 @@ public class TileFactory implements Factory {
         );
 
         return new CornerTile(companion, tileData.get("id"));
-    }
+    }*/
 
     private TaxTile createTax(Map<String, String> tileData) {
         Record companion = new TaxCompanion(
