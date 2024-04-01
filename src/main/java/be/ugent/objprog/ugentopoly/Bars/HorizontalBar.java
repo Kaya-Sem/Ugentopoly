@@ -26,9 +26,13 @@ public class HorizontalBar extends GridPane implements Bar{
     }
 
     public void populate(List<? extends Tile> tiles){
-        for (int i = 0; i < 9; i++) {
-            Tile tile = tiles.get(i);
-            add(tile, i, 0);
+        if (tiles.size() == 9) {
+            for (int i = 0; i < 9; i++) {
+                Tile tile = tiles.get(i);
+                add(tile, i, 0);
+            }
+        } else {
+            throw new IllegalArgumentException("tile list must be of size 9!");
         }
     }
 }

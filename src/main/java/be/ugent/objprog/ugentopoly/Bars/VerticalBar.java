@@ -32,9 +32,13 @@ public class VerticalBar extends GridPane implements Bar {
     }
 
     public void populate(List<? extends Tile> tiles) {
-        for (int i = 0; i < 9; i++) {
-            Tile tile = tiles.get(i);
-            add(tile, 0, i);
+        if (tiles.size() == 9) {
+            for (int i = 0; i < 9; i++) {
+                Tile tile = tiles.get(i);
+                add(tile, 0, i);
+            }
+        } else {
+            throw new IllegalArgumentException("tile list must be of size 9!");
         }
     }
 }
