@@ -10,16 +10,19 @@ import java.util.List;
 /*
     initializeRowConstraints() : fill the bar with 8 rows, as to create 8 places for tiles.
     populate() : places 9 received tiles in the slots.
+    NON URGENT write documentation for BARS
 */
 
 public class VerticalBar extends GridPane implements Bar {
     private static final int NUM_ROWS = 8;
     private static final double ROW_HEIGHT = Tile.SHORT_SIDE;
 
-    public VerticalBar() {
+    public VerticalBar(List<? extends Tile> tiles) {
         setPrefWidth(Tile.LONG_SIDE);
         setPrefHeight(MiddleSection.getSize());
+
         initializeRowConstraints();
+        populate(tiles);
     }
 
     private void initializeRowConstraints() {

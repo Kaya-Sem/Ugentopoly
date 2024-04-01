@@ -7,27 +7,22 @@ import javafx.scene.layout.GridPane;
 
 import java.util.List;
 
-// TODO implement same logic as vertical bar
-
 public class HorizontalBar extends GridPane implements Bar{
-    private static final ColumnConstraints[] COLUMN_CONSTRAINTS = {
-            new ColumnConstraints(Tile.SHORT_SIDE),
-            new ColumnConstraints(Tile.SHORT_SIDE),
-            new ColumnConstraints(Tile.SHORT_SIDE),
-            new ColumnConstraints(Tile.SHORT_SIDE),
-            new ColumnConstraints(Tile.SHORT_SIDE),
-            new ColumnConstraints(Tile.SHORT_SIDE),
-            new ColumnConstraints(Tile.SHORT_SIDE),
-            new ColumnConstraints(Tile.SHORT_SIDE),
-    };
+    private static final int NUM_COLS = 8;
+    private static final double COL_WIDTH = Tile.SHORT_SIDE;
 
+    private void initializeColumnConstraints(){
+        for (int i=0; i< NUM_COLS; i++) {
+            getColumnConstraints().add(new ColumnConstraints(COL_WIDTH));
+        }
+    }
 
-    public HorizontalBar() {
+    public HorizontalBar(List<? extends Tile> tiles) {
         setPrefWidth(MiddleSection.getSize());
         setPrefHeight(Tile.LONG_SIDE);
-        getColumnConstraints().addAll(
-            COLUMN_CONSTRAINTS
-        );
+
+        initializeColumnConstraints();
+        populate(tiles);
     }
 
     public void populate(List<? extends Tile> tiles){
