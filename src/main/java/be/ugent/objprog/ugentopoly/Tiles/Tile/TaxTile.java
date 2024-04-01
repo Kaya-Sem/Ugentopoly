@@ -5,7 +5,6 @@ import be.ugent.objprog.ugentopoly.TileButton;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
@@ -19,17 +18,14 @@ public class TaxTile extends SmallTile {
             ));
 
     // Constructor
-    public TaxTile(
-            Record companion,
-            String id
-    ){
+    public TaxTile(Record companion, String id){
         super(companion, id);
         setup(id);
     }
 
     // OPTIMIZE
     @Override
-    void setup(String id) {
+    protected void setup(String id) {
         TileHBox hbox = new TileHBox();
 
         TileImageView imageView = new TileImageView(image);

@@ -26,6 +26,6 @@ public abstract class SmallTile extends Tile {
     }
 
     @Override
-    abstract void setup(String id);
+    protected abstract void setup(String id);
 
 }

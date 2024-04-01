@@ -1,17 +1,18 @@
-package be.ugent.objprog.ugentopoly.Tiles.Tile;
+package be.ugent.objprog.ugentopoly.Tiles.Tile.CornerTiles;
 
 import be.ugent.objprog.ugentopoly.TileButton;
+import be.ugent.objprog.ugentopoly.Tiles.Tile.TileImageView;
 import javafx.geometry.Pos;
 import javafx.scene.image.Image;
 
-public class StartTile extends CornerTile {
+public class StartCornerTile extends CornerTile {
 
-    public StartTile(Record companion, String id) {
+    public StartCornerTile(Record companion, String id) {
         super(companion, id);
         setup(id);
     }
 
-    void setup(String id) {
+    public void setup(String id) {
         String imagePath = "/be/ugent/objprog/ugentopoly/assets/start.png";
         String arrowPath = "/be/ugent/objprog/ugentopoly/assets/start-arrow.png";
 

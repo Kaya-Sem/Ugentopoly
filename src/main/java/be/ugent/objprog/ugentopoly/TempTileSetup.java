@@ -1,5 +1,6 @@
 package be.ugent.objprog.ugentopoly;
 
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -7,6 +8,10 @@ import java.util.Map;
 
 import be.ugent.objprog.ugentopoly.Parsers.XMLParser;
 import be.ugent.objprog.ugentopoly.Tiles.Tile.*;
+import be.ugent.objprog.ugentopoly.Tiles.Tile.CornerTiles.FreeParkingCornerTile;
+import be.ugent.objprog.ugentopoly.Tiles.Tile.CornerTiles.GoToJailCornerTile;
+import be.ugent.objprog.ugentopoly.Tiles.Tile.CornerTiles.JailCornerTile;
+import be.ugent.objprog.ugentopoly.Tiles.Tile.CornerTiles.StartCornerTile;
 import be.ugent.objprog.ugentopoly.Tiles.TileCompanions.*;
 
 public class TempTileSetup {
@@ -14,13 +19,24 @@ public class TempTileSetup {
     static XMLParser parser = new XMLParser();
     static Map<String, String> colors = parser.areaColors();
 
-    public static StartTile templateCornerTile() {
-        return new StartTile(
+    public static StartCornerTile templateCornerTile() {
+        return new StartCornerTile(
                 new CornerCompanion(
                         "START",
                         "0",
                         "tile.street01"),
                 "tile.jail");
+    }
+
+    public static JailCornerTile initJailCornerTile() {
+        return new JailCornerTile(
+                new CornerCompanion(
+                        "JAIL",
+                        "10",
+                        "tile.jail"
+                ),
+                "tile.jail"
+        );
     }
 
     public static ChestTile templateChestTile(){
@@ -101,14 +117,36 @@ public class TempTileSetup {
         );
     }
 
-    protected static StartTile initStartTile(){
-        return new StartTile(
+    protected static StartCornerTile initStartTile(){
+        return new StartCornerTile(
                 new CornerCompanion(
                         "START",
                         "0",
                         "tile.start"
                 ),
                 "tile.start"
+        );
+    }
+
+    public static FreeParkingCornerTile initFreeParkingCornerTile(){
+        return new FreeParkingCornerTile(
+                new CornerCompanion(
+                        "FREE_PARKING",
+                        "20",
+                        "tile.freeparking"
+                ),
+                "tile.freeparking"
+        );
+    }
+
+    public static GoToJailCornerTile initGoToJailCornerTile(){
+        return new GoToJailCornerTile(
+                new CornerCompanion(
+                        "GO_TO_JAIL",
+                        "30",
+                        "tile.gotojail"
+                ),
+                "tile.gotojail"
         );
     }
 
@@ -158,9 +196,10 @@ public class TempTileSetup {
 
     public static ArrayList<? extends Tile> cornerTiles = new ArrayList<>(Arrays.asList(
             initStartTile(),
-            templateCornerTile(),
-            templateCornerTile(),
-            templateCornerTile()));
+            initJailCornerTile(),
+            initFreeParkingCornerTile(),
+            initGoToJailCornerTile()
+            ));
 
     public static Map<String, ArrayList<? extends Tile>> initializedTileMap = new HashMap<>() {
         {

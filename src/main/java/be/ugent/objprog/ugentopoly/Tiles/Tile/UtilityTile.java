@@ -19,7 +19,7 @@ public class UtilityTile extends SmallTile {
     }
 
     @Override
-    void setup(String id) {
+    protected void setup(String id) {
         String imageName = id.substring(5) + ".png";
         String imagePath = "/be/ugent/objprog/ugentopoly/assets/" + imageName;
         System.out.println(imagePath);

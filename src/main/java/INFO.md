@@ -10,5 +10,5 @@ Create a class of game state and data
 class or record for current tile mappings?
 
 
-
+Create readme documentation for larger blocks like "tiles"
 

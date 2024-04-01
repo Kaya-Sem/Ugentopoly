@@ -7,6 +7,8 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
+import java.util.Objects;
+
 public class Ugentopoly extends Application {
     private static final String ICON = "tax.png";
     private static final int WINDOW_SIZE = 900;
@@ -22,7 +24,7 @@ public class Ugentopoly extends Application {
         //final Dice dice = new Dice();
         StackPane root = new StackPane(new Board());
         Scene scene = new Scene(root, BOARD_SIZE, BOARD_SIZE );
-        scene.getStylesheets().add(getClass().getResource("/be/ugent/objprog/ugentopoly/styles.css").toExternalForm());
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/be/ugent/objprog/ugentopoly/styles.css")).toExternalForm());
         stage.setScene(scene);
 
         @SuppressWarnings("ConstantConditions")

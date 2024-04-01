@@ -27,7 +27,7 @@ public class ChanceTile extends SmallTile {
 
     // OPTIMIZE
     @Override
-    void setup(String id) {
+    protected void setup(String id) {
         TileHBox hbox = new TileHBox();
 
         TileImageView imageView = new TileImageView(image);

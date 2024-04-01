@@ -65,14 +65,6 @@ public class Board extends GridPane {
         leftBar.populate(TempTileSetup.leftBarTiles);
         rightBar.populate(TempTileSetup.rightBarTiles);
 
-        // create a new toggle group for all the tiles
-        /*ToggleGroup toggleGroup = new ToggleGroup();
-        for (ArrayList<? extends Tile> tileList : tileMap.values()) {
-            for (Tile tile : tileList) {
-                tile.setToggleGroup(toggleGroup);
-            }
-        }*/
-
         // TODO make positions constant
         // Add components to the GridPane
         add(topRow,1, 0);
@@ -84,10 +76,11 @@ public class Board extends GridPane {
         add(new MiddleSection(), 1, 1);
 
 
-        add(TempTileSetup.cornerTiles.get(0) , 0, 0); // top left
-        add(TempTileSetup.cornerTiles.get(0), 2, 0); // top right
-        add(TempTileSetup.cornerTiles.get(0), 0, 2); // bottom right
-        add(TempTileSetup.cornerTiles.get(0), 2, 2); // bottom left
+        System.out.println(TempTileSetup.cornerTiles);
+        add(TempTileSetup.cornerTiles.get(0), 0, 2); // bottom left
+        add(TempTileSetup.cornerTiles.get(1) , 0, 0); // top left
+        add(TempTileSetup.cornerTiles.get(2), 2, 0); // top right
+        add(TempTileSetup.cornerTiles.get(3), 2, 2); // bottom right
 
 
 
