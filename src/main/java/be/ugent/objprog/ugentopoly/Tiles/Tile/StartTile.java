@@ -1,30 +1,29 @@
 package be.ugent.objprog.ugentopoly.Tiles.Tile;
 
 import be.ugent.objprog.ugentopoly.TileButton;
+import javafx.geometry.Pos;
 import javafx.scene.image.Image;
 
-import java.util.Objects;
+public class StartTile extends CornerTile {
 
-public class StartTile extends CornerTile{
-
-    public StartTile(Record companion, String id){
+    public StartTile(Record companion, String id) {
         super(companion, id);
         setup(id);
     }
 
-    // TODO make res path a constant
-    void setup(String id){
-        String[] paths = CornerTile.IMAGES.get(id).split(" ");
+    void setup(String id) {
+        String imagePath = "/be/ugent/objprog/ugentopoly/assets/start.png";
+        String arrowPath = "/be/ugent/objprog/ugentopoly/assets/start-arrow.png";
 
-        Image arrow = new Image(Objects.requireNonNull(getClass()
-                .getResourceAsStream(paths[1])));
+        TileImageView arrowImageView = new TileImageView(new Image(arrowPath), 2.0, true);
+        arrowImageView.setRotate(90);
+        setAlignment(arrowImageView, Pos.CENTER_LEFT);
 
-        Image start = new Image(Objects.requireNonNull(getClass()
-                .getResourceAsStream(paths[0])));
-
+        TileImageView startImage = new TileImageView(new Image(imagePath), 1.0, true);
+        setAlignment(startImage, Pos.CENTER_RIGHT);
 
         TileButton toggleButton = new TileButton();
-        getChildren().addAll(toggleButton);
+        getChildren().addAll(startImage, arrowImageView, toggleButton);
 
     }
 }
