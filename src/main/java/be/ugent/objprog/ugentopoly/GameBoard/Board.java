@@ -11,8 +11,6 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 
-import java.util.List;
-
 public class Board extends GridPane {
     public static final double BOARD_SIZE = Ugentopoly.BOARD_SIZE;
     public static final int SMALL_TILES = 9;
@@ -38,32 +36,18 @@ public class Board extends GridPane {
         );
 
 
-        /*
-        load a map of initialised tiles
-
-        top_row -> top row tiles
-        bottom_row -> bottom row tiles
-        right_row -> right bar tiles
-        left_row -> left bar tiles
-        corners -> corner tiles
-
-        */
+        // load a map of initialised tiles
 
         //TODO fix
         //TileInitializer tileInitializer = new TileInitializer();
         //Map<String, ArrayList<? extends Tile>> tileMap = tileInitializer.initialiseTiles();
 
+        // TODO these should take a list as argument, so we don't have to use .populate
         // initialize tileholders
-        HorizontalBar topRow = new HorizontalBar();
-        HorizontalBar bottomRow = new HorizontalBar();
-        VerticalBar leftBar = new VerticalBar();
-        VerticalBar rightBar = new VerticalBar();
-
-        // populate tiles with lists from map
-        topRow.populate(TempTileSetup.upperBarTiles);
-        bottomRow.populate(TempTileSetup.bottomBarTiles);
-        leftBar.populate(TempTileSetup.leftBarTiles);
-        rightBar.populate(TempTileSetup.rightBarTiles);
+        HorizontalBar topRow = new HorizontalBar(TempTileSetup.upperBarTiles);
+        HorizontalBar bottomRow = new HorizontalBar(TempTileSetup.bottomBarTiles);
+        VerticalBar leftBar = new VerticalBar(TempTileSetup.leftBarTiles);
+        VerticalBar rightBar = new VerticalBar(TempTileSetup.rightBarTiles);
 
         // TODO make positions constant
         // Add components to the GridPane
@@ -75,14 +59,12 @@ public class Board extends GridPane {
         // Add middle board
         add(new MiddleSection(), 1, 1);
 
-
+        // TODO make positions constant, for better readability
         System.out.println(TempTileSetup.cornerTiles);
         add(TempTileSetup.cornerTiles.get(0), 0, 2); // bottom left
         add(TempTileSetup.cornerTiles.get(1) , 0, 0); // top left
         add(TempTileSetup.cornerTiles.get(2), 2, 0); // top right
         add(TempTileSetup.cornerTiles.get(3), 2, 2); // bottom right
-
-
 
     }
 }
