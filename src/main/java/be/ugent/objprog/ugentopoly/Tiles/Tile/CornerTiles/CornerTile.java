@@ -1,10 +1,7 @@
 package be.ugent.objprog.ugentopoly.Tiles.Tile.CornerTiles;
 
-import be.ugent.objprog.ugentopoly.CustomButtonHandler;
 import be.ugent.objprog.ugentopoly.TileButton;
 import be.ugent.objprog.ugentopoly.Tiles.Tile.Tile;
-import javafx.event.ActionEvent;
-import javafx.scene.control.ToggleButton;
 
 import java.util.Map;
 
@@ -25,10 +22,5 @@ abstract public class CornerTile extends Tile {
         setMinWidth(Tile.LONG_SIDE);
 
         tileButton.setOnAction(event -> handleButton(event, companion));
-    }
-
-    private void handleButton(ActionEvent event, Record companion) {
-        System.err.println("Button clicked: " + event.getEventType() + " " + event.hashCode() + "\n" + companion);
-        CustomButtonHandler.updateDisplayedCard(companion);
     }
 }
