@@ -4,7 +4,6 @@ import be.ugent.objprog.ugentopoly.CustomButtonHandler;
 import be.ugent.objprog.ugentopoly.TileButton;
 import be.ugent.objprog.ugentopoly.Ugentopoly;
 import javafx.event.ActionEvent;
-import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.StackPane;
 
 public abstract class Tile extends StackPane {
