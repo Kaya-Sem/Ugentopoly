@@ -17,7 +17,10 @@ public class VerticalBar extends GridPane implements Bar {
     private static final int NUM_ROWS = 8;
     private static final double ROW_HEIGHT = Tile.SHORT_SIDE;
 
+    private final List<? extends Tile> tiles;
+
     public VerticalBar(List<? extends Tile> tiles) {
+        this.tiles = tiles;
         setPrefWidth(Tile.LONG_SIDE);
         setPrefHeight(MiddleSection.getSize());
 
@@ -39,6 +42,12 @@ public class VerticalBar extends GridPane implements Bar {
             }
         } else {
             throw new IllegalArgumentException("tile list must be of size 9!");
+        }
+    }
+
+    public void applyRotation(double angle) {
+        for (Tile tile : this.tiles) {
+            tile.applyRotation(angle);
         }
     }
 }

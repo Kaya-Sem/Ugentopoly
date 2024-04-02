@@ -11,6 +11,8 @@ public class HorizontalBar extends GridPane implements Bar{
     private static final int NUM_COLS = 8;
     private static final double COL_WIDTH = Tile.SHORT_SIDE;
 
+    private final List<? extends Tile> tiles;
+
     private void initializeColumnConstraints(){
         for (int i=0; i< NUM_COLS; i++) {
             getColumnConstraints().add(new ColumnConstraints(COL_WIDTH));
@@ -18,11 +20,12 @@ public class HorizontalBar extends GridPane implements Bar{
     }
 
     public HorizontalBar(List<? extends Tile> tiles) {
+        this.tiles = tiles;
         setPrefWidth(MiddleSection.getSize());
         setPrefHeight(Tile.LONG_SIDE);
 
         initializeColumnConstraints();
-        populate(tiles);
+        populate(this.tiles);
     }
 
     public void populate(List<? extends Tile> tiles){
@@ -35,4 +38,11 @@ public class HorizontalBar extends GridPane implements Bar{
             throw new IllegalArgumentException("tile list must be of size 9!");
         }
     }
+
+    public void applyRotation(double angle) {
+        for (Tile tile : this.tiles) {
+            tile.applyRotation(angle);
+        }
+    }
+
 }
