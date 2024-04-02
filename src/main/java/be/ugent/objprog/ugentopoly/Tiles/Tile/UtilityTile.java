@@ -1,19 +1,16 @@
 package be.ugent.objprog.ugentopoly.Tiles.Tile;
 
-import be.ugent.objprog.ugentopoly.TileButton;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import java.util.Objects;
+
 import javafx.geometry.Insets;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 
-import java.util.Objects;
-
 public class UtilityTile extends SmallTile {
 
     // Constructor
-    public UtilityTile(Record companion, String id){
+    public UtilityTile(Record companion, String id) {
         super(companion, id);
         setup(id);
     }
@@ -31,8 +28,8 @@ public class UtilityTile extends SmallTile {
 
         ImageView imageView = new ImageView(image);
 
-        imageView.setFitHeight(Tile.SHORT_SIDE  -13);
-        imageView.setFitWidth(Tile.LONG_SIDE- 13);
+        imageView.setFitHeight(Tile.SHORT_SIDE - 13);
+        imageView.setFitWidth(Tile.LONG_SIDE - 13);
         imageView.setPreserveRatio(true);
 
         StackPane pane = new StackPane(imageView);
@@ -41,6 +38,5 @@ public class UtilityTile extends SmallTile {
         pane.setPadding(new Insets(10, 10, 10, 10));
 
         getChildren().addAll(pane, tileButton);
+    }
 }
-}
-
