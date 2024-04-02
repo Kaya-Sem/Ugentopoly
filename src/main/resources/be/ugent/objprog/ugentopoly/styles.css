@@ -1,7 +1,6 @@
 
 .toggle-button:selected {
-    -fx-font-size: 17px; /* Font size */
-    -fx-border-width: 2px;
+    -fx-border-width: 3px;
 }
 
 .toggle-button:hover {

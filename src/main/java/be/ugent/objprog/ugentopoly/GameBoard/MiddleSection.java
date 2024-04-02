@@ -1,7 +1,6 @@
 package be.ugent.objprog.ugentopoly.GameBoard;
 import be.ugent.objprog.ugentopoly.Tiles.Tile.Tile;
 import be.ugent.objprog.ugentopoly.Ugentopoly;
-import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -13,15 +12,15 @@ import java.util.Objects;
 public class MiddleSection extends StackPane {
     private static final double SIZE = (Ugentopoly.BOARD_SIZE / Ugentopoly.SMALL_TILES) * 9;
 
-    public  MiddleSection(){
+    private final StackPane displayedCard;
 
-        setPrefSize(SIZE, SIZE);
+    public  MiddleSection(){
+        setMinSize(SIZE, SIZE);
         setMaxSize(SIZE, SIZE);
-        setAlignment(Pos.CENTER); // Center content within the StackPane
 
         // Load the bottom image
-        InputStream bottomImageStream = getClass().getResourceAsStream("/be/ugent/objprog/ugentopoly/gent.jpg");
-        Image bottomImage = new Image(Objects.requireNonNull(bottomImageStream));
+        Image bottomImage = new Image(Objects.requireNonNull(getClass()
+                .getResourceAsStream("/be/ugent/objprog/ugentopoly/gent.jpg")));
         ImageView bottomImageView = new ImageView(bottomImage);
         bottomImageView.setViewport(new Rectangle2D(0, 0, SIZE, SIZE));
 
@@ -38,7 +37,19 @@ public class MiddleSection extends StackPane {
         logo.setFitHeight(SIZE * 0.15);
         logo.setRotate(45.0);
 
-        getChildren().addAll(bottomImageView, logo);
+        // card in the middle
+        this.displayedCard = new StackPane();
+
+        getChildren().addAll(bottomImageView, logo, displayedCard);
+    }
+
+
+    // Method to update the placeholder with new content
+    public void updateDisplayedCard(StackPane card) {
+        displayedCard.getChildren().clear();
+        if (card != null) {
+            displayedCard.getChildren().addAll(card);
+        }
     }
 
     public static double getSize(){

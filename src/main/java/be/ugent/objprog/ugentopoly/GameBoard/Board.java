@@ -2,6 +2,7 @@ package be.ugent.objprog.ugentopoly.GameBoard;
 
 import be.ugent.objprog.ugentopoly.Bars.HorizontalBar;
 import be.ugent.objprog.ugentopoly.Bars.VerticalBar;
+import be.ugent.objprog.ugentopoly.CustomButtonHandler;
 import be.ugent.objprog.ugentopoly.TempTileSetup;
 import be.ugent.objprog.ugentopoly.Tiles.Tile.Tile;
 import be.ugent.objprog.ugentopoly.Ugentopoly;
@@ -35,9 +36,6 @@ public class Board extends GridPane {
                 new RowConstraints(MIDDLE_AREA_SIZE) // Mid-section row
         );
 
-
-        // load a map of initialised tiles
-
         //TODO fix
         //TileInitializer tileInitializer = new TileInitializer();
         //Map<String, ArrayList<? extends Tile>> tileMap = tileInitializer.initialiseTiles();
@@ -49,15 +47,20 @@ public class Board extends GridPane {
         VerticalBar leftBar = new VerticalBar(TempTileSetup.leftBarTiles);
         VerticalBar rightBar = new VerticalBar(TempTileSetup.rightBarTiles);
 
+        // apply rotation to tiles
+        topRow.applyRotation(90);
+        rightBar.applyRotation(180);
+        bottomRow.applyRotation(270);
+
         // TODO make positions constant
-        // Add components to the GridPane
         add(topRow,1, 0);
         add(rightBar, 2, 1);
         add(leftBar, 0, 1);
         add(bottomRow, 1, 2);
 
-        // Add middle board
-        add(new MiddleSection(), 1, 1);
+        MiddleSection middleSection = new MiddleSection();
+        CustomButtonHandler.middleSection = middleSection;
+        add(middleSection, 1, 1);
 
         // TODO make positions constant, for better readability
         System.out.println(TempTileSetup.cornerTiles);

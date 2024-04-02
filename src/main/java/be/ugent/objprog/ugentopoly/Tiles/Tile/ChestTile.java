@@ -3,7 +3,6 @@ package be.ugent.objprog.ugentopoly.Tiles.Tile;
 import be.ugent.objprog.ugentopoly.Parsers.PropertyLoader;
 import be.ugent.objprog.ugentopoly.TileButton;
 import javafx.scene.control.Label;
-import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -19,18 +18,20 @@ public class ChestTile extends SmallTile {
             ));
 
     // Constructor
-    public ChestTile(
-            Record companion,
-            String id
-    ){
+    public ChestTile(Record companion, String id){
         super(companion, id);
+        setup(id);
+    }
+
+    public ChestTile(String id) {
+        super(id);
+        setup(id);
     }
 
 
     // OPTIMIZE
-    @Override
     protected void setup(String id) {
-        TileHBox hbox = new TileHBox();
+        TileHBox hBox = new TileHBox();
 
         TileImageView imageView = new TileImageView(image);
 
@@ -39,10 +40,9 @@ public class ChestTile extends SmallTile {
         textLabel.setFont(Font.font("Arial", FontWeight.BOLD, 10));
         textLabel.setWrapText(true);
 
-        hbox.getChildren().addAll(imageView, textLabel);
+        hBox.getChildren().addAll(imageView, textLabel);
 
-        ToggleButton toggleButton = new TileButton();
-        getChildren().addAll(hbox, toggleButton);
+        getChildren().addAll(hBox, tileButton);
     }
 }
 

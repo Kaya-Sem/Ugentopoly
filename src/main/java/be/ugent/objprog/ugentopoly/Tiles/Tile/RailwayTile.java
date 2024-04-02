@@ -18,11 +18,13 @@ public class RailwayTile extends SmallTile {
             ));
 
     // Constructor
-    public RailwayTile(
-            Record companion,
-            String id
-    ){
+    public RailwayTile(Record companion, String id){
         super(companion, id);
+    }
+
+    public RailwayTile(String id) {
+        super(id);
+        setup(id);
     }
 
     // OPTIMIZE
@@ -39,8 +41,7 @@ public class RailwayTile extends SmallTile {
 
         hbox.getChildren().addAll(imageView, textLabel);
 
-        ToggleButton toggleButton = new TileButton();
-        getChildren().addAll(hbox, toggleButton);
+        getChildren().addAll(hbox, tileButton);
     }
 }
 

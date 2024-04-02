@@ -1,6 +1,5 @@
 package be.ugent.objprog.ugentopoly;
 
-import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -19,15 +18,6 @@ public class TempTileSetup {
     static XMLParser parser = new XMLParser();
     static Map<String, String> colors = parser.areaColors();
 
-    public static StartCornerTile templateCornerTile() {
-        return new StartCornerTile(
-                new CornerCompanion(
-                        "START",
-                        "0",
-                        "tile.street01"),
-                "tile.jail");
-    }
-
     public static JailCornerTile initJailCornerTile() {
         return new JailCornerTile(
                 new CornerCompanion(
@@ -39,7 +29,7 @@ public class TempTileSetup {
         );
     }
 
-    public static ChestTile templateChestTile(){
+    public static ChestTile initChestTile(){
         return new ChestTile(
                 new ChestCompanion(
                         "CHEST",
@@ -50,7 +40,7 @@ public class TempTileSetup {
         );
     }
 
-    public static ChanceTile templateChanceTile(){
+    public static ChanceTile initChanceTile(){
         return new ChanceTile(
                 new ChanceCompanion(
                         "CHANCE",
@@ -155,10 +145,10 @@ public class TempTileSetup {
             templateTile(),
             templateTile(),
             templateTile(),
+            initChestTile(),
             templateTile(),
             templateTile(),
-            templateTile(),
-            templateUtilityTile(),
+            templateUtilityTile(), // TODO
             templateTile()));
 
     public static ArrayList<? extends Tile> bottomBarTiles = new ArrayList<>(Arrays.asList(
@@ -173,26 +163,26 @@ public class TempTileSetup {
             templateTile()));
 
     public static ArrayList<? extends Tile> rightBarTiles = new ArrayList<>(Arrays.asList(
-            templateTile(),
-            templateTile(),
-            templateTile(),
-            templateTile(),
-            templateTile(),
-            templateTile(),
-            templateTile(),
-            templateTile(),
-            templateTile()));
+            new StreetTile("tile.street12"),
+            new ChanceTile("tile.chance"),
+            new StreetTile("tile.street13"),
+            new StreetTile("tile.street14"),
+            new RailwayTile("tile.railway3"),
+            new StreetTile("tile.street15"),
+            new StreetTile("tile.street16"),
+            new UtilityTile("tile.utility2"),
+            new StreetTile("tile.street17")));
 
     public static ArrayList<? extends Tile> leftBarTiles = new ArrayList<>(Arrays.asList(
-            templateUtilityTile(),
-            templateTile(),
-            templateChanceTile(),
-            templateTaxTile(),
-            templateRailwayTile(),
-            templateTile(),
-            templateTile(),
-            templateChestTile(),
-            templateTile()));
+            new StreetTile("tile.street05"),
+            new StreetTile("tile.street04"),
+            new ChanceTile("tile.chance"),
+            new StreetTile("tile.street03"),
+            new RailwayTile("tile.railway1"),
+            new TaxTile("tile.tax1"),
+            new StreetTile("tile.street02"),
+            new ChestTile("tile.chest"),
+            new StreetTile("tile.street01")));
 
     public static ArrayList<? extends Tile> cornerTiles = new ArrayList<>(Arrays.asList(
             initStartTile(),

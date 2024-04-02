@@ -1,7 +1,7 @@
 package be.ugent.objprog.ugentopoly.Tiles.Tile.CornerTiles;
 
-import be.ugent.objprog.ugentopoly.TileButton;
 import be.ugent.objprog.ugentopoly.Parsers.PropertyLoader;
+import be.ugent.objprog.ugentopoly.Tiles.Tile.Tile;
 import be.ugent.objprog.ugentopoly.Tiles.Tile.TileImageView;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -11,6 +11,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
 public class GoToJailCornerTile extends CornerTile {
+    private final double ROTATION = -45;
 
     public GoToJailCornerTile(Record companion, String id) {
         super(companion, id);
@@ -33,9 +34,11 @@ public class GoToJailCornerTile extends CornerTile {
         TileImageView image = new TileImageView(new Image(CornerTile.IMAGES.get(id)), 1.5, true);
 
         vBox.getChildren().addAll(textLabel1, image, textLabel2);
+        vBox.setMaxHeight(Tile.LONG_SIDE - 20);
+        vBox.setMaxWidth(Tile.LONG_SIDE - 20);
         vBox.setAlignment(Pos.CENTER);
-        vBox.setRotate(-45);
+        vBox.setRotate(ROTATION);
 
-        getChildren().addAll(vBox, new TileButton());
+        getChildren().addAll(vBox, tileButton);
     }
 }

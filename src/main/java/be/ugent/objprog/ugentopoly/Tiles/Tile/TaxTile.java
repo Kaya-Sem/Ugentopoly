@@ -23,10 +23,14 @@ public class TaxTile extends SmallTile {
         setup(id);
     }
 
+    public TaxTile(String id) {
+        super(id);
+        setup(id);
+    }
+
     // OPTIMIZE
-    @Override
     protected void setup(String id) {
-        TileHBox hbox = new TileHBox();
+        TileHBox hBox = new TileHBox(); // TODO update constructor to take children?
 
         TileImageView imageView = new TileImageView(image);
 
@@ -35,10 +39,9 @@ public class TaxTile extends SmallTile {
         textLabel.setFont(Font.font("Arial", FontWeight.BOLD, 10));
         textLabel.setWrapText(true);
 
-        hbox.getChildren().addAll(imageView, textLabel);
+        hBox.getChildren().addAll(imageView, textLabel);
 
-        ToggleButton toggleButton = new TileButton();
-        getChildren().addAll(hbox, toggleButton);
+        getChildren().addAll(hBox, tileButton);
     }
 }
 

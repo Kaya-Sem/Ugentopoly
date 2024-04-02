@@ -18,11 +18,13 @@ public class ChanceTile extends SmallTile {
             ));
 
     // Constructor
-    public ChanceTile(
-            Record companion,
-            String id
-    ){
+    public ChanceTile(Record companion, String id){
         super(companion, id);
+    }
+
+    public ChanceTile(String id) {
+        super(id);
+        setup(id);
     }
 
     // OPTIMIZE
@@ -39,8 +41,7 @@ public class ChanceTile extends SmallTile {
 
         hbox.getChildren().addAll(imageView, textLabel);
 
-        ToggleButton toggleButton = new TileButton();
-        getChildren().addAll(hbox, toggleButton);
+        getChildren().addAll(hbox, tileButton);
     }
 }
 

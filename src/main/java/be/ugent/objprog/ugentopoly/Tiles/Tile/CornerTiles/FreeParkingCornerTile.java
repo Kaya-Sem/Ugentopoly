@@ -36,6 +36,6 @@ public class FreeParkingCornerTile extends CornerTile {
         vBox.setAlignment(Pos.CENTER);
         vBox.setRotate(-135);
 
-        getChildren().addAll(vBox, new TileButton());
+        getChildren().addAll(vBox, tileButton );
     }
 }

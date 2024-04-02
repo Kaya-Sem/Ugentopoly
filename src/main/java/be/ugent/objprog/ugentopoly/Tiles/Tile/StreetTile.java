@@ -16,7 +16,7 @@ import javafx.scene.text.FontWeight;
 public class StreetTile extends SmallTile {
     private static final int STRIP_WIDTH = 30;
 
-    private static String color = "#FFFFFF";
+    private String color = "#FFFFFF";
     protected int rotatie;
 
     // Constructor
@@ -24,6 +24,11 @@ public class StreetTile extends SmallTile {
         super(companion, id);
         this.color = color;
 
+        setup(id);
+    }
+
+    public StreetTile(String id) {
+        super(id);
         setup(id);
     }
 
@@ -41,7 +46,7 @@ public class StreetTile extends SmallTile {
         pane.setPrefHeight(Tile.SHORT_SIDE);
 
         Rectangle rectangle  = new Rectangle();
-        rectangle.setFill(Paint.valueOf(color));
+        rectangle.setFill(Paint.valueOf(this.color));
         rectangle.setHeight(Tile.SHORT_SIDE);
         rectangle.setWidth(STRIP_WIDTH);
 
@@ -49,8 +54,7 @@ public class StreetTile extends SmallTile {
         HBox.setHgrow(rectangle, Priority.SOMETIMES);
 
         hbox.getChildren().addAll(pane, rectangle);
-        ToggleButton toggleButton = new TileButton();
-        getChildren().addAll(hbox, toggleButton);
+        getChildren().addAll(hbox, tileButton);
     }
 }
 

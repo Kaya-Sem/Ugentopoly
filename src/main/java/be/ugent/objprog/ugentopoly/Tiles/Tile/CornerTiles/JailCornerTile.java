@@ -30,8 +30,7 @@ public class JailCornerTile extends CornerTile {
         vBox.setAlignment(Pos.CENTER);
         vBox.setRotate(135);
 
-        TileButton toggleButton = new TileButton();
-        getChildren().addAll(vBox, toggleButton);
+        getChildren().addAll(vBox, tileButton);
 
     }
 }

@@ -23,8 +23,7 @@ public class StartCornerTile extends CornerTile {
         TileImageView startImage = new TileImageView(new Image(imagePath), 1.0, true);
         setAlignment(startImage, Pos.CENTER_RIGHT);
 
-        TileButton toggleButton = new TileButton();
-        getChildren().addAll(startImage, arrowImageView, toggleButton);
+        getChildren().addAll(startImage, arrowImageView, tileButton);
 
     }
 }
