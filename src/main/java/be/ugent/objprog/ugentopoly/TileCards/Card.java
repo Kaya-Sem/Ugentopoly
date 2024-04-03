@@ -1,9 +1,8 @@
-package be.ugent.objprog.ugentopoly.Cards;
+package be.ugent.objprog.ugentopoly.TileCards;
 
 import be.ugent.objprog.ugentopoly.Tiles.Tile.Tile;
-import javafx.scene.effect.Bloom;
+import javafx.geometry.Insets;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.effect.MotionBlur;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -36,6 +35,10 @@ public class Card extends StackPane {
         dropShadow.setColor(Color.DIMGREY); // Set the color of the drop shadow
         border.setEffect(dropShadow);
 
-        getChildren().add(border);
+        StackPane content = new StackPane();
+        content.setPadding(new Insets(10, 10, 10, 10));
+        content.setBackground(Background.fill(Color.TRANSPARENT));
+
+        getChildren().addAll(border, content);
     }
 }
