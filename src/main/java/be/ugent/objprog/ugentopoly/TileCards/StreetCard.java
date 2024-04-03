@@ -27,6 +27,7 @@ public class StreetCard extends HorizontalCard {
         Label cost = new Label(c.cost() + "€");
         cost.setFont(Font.font("Arial", FontWeight.THIN, 11));
 
+        VBox info = new VBox(
                 textLabel,
                 cost,
                 new Label("\n"),
