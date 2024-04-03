@@ -1,10 +1,10 @@
 package be.ugent.objprog.ugentopoly.Tiles.Tile;
 
 import be.ugent.objprog.ugentopoly.Parsers.PropertyLoader;
-import be.ugent.objprog.ugentopoly.TileButton;
+import be.ugent.objprog.ugentopoly.TileCards.StreetCard;
+import be.ugent.objprog.ugentopoly.Tiles.TileCompanions.StreetCompanion;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
@@ -14,38 +14,42 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
 public class StreetTile extends SmallTile {
-    private static final int STRIP_WIDTH = 30;
 
-    private String color = "#FFFFFF";
-    protected int rotatie;
+    private static final int STRIP_WIDTH = 30;
+    private final String color;
+    private final String text;
 
     // Constructor
-    public StreetTile(Record companion, String id, String color){
+    public StreetTile(StreetCompanion companion, String id, String color) {
         super(companion, id);
         this.color = color;
-
+        this.text = PropertyLoader.getLabel(id);
         setup(id);
+        this.card = createCard(text, color, companion);
+        this.tileButton.setOnAction(this::handleButton);
     }
 
-    public StreetTile(String id) {
-        super(id);
-        setup(id);
+    private StreetCard createCard(String text, String color, StreetCompanion companion) {
+        return new StreetCard(
+                text,
+                color,
+                companion);
     }
 
     @Override
-    public void setup(String id){
+    public void setup(String id) {
         HBox hbox = new HBox();
 
-        Label label = new Label(PropertyLoader.getLabel(id));
+        Label label = new Label(this.text);
         label.setAlignment(Pos.CENTER);
-        label.setFont(Font.font("Arial", FontWeight.BOLD, 10));
+        label.setFont(Font.font("Arial", FontWeight.BOLD, 11));
         label.setWrapText(true);
 
         StackPane pane = new StackPane(label);
         pane.setPrefWidth(Tile.LONG_SIDE - 10);
         pane.setPrefHeight(Tile.SHORT_SIDE);
 
-        Rectangle rectangle  = new Rectangle();
+        Rectangle rectangle = new Rectangle();
         rectangle.setFill(Paint.valueOf(this.color));
         rectangle.setHeight(Tile.SHORT_SIDE);
         rectangle.setWidth(STRIP_WIDTH);
@@ -54,7 +58,7 @@ public class StreetTile extends SmallTile {
         HBox.setHgrow(rectangle, Priority.SOMETIMES);
 
         hbox.getChildren().addAll(pane, rectangle);
+
         getChildren().addAll(hbox, tileButton);
     }
 }
-
