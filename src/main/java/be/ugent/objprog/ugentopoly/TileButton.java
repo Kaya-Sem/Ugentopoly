@@ -17,12 +17,11 @@ public class TileButton extends ToggleButton {
         setStyle("-fx-background-color: transparent;");
     }
 
-    /* MVC model? set a current present card current game state: selected card: None/Card
+    /* MVC model? set a current present card current game state: selected card: None/VerticalCard
     static class ButtonHandler implements EventHandler<ActionEvent> {
         @Override
         public void handle(ActionEvent event) {
-            ToggleButton source  =(ToggleButton) event.getSource();
-            boolean isSelected = source.isSelected();
+
 
             System.err.println((isSelected) ? this + " Button selected" : this + "Button deselected");
         }

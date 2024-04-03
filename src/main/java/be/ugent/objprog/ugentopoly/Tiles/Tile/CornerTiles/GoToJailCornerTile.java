@@ -1,6 +1,7 @@
 package be.ugent.objprog.ugentopoly.Tiles.Tile.CornerTiles;
 
 import be.ugent.objprog.ugentopoly.Parsers.PropertyLoader;
+import be.ugent.objprog.ugentopoly.TileCards.BasicVerticalCard;
 import be.ugent.objprog.ugentopoly.Tiles.Tile.Tile;
 import be.ugent.objprog.ugentopoly.Tiles.Tile.TileImageView;
 import javafx.geometry.Pos;
@@ -11,11 +12,17 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
 public class GoToJailCornerTile extends CornerTile {
-    private final double ROTATION = -45;
+    private static final double ROTATION = -45;
+    private final Image image = new Image("/be/ugent/objprog/ugentopoly/assets/go_to_jail.png");
 
     public GoToJailCornerTile(Record companion, String id) {
         super(companion, id);
         setup(id);
+        this.card = createCard(PropertyLoader.getLabel(id));
+    }
+
+    private BasicVerticalCard createCard(String text) {
+        return new BasicVerticalCard(this.image, text);
     }
 
     // TODO extract setFont and label to class. (or css?)
@@ -31,7 +38,7 @@ public class GoToJailCornerTile extends CornerTile {
         Label textLabel2 = new Label(text[1]);
         textLabel2.setFont(Font.font("Arial", FontWeight.BOLD, 10));
 
-        TileImageView image = new TileImageView(new Image(CornerTile.IMAGES.get(id)), 1.5, true);
+        TileImageView image = new TileImageView(this.image, 1.5, true);
 
         vBox.getChildren().addAll(textLabel1, image, textLabel2);
         vBox.setMaxHeight(Tile.LONG_SIDE - 20);

@@ -50,7 +50,6 @@ public class XMLParser {
 
 
     // NEED HELP linkedHashMap incorrect order even when XML is correct. 1 element wrong
-
     private static Map<String, String> parseTile(Element tileElement) {
         Map<String, String> tileMap = new HashMap<>();
         tileMap.put("type", tileElement.getAttributeValue("type"));

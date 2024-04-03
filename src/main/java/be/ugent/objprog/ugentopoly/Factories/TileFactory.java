@@ -46,7 +46,7 @@ public class TileFactory implements Factory {
     }
 
     private UtilityTile createUtility(Map<String, String> tileData) {
-        Record companion = new UtilityCompanion(
+        UtilityCompanion companion = new UtilityCompanion(
                 tileData.get("type"),
                 tileData.get("position"),
                 tileData.get("id"),
@@ -67,7 +67,7 @@ public class TileFactory implements Factory {
     }*/
 
     private TaxTile createTax(Map<String, String> tileData) {
-        Record companion = new TaxCompanion(
+        TaxCompanion companion = new TaxCompanion(
                 tileData.get("type"),
                 tileData.get("position"),
                 tileData.get("id"),
@@ -101,7 +101,7 @@ public class TileFactory implements Factory {
 
     private StreetTile createStreet(Map<String, String> tileData){
 
-        Record companion = new StreetCompanion(
+        StreetCompanion companion = new StreetCompanion(
                 tileData.get("type"),
                 tileData.get("position"),
                 tileData.get("area"),

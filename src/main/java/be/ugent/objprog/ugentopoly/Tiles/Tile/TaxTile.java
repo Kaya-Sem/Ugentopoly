@@ -1,9 +1,9 @@
 package be.ugent.objprog.ugentopoly.Tiles.Tile;
 
 import be.ugent.objprog.ugentopoly.Parsers.PropertyLoader;
-import be.ugent.objprog.ugentopoly.TileButton;
+import be.ugent.objprog.ugentopoly.TileCards.TaxCard;
+import be.ugent.objprog.ugentopoly.Tiles.TileCompanions.TaxCompanion;
 import javafx.scene.control.Label;
-import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -18,14 +18,10 @@ public class TaxTile extends SmallTile {
             ));
 
     // Constructor
-    public TaxTile(Record companion, String id){
+    public TaxTile(TaxCompanion companion, String id){
         super(companion, id);
         setup(id);
-    }
-
-    public TaxTile(String id) {
-        super(id);
-        setup(id);
+        this.card = createCard(PropertyLoader.getLabel(id));
     }
 
     // OPTIMIZE
@@ -43,5 +39,10 @@ public class TaxTile extends SmallTile {
 
         getChildren().addAll(hBox, tileButton);
     }
+
+    private TaxCard createCard(String text) {
+        return new TaxCard(image, text, "200");
+    }
+
 }
 

@@ -1,19 +1,20 @@
 package be.ugent.objprog.ugentopoly.TileCards;
 
-import be.ugent.objprog.ugentopoly.Tiles.Tile.Tile;
+import be.ugent.objprog.ugentopoly.GameBoard.MiddleSection;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-public class Card extends StackPane {
-    public static final Double HEIGHT = Tile.LONG_SIDE * 2 + Tile.SHORT_SIDE;
-    public static final Double WIDTH = Tile.LONG_SIDE + Tile.SHORT_SIDE;
+public class VerticalCard extends TemplateCard {
+    public static final Double HEIGHT = MiddleSection.getSize() / 2;
+    public static final Double WIDTH = MiddleSection.getSize() / 3;
 
 
-    public Card() {
+    public VerticalCard() {
         setMinHeight(HEIGHT);
         setMinWidth(WIDTH);
         setMaxHeight(HEIGHT);
@@ -38,6 +39,7 @@ public class Card extends StackPane {
         StackPane content = new StackPane();
         content.setPadding(new Insets(10, 10, 10, 10));
         content.setBackground(Background.fill(Color.TRANSPARENT));
+        content.setAlignment(Pos.CENTER);
 
         getChildren().addAll(border, content);
     }

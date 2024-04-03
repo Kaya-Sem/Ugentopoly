@@ -51,25 +51,25 @@ public class TempTileSetup {
         );
     }
 
-    public static TaxTile templateTaxTile(){
+    public static TaxTile initTaxTile(String id, String amount){
         return new TaxTile(
                 new TaxCompanion(
                         "TAX",
                         "4",
-                        "tile.tax1",
-                        "200"
+                        id,
+                       amount
                 ),
-                "tile.tax1"
+                id
         );
     }
 
-    protected static StreetTile templateTile() {
+    protected static StreetTile initStreetTile(String area, String id) {
         return new StreetTile(
                 new StreetCompanion(
                         "STREET",
                         "1",
-                        "area1",
-                        "tile.street01",
+                        area,
+                        id,
                         "60",
                         "2",
                         "10",
@@ -77,33 +77,32 @@ public class TempTileSetup {
                         "90",
                         "160",
                         "250"),
-                "tile.street05",
-                colors.get("area1")
-
+                id,
+                colors.get(area)
                 );
     }
 
-    protected static RailwayTile templateRailwayTile(){
+    protected static RailwayTile initRailwayTile(String id){
      return new RailwayTile(
              new RailwayCompanion(
                      "RAILWAY",
                      "5",
-                     "tile.railway1",
+                     id,
                      "200",
                      "50"
              ),
-             "tile.railway1"
+             id
      );
     }
 
-    protected static UtilityTile templateUtilityTile(){
+    protected static UtilityTile initUtilityTile(String id){
         return new UtilityTile(
                 new UtilityCompanion(
                        "UTILITY",
                 "12",
-                        "tile.utility1",
+                        id,
                         "150"),
-                "tile.utility2"
+               id
         );
     }
 
@@ -141,48 +140,52 @@ public class TempTileSetup {
     }
 
     public static ArrayList<? extends Tile> upperBarTiles = new ArrayList<>(Arrays.asList(
-            templateTile(),
-            templateTile(),
-            templateTile(),
-            templateTile(),
+            initStreetTile("area3", "tile.street06"),
+            initUtilityTile("tile.utility1"),
+            initStreetTile("area3", "tile.street07"),
+            initStreetTile("area3", "tile.street08"),
+            initRailwayTile("tile.railway2"),
+            initStreetTile("area4", "tile.street09"),
             initChestTile(),
-            templateTile(),
-            templateTile(),
-            templateUtilityTile(), // TODO
-            templateTile()));
+            initStreetTile("area4", "tile.street10"),
+            initStreetTile("area4", "tile.street11")));
 
     public static ArrayList<? extends Tile> bottomBarTiles = new ArrayList<>(Arrays.asList(
-            templateTile(),
-            templateTile(),
-            templateTile(),
-            templateTile(),
-            templateTile(),
-            templateTile(),
-            templateTile(),
-            templateTile(),
-            templateTile()));
+            initStreetTile("area7", "tile.street18"),
+            initStreetTile("area7","tile.street19"),
+            initChestTile(),
+            initStreetTile("area7","tile.street20"),
+            initRailwayTile("tile.railway4"),
+            initChanceTile(),
+            initStreetTile("area8","tile.street21"),
+            initTaxTile("tile.tax2","75"),
+            initStreetTile("area8","tile.street22")
+    ));
 
     public static ArrayList<? extends Tile> rightBarTiles = new ArrayList<>(Arrays.asList(
-            new StreetTile("tile.street12"),
-            new ChanceTile("tile.chance"),
-            new StreetTile("tile.street13"),
-            new StreetTile("tile.street14"),
-            new RailwayTile("tile.railway3"),
-            new StreetTile("tile.street15"),
-            new StreetTile("tile.street16"),
-            new UtilityTile("tile.utility2"),
-            new StreetTile("tile.street17")));
+            initStreetTile("area5", "tile.street12"),
+            initChanceTile(),
+            initStreetTile("area5", "tile.street13"),
+            initStreetTile("area5", "tile.street14"),
+            initRailwayTile("tile.railway3"),
+            initStreetTile("area6", "tile.street15"),
+            initStreetTile("area6", "tile.street16"),
+            initUtilityTile("tile.utility2"),
+            initStreetTile("area6", "tile.street17")));
+
 
     public static ArrayList<? extends Tile> leftBarTiles = new ArrayList<>(Arrays.asList(
-            new StreetTile("tile.street05"),
-            new StreetTile("tile.street04"),
-            new ChanceTile("tile.chance"),
-            new StreetTile("tile.street03"),
-            new RailwayTile("tile.railway1"),
-            new TaxTile("tile.tax1"),
-            new StreetTile("tile.street02"),
-            new ChestTile("tile.chest"),
-            new StreetTile("tile.street01")));
+            initStreetTile("area1", "tile.street01"),
+            initChestTile(),
+            initStreetTile("area1", "tile.street02"),
+            initTaxTile("tile.tax1", "200"),
+            initRailwayTile("tile.railway1"),
+            initStreetTile("area2", "tile.street03"),
+            initChanceTile(),
+            initStreetTile("area2","tile.street04"),
+            initStreetTile("area2", "tile.street05")
+            ));
+
 
     public static ArrayList<? extends Tile> cornerTiles = new ArrayList<>(Arrays.asList(
             initStartTile(),
