@@ -8,22 +8,5 @@ public abstract class SmallTile extends Tile {
         setMaxHeight(Tile.SHORT_SIDE);
         setMinWidth(Tile.LONG_SIDE);
         setMaxWidth(Tile.LONG_SIDE);
-
-
-
     }
-
-    public SmallTile(String id) {
-        super(id);
-        setMinHeight(Tile.SHORT_SIDE);
-        setMaxHeight(Tile.SHORT_SIDE);
-        setMinWidth(Tile.LONG_SIDE);
-        setMaxWidth(Tile.LONG_SIDE);
-    }
-
-
-
-    @Override
-    protected abstract void setup(String id);
-
 }
