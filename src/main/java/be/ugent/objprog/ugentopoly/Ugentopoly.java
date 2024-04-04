@@ -34,9 +34,9 @@ public class Ugentopoly extends Application {
 
         stage.setTitle("Ugentopoly");
 
-        // TODO fix implement these!
-        // final Dice dice = new Dice();
-        // stage.setOnCloseRequest(e -> dice.close());
+        // NON-URGENT fix implement these!
+         // final Dice dice = new Dice();
+         //stage.setOnCloseRequest(e -> dice.close());
 
         stage.setScene(scene);
         stage.show();

@@ -1,8 +1,8 @@
 package be.ugent.objprog.ugentopoly.tiles.tile;
 
-import be.ugent.objprog.ugentopoly.CustomButtonHandler;
 import be.ugent.objprog.ugentopoly.TileButton;
 import be.ugent.objprog.ugentopoly.Ugentopoly;
+import be.ugent.objprog.ugentopoly.gameBoard.Board;
 import be.ugent.objprog.ugentopoly.tileCards.TemplateCard;
 import javafx.event.ActionEvent;
 import javafx.scene.layout.StackPane;
@@ -38,10 +38,6 @@ public class Tile extends StackPane {
 
     protected void handleButton(ActionEvent event) {
         System.err.println(this.companion);
-        TileButton source  = (TileButton) event.getSource();
-        boolean isSelected = source.isSelected();
-
-
-        CustomButtonHandler.updateDisplayedCard((isSelected) ? card : null);
+        Board.middleSection.updateDisplayedCard(card);
     }
 }
