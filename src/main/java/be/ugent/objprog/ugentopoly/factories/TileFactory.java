@@ -6,11 +6,6 @@ import be.ugent.objprog.ugentopoly.tiles.tileCompanions.*;
 import java.util.Map;
 
 public class TileFactory {
-
-    // CONSTRUCTOR
-    public TileFactory() {}
-
-    // CREATOR METHOD
     // HACK enum klasse of map/lambda
     public <U extends Tile> U forge(Map<String, String> tileData) {
         try {

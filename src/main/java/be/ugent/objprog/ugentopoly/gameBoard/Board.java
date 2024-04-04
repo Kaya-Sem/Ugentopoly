@@ -2,7 +2,6 @@ package be.ugent.objprog.ugentopoly.gameBoard;
 
 import be.ugent.objprog.ugentopoly.bars.HorizontalBar;
 import be.ugent.objprog.ugentopoly.bars.VerticalBar;
-import be.ugent.objprog.ugentopoly.CustomButtonHandler;
 import be.ugent.objprog.ugentopoly.TempTileSetup;
 import be.ugent.objprog.ugentopoly.tiles.tile.Tile;
 import be.ugent.objprog.ugentopoly.Ugentopoly;
@@ -18,6 +17,7 @@ public class Board extends GridPane {
     protected static final double MIDDLE_AREA_SIZE = (BOARD_SIZE / Ugentopoly.SMALL_TILES) * SMALL_TILES;
 
     public static final ToggleGroup TOGGLE_GROUP = new ToggleGroup();
+    public static MiddleSection middleSection = new MiddleSection();
 
     public Board() {
         setPrefSize(BOARD_SIZE, BOARD_SIZE);
@@ -40,7 +40,6 @@ public class Board extends GridPane {
         //TileInitializer tileInitializer = new TileInitializer();
         //Map<String, ArrayList<? extends tile>> tileMap = tileInitializer.initialiseTiles();
 
-        // TODO these should take a list as argument, so we don't have to use .populate
         // initialize tileholders
         HorizontalBar topRow = new HorizontalBar(TempTileSetup.upperBarTiles);
         HorizontalBar bottomRow = new HorizontalBar(TempTileSetup.bottomBarTiles);
@@ -58,8 +57,6 @@ public class Board extends GridPane {
         add(leftBar, 0, 1);
         add(bottomRow, 1, 2);
 
-        MiddleSection middleSection = new MiddleSection();
-        CustomButtonHandler.middleSection = middleSection;
         add(middleSection, 1, 1);
 
         // TODO make positions constant, for better readability

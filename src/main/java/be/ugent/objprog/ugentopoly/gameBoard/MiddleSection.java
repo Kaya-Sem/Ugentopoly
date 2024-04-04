@@ -1,7 +1,5 @@
 package be.ugent.objprog.ugentopoly.gameBoard;
 
-import java.util.Objects;
-
 import be.ugent.objprog.ugentopoly.Ugentopoly;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -11,11 +9,11 @@ public class MiddleSection extends StackPane {
     static final double SIZE = (Ugentopoly.BOARD_SIZE / Ugentopoly.SMALL_TILES) * 9;
 
     private static final Image BACKGROUND = new Image(
-            Objects.requireNonNull(MiddleSection.class
-                    .getResourceAsStream("/be/ugent/objprog/ugentopoly/gent3.jpg")));
+            MiddleSection.class
+                    .getResourceAsStream("/be/ugent/objprog/ugentopoly/gent3.jpg"));
     private static final Image LOGO = new Image(
-            Objects.requireNonNull(MiddleSection.class
-                    .getResourceAsStream("/be/ugent/objprog/ugentopoly/assets/logo.png")));
+            MiddleSection.class.getResourceAsStream("/be/ugent/objprog/ugentopoly/assets/logo.png")
+    );
 
     private final StackPane displayedCard;
 
