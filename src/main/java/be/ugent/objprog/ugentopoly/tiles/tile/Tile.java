@@ -41,6 +41,7 @@ public class Tile extends StackPane {
         TileButton source  = (TileButton) event.getSource();
         boolean isSelected = source.isSelected();
 
+
         CustomButtonHandler.updateDisplayedCard((isSelected) ? card : null);
     }
 }
