@@ -33,16 +33,16 @@ public class GoToJailCornerTile extends CornerTile {
         String[] text = PropertyLoader.getLabel(id).split("\\n");
 
         Label textLabel1 = new Label(text[0]);
-        textLabel1.setFont(Font.font("Arial", FontWeight.BOLD, 10));
-
         Label textLabel2 = new Label(text[1]);
+
+        textLabel1.setFont(Font.font("Arial", FontWeight.BOLD, 10));
         textLabel2.setFont(Font.font("Arial", FontWeight.BOLD, 10));
 
-        TileImageView image = new TileImageView(this.image, 1.5, true);
+        TileImageView image = new TileImageView(this.image, 1.7, true);
 
         vBox.getChildren().addAll(textLabel1, image, textLabel2);
-        vBox.setMaxHeight(Tile.LONG_SIDE - 20);
-        vBox.setMaxWidth(Tile.LONG_SIDE - 20);
+        vBox.setMaxHeight(Tile.LONG_SIDE - 30);
+        vBox.setMaxWidth(Tile.LONG_SIDE - 30);
         vBox.setAlignment(Pos.CENTER);
         vBox.setRotate(ROTATION);
 
