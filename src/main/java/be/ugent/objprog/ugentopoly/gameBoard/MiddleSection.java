@@ -1,48 +1,43 @@
 package be.ugent.objprog.ugentopoly.gameBoard;
-import be.ugent.objprog.ugentopoly.tiles.tile.Tile;
+
+import java.util.Objects;
+
 import be.ugent.objprog.ugentopoly.Ugentopoly;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 
-import java.io.InputStream;
-import java.util.Objects;
-
 public class MiddleSection extends StackPane {
-    private static final double SIZE = (Ugentopoly.BOARD_SIZE / Ugentopoly.SMALL_TILES) * 9;
+    static final double SIZE = (Ugentopoly.BOARD_SIZE / Ugentopoly.SMALL_TILES) * 9;
+
+    private static final Image BACKGROUND = new Image(
+            Objects.requireNonNull(MiddleSection.class
+                    .getResourceAsStream("/be/ugent/objprog/ugentopoly/gent2.jpg")));
+    private static final Image LOGO = new Image(
+            Objects.requireNonNull(MiddleSection.class
+                    .getResourceAsStream("/be/ugent/objprog/ugentopoly/assets/logo.png")));
 
     private final StackPane displayedCard;
 
-    public  MiddleSection(){
+    public MiddleSection() {
         setMinSize(SIZE, SIZE);
         setMaxSize(SIZE, SIZE);
 
-        // Load the bottom image
-        Image bottomImage = new Image(Objects.requireNonNull(getClass()
-                .getResourceAsStream("/be/ugent/objprog/ugentopoly/gent2.jpg")));
-        ImageView bottomImageView = new ImageView(bottomImage);
+        this.displayedCard = new StackPane();
+
+        ImageView bottomImageView = new ImageView(BACKGROUND);
+        ImageView logo = new ImageView(LOGO);
+
         bottomImageView.setViewport(new Rectangle2D(0, 0, SIZE, SIZE));
 
-        // TODO extract logo or make cleaner
-        // Load the top image
-        InputStream topImageStream = getClass().getResourceAsStream("/be/ugent/objprog/ugentopoly/assets/logo.png");
-        Image topImage = new Image(Objects.requireNonNull(topImageStream));
-        ImageView logo = new ImageView(topImage);
-        //topImageView.setViewport(new Rectangle2D(0, 0, SIZE, SIZE));
-
-        // Scale down the logo to fit within the bounds
         logo.setPreserveRatio(true);
-        logo.setFitWidth(Board.BOARD_SIZE - 2 * Tile.LONG_SIDE);
+        logo.setFitWidth(Board.BOARD_SIZE);
         logo.setFitHeight(SIZE * 0.15);
         logo.setRotate(45.0);
 
-        // card in the middle
-        this.displayedCard = new StackPane();
-
         getChildren().addAll(bottomImageView, logo, displayedCard);
     }
-
 
     // Method to update the placeholder with new content
     public void updateDisplayedCard(StackPane card) {
@@ -52,7 +47,7 @@ public class MiddleSection extends StackPane {
         }
     }
 
-    public static double getSize(){
+    public static double getSize() {
         return SIZE;
     }
 }
