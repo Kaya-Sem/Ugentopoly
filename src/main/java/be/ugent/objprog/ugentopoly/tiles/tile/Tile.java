@@ -16,7 +16,7 @@ public class Tile extends StackPane {
     final String id;
     protected TemplateCard card;
 
-    protected final TileButton tileButton = new TileButton();
+    protected TileButton tileButton = new TileButton();
 
     public Tile(Record companion, String id){
         this.companion = companion;

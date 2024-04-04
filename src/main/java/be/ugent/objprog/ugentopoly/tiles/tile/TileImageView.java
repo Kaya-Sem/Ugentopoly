@@ -9,8 +9,8 @@ public class TileImageView extends ImageView {
     public TileImageView(Image image){
         super(image);
 
-        setFitHeight(Tile.SHORT_SIDE / 1.5);
-        setFitWidth(Tile.SHORT_SIDE / 1.5);
+        setFitHeight(Tile.SHORT_SIDE / 1.9);
+        setFitWidth(Tile.SHORT_SIDE / 1.9);
         setPreserveRatio(true);
     }
 
@@ -25,4 +25,3 @@ public class TileImageView extends ImageView {
         setPreserveRatio(true);
     }
 }
-

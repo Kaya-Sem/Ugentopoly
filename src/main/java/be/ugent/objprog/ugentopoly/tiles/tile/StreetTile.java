@@ -1,5 +1,6 @@
 package be.ugent.objprog.ugentopoly.tiles.tile;
 
+import be.ugent.objprog.ugentopoly.TileButton;
 import be.ugent.objprog.ugentopoly.parsers.PropertyLoader;
 import be.ugent.objprog.ugentopoly.tileCards.StreetCard;
 import be.ugent.objprog.ugentopoly.tiles.tileCompanions.StreetCompanion;
@@ -45,9 +46,9 @@ public class StreetTile extends SmallTile {
         rectangle.setFill(Paint.valueOf(this.color));
         rectangle.setHeight(Tile.SHORT_SIDE);
         rectangle.setWidth(STRIP_WIDTH);
+        setAlignment(rectangle, Pos.CENTER_RIGHT);
 
         HBox.setHgrow(pane, Priority.ALWAYS);
-        HBox.setHgrow(rectangle, Priority.SOMETIMES);
 
         hbox.getChildren().addAll(pane, rectangle);
 

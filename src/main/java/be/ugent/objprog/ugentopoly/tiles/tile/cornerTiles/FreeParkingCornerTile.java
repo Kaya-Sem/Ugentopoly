@@ -2,6 +2,7 @@ package be.ugent.objprog.ugentopoly.tiles.tile.cornerTiles;
 
 import be.ugent.objprog.ugentopoly.parsers.PropertyLoader;
 import be.ugent.objprog.ugentopoly.tileCards.BasicVerticalCard;
+import be.ugent.objprog.ugentopoly.tiles.tile.Tile;
 import be.ugent.objprog.ugentopoly.tiles.tile.TileImageView;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -22,7 +23,7 @@ public class FreeParkingCornerTile extends CornerTile {
     // TODO extract setFont and label to class. (or css?)
     @Override
     protected void setup(String id) {
-        TileImageView image = new TileImageView(this.image, 1.5, true);
+        TileImageView image = new TileImageView(this.image, 1.7, true);
 
         String[] text = PropertyLoader.getLabel(id).split(" ");
         Label textLabel1 = new Label(text[0]);
@@ -32,7 +33,8 @@ public class FreeParkingCornerTile extends CornerTile {
         textLabel2.setFont(Font.font("Arial", FontWeight.BOLD, 10));
 
         VBox vBox = new VBox(textLabel1, image, textLabel2);
-
+        vBox.setMaxWidth(Tile.LONG_SIDE - 30);
+        vBox.setMaxHeight(Tile.LONG_SIDE - 30);
         vBox.setAlignment(Pos.CENTER);
         vBox.setRotate(-135);
 
