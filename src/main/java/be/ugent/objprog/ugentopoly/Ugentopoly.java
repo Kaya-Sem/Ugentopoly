@@ -10,7 +10,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class Ugentopoly extends Application {
-    private static final String ICON = "coolseat.png";
+    private static final String ICON = "chest.png";
     private static final int WINDOW_SIZE = 900;
     public static final double BOARD_SIZE = 845.0;
     public static final int SMALL_TILES = 13;
