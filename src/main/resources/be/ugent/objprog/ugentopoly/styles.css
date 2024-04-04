@@ -1,18 +1,19 @@
 
 .toggle-button:selected {
-    -fx-border-width: 2px;
+    -fx-border-width: 1px 2px 1px 2px; /* top right bottom left */
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0.5, 0, 0);
 }
 
 .toggle-button:hover {
-    -fx-border-width: 2px;
+    -fx-border-width: 1px 2px 1px 2px; /* top right bottom left */
 }
 
 .toggle-button:hover:armed {
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0.5, 0, 0);
-    -fx-border-width: 1px;
+    -fx-border-width: 1.5px 2.5px 1.5px 2.5px; /* top right bottom left */
 }
 
 .toggle-button {
     -fx-border-color: black;
+    -fx-border-width: 0.5px 1px 0.5px 1px; /* top right bottom left */
 }
