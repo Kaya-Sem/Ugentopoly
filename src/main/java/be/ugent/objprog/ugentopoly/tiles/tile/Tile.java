@@ -37,7 +37,7 @@ public class Tile extends StackPane {
     }
 
     protected void handleButton(ActionEvent event) {
-        System.err.println("Button clicked: " + this.companion);
+        System.err.println(this.companion);
         TileButton source  = (TileButton) event.getSource();
         boolean isSelected = source.isSelected();
 

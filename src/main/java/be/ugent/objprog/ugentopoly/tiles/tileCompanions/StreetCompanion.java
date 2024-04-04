@@ -12,5 +12,4 @@ public record StreetCompanion(
         String rent3,
         String rent4,
         String rent5
-) {
-}
+) {}
