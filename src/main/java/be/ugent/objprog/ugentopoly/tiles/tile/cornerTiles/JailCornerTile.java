@@ -2,6 +2,7 @@ package be.ugent.objprog.ugentopoly.tiles.tile.cornerTiles;
 
 import be.ugent.objprog.ugentopoly.parsers.PropertyLoader;
 import be.ugent.objprog.ugentopoly.tileCards.BasicVerticalCard;
+import be.ugent.objprog.ugentopoly.tiles.tile.Tile;
 import be.ugent.objprog.ugentopoly.tiles.tile.TileImageView;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -33,6 +34,8 @@ public class JailCornerTile extends CornerTile {
         TileImageView tileImageView= new TileImageView(image, 1.5, true);
 
         vBox.getChildren().addAll(tileImageView, textLabel);
+        vBox.setMaxHeight(Tile.LONG_SIDE - 30);
+        vBox.setMaxWidth(Tile.LONG_SIDE - 30);
         vBox.setAlignment(Pos.CENTER);
         vBox.setRotate(135);
 
