@@ -3,7 +3,6 @@ package be.ugent.objprog.ugentopoly.gameBoard;
 import java.util.Objects;
 
 import be.ugent.objprog.ugentopoly.Ugentopoly;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
@@ -26,17 +25,18 @@ public class MiddleSection extends StackPane {
 
         this.displayedCard = new StackPane();
 
-        ImageView bottomImageView = new ImageView(BACKGROUND);
+        ImageView background = new ImageView(BACKGROUND);
         ImageView logo = new ImageView(LOGO);
-
-        bottomImageView.setViewport(new Rectangle2D(0, 0, SIZE, SIZE));
+        background.setFitHeight(SIZE);
+        background.setFitWidth(SIZE);
+        background.setPreserveRatio(true);
 
         logo.setPreserveRatio(true);
         logo.setFitWidth(Board.BOARD_SIZE);
         logo.setFitHeight(SIZE * 0.15);
         logo.setRotate(45.0);
 
-        getChildren().addAll(bottomImageView, logo, displayedCard);
+        getChildren().addAll(background, logo, displayedCard);
     }
 
     public void updateDisplayedCard(StackPane card) {
