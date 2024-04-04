@@ -20,6 +20,7 @@ public class ChanceTile extends SmallTile {
     public ChanceTile(Record companion, String id){
         super(companion, id);
         setup(id);
+        this.card = new BasicVerticalCard(image, PropertyLoader.getLabel(id));
     }
 
     // OPTIMIZE
@@ -31,7 +32,6 @@ public class ChanceTile extends SmallTile {
         Label textLabel = new Label(text);
         textLabel.setFont(Font.font("Arial", FontWeight.BOLD, 10));
         textLabel.setWrapText(true);
-
         hbox.getChildren().addAll(imageView, textLabel);
         getChildren().addAll(hbox, tileButton);
     }

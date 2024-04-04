@@ -13,7 +13,7 @@ public class MiddleSection extends StackPane {
 
     private static final Image BACKGROUND = new Image(
             Objects.requireNonNull(MiddleSection.class
-                    .getResourceAsStream("/be/ugent/objprog/ugentopoly/gent2.jpg")));
+                    .getResourceAsStream("/be/ugent/objprog/ugentopoly/gent3.jpg")));
     private static final Image LOGO = new Image(
             Objects.requireNonNull(MiddleSection.class
                     .getResourceAsStream("/be/ugent/objprog/ugentopoly/assets/logo.png")));
@@ -39,7 +39,6 @@ public class MiddleSection extends StackPane {
         getChildren().addAll(bottomImageView, logo, displayedCard);
     }
 
-    // Method to update the placeholder with new content
     public void updateDisplayedCard(StackPane card) {
         displayedCard.getChildren().clear();
         if (card != null) {
