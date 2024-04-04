@@ -1,6 +1,5 @@
 package be.ugent.objprog.ugentopoly;
-import be.ugent.objprog.dice.Dice;
-import be.ugent.objprog.ugentopoly.GameBoard.Board;
+import be.ugent.objprog.ugentopoly.gameBoard.Board;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;

@@ -4,18 +4,13 @@
 }
 
 .toggle-button:hover {
-    -fx-font-size: 15px; /* Font size */
+    -fx-border-width: 2px;
 }
 .toggle-button:hover:armed {
-    -fx-font-size: 14px; /* Font size */
-    -fx-border-width: 2px;
+    -fx-border-width: 1px;
 }
 
 /* Define styles for ToggleButton */
 .toggle-button {
-    -fx-background-color: white; /* Background color */
-    -fx-text-fill: black; /* Text color */
-    -fx-font-size: 14px; /* Font size */
     -fx-border-color: black; /* Border color */
-    -fx-font-family: "CaskaydiaCove NFM SemiBold";
 }

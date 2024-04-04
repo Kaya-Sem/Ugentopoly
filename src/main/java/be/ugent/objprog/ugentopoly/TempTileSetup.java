@@ -5,18 +5,18 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import be.ugent.objprog.ugentopoly.Parsers.XMLParser;
-import be.ugent.objprog.ugentopoly.Tiles.Tile.*;
-import be.ugent.objprog.ugentopoly.Tiles.Tile.CornerTiles.FreeParkingCornerTile;
-import be.ugent.objprog.ugentopoly.Tiles.Tile.CornerTiles.GoToJailCornerTile;
-import be.ugent.objprog.ugentopoly.Tiles.Tile.CornerTiles.JailCornerTile;
-import be.ugent.objprog.ugentopoly.Tiles.Tile.CornerTiles.StartCornerTile;
-import be.ugent.objprog.ugentopoly.Tiles.TileCompanions.*;
+import be.ugent.objprog.ugentopoly.parsers.XMLParser;
+import be.ugent.objprog.ugentopoly.tiles.tile.*;
+import be.ugent.objprog.ugentopoly.tiles.tile.cornerTiles.FreeParkingCornerTile;
+import be.ugent.objprog.ugentopoly.tiles.tile.cornerTiles.GoToJailCornerTile;
+import be.ugent.objprog.ugentopoly.tiles.tile.cornerTiles.JailCornerTile;
+import be.ugent.objprog.ugentopoly.tiles.tile.cornerTiles.StartCornerTile;
+import be.ugent.objprog.ugentopoly.tiles.tileCompanions.*;
 
 public class TempTileSetup {
 
-    static XMLParser parser = new XMLParser();
-    static Map<String, String> colors = parser.areaColors();
+    static final XMLParser parser = new XMLParser();
+    static final Map<String, String> colors = parser.areaColors();
 
     public static JailCornerTile initJailCornerTile() {
         return new JailCornerTile(
@@ -139,7 +139,7 @@ public class TempTileSetup {
         );
     }
 
-    public static ArrayList<? extends Tile> upperBarTiles = new ArrayList<>(Arrays.asList(
+    public static final ArrayList<? extends Tile> upperBarTiles = new ArrayList<>(Arrays.asList(
             initStreetTile("area3", "tile.street06"),
             initUtilityTile("tile.utility1"),
             initStreetTile("area3", "tile.street07"),
@@ -150,7 +150,7 @@ public class TempTileSetup {
             initStreetTile("area4", "tile.street10"),
             initStreetTile("area4", "tile.street11")));
 
-    public static ArrayList<? extends Tile> bottomBarTiles = new ArrayList<>(Arrays.asList(
+    public static final ArrayList<? extends Tile> bottomBarTiles = new ArrayList<>(Arrays.asList(
             initStreetTile("area7", "tile.street18"),
             initStreetTile("area7","tile.street19"),
             initChestTile(),
@@ -162,7 +162,7 @@ public class TempTileSetup {
             initStreetTile("area8","tile.street22")
     ));
 
-    public static ArrayList<? extends Tile> rightBarTiles = new ArrayList<>(Arrays.asList(
+    public static final ArrayList<? extends Tile> rightBarTiles = new ArrayList<>(Arrays.asList(
             initStreetTile("area5", "tile.street12"),
             initChanceTile(),
             initStreetTile("area5", "tile.street13"),
@@ -174,7 +174,7 @@ public class TempTileSetup {
             initStreetTile("area6", "tile.street17")));
 
 
-    public static ArrayList<? extends Tile> leftBarTiles = new ArrayList<>(Arrays.asList(
+    public static final ArrayList<? extends Tile> leftBarTiles = new ArrayList<>(Arrays.asList(
             initStreetTile("area1", "tile.street01"),
             initChestTile(),
             initStreetTile("area1", "tile.street02"),
@@ -187,7 +187,7 @@ public class TempTileSetup {
             ));
 
 
-    public static ArrayList<? extends Tile> cornerTiles = new ArrayList<>(Arrays.asList(
+    public static final ArrayList<? extends Tile> cornerTiles = new ArrayList<>(Arrays.asList(
             initStartTile(),
             initJailCornerTile(),
             initFreeParkingCornerTile(),

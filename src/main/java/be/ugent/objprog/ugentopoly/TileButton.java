@@ -1,6 +1,6 @@
 package be.ugent.objprog.ugentopoly;
 
-import be.ugent.objprog.ugentopoly.GameBoard.Board;
+import be.ugent.objprog.ugentopoly.gameBoard.Board;
 import javafx.scene.control.ToggleButton;
 
 public class TileButton extends ToggleButton {

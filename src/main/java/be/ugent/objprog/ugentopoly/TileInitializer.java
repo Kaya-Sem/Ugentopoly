@@ -1,15 +1,15 @@
 package be.ugent.objprog.ugentopoly;
 
-import be.ugent.objprog.ugentopoly.Factories.TileFactory;
-import be.ugent.objprog.ugentopoly.Parsers.XMLParser;
-import be.ugent.objprog.ugentopoly.Tiles.Tile.Tile;
+import be.ugent.objprog.ugentopoly.factories.TileFactory;
+import be.ugent.objprog.ugentopoly.parsers.XMLParser;
+import be.ugent.objprog.ugentopoly.tiles.tile.Tile;
 
 import java.util.*;
 
 // TODO sort on position?
 
 public class TileInitializer {
-    private Tile[] tilesArray;
+    private final Tile[] tilesArray;
 
     public TileInitializer() {
         this.tilesArray = new Tile[40];
