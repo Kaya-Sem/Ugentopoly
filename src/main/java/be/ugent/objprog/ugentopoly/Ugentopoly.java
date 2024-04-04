@@ -1,4 +1,7 @@
 package be.ugent.objprog.ugentopoly;
+
+import java.util.Objects;
+
 import be.ugent.objprog.ugentopoly.gameBoard.Board;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -6,24 +9,19 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-import java.util.Objects;
-
 public class Ugentopoly extends Application {
-    private static final String ICON = "tax.png";
+    private static final String ICON = "coolseat.png";
     private static final int WINDOW_SIZE = 900;
     public static final double BOARD_SIZE = 845.0;
     public static final int SMALL_TILES = 13;
 
-    public static final String resourcePath = "/be/ugent/objprog/ugentopoly/assets/";
-
     @Override
     public void start(Stage stage) {
 
-
-        //final Dice dice = new Dice();
         StackPane root = new StackPane(new Board());
-        Scene scene = new Scene(root, BOARD_SIZE, BOARD_SIZE );
-        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/be/ugent/objprog/ugentopoly/styles.css")).toExternalForm());
+        Scene scene = new Scene(root, BOARD_SIZE, BOARD_SIZE);
+        scene.getStylesheets().add(Objects
+                .requireNonNull(getClass().getResource("/be/ugent/objprog/ugentopoly/styles.css")).toExternalForm());
         stage.setScene(scene);
 
         @SuppressWarnings("ConstantConditions")
@@ -35,7 +33,10 @@ public class Ugentopoly extends Application {
         stage.show();
 
         stage.setTitle("Ugentopoly");
-        //stage.setOnCloseRequest(e -> dice.close());
+
+        // final Dice dice = new Dice();
+        // stage.setOnCloseRequest(e -> dice.close());
+
         stage.setScene(scene);
         stage.show();
     }
