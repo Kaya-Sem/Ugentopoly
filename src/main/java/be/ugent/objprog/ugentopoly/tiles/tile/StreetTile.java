@@ -25,15 +25,7 @@ public class StreetTile extends SmallTile {
         this.color = color;
         this.text = PropertyLoader.getLabel(id);
         setup(id);
-        this.card = createCard(text, color, companion);
-        this.tileButton.setOnAction(this::handleButton);
-    }
-
-    private StreetCard createCard(String text, String color, StreetCompanion companion) {
-        return new StreetCard(
-                text,
-                color,
-                companion);
+        this.card = new StreetCard(text, color, companion);
     }
 
     @Override
