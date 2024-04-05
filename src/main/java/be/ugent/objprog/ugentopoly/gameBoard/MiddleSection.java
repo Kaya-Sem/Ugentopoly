@@ -12,8 +12,7 @@ public class MiddleSection extends StackPane {
             MiddleSection.class
                     .getResourceAsStream("/be/ugent/objprog/ugentopoly/gent3.jpg"));
     private static final Image LOGO = new Image(
-            MiddleSection.class.getResourceAsStream("/be/ugent/objprog/ugentopoly/assets/logo.png")
-    );
+            MiddleSection.class.getResourceAsStream("/be/ugent/objprog/ugentopoly/assets/logo.png"));
 
     private final StackPane displayedCard;
 
