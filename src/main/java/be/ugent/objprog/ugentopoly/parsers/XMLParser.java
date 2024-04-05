@@ -1,15 +1,15 @@
 package be.ugent.objprog.ugentopoly.parsers;
 
-import org.jdom2.Document;
-import org.jdom2.Element;
-import org.jdom2.JDOMException;
-import org.jdom2.input.SAXBuilder;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.jdom2.Document;
+import org.jdom2.Element;
+import org.jdom2.JDOMException;
+import org.jdom2.input.SAXBuilder;
 
 public class XMLParser {
     /*
@@ -19,7 +19,8 @@ public class XMLParser {
     // TODO parse make parsers for other xml data
 
     private static final String XML_PATH = "/be/ugent/objprog/ugentopoly/ugentopoly.xml";
-    static final String[] ATTRIBUTES = {"area", "cost", "rent0", "rent1", "rent2", "rent3", "rent4", "rent5", "amount"};
+    static final String[] ATTRIBUTES = { "area", "cost", "rent0", "rent1", "rent2", "rent3", "rent4", "rent5",
+            "amount" };
     Document document;
     Element root;
 
@@ -34,7 +35,7 @@ public class XMLParser {
         this.root = document.getRootElement();
     }
 
-    public Map<String, String> areaColors(){
+    public Map<String, String> areaColors() {
         Map<String, String> colors = new HashMap<>();
         List<Element> colorElements = root.getChildren("areas").getFirst().getChildren("area");
 
@@ -47,9 +48,8 @@ public class XMLParser {
         return colors;
     }
 
-
-
-    // NEED HELP linkedHashMap incorrect order even when XML is correct. 1 element wrong
+    // NEED HELP linkedHashMap incorrect order even when XML is correct. 1 element
+    // wrong
     private static Map<String, String> parseTile(Element tileElement) {
         Map<String, String> tileMap = new HashMap<>();
         tileMap.put("type", tileElement.getAttributeValue("type"));
