@@ -17,16 +17,16 @@ public class RailwayCard extends VerticalCard{
         Label costLabel = new Label(cost + "€");
         costLabel.setTextAlignment(TextAlignment.LEFT);
 
-        textLabel.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+        textLabel.setFont(Font.font("Arial", FontWeight.BOLD, 15));
 
         VBox title = new VBox(textLabel, costLabel);
         title.setAlignment(Pos.CENTER);
 
-        Label preText = new Label("rent: ");
+        Label preText = new Label(" rent");
         Label rentLabel = new Label(rent + "€");
         rentLabel.setFont(Font.font("Arial", FontWeight.BOLD, 13));
 
-        HBox rentBox = new HBox(preText, rentLabel);
+        HBox rentBox = new HBox(rentLabel, preText);
         rentBox.setAlignment(Pos.CENTER);
 
 
