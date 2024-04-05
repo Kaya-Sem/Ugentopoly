@@ -38,6 +38,8 @@ public class Tile extends StackPane {
 
     protected void handleButton(ActionEvent event) {
         System.err.println(this.companion);
-        Board.middleSection.updateDisplayedCard(card);
+        TileButton source = (TileButton) event.getSource();
+
+        Board.middleSection.updateDisplayedCard((source.isSelected()) ? card : null);
     }
 }
