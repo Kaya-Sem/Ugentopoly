@@ -36,6 +36,7 @@ public class VerticalCard extends TemplateCard {
         dropShadow.setColor(Color.DIMGREY); // Set the color of the drop shadow
         border.setEffect(dropShadow);
 
+        // TODO i think this is unneeded
         StackPane content = new StackPane();
         content.setPadding(new Insets(10, 10, 10, 10));
         content.setBackground(Background.fill(Color.TRANSPARENT));

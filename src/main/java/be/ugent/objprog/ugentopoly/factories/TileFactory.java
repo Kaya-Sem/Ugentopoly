@@ -71,7 +71,7 @@ public class TileFactory {
     }
 
     private RailwayTile createRailway(Map<String, String> tileData) {
-        Record companion = new RailwayCompanion(
+        RailwayCompanion companion = new RailwayCompanion(
                 tileData.get("type"),
                 tileData.get("position"),
                 tileData.get("id"),

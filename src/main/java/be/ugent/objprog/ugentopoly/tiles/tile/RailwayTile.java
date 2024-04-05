@@ -1,7 +1,8 @@
 package be.ugent.objprog.ugentopoly.tiles.tile;
 
 import be.ugent.objprog.ugentopoly.parsers.PropertyLoader;
-import be.ugent.objprog.ugentopoly.tileCards.BasicVerticalCard;
+import be.ugent.objprog.ugentopoly.tileCards.RailwayCard;
+import be.ugent.objprog.ugentopoly.tiles.tileCompanions.RailwayCompanion;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.text.Font;
@@ -14,10 +15,15 @@ public class RailwayTile extends SmallTile {
             "/be/ugent/objprog/ugentopoly/assets/railway.png"))
             );
 
+    private String cost;
+    private String rent;
+
     // Constructor
-    public RailwayTile(Record companion, String id){
+    public RailwayTile(RailwayCompanion companion, String id){
         super(companion, id);
         setup(id);
+        this.cost = companion.cost();
+        this.rent = companion.rent();
         this.card = createCard(PropertyLoader.getLabel(id));
     }
 
@@ -38,9 +44,8 @@ public class RailwayTile extends SmallTile {
         getChildren().addAll(hbox, tileButton);
     }
 
-    private BasicVerticalCard createCard(String text) {
-        return new BasicVerticalCard(RailwayTile.image, text) {
+    private RailwayCard createCard(String text) {
+        return new RailwayCard(RailwayTile.image, text, cost, rent) {
         };
     }
 }
-

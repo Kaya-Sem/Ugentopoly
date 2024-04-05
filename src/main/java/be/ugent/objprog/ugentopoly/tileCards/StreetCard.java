@@ -54,7 +54,7 @@ public class StreetCard extends HorizontalCard {
     }
 
 
-    private static class rentLabel extends HBox {
+    public static class rentLabel extends HBox {
         public rentLabel(String preText, String rentAmount){
             Label text = new Label(preText);
             Label amount = new Label(rentAmount + "€");
