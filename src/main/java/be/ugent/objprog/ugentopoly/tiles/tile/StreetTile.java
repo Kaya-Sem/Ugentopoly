@@ -1,6 +1,5 @@
 package be.ugent.objprog.ugentopoly.tiles.tile;
 
-import be.ugent.objprog.ugentopoly.TileButton;
 import be.ugent.objprog.ugentopoly.parsers.PropertyLoader;
 import be.ugent.objprog.ugentopoly.tileCards.StreetCard;
 import be.ugent.objprog.ugentopoly.tiles.tileCompanions.StreetCompanion;

@@ -1,6 +1,6 @@
 package be.ugent.objprog.ugentopoly.tiles.tile;
 
-import be.ugent.objprog.ugentopoly.TileButton;
+import be.ugent.objprog.ugentopoly.tiles.TileButton;
 import be.ugent.objprog.ugentopoly.Ugentopoly;
 import be.ugent.objprog.ugentopoly.gameBoard.Board;
 import be.ugent.objprog.ugentopoly.tileCards.TemplateCard;
