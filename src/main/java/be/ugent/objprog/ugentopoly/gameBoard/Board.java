@@ -17,7 +17,7 @@ public class Board extends GridPane {
     protected static final double MIDDLE_AREA_SIZE = (BOARD_SIZE / Ugentopoly.SMALL_TILES) * SMALL_TILES;
 
     public static final ToggleGroup TOGGLE_GROUP = new ToggleGroup();
-    public static MiddleSection middleSection = new MiddleSection();
+    public static final MiddleSection middleSection = new MiddleSection();
 
     public Board() {
         setPrefSize(BOARD_SIZE, BOARD_SIZE);
@@ -47,6 +47,7 @@ public class Board extends GridPane {
         VerticalBar leftBar = new VerticalBar(TempTileSetup.leftBarTiles);
         VerticalBar rightBar = new VerticalBar(TempTileSetup.rightBarTiles);
 
+        // TODO can be done in the initializer?
         // apply rotation to tiles
         topRow.applyRotation(90);
         rightBar.applyRotation(180);
@@ -60,8 +61,6 @@ public class Board extends GridPane {
 
         add(middleSection, 1, 1);
 
-        // TODO make positions constant, for better readability
-        System.out.println(TempTileSetup.cornerTiles);
         add(TempTileSetup.cornerTiles.get(0), 0, 2); // bottom left
         add(TempTileSetup.cornerTiles.get(1), 0, 0); // top left
         add(TempTileSetup.cornerTiles.get(2), 2, 0); // top right
