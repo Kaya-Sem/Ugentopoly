@@ -25,12 +25,11 @@ public class HorizontalCard extends TemplateCard {
         border.setArcHeight(20);
         border.setArcWidth(20);
 
-        // Apply drop shadow effect to the rectangle
         DropShadow dropShadow = new DropShadow();
         dropShadow.setRadius(10);
         dropShadow.setOffsetX(-5);
         dropShadow.setOffsetY(5);
-        dropShadow.setColor(Color.DIMGREY); // Set the color of the drop shadow
+        dropShadow.setColor(Color.DIMGREY);
         border.setEffect(dropShadow);
 
         getChildren().addAll(border);
