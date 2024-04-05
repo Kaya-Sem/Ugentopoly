@@ -1,10 +1,10 @@
 package be.ugent.objprog.ugentopoly.gameBoard;
 
+import be.ugent.objprog.ugentopoly.TempTileSetup;
+import be.ugent.objprog.ugentopoly.Ugentopoly;
 import be.ugent.objprog.ugentopoly.bars.HorizontalBar;
 import be.ugent.objprog.ugentopoly.bars.VerticalBar;
-import be.ugent.objprog.ugentopoly.TempTileSetup;
 import be.ugent.objprog.ugentopoly.tiles.tile.Tile;
-import be.ugent.objprog.ugentopoly.Ugentopoly;
 import javafx.geometry.Pos;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.ColumnConstraints;
@@ -36,9 +36,10 @@ public class Board extends GridPane {
                 new RowConstraints(MIDDLE_AREA_SIZE) // Mid-section row
         );
 
-        //TODO fix
-        //TileInitializer tileInitializer = new TileInitializer();
-        //Map<String, ArrayList<? extends tile>> tileMap = tileInitializer.initialiseTiles();
+        // TODO fix
+        // TileInitializer tileInitializer = new TileInitializer();
+        // Map<String, ArrayList<? extends tile>> tileMap =
+        // tileInitializer.initialiseTiles();
 
         // initialize tileholders
         HorizontalBar topRow = new HorizontalBar(TempTileSetup.upperBarTiles);
@@ -52,7 +53,7 @@ public class Board extends GridPane {
         bottomRow.applyRotation(270);
 
         // TODO make positions constant
-        add(topRow,1, 0);
+        add(topRow, 1, 0);
         add(rightBar, 2, 1);
         add(leftBar, 0, 1);
         add(bottomRow, 1, 2);
@@ -62,7 +63,7 @@ public class Board extends GridPane {
         // TODO make positions constant, for better readability
         System.out.println(TempTileSetup.cornerTiles);
         add(TempTileSetup.cornerTiles.get(0), 0, 2); // bottom left
-        add(TempTileSetup.cornerTiles.get(1) , 0, 0); // top left
+        add(TempTileSetup.cornerTiles.get(1), 0, 0); // top left
         add(TempTileSetup.cornerTiles.get(2), 2, 0); // top right
         add(TempTileSetup.cornerTiles.get(3), 2, 2); // bottom right
 
