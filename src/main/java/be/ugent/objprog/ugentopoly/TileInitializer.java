@@ -8,7 +8,7 @@ import java.util.*;
 
 /**
  * Initializes the tiles for the game.
- * @return A list of 40 tiles and a list of 40 tile models, sorted by position
+ * return A list of 40 tiles and a list of 40 tile models, sorted by position
  **/
 
 public class TileInitializer {
@@ -22,8 +22,7 @@ public class TileInitializer {
         this.factory = new TileModelFactory(parser.areaColors());
     }
 
-    public List<? extends TileModel> TileModelInitializer() {
-        List<? extends TileModel> TileModels = new ArrayList<>();
+    public TileModel[] TileModelInitializer() {
 
         Map<String, Map<String, String>> tileData = parser.parseTileData();
 
@@ -39,9 +38,7 @@ public class TileInitializer {
             tileModelArray[position] = tileModel;
         }
 
-        if (tileModelArray.length == 0) {
-            System.err.println("Error: tileModelArray is empty. No tiles initialized.");
-        }
 
-        return TileModels;
+        // TODO return a map of already divided subparts?
+        return tileModelArray;
     }}
