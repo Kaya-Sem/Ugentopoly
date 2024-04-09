@@ -1,9 +1,9 @@
-package be.ugent.objprog.ugentopoly.tiles.tile;
+package be.ugent.objprog.ugentopoly.tiles.tileViews;
 
-import be.ugent.objprog.ugentopoly.tiles.TileButton;
 import be.ugent.objprog.ugentopoly.Ugentopoly;
 import be.ugent.objprog.ugentopoly.gameBoard.Board;
 import be.ugent.objprog.ugentopoly.tileCards.TemplateCard;
+import be.ugent.objprog.ugentopoly.tiles.TileButton;
 import javafx.event.ActionEvent;
 import javafx.scene.layout.StackPane;
 
@@ -12,19 +12,14 @@ public class Tile extends StackPane {
     public final static double SHORT_SIDE = ((Ugentopoly.BOARD_SIZE / Ugentopoly.SMALL_TILES));
     private static final double OFFSET = 32.5;
 
-    final Record companion;
-    final String id;
     protected TemplateCard card;
-
     protected TileButton tileButton = new TileButton();
 
-    public Tile(Record companion, String id){
-        this.companion = companion;
-        this.id = id;
+    public Tile(){
         this.tileButton.setOnAction(this::handleButton);
     }
 
-    protected void setup(String id) {}
+    protected void setup() {}
 
     public void applyRotation(double angle){
         setTranslateX(getWidth() / 2);
@@ -37,9 +32,7 @@ public class Tile extends StackPane {
     }
 
     protected void handleButton(ActionEvent event) {
-        System.err.println(this.companion);
         TileButton source = (TileButton) event.getSource();
-
         Board.middleSection.updateDisplayedCard((source.isSelected()) ? card : null);
     }
 }
