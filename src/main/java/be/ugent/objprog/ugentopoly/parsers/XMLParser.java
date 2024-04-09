@@ -19,7 +19,7 @@ public class XMLParser {
     // TODO parse make parsers for other xml data
 
     private static final String XML_PATH = "/be/ugent/objprog/ugentopoly/ugentopoly.xml";
-    static final String[] ATTRIBUTES = { "area", "cost", "rent0", "rent1", "rent2", "rent3", "rent4", "rent5",
+    static final String[] ATTRIBUTES = { "area", "cost", "rent", "rent0", "rent1", "rent2", "rent3", "rent4", "rent5",
             "amount" };
     Document document;
     Element root;
@@ -29,10 +29,48 @@ public class XMLParser {
         try {
             this.document = new SAXBuilder().build(inputStream);
         } catch (JDOMException | IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Error occurred in creating document in XMLParser" + e);
         }
 
         this.root = document.getRootElement();
+        // NEEDSLOG
+    }
+
+    // load tileViews information
+    public Map<String, Map<String, String>> parseAllTileData() {
+        Map<String, Map<String, String>> tiles = new HashMap<>();
+
+        List<Element> tileElements = root.getChildren("tiles").getFirst().getChildren("tile");
+
+        if (tileElements.isEmpty()) {
+            throw new IllegalStateException("tile data has not correctly been parsed from XML file. Nothing was returned");
+        }
+
+        for (Element tileElement : tileElements) {
+            // Parse tileViews attributes and create tileViews data map
+            String tileIdentifier = tileElement.getAttributeValue("position");
+            Map<String, String> tileAttributes = parseTile(tileElement);
+            tiles.put(tileIdentifier, tileAttributes);
+        }
+
+        return tiles;
+    }
+
+    // NEED HELP linkedHashMap incorrect order even when XML is correct. 1 element
+    // wrong
+    private static Map<String, String> parseTile(Element tileElement) {
+        Map<String, String> tileMap = new HashMap<>();
+        tileMap.put("position", tileElement.getAttributeValue("position"));
+        tileMap.put("id", tileElement.getAttributeValue("id"));
+        tileMap.put("type", tileElement.getAttributeValue("type"));
+
+        for (String attr : XMLParser.ATTRIBUTES) {
+            tileMap.put(attr, tileElement.getAttributeValue(attr));
+        }
+
+        tileMap.entrySet().removeIf(entry -> entry.getValue() == null);
+
+        return tileMap;
     }
 
     public Map<String, String> areaColors() {
@@ -45,56 +83,27 @@ public class XMLParser {
             colors.put(colorId, color);
         }
 
+        if (colors.isEmpty()) {
+            throw new IllegalStateException("\n area color map was empty unexpectedly...\n");
+        }
+
         return colors;
     }
 
-    // NEED HELP linkedHashMap incorrect order even when XML is correct. 1 element
-    // wrong
-    private static Map<String, String> parseTile(Element tileElement) {
-        Map<String, String> tileMap = new HashMap<>();
-        tileMap.put("type", tileElement.getAttributeValue("type"));
-        tileMap.put("position", tileElement.getAttributeValue("position"));
-        tileMap.put("id", tileElement.getAttributeValue("id"));
-
-        for (String attr : XMLParser.ATTRIBUTES) {
-            tileMap.put(attr, tileElement.getAttributeValue(attr));
-        }
-
-        return tileMap;
-    }
-
-    // NON URGENT maak een testklasse aan hiervoor? hoe specifieer ik correcte
-    // return value?
-    // maak ook voor andere testklassen aan
     private static void test() {
         XMLParser parser = new XMLParser();
-        Map<String, Map<String, String>> tilesData = parser.parseTileData();
+        Map<String, Map<String, String>> tilesData = parser.parseAllTileData();
+
+        System.out.println(tilesData.size());
+
         for (Map.Entry<?, ?> entry : tilesData.entrySet()) {
             System.out.printf("%-15s : %s%n", entry.getKey(), entry.getValue());
         }
-
-        System.out.println();
 
         System.out.println(parser.areaColors());
     }
 
     public static void main(String[] args) {
         test();
-    }
-
-    // load tile information
-    public Map<String, Map<String, String>> parseTileData() {
-        Map<String, Map<String, String>> tiles = new HashMap<>();
-
-        List<Element> tileElements = root.getChildren("tiles").getFirst().getChildren("tile");
-
-        for (Element tileElement : tileElements) {
-            // Parse tile attributes and create tile object
-            String tileId = tileElement.getAttributeValue("id");
-            Map<String, String> tileAttributes = parseTile(tileElement);
-            tiles.put(tileId, tileAttributes);
-        }
-
-        return tiles;
     }
 }
