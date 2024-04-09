@@ -5,4 +5,8 @@ import be.ugent.objprog.ugentopoly.tiles.tileModels.TileModel;
 
 public record TileTuple(TileModel tileModel, Tile tileView) {
 
+    public TileTuple{
+        assert (tileModel != null): "initialized a tiletuple with no tileModel";
+        assert (tileView != null): "initialized a tiletuple with no tileView";
+    }
 }
