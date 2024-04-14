@@ -1,7 +1,8 @@
 package be.ugent.objprog.ugentopoly.bars;
 
 import be.ugent.objprog.ugentopoly.gameBoard.MiddleSection;
-import be.ugent.objprog.ugentopoly.tiles.tile.Tile;
+import be.ugent.objprog.ugentopoly.tiles.tileViews.SmallTile;
+import be.ugent.objprog.ugentopoly.tiles.tileViews.Tile;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 
@@ -19,23 +20,23 @@ public class HorizontalBar extends GridPane implements Bar{
         }
     }
 
-    public HorizontalBar(List<? extends Tile> tiles) {
-        this.tiles = tiles;
+    public HorizontalBar(SmallTile[] tiles) {
+        this.tiles = List.of(tiles);
         setPrefWidth(MiddleSection.getSize());
         setPrefHeight(Tile.LONG_SIDE);
 
         initializeColumnConstraints();
-        populate(this.tiles);
+        populate();
     }
 
-    public void populate(List<? extends Tile> tiles){
+    public void populate(){
         if (tiles.size() == 9) {
             for (int i = 0; i < 9; i++) {
                 Tile tile = tiles.get(i);
                 add(tile, i, 0);
             }
         } else {
-            throw new IllegalArgumentException("tile list must be of size 9!");
+            throw new IllegalArgumentException("tileViews list must be of size 9!");
         }
     }
 

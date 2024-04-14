@@ -1,15 +1,22 @@
 package be.ugent.objprog.ugentopoly.gameBoard;
 
-import be.ugent.objprog.ugentopoly.TempTileSetup;
+import be.ugent.objprog.ugentopoly.TileInitializer;
 import be.ugent.objprog.ugentopoly.Ugentopoly;
 import be.ugent.objprog.ugentopoly.bars.HorizontalBar;
 import be.ugent.objprog.ugentopoly.bars.VerticalBar;
-import be.ugent.objprog.ugentopoly.tiles.tile.Tile;
+import be.ugent.objprog.ugentopoly.factories.TileFactory;
+import be.ugent.objprog.ugentopoly.parsers.XMLParser;
+import be.ugent.objprog.ugentopoly.tiles.tileViews.SmallTile;
+import be.ugent.objprog.ugentopoly.tiles.tileViews.Tile;
+import be.ugent.objprog.ugentopoly.tiles.tileModels.TileModel;
+import be.ugent.objprog.ugentopoly.tiles.tileViews.cornerTiles.CornerTile;
 import javafx.geometry.Pos;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
+
+import java.util.Map;
 
 public class Board extends GridPane {
     public static final double BOARD_SIZE = Ugentopoly.BOARD_SIZE;
@@ -18,6 +25,8 @@ public class Board extends GridPane {
 
     public static final ToggleGroup TOGGLE_GROUP = new ToggleGroup();
     public static final MiddleSection middleSection = new MiddleSection();
+
+    private final TileModel[] tileModels;
 
     public Board() {
         setPrefSize(BOARD_SIZE, BOARD_SIZE);
@@ -36,16 +45,25 @@ public class Board extends GridPane {
                 new RowConstraints(MIDDLE_AREA_SIZE) // Mid-section row
         );
 
-        // TODO fix
-        // TileInitializer tileInitializer = new TileInitializer();
-        // Map<String, ArrayList<? extends tile>> tileMap =
-        // tileInitializer.initialiseTiles();
+        // retrieve a map of 4 parts + all models
+
+        XMLParser parser = new XMLParser();
+        TileFactory factory = new TileFactory(parser.areaColors());
+
+        TileInitializer tileInitializer = new TileInitializer(parser, factory);
+
+        Map<String, Object[]> tileMap = tileInitializer.TileModelInitializer();
+
+//        System.out.println(tileMap.keySet());
+
+        this.tileModels = (TileModel[]) tileMap.get("models");
+
 
         // initialize tileholders
-        HorizontalBar topRow = new HorizontalBar(TempTileSetup.upperBarTiles);
-        HorizontalBar bottomRow = new HorizontalBar(TempTileSetup.bottomBarTiles);
-        VerticalBar leftBar = new VerticalBar(TempTileSetup.leftBarTiles);
-        VerticalBar rightBar = new VerticalBar(TempTileSetup.rightBarTiles);
+        HorizontalBar topRow = new HorizontalBar((SmallTile[]) tileMap.get("up"));
+        HorizontalBar bottomRow = new HorizontalBar((SmallTile[]) tileMap.get("bottom"));
+        VerticalBar leftBar = new VerticalBar((SmallTile[]) tileMap.get("left"));
+        VerticalBar rightBar = new VerticalBar((SmallTile[]) tileMap.get("right"));
 
         // TODO can be done in the initializer?
         // apply rotation to tiles
@@ -61,10 +79,15 @@ public class Board extends GridPane {
 
         add(middleSection, 1, 1);
 
-        add(TempTileSetup.cornerTiles.get(0), 0, 2); // bottom left
-        add(TempTileSetup.cornerTiles.get(1), 0, 0); // top left
-        add(TempTileSetup.cornerTiles.get(2), 2, 0); // top right
-        add(TempTileSetup.cornerTiles.get(3), 2, 2); // bottom right
+        add((CornerTile)tileMap.get("corners")[0], 0, 2); // bottom left
+        add((CornerTile)tileMap.get("corners")[1], 0, 0); // top left
+        add((CornerTile)tileMap.get("corners")[2], 2, 0); // top right
+        add((CornerTile)tileMap.get("corners")[3], 2, 2); // bottom right
 
+    }
+
+
+    public TileModel[] getTileModels() {
+        return tileModels;
     }
 }

@@ -1,4 +1,4 @@
-package be.ugent.objprog.ugentopoly.tiles.tile;
+package be.ugent.objprog.ugentopoly.tiles.tileViews;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;

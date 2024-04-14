@@ -1,7 +1,7 @@
-package be.ugent.objprog.ugentopoly.tileCards;
+package be.ugent.objprog.ugentopoly.tiles.tileCards;
 
-import be.ugent.objprog.ugentopoly.tiles.tile.Tile;
-import be.ugent.objprog.ugentopoly.tiles.tileCompanions.StreetCompanion;
+import be.ugent.objprog.ugentopoly.tiles.tileModels.StreetTileModel;
+import be.ugent.objprog.ugentopoly.tiles.tileViews.Tile;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -17,33 +17,30 @@ import static javafx.geometry.Pos.CENTER_LEFT;
 import static javafx.geometry.Pos.CENTER_RIGHT;
 
 public class StreetCard extends HorizontalCard {
-    public StreetCard(String text, String color, StreetCompanion c) {
-
-
-
-        Label textLabel = new Label(text);
+    public StreetCard(StreetTileModel model) {
+        Label textLabel = new Label(model.getStreetName());
         textLabel.setFont(Font.font("Raleway", FontWeight.EXTRA_BOLD, 15));
 
-        Label cost = new Label(c.cost() + "€");
+        Label cost = new Label(model.getCost());
         cost.setFont(Font.font("Arial", FontWeight.THIN, 11));
 
         VBox info = new VBox(
                 textLabel,
                 cost,
                 new Label("\n"),
-                new rentLabel("rent 0", c.rent0()),
-                new rentLabel("rent 1", c.rent1()),
-                new rentLabel("rent 2", c.rent2()),
-                new rentLabel("rent 3", c.rent3()),
-                new rentLabel("rent 4", c.rent4()),
-                new rentLabel("rent 5", c.rent5())
+                new rentLabel("rent 0", model.getRent0()),
+                new rentLabel("rent 1", model.getRent1()),
+                new rentLabel("rent 2", model.getRent2()),
+                new rentLabel("rent 3", model.getRent3()),
+                new rentLabel("rent 4", model.getRent4()),
+                new rentLabel("rent 5", model.getRent5())
         );
 
         info.setAlignment(CENTER_LEFT);
         info.setPadding(new Insets(20, 20, 20, 20));
 
         Rectangle bar = new Rectangle(Tile.SHORT_SIDE - 3, HEIGHT - 3);
-        bar.setFill(Paint.valueOf(color));
+        bar.setFill(Paint.valueOf(model.getColor()));
         bar.setArcHeight(20);
         bar.setArcWidth(20);
 

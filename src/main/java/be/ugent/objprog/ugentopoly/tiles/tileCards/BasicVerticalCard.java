@@ -1,6 +1,6 @@
-package be.ugent.objprog.ugentopoly.tileCards;
+package be.ugent.objprog.ugentopoly.tiles.tileCards;
 
-import be.ugent.objprog.ugentopoly.tiles.tile.Tile;
+import be.ugent.objprog.ugentopoly.tiles.tileViews.Tile;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;

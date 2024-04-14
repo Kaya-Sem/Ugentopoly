@@ -1,8 +1,8 @@
-package be.ugent.objprog.ugentopoly.tiles.tile;
+package be.ugent.objprog.ugentopoly.tiles.tileViews;
 
 import be.ugent.objprog.ugentopoly.parsers.PropertyLoader;
-import be.ugent.objprog.ugentopoly.tileCards.RailwayCard;
-import be.ugent.objprog.ugentopoly.tiles.tileCompanions.RailwayCompanion;
+import be.ugent.objprog.ugentopoly.tiles.tileCards.RailwayCard;
+import be.ugent.objprog.ugentopoly.tiles.tileModels.RailwayTileModel;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.text.Font;
@@ -15,26 +15,25 @@ public class RailwayTile extends SmallTile {
             "/be/ugent/objprog/ugentopoly/assets/railway.png"))
             );
 
-    private String cost;
-    private String rent;
-
     // Constructor
-    public RailwayTile(RailwayCompanion companion, String id){
-        super(companion, id);
-        setup(id);
-        this.cost = companion.cost();
-        this.rent = companion.rent();
-        this.card = createCard(PropertyLoader.getLabel(id));
+    public RailwayTile(RailwayTileModel model){
+        super(model);
+        this.card = new RailwayCard(
+                image,
+                PropertyLoader.getLabel(model.getId()),
+                String.valueOf(model.getCost()),
+                String.valueOf(model.getRent()));
+        setup();
     }
 
     // OPTIMIZE
     @Override
-    protected void setup(String id) {
+    protected void setup() {
         TileHBox hbox = new TileHBox();
 
         TileImageView imageView = new TileImageView(image);
 
-        String text = PropertyLoader.getLabel(id);
+        String text = PropertyLoader.getLabel(model.getId());
         Label textLabel = new Label(text);
         textLabel.setFont(Font.font("Arial", FontWeight.BOLD, 10));
         textLabel.setWrapText(true);
@@ -42,10 +41,5 @@ public class RailwayTile extends SmallTile {
         hbox.getChildren().addAll(imageView, textLabel);
 
         getChildren().addAll(hbox, tileButton);
-    }
-
-    private RailwayCard createCard(String text) {
-        return new RailwayCard(RailwayTile.image, text, cost, rent) {
-        };
     }
 }

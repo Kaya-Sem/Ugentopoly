@@ -1,8 +1,8 @@
-package be.ugent.objprog.ugentopoly.tiles.tile;
+package be.ugent.objprog.ugentopoly.tiles.tileViews;
 
-import be.ugent.objprog.ugentopoly.parsers.PropertyLoader;
-import be.ugent.objprog.ugentopoly.tileCards.StreetCard;
-import be.ugent.objprog.ugentopoly.tiles.tileCompanions.StreetCompanion;
+import be.ugent.objprog.ugentopoly.tiles.tileCards.StreetCard;
+import be.ugent.objprog.ugentopoly.tiles.tileModels.StreetTileModel;
+import javafx.beans.InvalidationListener;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -13,26 +13,25 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
-public class StreetTile extends SmallTile {
+public class StreetTileView extends SmallTile implements InvalidationListener {
 
+    private StreetTileModel model;
     private static final int STRIP_WIDTH = 30;
-    private final String color;
-    private final String text;
+    private String owner;
 
     // Constructor
-    public StreetTile(StreetCompanion companion, String id, String color) {
-        super(companion, id);
-        this.color = color;
-        this.text = PropertyLoader.getLabel(id);
-        setup(id);
-        this.card = new StreetCard(text, color, companion);
+    public StreetTileView(StreetTileModel model) {
+        super(model);
+        this.card = new StreetCard(this.model);
+        setup();
+        // NEEDSLOG
     }
 
     @Override
-    public void setup(String id) {
+    public void setup() {
         HBox hbox = new HBox();
 
-        Label label = new Label(this.text);
+        Label label = new Label(model.getStreetName());
         label.setAlignment(Pos.CENTER);
         label.setFont(Font.font("Arial", FontWeight.BOLD, 11));
         label.setWrapText(true);
@@ -42,7 +41,7 @@ public class StreetTile extends SmallTile {
         pane.setPrefHeight(Tile.SHORT_SIDE);
 
         Rectangle rectangle = new Rectangle();
-        rectangle.setFill(Paint.valueOf(this.color));
+        rectangle.setFill(Paint.valueOf(model.getColor()));
         rectangle.setHeight(Tile.SHORT_SIDE);
         rectangle.setWidth(STRIP_WIDTH);
         setAlignment(rectangle, Pos.CENTER_RIGHT);
@@ -52,5 +51,10 @@ public class StreetTile extends SmallTile {
         hbox.getChildren().addAll(pane, rectangle);
 
         getChildren().addAll(hbox, tileButton);
+    }
+
+    public void invalidated(StreetTileModel observable) {
+        this.owner = observable.getOwner();
+        // NEEDSLOG
     }
 }

@@ -1,4 +1,4 @@
-package be.ugent.objprog.ugentopoly.tileCards;
+package be.ugent.objprog.ugentopoly.tiles.tileCards;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;

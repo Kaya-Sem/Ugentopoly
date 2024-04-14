@@ -1,7 +1,7 @@
-package be.ugent.objprog.ugentopoly.tiles.tile;
+package be.ugent.objprog.ugentopoly.tiles.tileViews;
 
-import be.ugent.objprog.ugentopoly.tileCards.UtilityCard;
-import be.ugent.objprog.ugentopoly.tiles.tileCompanions.UtilityCompanion;
+import be.ugent.objprog.ugentopoly.tiles.tileCards.UtilityCard;
+import be.ugent.objprog.ugentopoly.tiles.tileModels.UtilityTileModel;
 import javafx.geometry.Insets;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -10,20 +10,18 @@ import javafx.scene.layout.StackPane;
 import java.util.Objects;
 
 public class UtilityTile extends SmallTile {
-
-
     private Image image;
 
     // Constructor
-    public UtilityTile(UtilityCompanion companion, String id) {
-        super(companion, id);
-        setup(id);
-        this.card = createCard(this.image, companion.cost());
+    public UtilityTile(UtilityTileModel model) {
+        super(model);
+        setup();
+        this.card = new UtilityCard(this.image, String.valueOf(model.getCost()));
     }
 
     @Override
-    protected void setup(String id) {
-        String imageName = id.substring(5) + ".png";
+    protected void setup() {
+        String imageName = model.getId().substring(5) + ".png"; // maybe not the most robust way
         String imagePath = "/be/ugent/objprog/ugentopoly/assets/" + imageName;
         Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream(imagePath)));
         this.image = image;
@@ -40,9 +38,5 @@ public class UtilityTile extends SmallTile {
         pane.setPadding(new Insets(10, 10, 10, 10));
 
         getChildren().addAll(pane, tileButton);
-    }
-
-    private UtilityCard createCard(Image image, String cost) {
-        return new UtilityCard(image, cost);
     }
 }

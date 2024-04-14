@@ -1,4 +1,4 @@
-package be.ugent.objprog.ugentopoly.tileCards;
+package be.ugent.objprog.ugentopoly.tiles.tileCards;
 
 import be.ugent.objprog.ugentopoly.gameBoard.MiddleSection;
 import javafx.geometry.Insets;

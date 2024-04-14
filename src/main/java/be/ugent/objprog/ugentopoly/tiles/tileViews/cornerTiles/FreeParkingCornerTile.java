@@ -1,9 +1,11 @@
-package be.ugent.objprog.ugentopoly.tiles.tile.cornerTiles;
+package be.ugent.objprog.ugentopoly.tiles.tileViews.cornerTiles;
 
 import be.ugent.objprog.ugentopoly.parsers.PropertyLoader;
-import be.ugent.objprog.ugentopoly.tileCards.BasicVerticalCard;
-import be.ugent.objprog.ugentopoly.tiles.tile.Tile;
-import be.ugent.objprog.ugentopoly.tiles.tile.TileImageView;
+import be.ugent.objprog.ugentopoly.tiles.tileCards.BasicVerticalCard;
+import be.ugent.objprog.ugentopoly.tiles.tileViews.Tile;
+import be.ugent.objprog.ugentopoly.tiles.tileViews.TileImageView;
+import be.ugent.objprog.ugentopoly.tiles.tileModels.TileModel;
+import javafx.beans.Observable;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -14,18 +16,18 @@ import javafx.scene.text.FontWeight;
 public class FreeParkingCornerTile extends CornerTile {
     private final Image image = new Image("/be/ugent/objprog/ugentopoly/assets/free_parking.png");
 
-    public FreeParkingCornerTile(Record companion, String id) {
-        super(companion, id);
-        setup(id);
-        this.card = new BasicVerticalCard(this.image, PropertyLoader.getLabel(id));
+    public FreeParkingCornerTile(TileModel model) {
+        super(model);
+        setup();
+        this.card = new BasicVerticalCard(this.image, PropertyLoader.getLabel(model.getId()));
     }
 
     // TODO extract setFont and label to class. (or css?)
     @Override
-    protected void setup(String id) {
+    protected void setup() {
         TileImageView image = new TileImageView(this.image, 1.7, true);
 
-        String[] text = PropertyLoader.getLabel(id).split(" ");
+        String[] text = PropertyLoader.getLabel(model.getId()).split(" ");
         Label textLabel1 = new Label(text[0]);
         Label textLabel2 = new Label(text[1]);
 
@@ -39,5 +41,10 @@ public class FreeParkingCornerTile extends CornerTile {
         vBox.setRotate(-135);
 
         getChildren().addAll(vBox, tileButton );
+    }
+
+    @Override
+    public void invalidated(Observable observable) {
+
     }
 }

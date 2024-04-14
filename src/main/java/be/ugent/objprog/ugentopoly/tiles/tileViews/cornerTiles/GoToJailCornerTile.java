@@ -1,9 +1,11 @@
-package be.ugent.objprog.ugentopoly.tiles.tile.cornerTiles;
+package be.ugent.objprog.ugentopoly.tiles.tileViews.cornerTiles;
 
 import be.ugent.objprog.ugentopoly.parsers.PropertyLoader;
-import be.ugent.objprog.ugentopoly.tileCards.BasicVerticalCard;
-import be.ugent.objprog.ugentopoly.tiles.tile.Tile;
-import be.ugent.objprog.ugentopoly.tiles.tile.TileImageView;
+import be.ugent.objprog.ugentopoly.tiles.tileCards.BasicVerticalCard;
+import be.ugent.objprog.ugentopoly.tiles.tileViews.Tile;
+import be.ugent.objprog.ugentopoly.tiles.tileViews.TileImageView;
+import be.ugent.objprog.ugentopoly.tiles.tileModels.TileModel;
+import javafx.beans.Observable;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -15,22 +17,19 @@ public class GoToJailCornerTile extends CornerTile {
     private static final double ROTATION = -45;
     private final Image image = new Image("/be/ugent/objprog/ugentopoly/assets/go_to_jail.png");
 
-    public GoToJailCornerTile(Record companion, String id) {
-        super(companion, id);
-        setup(id);
-        this.card = createCard(PropertyLoader.getLabel(id));
-    }
-
-    private BasicVerticalCard createCard(String text) {
-        return new BasicVerticalCard(this.image, text);
+    public GoToJailCornerTile(TileModel model) {
+        super(model);
+        setup();
+        this.card = new BasicVerticalCard(this.image, PropertyLoader.getLabel(model.getId()));
     }
 
     // TODO extract setFont and label to class. (or css?)
     @Override
-    protected void setup(String id) {
+    protected void setup() {
         VBox vBox = new VBox();
 
-        String[] text = PropertyLoader.getLabel(id).split("\\n");
+        // make more versatile. What if they add a string with no newline? it will crash the program
+        String[] text = PropertyLoader.getLabel(model.getId()).split("\\n");
 
         Label textLabel1 = new Label(text[0]);
         Label textLabel2 = new Label(text[1]);
@@ -47,5 +46,10 @@ public class GoToJailCornerTile extends CornerTile {
         vBox.setRotate(ROTATION);
 
         getChildren().addAll(vBox, tileButton);
+    }
+
+    @Override
+    public void invalidated(Observable observable) {
+        // NEEDSLOG
     }
 }

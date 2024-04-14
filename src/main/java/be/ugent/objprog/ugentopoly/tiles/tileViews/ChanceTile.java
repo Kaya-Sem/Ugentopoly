@@ -1,7 +1,8 @@
-package be.ugent.objprog.ugentopoly.tiles.tile;
+package be.ugent.objprog.ugentopoly.tiles.tileViews;
 
 import be.ugent.objprog.ugentopoly.parsers.PropertyLoader;
-import be.ugent.objprog.ugentopoly.tileCards.BasicVerticalCard;
+import be.ugent.objprog.ugentopoly.tiles.tileCards.BasicVerticalCard;
+import be.ugent.objprog.ugentopoly.tiles.tileModels.TileModel;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.text.Font;
@@ -16,19 +17,20 @@ public class ChanceTile extends SmallTile {
                             "/be/ugent/objprog/ugentopoly/assets/chance.png")
             ));
 
+
     // Constructor
-    public ChanceTile(Record companion, String id){
-        super(companion, id);
-        setup(id);
-        this.card = new BasicVerticalCard(image, PropertyLoader.getLabel(id));
+    public ChanceTile(TileModel model){
+        super(model);
+        setup();
+        this.card = new BasicVerticalCard(image, PropertyLoader.getLabel(model.getId()));
     }
 
     // OPTIMIZE
     @Override
-    protected void setup(String id) {
+    protected void setup() {
         TileHBox hbox = new TileHBox();
         TileImageView imageView = new TileImageView(image);
-        String text = PropertyLoader.getLabel(id);
+        String text = PropertyLoader.getLabel(model.getId());
         Label textLabel = new Label(text);
         textLabel.setFont(Font.font("Arial", FontWeight.BOLD, 10));
         textLabel.setWrapText(true);

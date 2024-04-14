@@ -2,20 +2,35 @@ package be.ugent.objprog.ugentopoly.tiles.tileViews;
 
 import be.ugent.objprog.ugentopoly.Ugentopoly;
 import be.ugent.objprog.ugentopoly.gameBoard.Board;
-import be.ugent.objprog.ugentopoly.tileCards.TemplateCard;
+import be.ugent.objprog.ugentopoly.tiles.tileCards.TemplateCard;
 import be.ugent.objprog.ugentopoly.tiles.TileButton;
+import be.ugent.objprog.ugentopoly.tiles.tileModels.TileModel;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.event.ActionEvent;
 import javafx.scene.layout.StackPane;
 
-public class Tile extends StackPane {
+public class Tile extends StackPane implements InvalidationListener{
     public final static double LONG_SIDE = ((Ugentopoly.BOARD_SIZE / Ugentopoly.SMALL_TILES) * 2);
     public final static double SHORT_SIDE = ((Ugentopoly.BOARD_SIZE / Ugentopoly.SMALL_TILES));
     private static final double OFFSET = 32.5;
 
     protected TemplateCard card;
     protected TileButton tileButton = new TileButton();
+    protected final TileModel model;
 
-    public Tile(){
+    public TileModel getModel(){
+        return model;
+    }
+
+    public Tile(TileModel model){
+
+        assert (model != null): "given model for tile " + this + " is null";
+
+        System.err.println(model);
+
+        this.model = model;
+        this.model.addListener(this);
         this.tileButton.setOnAction(this::handleButton);
     }
 
@@ -34,5 +49,10 @@ public class Tile extends StackPane {
     protected void handleButton(ActionEvent event) {
         TileButton source = (TileButton) event.getSource();
         Board.middleSection.updateDisplayedCard((source.isSelected()) ? card : null);
+    }
+
+    @Override
+    public void invalidated(Observable observable) {
+
     }
 }
