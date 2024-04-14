@@ -1,11 +1,12 @@
 package be.ugent.objprog.ugentopoly.players;
 
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
-import javafx.scene.image.Image;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import be.ugent.objprog.ugentopoly.tiles.tileViews.Tile;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
+import javafx.scene.paint.Color;
 
 public class PlayerModel implements Observable {
 
@@ -14,26 +15,30 @@ public class PlayerModel implements Observable {
     private String playerName;
     private int balance;
     private final String color;
-    private final Image badge;
+    private final String badge;
+    private List<? extends Tile> ownedTiles; // TODO implement
 
-    // TODO list of owned tiles. need to implement MVC for tiles and have TileModels. Update tileModel owners etc
+    @Override
+    public String toString() {
+        return "\n" + "Player Name: " + playerName + "\n" +
+                "Balance: " + balance + "\n" +
+                "Color: " + color + "\n" +
+                "Badge: " + badge;
+    }
 
-
-    public  PlayerModel(String playerName, String color) {
-        this.listenerList = new ArrayList<>();
+    public PlayerModel(String playerName, Color color, int balance, String badge) {
+        listenerList = new ArrayList<>();
         this.playerName = playerName;
-        this.color = color;
-        this.balance = 0; // TODO what is the starting balance? -> see xml
-        // LOG player tileModel instantiated {player date}
-        badge = null;
+        this.color = String.valueOf(color);
+        this.balance = balance;
+        this.badge = badge;
+
+        // NEEDSLOG
     }
 
     private void fireInvalidationEvent() {
-        for (InvalidationListener listener : listenerList) {
-            listener.invalidated(this);
-        }
+        listenerList.forEach(listener -> listener.invalidated(this));
     }
-
 
     public String getPlayerName() {
         return playerName;
@@ -44,7 +49,9 @@ public class PlayerModel implements Observable {
         fireInvalidationEvent();
     }
 
-    public int getBalance() {return balance;}
+    public int getBalance() {
+        return balance;
+    }
 
     public void setBalance(int balance) {
         if (balance != 0) {
@@ -53,7 +60,9 @@ public class PlayerModel implements Observable {
         }
     }
 
-    public String getColor() {return color;}
+    public String getColor() {
+        return color;
+    }
 
     @Override
     public void addListener(InvalidationListener listener) {
@@ -65,7 +74,7 @@ public class PlayerModel implements Observable {
         listenerList.add(listener);
     }
 
-    public Image getBadge() {
+    public String getBadge() {
         return badge;
     }
 }
