@@ -1,12 +1,12 @@
 package be.ugent.objprog.ugentopoly.bars;
 
+import java.util.List;
+
 import be.ugent.objprog.ugentopoly.gameBoard.MiddleSection;
 import be.ugent.objprog.ugentopoly.tiles.tileViews.SmallTile;
 import be.ugent.objprog.ugentopoly.tiles.tileViews.Tile;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
-
-import java.util.List;
 
 /*
     initializeRowConstraints() : fill the bar with 8 rows, as to create 8 places for tiles.
@@ -36,19 +36,14 @@ public class VerticalBar extends GridPane implements Bar {
     }
 
     public void populate() {
-        if (tiles.size() == 9) {
-            for (int i = 0; i < 9; i++) {
-                Tile tile = tiles.get(i);
-                add(tile, 0, i);
-            }
-        } else {
-            throw new IllegalArgumentException("tileViews list must be of size 9!");
+        assert tiles.size() == 9 : "tileViews size expected: 9 but got " + tiles.size();
+        for (int i = 0; i < 9; i++) {
+            Tile tile = tiles.get(i);
+            add(tile, 0, i);
         }
     }
 
     public void applyRotation(double angle) {
-        for (Tile tile : this.tiles) {
-            tile.applyRotation(angle);
-        }
+        this.tiles.forEach(tile -> tile.applyRotation(angle));
     }
 }
