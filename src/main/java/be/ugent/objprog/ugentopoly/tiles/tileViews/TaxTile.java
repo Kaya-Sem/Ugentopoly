@@ -1,33 +1,33 @@
 package be.ugent.objprog.ugentopoly.tiles.tileViews;
 
+import java.util.Objects;
+
 import be.ugent.objprog.ugentopoly.parsers.PropertyLoader;
 import be.ugent.objprog.ugentopoly.tiles.tileCards.TaxCard;
 import be.ugent.objprog.ugentopoly.tiles.tileModels.TaxTileModel;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-
-import java.util.Objects;
 
 public class TaxTile extends SmallTile {
     private static final Image image = new Image(
             Objects.requireNonNull(
                     ChestTile.class.getResourceAsStream(
-                            "/be/ugent/objprog/ugentopoly/assets/tax.png")
-            ));
+                            "/be/ugent/objprog/ugentopoly/assets/tax.png")));
 
     // Constructor
-    public TaxTile(TaxTileModel model){
+    public TaxTile(TaxTileModel model) {
         super(model);
+        this.model = model;
+        this.model.addListener(this);
         setup();
-        this.card = createCard(PropertyLoader.getLabel(model.getId()));
+        this.card = new TaxCard(image, PropertyLoader.getLabel(model.getId()), "200"); // TODO don't hardcode this
     }
 
     // OPTIMIZE
     protected void setup() {
-        TileHBox hBox = new TileHBox(); // TODO update constructor to take children?
-
         TileImageView imageView = new TileImageView(image);
 
         String text = PropertyLoader.getLabel(model.getId());
@@ -35,13 +35,6 @@ public class TaxTile extends SmallTile {
         textLabel.setFont(Font.font("Arial", FontWeight.BOLD, 10));
         textLabel.setWrapText(true);
 
-        hBox.getChildren().addAll(imageView, textLabel);
-
-        getChildren().addAll(hBox, tileButton);
+        getChildren().addAll(new HBox(imageView, textLabel), tileButton);
     }
-
-    private TaxCard createCard(String text) {
-        return new TaxCard(image, text, "200");
-    }
-
 }
