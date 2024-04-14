@@ -2,6 +2,7 @@ package be.ugent.objprog.ugentopoly.players;
 
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
+import javafx.scene.image.Image;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,8 +14,9 @@ public class PlayerModel implements Observable {
     private String playerName;
     private int balance;
     private final String color;
+    private final Image badge;
 
-    // TODO list of owned tiles. need to implement MVC for tiles and have TileModels
+    // TODO list of owned tiles. need to implement MVC for tiles and have TileModels. Update tileModel owners etc
 
 
     public  PlayerModel(String playerName, String color) {
@@ -23,6 +25,7 @@ public class PlayerModel implements Observable {
         this.color = color;
         this.balance = 0; // TODO what is the starting balance? -> see xml
         // LOG player tileModel instantiated {player date}
+        badge = null;
     }
 
     private void fireInvalidationEvent() {
@@ -60,5 +63,9 @@ public class PlayerModel implements Observable {
     @Override
     public void removeListener(InvalidationListener listener) {
         listenerList.add(listener);
+    }
+
+    public Image getBadge() {
+        return badge;
     }
 }

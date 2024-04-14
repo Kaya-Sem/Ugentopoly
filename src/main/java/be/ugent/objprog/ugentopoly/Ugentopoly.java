@@ -2,8 +2,9 @@ package be.ugent.objprog.ugentopoly;
 
 import java.util.Objects;
 
-import be.ugent.objprog.dice.Dice;
 import be.ugent.objprog.ugentopoly.gameBoard.Board;
+import be.ugent.objprog.ugentopoly.parsers.XMLParser;
+import be.ugent.objprog.ugentopoly.players.PlayerCreatorStage;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -21,13 +22,17 @@ public class Ugentopoly extends Application {
     @Override
     public void start(Stage stage) {
 
+        XMLParser parser = new XMLParser();
+
+        PlayerCreatorStage players = new PlayerCreatorStage();
+        players.showAndWait();
+
         StackPane root = new StackPane();
 
         Label currentPlayersMove = new Label("jeffrey");
 
         root.getChildren().addAll(new Board(), currentPlayersMove);
         StackPane.setAlignment(currentPlayersMove, Pos.TOP_CENTER);
-
 
 
 

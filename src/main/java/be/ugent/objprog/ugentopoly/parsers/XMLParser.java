@@ -36,6 +36,12 @@ public class XMLParser {
         // NEEDSLOG
     }
 
+    public String getStartingBalance() {
+        Element settings = root.getChild("settings");
+        String balance = settings.getAttributeValue("balance");
+        return balance;
+    }
+
     // load tileViews information
     public Map<String, Map<String, String>> parseAllTileData() {
         Map<String, Map<String, String>> tiles = new HashMap<>();
@@ -99,6 +105,8 @@ public class XMLParser {
         for (Map.Entry<?, ?> entry : tilesData.entrySet()) {
             System.out.printf("%-15s : %s%n", entry.getKey(), entry.getValue());
         }
+
+        System.out.println("Starting balance: " + parser.getStartingBalance());
 
         System.out.println(parser.areaColors());
     }
