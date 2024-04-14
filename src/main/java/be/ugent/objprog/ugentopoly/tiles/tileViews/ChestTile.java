@@ -1,6 +1,8 @@
 package be.ugent.objprog.ugentopoly.tiles.tileViews;
 
 import be.ugent.objprog.ugentopoly.parsers.PropertyLoader;
+import be.ugent.objprog.ugentopoly.tiles.TileHBox;
+import be.ugent.objprog.ugentopoly.tiles.TileImageView;
 import be.ugent.objprog.ugentopoly.tiles.tileCards.BasicVerticalCard;
 import be.ugent.objprog.ugentopoly.tiles.tileModels.TileModel;
 import javafx.scene.control.Label;
@@ -21,28 +23,24 @@ public class ChestTile extends SmallTile {
     // Constructor
     public ChestTile(TileModel model){
         super(model);
+        this.model = model;
+        this.model.addListener(this);
         setup();
-        this.card = createCard(PropertyLoader.getLabel(model.getId()));
+        this.card = new BasicVerticalCard(image, PropertyLoader.getLabel(model.getId()));
     }
 
 
     // OPTIMIZE
-    protected void setup(String id) {
+    protected void setup() {
         TileHBox hBox = new TileHBox();
         TileImageView imageView = new TileImageView(image);
-        String text = PropertyLoader.getLabel(id);
+        String text = PropertyLoader.getLabel(model.getId());
         Label textLabel = new Label(text);
         textLabel.setFont(Font.font("Arial", FontWeight.BOLD, 10));
         textLabel.setWrapText(true);
         hBox.getChildren().addAll(imageView, textLabel);
+
         getChildren().addAll(hBox, tileButton);
     }
 
-    private BasicVerticalCard createCard(String text) {
-        return new BasicVerticalCard(this.image, text);
-    }
-
-    public TileModel getModel() {
-        return model;
-    }
 }

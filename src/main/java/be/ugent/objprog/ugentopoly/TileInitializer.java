@@ -48,16 +48,12 @@ public class TileInitializer {
             }
         }
 
-        for (Tile tile : tileViewArray) {
-            System.out.println(tile.getModel().getPosition());
-        }
-
         return Map.of(
                 "models", tileModelArray,
-                "left", Arrays.copyOfRange(tileViewArray, 1, 9),
-                "top", Arrays.copyOfRange(tileViewArray, 11, 19),
-                "right", Arrays.copyOfRange(tileViewArray, 21, 29),
-                "bottom", Arrays.copyOfRange(tileViewArray, 31, 39),
+                "left", Arrays.copyOfRange(tileViewArray, 1, 10),
+                "top", Arrays.copyOfRange(tileViewArray, 11, 20),
+                "right", Arrays.copyOfRange(tileViewArray, 21, 30),
+                "bottom", Arrays.copyOfRange(tileViewArray, 31, 40),
                 "corners", new Tile[]{tileViewArray[0], tileViewArray[10], tileViewArray[20], tileViewArray[30]}
 
         );

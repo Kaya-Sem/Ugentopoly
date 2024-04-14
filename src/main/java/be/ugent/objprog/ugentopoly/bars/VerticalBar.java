@@ -3,7 +3,6 @@ package be.ugent.objprog.ugentopoly.bars;
 import java.util.List;
 
 import be.ugent.objprog.ugentopoly.gameBoard.MiddleSection;
-import be.ugent.objprog.ugentopoly.tiles.tileViews.SmallTile;
 import be.ugent.objprog.ugentopoly.tiles.tileViews.Tile;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
@@ -20,7 +19,7 @@ public class VerticalBar extends GridPane implements Bar {
 
     private final List<? extends Tile> tiles;
 
-    public VerticalBar(SmallTile[] tiles) {
+    public VerticalBar(Tile[] tiles) {
         this.tiles = List.of(tiles);
         setPrefWidth(Tile.LONG_SIDE);
         setPrefHeight(MiddleSection.getSize());

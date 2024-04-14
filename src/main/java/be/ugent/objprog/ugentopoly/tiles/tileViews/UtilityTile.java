@@ -1,6 +1,7 @@
 package be.ugent.objprog.ugentopoly.tiles.tileViews;
 
 import be.ugent.objprog.ugentopoly.tiles.tileCards.UtilityCard;
+import be.ugent.objprog.ugentopoly.tiles.tileModels.TileModel;
 import be.ugent.objprog.ugentopoly.tiles.tileModels.UtilityTileModel;
 import javafx.geometry.Insets;
 import javafx.scene.image.Image;
@@ -15,6 +16,8 @@ public class UtilityTile extends SmallTile {
     // Constructor
     public UtilityTile(UtilityTileModel model) {
         super(model);
+        this.model = model;
+        this.model.addListener(this);
         setup();
         this.card = new UtilityCard(this.image, String.valueOf(model.getCost()));
     }
@@ -38,5 +41,9 @@ public class UtilityTile extends SmallTile {
         pane.setPadding(new Insets(10, 10, 10, 10));
 
         getChildren().addAll(pane, tileButton);
+    }
+
+    public UtilityTileModel getModel() {
+        return (UtilityTileModel) model;
     }
 }

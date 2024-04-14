@@ -1,5 +1,6 @@
-package be.ugent.objprog.ugentopoly.tiles.tileViews;
+package be.ugent.objprog.ugentopoly.tiles;
 
+import be.ugent.objprog.ugentopoly.tiles.tileViews.Tile;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 

@@ -48,6 +48,7 @@ public class TileFactory {
 
     public TileTuple createBasicTileModel() {
 
+        // HACK
         TileModel model = new TileModel(this.data.get("id"), Integer.parseInt(this.data.get("position")));
         Tile view = switch (this.data.get("type")) {
             case "START" -> new StartCornerTile(model);
@@ -56,10 +57,10 @@ public class TileFactory {
             case "FREE_PARKING" -> new FreeParkingCornerTile(model);
             case "CHEST" -> new ChestTile(model);
             case "CHANCE" -> new ChanceTile(model);
-            default -> throw new IllegalStateException("Unexpected value: " + this.data.get("type"));
+            default -> throw new IllegalStateException("Unexpected type: " + this.data.get("type"));
         };
-        return new TileTuple(model, view);
 
+        return new TileTuple(model, view);
     }
 
     private TileTuple createUtility() {

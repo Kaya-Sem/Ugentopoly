@@ -3,7 +3,6 @@ package be.ugent.objprog.ugentopoly.bars;
 import java.util.List;
 
 import be.ugent.objprog.ugentopoly.gameBoard.MiddleSection;
-import be.ugent.objprog.ugentopoly.tiles.tileViews.SmallTile;
 import be.ugent.objprog.ugentopoly.tiles.tileViews.Tile;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -20,7 +19,7 @@ public class HorizontalBar extends GridPane implements Bar {
         }
     }
 
-    public HorizontalBar(SmallTile[] tiles) {
+    public HorizontalBar(Tile[] tiles) {
         this.tiles = List.of(tiles);
         setPrefWidth(MiddleSection.getSize());
         setPrefHeight(Tile.LONG_SIDE);
@@ -30,7 +29,8 @@ public class HorizontalBar extends GridPane implements Bar {
     }
 
     public void populate() {
-        assert tiles.size() == 9 : "tileViews size expected: 9 but got " + tiles.size();
+        assert this.tiles.size() == 9 : "tileViews size expected: 9 but got " + tiles.size();
+        System.out.println(tiles.size());
         for (int i = 0; i < 9; i++) {
             Tile tile = tiles.get(i);
             add(tile, i, 0);

@@ -3,7 +3,7 @@ package be.ugent.objprog.ugentopoly.tiles.tileViews.cornerTiles;
 import be.ugent.objprog.ugentopoly.parsers.PropertyLoader;
 import be.ugent.objprog.ugentopoly.tiles.tileCards.BasicVerticalCard;
 import be.ugent.objprog.ugentopoly.tiles.tileViews.Tile;
-import be.ugent.objprog.ugentopoly.tiles.tileViews.TileImageView;
+import be.ugent.objprog.ugentopoly.tiles.TileImageView;
 import be.ugent.objprog.ugentopoly.tiles.tileModels.TileModel;
 import javafx.beans.Observable;
 import javafx.geometry.Pos;
@@ -18,6 +18,8 @@ public class JailCornerTile extends CornerTile {
 
     public JailCornerTile(TileModel model){
         super(model);
+        this.model = model;
+        this.model.addListener(this);
         setup();
         this.card = createCard(PropertyLoader.getLabel(model.getId()));
     }

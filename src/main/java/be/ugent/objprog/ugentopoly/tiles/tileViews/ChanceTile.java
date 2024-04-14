@@ -1,6 +1,8 @@
 package be.ugent.objprog.ugentopoly.tiles.tileViews;
 
 import be.ugent.objprog.ugentopoly.parsers.PropertyLoader;
+import be.ugent.objprog.ugentopoly.tiles.TileHBox;
+import be.ugent.objprog.ugentopoly.tiles.TileImageView;
 import be.ugent.objprog.ugentopoly.tiles.tileCards.BasicVerticalCard;
 import be.ugent.objprog.ugentopoly.tiles.tileModels.TileModel;
 import javafx.scene.control.Label;
@@ -21,6 +23,8 @@ public class ChanceTile extends SmallTile {
     // Constructor
     public ChanceTile(TileModel model){
         super(model);
+        this.model = model;
+        this.model.addListener(this);
         setup();
         this.card = new BasicVerticalCard(image, PropertyLoader.getLabel(model.getId()));
     }
@@ -36,5 +40,9 @@ public class ChanceTile extends SmallTile {
         textLabel.setWrapText(true);
         hbox.getChildren().addAll(imageView, textLabel);
         getChildren().addAll(hbox, tileButton);
+    }
+
+    public TileModel getModel() {
+        return model;
     }
 }

@@ -3,6 +3,8 @@ package be.ugent.objprog.ugentopoly.tiles.tileViews;
 import java.util.Objects;
 
 import be.ugent.objprog.ugentopoly.parsers.PropertyLoader;
+import be.ugent.objprog.ugentopoly.tiles.TileHBox;
+import be.ugent.objprog.ugentopoly.tiles.TileImageView;
 import be.ugent.objprog.ugentopoly.tiles.tileCards.TaxCard;
 import be.ugent.objprog.ugentopoly.tiles.tileModels.TaxTileModel;
 import javafx.scene.control.Label;
@@ -28,13 +30,18 @@ public class TaxTile extends SmallTile {
 
     // OPTIMIZE
     protected void setup() {
-        TileImageView imageView = new TileImageView(image);
-
+        TileHBox hBox = new TileHBox();
         String text = PropertyLoader.getLabel(model.getId());
         Label textLabel = new Label(text);
         textLabel.setFont(Font.font("Arial", FontWeight.BOLD, 10));
         textLabel.setWrapText(true);
 
-        getChildren().addAll(new HBox(imageView, textLabel), tileButton);
+        hBox.getChildren().addAll(new TileImageView(image), textLabel);
+
+        getChildren().addAll(hBox, tileButton);
+    }
+
+    public TaxTileModel getModel() {
+        return (TaxTileModel) model;
     }
 }

@@ -15,13 +15,15 @@ import javafx.scene.text.FontWeight;
 
 public class StreetTileView extends SmallTile implements InvalidationListener {
 
-    private StreetTileModel model;
+    private final StreetTileModel model;
     private static final int STRIP_WIDTH = 30;
     private String owner;
 
     // Constructor
     public StreetTileView(StreetTileModel model) {
         super(model);
+        this.model = model;
+        this.model.addListener(this);
         this.card = new StreetCard(this.model);
         setup();
         // NEEDSLOG
@@ -56,5 +58,9 @@ public class StreetTileView extends SmallTile implements InvalidationListener {
     public void invalidated(StreetTileModel observable) {
         this.owner = observable.getOwner();
         // NEEDSLOG
+    }
+
+    public StreetTileModel getModel() {
+        return model;
     }
 }

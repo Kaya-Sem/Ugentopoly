@@ -1,6 +1,8 @@
 package be.ugent.objprog.ugentopoly.tiles.tileViews;
 
 import be.ugent.objprog.ugentopoly.parsers.PropertyLoader;
+import be.ugent.objprog.ugentopoly.tiles.TileHBox;
+import be.ugent.objprog.ugentopoly.tiles.TileImageView;
 import be.ugent.objprog.ugentopoly.tiles.tileCards.RailwayCard;
 import be.ugent.objprog.ugentopoly.tiles.tileModels.RailwayTileModel;
 import javafx.scene.control.Label;
@@ -18,6 +20,8 @@ public class RailwayTile extends SmallTile {
     // Constructor
     public RailwayTile(RailwayTileModel model){
         super(model);
+        this.model = model;
+        this.model.addListener(this);
         this.card = new RailwayCard(
                 image,
                 PropertyLoader.getLabel(model.getId()),
@@ -29,17 +33,21 @@ public class RailwayTile extends SmallTile {
     // OPTIMIZE
     @Override
     protected void setup() {
-        TileHBox hbox = new TileHBox();
-
         TileImageView imageView = new TileImageView(image);
+        // TODO create extra constructor to call with children
+        TileHBox hBox = new TileHBox();
 
         String text = PropertyLoader.getLabel(model.getId());
         Label textLabel = new Label(text);
         textLabel.setFont(Font.font("Arial", FontWeight.BOLD, 10));
         textLabel.setWrapText(true);
 
-        hbox.getChildren().addAll(imageView, textLabel);
+        hBox.getChildren().addAll(imageView, textLabel);
 
-        getChildren().addAll(hbox, tileButton);
+        getChildren().addAll(hBox, tileButton);
+    }
+
+    public RailwayTileModel getModel() {
+        return (RailwayTileModel) model;
     }
 }
