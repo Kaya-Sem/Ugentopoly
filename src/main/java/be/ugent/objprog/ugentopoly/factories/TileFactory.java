@@ -13,12 +13,14 @@ import be.ugent.objprog.ugentopoly.tiles.tileModels.TileModel;
 import be.ugent.objprog.ugentopoly.tiles.tileModels.UtilityTileModel;
 
 import java.util.Map;
+import java.util.Objects;
 import java.util.function.Supplier;
 
 /*
 NON-URGENT add documentation
 */
 
+// TODO split into subfactories?
 public class TileFactory {
     private final Map<String, String> areaColors;
     protected Map<String, String> data;
@@ -37,12 +39,12 @@ public class TileFactory {
 
 
     public TileFactory(Map<String, String> areaColors) {
-        this.areaColors = areaColors;
+        this.areaColors = Objects.requireNonNull(areaColors);
         // NEEDSLOG
     }
 
     public TileTuple forge(Map<String, String> tileData) {
-        this.data = tileData;
+        data = tileData;
         return tileMethods.get(data.get("type")).get();
     }
 

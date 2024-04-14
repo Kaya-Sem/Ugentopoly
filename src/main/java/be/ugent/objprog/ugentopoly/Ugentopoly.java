@@ -24,7 +24,7 @@ public class Ugentopoly extends Application {
 
         XMLParser parser = new XMLParser();
 
-        PlayerCreatorStage players = new PlayerCreatorStage();
+        PlayerCreatorStage players = new PlayerCreatorStage(parser.getStartingBalance());
         players.showAndWait();
 
         StackPane root = new StackPane();

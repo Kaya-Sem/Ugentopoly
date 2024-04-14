@@ -6,6 +6,7 @@ import java.util.List;
 import be.ugent.objprog.ugentopoly.tiles.tileViews.Tile;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
 public class PlayerModel implements Observable {
@@ -15,7 +16,9 @@ public class PlayerModel implements Observable {
     private String playerName;
     private int balance;
     private final String color;
-    private final String badge;
+    private final Image badgeImage;
+    private final String badgeName;
+
     private List<? extends Tile> ownedTiles; // TODO implement
 
     @Override
@@ -23,15 +26,17 @@ public class PlayerModel implements Observable {
         return "\n" + "Player Name: " + playerName + "\n" +
                 "Balance: " + balance + "\n" +
                 "Color: " + color + "\n" +
-                "Badge: " + badge;
+                "Badge name: " + badgeName + "\n" +
+                "Badge image: " + badgeImage;
     }
 
-    public PlayerModel(String playerName, Color color, int balance, String badge) {
+    public PlayerModel(String playerName, Color color, int balance, ImageTextItem badgeImage) {
         listenerList = new ArrayList<>();
         this.playerName = playerName;
         this.color = String.valueOf(color);
         this.balance = balance;
-        this.badge = badge;
+        this.badgeImage = badgeImage.image();
+        this.badgeName = badgeImage.text();
 
         // NEEDSLOG
     }
@@ -74,7 +79,11 @@ public class PlayerModel implements Observable {
         listenerList.add(listener);
     }
 
-    public String getBadge() {
-        return badge;
+    public Image getBadgeImage() {
+        return badgeImage;
     }
-}
+
+
+    public String getBadgeName() {
+        return badgeName;
+    }}
