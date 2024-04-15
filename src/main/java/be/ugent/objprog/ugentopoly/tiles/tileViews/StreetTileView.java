@@ -24,7 +24,7 @@ public class StreetTileView extends SmallTile implements InvalidationListener {
         super(model);
         this.model = model;
         this.model.addListener(this);
-        this.card = new StreetCard(this.model);
+        card = new StreetCard(this.model);
         setup();
         // NEEDSLOG
     }
