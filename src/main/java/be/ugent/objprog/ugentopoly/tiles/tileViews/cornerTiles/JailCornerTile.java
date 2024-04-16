@@ -18,8 +18,8 @@ public class JailCornerTile extends CornerTile {
 
     public JailCornerTile(TileModel model){
         super(model);
-        this.model = model;
-        this.model.addListener(this);
+        this.setModel(model);
+        this.getModel().addListener(this);
         setup();
         this.card = createCard(PropertyLoader.getLabel(model.getId()));
     }
@@ -32,7 +32,7 @@ public class JailCornerTile extends CornerTile {
     public void setup() {
         VBox vBox = new VBox();
 
-        Label textLabel = new Label(PropertyLoader.getLabel(model.getId()));
+        Label textLabel = new Label(PropertyLoader.getLabel(getModel().getId()));
         textLabel.setFont(Font.font("Arial", FontWeight.BOLD, 10));
 
         TileImageView tileImageView= new TileImageView(image, 1.5, true);
