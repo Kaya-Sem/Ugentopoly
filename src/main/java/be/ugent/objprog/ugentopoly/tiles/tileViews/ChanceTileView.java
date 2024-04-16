@@ -12,16 +12,16 @@ import javafx.scene.text.FontWeight;
 
 import java.util.Objects;
 
-public class ChanceTile extends SmallTile {
+public class ChanceTileView extends SmallTile {
     private static final Image image = new Image(
             Objects.requireNonNull(
-                    ChestTile.class.getResourceAsStream(
+                    ChestTileView.class.getResourceAsStream(
                             "/be/ugent/objprog/ugentopoly/assets/chance.png")
             ));
 
 
     // Constructor
-    public ChanceTile(TileModel model){
+    public ChanceTileView(TileModel model){
         super(model);
         this.model = model;
         this.model.addListener(this);

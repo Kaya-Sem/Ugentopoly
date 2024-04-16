@@ -9,18 +9,17 @@ import be.ugent.objprog.ugentopoly.tiles.tileCards.TaxCard;
 import be.ugent.objprog.ugentopoly.tiles.tileModels.TaxTileModel;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
-public class TaxTile extends SmallTile {
+public class TaxTileView extends SmallTile {
     private static final Image image = new Image(
             Objects.requireNonNull(
-                    ChestTile.class.getResourceAsStream(
+                    ChestTileView.class.getResourceAsStream(
                             "/be/ugent/objprog/ugentopoly/assets/tax.png")));
 
     // Constructor
-    public TaxTile(TaxTileModel model) {
+    public TaxTileView(TaxTileModel model) {
         super(model);
         this.model = model;
         this.model.addListener(this);

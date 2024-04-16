@@ -1,21 +1,14 @@
-package be.ugent.objprog.ugentopoly.playerTabPane;
+package be.ugent.objprog.ugentopoly.players;
 
 import be.ugent.objprog.ugentopoly.GameModel;
-import be.ugent.objprog.ugentopoly.players.PlayerModel;
-import be.ugent.objprog.ugentopoly.tiles.tileModels.TileModel;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.VBox;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class PlayerTabPane extends TabPane implements InvalidationListener {
     private List<PlayerModel> playerModels;

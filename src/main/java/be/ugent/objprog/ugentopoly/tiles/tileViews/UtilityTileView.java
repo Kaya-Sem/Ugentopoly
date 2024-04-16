@@ -1,7 +1,6 @@
 package be.ugent.objprog.ugentopoly.tiles.tileViews;
 
 import be.ugent.objprog.ugentopoly.tiles.tileCards.UtilityCard;
-import be.ugent.objprog.ugentopoly.tiles.tileModels.TileModel;
 import be.ugent.objprog.ugentopoly.tiles.tileModels.UtilityTileModel;
 import javafx.geometry.Insets;
 import javafx.scene.image.Image;
@@ -10,11 +9,11 @@ import javafx.scene.layout.StackPane;
 
 import java.util.Objects;
 
-public class UtilityTile extends SmallTile {
+public class UtilityTileView extends SmallTile {
     private Image image;
 
     // Constructor
-    public UtilityTile(UtilityTileModel model) {
+    public UtilityTileView(UtilityTileModel model) {
         super(model);
         this.model = model;
         this.model.addListener(this);
