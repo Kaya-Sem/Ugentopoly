@@ -4,7 +4,7 @@ import be.ugent.objprog.ugentopoly.tiles.tileModels.TileModel;
 
 public abstract class SmallTile extends Tile {
 
-    public SmallTile(TileModel model) {
+    protected SmallTile(TileModel model) {
         super(model);
         setMinHeight(SHORT_SIDE);
         setMaxHeight(SHORT_SIDE);
