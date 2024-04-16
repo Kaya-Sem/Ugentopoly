@@ -15,3 +15,10 @@
     -fx-border-color: black;
     -fx-border-width: 1px 1px 1px 1px; /* top right bottom left */
 }
+
+.medium-title {
+    -fx-font-family: "SansSerif";
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: black;
+}
