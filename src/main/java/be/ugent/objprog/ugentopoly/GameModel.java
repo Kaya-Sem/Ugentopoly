@@ -1,24 +1,21 @@
 package be.ugent.objprog.ugentopoly;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import be.ugent.objprog.ugentopoly.players.PlayerModel;
-import be.ugent.objprog.ugentopoly.tiles.tileViews.Tile;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
-import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
 
 public class GameModel implements Observable {
 
     private final List<InvalidationListener> listenerList = new ArrayList<>();
     private final List<PlayerModel> playerModels;
-    private PlayerModel currentPlayerMove = null;
-
+    private PlayerModel currentPlayerMove;
 
     public GameModel(List<PlayerModel> players) {
-        playerModels = players;
+        playerModels = new ArrayList<>(players);
         currentPlayerMove = playerModels.getFirst(); // assign first player to move
 
         // NEEDSLOG
@@ -38,9 +35,8 @@ public class GameModel implements Observable {
         listenerList.add(listener);
     }
 
-
     public List<PlayerModel> getPlayerModels() {
-        return playerModels;
+        return Collections.unmodifiableList(playerModels);
     }
 
     public PlayerModel getCurrentPlayerMove() {
@@ -49,5 +45,6 @@ public class GameModel implements Observable {
 
     public void setCurrentPlayerMove(PlayerModel currentPlayerMove) {
         this.currentPlayerMove = currentPlayerMove;
+        fireInvalidationEvent();
     }
 }
