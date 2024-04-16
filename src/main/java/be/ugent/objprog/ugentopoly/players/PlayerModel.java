@@ -98,6 +98,7 @@ public class PlayerModel implements Observable {
                 ", badgeImage=" + badgeImage +
                 ", badgeName='" + badgeName + '\'' +
                 ", ownedTiles=" + ownedTiles +
+                ", pion= " + pion +
                 '}';
     }
 
