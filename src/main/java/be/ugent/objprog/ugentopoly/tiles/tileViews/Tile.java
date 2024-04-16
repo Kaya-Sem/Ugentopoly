@@ -20,14 +20,14 @@ public class Tile extends StackPane implements InvalidationListener{
     protected TileModel model;
 
     public TileModel getModel(){
-        return this.model;
+        return model;
     }
 
     public Tile(TileModel model){
         assert (model != null): "given model for tile " + this + " is null";
 
 
-        this.tileButton.setOnAction(this::handleButton);
+        tileButton.setOnAction(this::handleButton);
     }
 
     protected void setup() {}
