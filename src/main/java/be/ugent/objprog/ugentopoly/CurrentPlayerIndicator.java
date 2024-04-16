@@ -17,10 +17,12 @@ import javafx.scene.text.FontWeight;
 
 public class CurrentPlayerIndicator extends VBox implements InvalidationListener {
     protected static final double SPACING = 20.0;
+    protected static final double HEIGHT = 70.0;
     private final GameModel gameModel;
     private PlayerModel currentPlayer;
     private String playerName;
     private Image image;
+    private String balance;
 
     public CurrentPlayerIndicator(GameModel gameModel) {
         this.gameModel = gameModel;
@@ -29,6 +31,7 @@ public class CurrentPlayerIndicator extends VBox implements InvalidationListener
 
         playerName =currentPlayer.getPlayerName();
         image = currentPlayer.getBadgeImage();
+        balance = String.valueOf(currentPlayer.getBalance());
 
         Label text = new Label("Now Playing:");
         text.setFont(Font.font("Arial", FontWeight.MEDIUM, 15.0));
@@ -40,7 +43,7 @@ public class CurrentPlayerIndicator extends VBox implements InvalidationListener
        setSpacing(SPACING);
        setPadding(new Insets(SPACING));
 
-       setMaxHeight(50);
+       setMaxHeight(HEIGHT);
     }
 
 
@@ -55,12 +58,18 @@ public class CurrentPlayerIndicator extends VBox implements InvalidationListener
             playerNameLabel.setAlignment(Pos.CENTER);
             playerNameLabel.setFont(Font.font("Arial", FontWeight.BOLD, 20.0));
 
+            Label balanceLabel = new Label("€" + balance);
+            balanceLabel.setFont(Font.font("Consolas", FontWeight.THIN, 15.0));
+
+            VBox vBox = new VBox(playerNameLabel, balanceLabel );
+            vBox.setAlignment(Pos.CENTER);
+
             ImageView imageView = new ImageView(image);
             imageView.setPreserveRatio(true);
             imageView.setFitHeight(BADGESIZE);
             imageView.setFitWidth(BADGESIZE);
 
-            getChildren().addAll(imageView, playerNameLabel);
+            getChildren().addAll(imageView, vBox);
             setAlignment(Pos.CENTER);
             setSpacing(DISTANCE);
         }
