@@ -20,6 +20,7 @@ public class PlayerModel implements Observable {
     private final String color;
     private final Image badgeImage;
     private final String badgeName;
+    private final Pion pion;
 
     private List<TileModel> ownedTiles; // TODO implement
 
@@ -32,6 +33,7 @@ public class PlayerModel implements Observable {
         this.balance = balance;
         this.badgeImage = badgeImage.image();
         badgeName = badgeImage.text();
+        pion = new Pion(this.badgeImage);
 
         // NEEDSLOG
     }
@@ -97,5 +99,9 @@ public class PlayerModel implements Observable {
                 ", badgeName='" + badgeName + '\'' +
                 ", ownedTiles=" + ownedTiles +
                 '}';
+    }
+
+    public Pion getPion() {
+        return pion;
     }
 }
