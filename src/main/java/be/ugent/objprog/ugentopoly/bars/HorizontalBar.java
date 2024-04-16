@@ -8,6 +8,12 @@ import be.ugent.objprog.ugentopoly.tiles.tileViews.Tile;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 
+/*
+    initializeRowConstraints() : fill the bar with 8 rows, as to create 8 places for tiles.
+    populate() : places 9 received tiles in the slots.
+    NON-URGENT write documentation for BARS
+*/
+
 public class HorizontalBar extends GridPane implements Bar {
     private static final int NUM_COLS = 8;
     private static final double COL_WIDTH = Tile.SHORT_SIDE;
