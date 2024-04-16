@@ -20,8 +20,8 @@ public class TileInitializer {
     private final TileFactory factory;
 
     public TileInitializer(XMLParser parser, TileFactory factory) {
-        this.tileModelArray = new TileModel[40];
-        this.tileViewArray = new Tile[40];
+        tileModelArray = new TileModel[40];
+        tileViewArray = new Tile[40];
 
         this.parser = parser;
         this.factory = factory;
@@ -32,12 +32,9 @@ public class TileInitializer {
 
         Map<String, Map<String, String>> tileData = parser.parseAllTileData();
 
-        for (Map.Entry<String, Map<String, String>> entry : tileData.entrySet()) {
-            TileTuple tuple = factory.forge(entry.getValue());
-
+        tileData.values().stream().map(factory::forge).forEach(tuple -> {
             TileModel model = tuple.tileModel();
             Tile view = tuple.tileView();
-
             try {
                 int position = model.getPosition();
                 tileModelArray[position] = model;
@@ -46,7 +43,7 @@ public class TileInitializer {
             } catch (NumberFormatException e) {
                 System.err.println("Error parsing tileModel position as an integer! " + e.getMessage());
             }
-        }
+        });
 
         return Map.of(
                 "models", tileModelArray,
