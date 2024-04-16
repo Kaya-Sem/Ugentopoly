@@ -10,6 +10,8 @@ import org.jdom2.Text;
 
 public class ImageTextListCell extends ListCell<ImageTextItem> {
     protected static final double IMAGESIZE = 60.0;
+    protected static final double PADDING = 5.0;
+    protected static final double SPACING = 10.0;
 
     @Override
     protected void updateItem(ImageTextItem item, boolean empty) {
@@ -20,14 +22,13 @@ public class ImageTextListCell extends ListCell<ImageTextItem> {
             setGraphic(null);
         } else {
 
-            //setText(item.text());
             ImageView view = new ImageView(item.image());
             view.setFitWidth(IMAGESIZE);
             view.setFitHeight(IMAGESIZE);
             view.setPreserveRatio(true);
 
-            HBox hBox = new HBox(10);
-            hBox.setPadding(new Insets(5));
+            HBox hBox = new HBox(SPACING);
+            hBox.setPadding(new Insets(PADDING));
 
             Label textLabel = new Label(item.text());
 

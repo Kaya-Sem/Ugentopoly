@@ -10,6 +10,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.VBox;
 
+// TODO put a limit on name length
+// TODO mark in red when somehting is not filled in
+
 public class PlayerCustomizer extends VBox {
     protected static final double PADDING = 20.0;
 
@@ -49,6 +52,7 @@ public class PlayerCustomizer extends VBox {
         setSpacing(PADDING);
     }
 
+
     private class button extends ToggleButton {
         private button() {
             setAlignment(Pos.CENTER);
@@ -56,16 +60,17 @@ public class PlayerCustomizer extends VBox {
 
             setOnAction(event -> {
                 if (isSelected()) {
-                    creator.players.put(playerNumber, new PlayerModel(
-                            field.getText(),
-                            colorPicker.getValue(),
-                            Integer.parseInt(creator.balance),
-                            getBadgeComboBox().getValue()
 
-                    ));
-                    children.forEach(child -> child.setDisable(true));
+                        creator.players.put(playerNumber, new PlayerModel(
+                                field.getText(),
+                                colorPicker.getValue(),
+                                Integer.parseInt(creator.balance),
+                                getBadgeComboBox().getValue()
 
-                    System.out.println("Current map: " + creator.players);
+                        ));
+                        children.forEach(child -> child.setDisable(true));
+
+                        System.out.println("Current map: " + creator.players);
                 } else {
                     creator.players.remove(playerNumber);
                     children.forEach(child -> child.setDisable(false));

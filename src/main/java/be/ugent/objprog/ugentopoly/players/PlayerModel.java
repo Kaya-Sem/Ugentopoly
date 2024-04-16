@@ -1,11 +1,13 @@
 package be.ugent.objprog.ugentopoly.players;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-import be.ugent.objprog.ugentopoly.tiles.tileViews.Tile;
+import be.ugent.objprog.ugentopoly.tiles.tileModels.TileModel;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
+import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
@@ -13,32 +15,33 @@ public class PlayerModel implements Observable {
 
     private final List<InvalidationListener> listenerList;
 
-    private String playerName;
+    private final String playerName;
     private int balance;
     private final String color;
     private final Image badgeImage;
     private final String badgeName;
 
-    private List<? extends Tile> ownedTiles; // TODO implement
-
-    @Override
-    public String toString() {
-        return "\n" + "Player Name: " + playerName + "\n" +
-                "Balance: " + balance + "\n" +
-                "Color: " + color + "\n" +
-                "Badge name: " + badgeName + "\n" +
-                "Badge image: " + badgeImage;
-    }
+    private List<TileModel> ownedTiles; // TODO implement
 
     public PlayerModel(String playerName, Color color, int balance, ImageTextItem badgeImage) {
         listenerList = new ArrayList<>();
+
+        ownedTiles = new ArrayList<>();
         this.playerName = playerName;
         this.color = String.valueOf(color);
         this.balance = balance;
         this.badgeImage = badgeImage.image();
-        this.badgeName = badgeImage.text();
+        badgeName = badgeImage.text();
 
         // NEEDSLOG
+    }
+
+    public  void addTile(TileModel tileModel) {
+        ownedTiles.add(tileModel);
+    }
+
+    public ObservableList<? extends TileModel> getOwnedTiles() {
+        return (ObservableList<? extends TileModel>) ownedTiles;
     }
 
     private void fireInvalidationEvent() {
@@ -49,17 +52,12 @@ public class PlayerModel implements Observable {
         return playerName;
     }
 
-    public void setPlayerName(String playerName) {
-        this.playerName = playerName;
-        fireInvalidationEvent();
-    }
-
     public int getBalance() {
         return balance;
     }
 
     public void setBalance(int balance) {
-        if (balance != 0) {
+        if (0 != balance) {
             this.balance = balance;
             fireInvalidationEvent();
         }
@@ -86,4 +84,18 @@ public class PlayerModel implements Observable {
 
     public String getBadgeName() {
         return badgeName;
-    }}
+    }
+
+    @Override
+    public String toString() {
+        return "PlayerModel{" +
+                "listenerList=" + listenerList +
+                ", playerName='" + playerName + '\'' +
+                ", balance=" + balance +
+                ", color='" + color + '\'' +
+                ", badgeImage=" + badgeImage +
+                ", badgeName='" + badgeName + '\'' +
+                ", ownedTiles=" + ownedTiles +
+                '}';
+    }
+}

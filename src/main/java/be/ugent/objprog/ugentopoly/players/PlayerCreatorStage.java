@@ -13,10 +13,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class PlayerCreatorStage extends Stage {
 
@@ -24,7 +21,7 @@ public class PlayerCreatorStage extends Stage {
             new ImageTextItem("WINA", new Image("be/ugent/objprog/ugentopoly/assets/token1.png")),
             new ImageTextItem("V.T.K.", new Image("be/ugent/objprog/ugentopoly/assets/token2.png")),
             new ImageTextItem("CHEMICA", new Image("be/ugent/objprog/ugentopoly/assets/token3.png")),
-            new ImageTextItem("???", new Image("be/ugent/objprog/ugentopoly/assets/token4.png")), // TODO wie zijn dit
+            new ImageTextItem("FILOLOGICA", new Image("be/ugent/objprog/ugentopoly/assets/token4.png")), // TODO wie zijn dit
             new ImageTextItem("GEOLOGICA", new Image("be/ugent/objprog/ugentopoly/assets/token5.png")),
             new ImageTextItem("V.B.K.", new Image("be/ugent/objprog/ugentopoly/assets/token6.png")),
             new ImageTextItem("V.E.K.", new Image("be/ugent/objprog/ugentopoly/assets/token7.png")),
@@ -80,5 +77,11 @@ public class PlayerCreatorStage extends Stage {
         Scene scene = new Scene(root, WIDTH, HEIGHT);
         setScene(scene);
 
+    }
+
+    public List<PlayerModel> showAndWaitForPlayers() {
+        showAndWait();
+
+        return new ArrayList<>(players.values());
     }
 }
