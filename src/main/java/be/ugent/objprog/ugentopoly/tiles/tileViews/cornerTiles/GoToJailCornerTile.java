@@ -19,7 +19,7 @@ public class GoToJailCornerTile extends CornerTile {
 
     public GoToJailCornerTile(TileModel model) {
         super(model);
-        this.model = model;
+        this.setModel(model);
         this.model.addListener(this);
         setup();
         this.card = new BasicVerticalCard(this.image, PropertyLoader.getLabel(model.getId()));
@@ -42,8 +42,8 @@ public class GoToJailCornerTile extends CornerTile {
         TileImageView image = new TileImageView(this.image, 1.7, true);
 
         vBox.getChildren().addAll(textLabel1, image, textLabel2);
-        vBox.setMaxHeight(Tile.LONG_SIDE - 30);
-        vBox.setMaxWidth(Tile.LONG_SIDE - 30);
+        vBox.setMaxHeight(LONG_SIDE - 30);
+        vBox.setMaxWidth(LONG_SIDE - 30);
         vBox.setAlignment(Pos.CENTER);
         vBox.setRotate(ROTATION);
 
@@ -55,7 +55,4 @@ public class GoToJailCornerTile extends CornerTile {
         // NEEDSLOG
     }
 
-    public TileModel getModel() {
-        return model;
-    }
 }
