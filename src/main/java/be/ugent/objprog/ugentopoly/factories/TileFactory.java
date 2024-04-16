@@ -57,8 +57,8 @@ public class TileFactory {
             case "JAIL" -> new JailCornerTile(model);
             case "GO_TO_JAIL" -> new GoToJailCornerTile(model);
             case "FREE_PARKING" -> new FreeParkingCornerTile(model);
-            case "CHEST" -> new ChestTile(model);
-            case "CHANCE" -> new ChanceTile(model);
+            case "CHEST" -> new ChestTileView(model);
+            case "CHANCE" -> new ChanceTileView(model);
             default -> throw new IllegalStateException("Unexpected type: " + this.data.get("type"));
         };
 
@@ -71,7 +71,7 @@ public class TileFactory {
                 Integer.parseInt(data.get("position")),
                 Integer.parseInt(data.get("cost")));
 
-        UtilityTile view = new UtilityTile(model);
+        UtilityTileView view = new UtilityTileView(model);
         return new TileTuple(model, view);
     }
 
@@ -81,7 +81,7 @@ public class TileFactory {
                 Integer.parseInt(data.get("position")),
                 Integer.parseInt(data.get("amount")));
 
-        TaxTile view = new TaxTile(model);
+        TaxTileView view = new TaxTileView(model);
 
         return new TileTuple(model, view);
     }
@@ -93,7 +93,7 @@ public class TileFactory {
                 Integer.parseInt(data.get("cost")),
                 Integer.parseInt(data.get("rent")));
 
-        RailwayTile view = new RailwayTile(model);
+        RailwayTileView view = new RailwayTileView(model);
 
         return new TileTuple(model, view);
     }
