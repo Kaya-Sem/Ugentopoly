@@ -1,23 +1,44 @@
 package be.ugent.objprog.ugentopoly.tiles.tileModels;
 
+import be.ugent.objprog.ugentopoly.players.Pion;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class TileModel implements Observable {
 
-    protected final String id;
-    protected final int position;
+    private final String id;
+    private final int position;
+    private final List<Pion> pionnen = new ArrayList<>();
 
-    protected final List<InvalidationListener> listenerList;
+    private final List<InvalidationListener> listenerList;
 
     public TileModel(String id, int position){
         this.id = id;
         this.position = position;
         listenerList = new ArrayList<>();
+    }
+
+    public void addPion(Pion pion) {
+        if (!pionnen.contains(pion)) {
+            pionnen.add(pion);
+           fireInvalidationEvent();
+        }
+    }
+
+    public void removePion(Pion pion) {
+        if (! pionnen.contains(pion)) {
+            pionnen.remove(pion);
+            fireInvalidationEvent();
+        }
+    }
+
+    public List<Pion> getPionnen() {
+        return Collections.unmodifiableList(pionnen);
     }
 
     public String getId() {
@@ -41,32 +62,10 @@ public class TileModel implements Observable {
     }
 
     protected void fireInvalidationEvent() {
-        for (InvalidationListener listener : this.listenerList) {
-            listener.invalidated(this);
-        }
+        listenerList.forEach(listener -> listener.invalidated(this));
     }
 
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder(getClass().getSimpleName()).append(" {");
-        Field[] fields = getClass().getDeclaredFields();
-
-        for (Field field : fields) {
-            field.setAccessible(true);
-            try {
-                sb.append(field.getName()).append(": ").append(field.get(this)).append(", ");
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            }
-        }
-
-        if (sb.length() > 2) {
-            sb.delete(sb.length() - 2, sb.length());
-        }
-
-        sb.append("}");
-        return sb.toString();
+      public List<InvalidationListener> getListenerList() {
+        return Collections.unmodifiableList(listenerList);
     }
-
 }
