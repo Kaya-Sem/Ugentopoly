@@ -1,6 +1,7 @@
 package be.ugent.objprog.ugentopoly.bars;
 
 import java.util.List;
+import java.util.stream.IntStream;
 
 import be.ugent.objprog.ugentopoly.gameBoard.MiddleSection;
 import be.ugent.objprog.ugentopoly.tiles.tileViews.Tile;
@@ -29,20 +30,18 @@ public class VerticalBar extends GridPane implements Bar {
     }
 
     private void initializeRowConstraints() {
-        for (int i = 0; i < NUM_ROWS; i++) {
-            getRowConstraints().add(new RowConstraints(ROW_HEIGHT));
-        }
+        IntStream.range(0, NUM_ROWS).forEach(i -> getRowConstraints().add(new RowConstraints(ROW_HEIGHT)));
     }
 
     public void populate() {
         assert tiles.size() == 9 : "tileViews size expected: 9 but got " + tiles.size();
-        for (int i = 0; i < 9; i++) {
+        IntStream.range(0, 9).forEach(i -> {
             Tile tile = tiles.get(i);
             add(tile, 0, i);
-        }
+        });
     }
 
     public void applyRotation(double angle) {
-        this.tiles.forEach(tile -> tile.applyRotation(angle));
+        tiles.forEach(tile -> tile.applyRotation(angle));
     }
 }
