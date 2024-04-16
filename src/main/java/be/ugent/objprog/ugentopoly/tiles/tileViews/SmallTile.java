@@ -6,9 +6,9 @@ public abstract class SmallTile extends Tile {
 
     public SmallTile(TileModel model) {
         super(model);
-        setMinHeight(Tile.SHORT_SIDE);
-        setMaxHeight(Tile.SHORT_SIDE);
-        setMinWidth(Tile.LONG_SIDE);
-        setMaxWidth(Tile.LONG_SIDE);
+        setMinHeight(SHORT_SIDE);
+        setMaxHeight(SHORT_SIDE);
+        setMinWidth(LONG_SIDE);
+        setMaxWidth(LONG_SIDE);
     }
 }
