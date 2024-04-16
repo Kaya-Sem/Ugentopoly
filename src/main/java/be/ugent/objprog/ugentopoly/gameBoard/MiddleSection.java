@@ -6,13 +6,16 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 
 public class MiddleSection extends StackPane {
-    static final double SIZE = (Ugentopoly.BOARD_SIZE / Ugentopoly.SMALL_TILES) * 9;
+    public static final int SMALL_TILES = 13;
+    static final double SIZE = (Ugentopoly.BOARD_SIZE / SMALL_TILES) * 9;
 
     private static final Image BACKGROUND = new Image(
             MiddleSection.class
                     .getResourceAsStream("/be/ugent/objprog/ugentopoly/gent3.jpg"));
     private static final Image LOGO = new Image(
             MiddleSection.class.getResourceAsStream("/be/ugent/objprog/ugentopoly/assets/logo.png"));
+    protected static final double ROTATION = 45.0;
+    protected static final double SCALAR = 0.15;
 
     private final StackPane displayedCard;
 
@@ -20,7 +23,7 @@ public class MiddleSection extends StackPane {
         setMinSize(SIZE, SIZE);
         setMaxSize(SIZE, SIZE);
 
-        this.displayedCard = new StackPane();
+        displayedCard = new StackPane();
 
         ImageView background = new ImageView(BACKGROUND);
         ImageView logo = new ImageView(LOGO);
@@ -30,15 +33,16 @@ public class MiddleSection extends StackPane {
 
         logo.setPreserveRatio(true);
         logo.setFitWidth(Board.BOARD_SIZE);
-        logo.setFitHeight(SIZE * 0.15);
-        logo.setRotate(45.0);
+        logo.setFitHeight(SIZE * SCALAR);
+        logo.setRotate(ROTATION);
 
         getChildren().addAll(background, logo, displayedCard);
     }
 
+    // HACK do this with MVC
     public void updateDisplayedCard(StackPane card) {
         displayedCard.getChildren().clear();
-        if (card != null) {
+        if (null != card) {
             displayedCard.getChildren().addAll(card);
         }
     }
