@@ -6,15 +6,17 @@ import javafx.geometry.Pos;
 import javafx.scene.layout.HBox;
 
 public class TileHBox extends HBox {
+    private static final int SPACING = 10;
+    private static final int PADDING = 5;
 
     public TileHBox(){
+        setMinHeight(Tile.SHORT_SIDE);
+        setMaxHeight(Tile.SHORT_SIDE);
         setMinWidth(Tile.LONG_SIDE);
         setMaxWidth(Tile.LONG_SIDE);
 
-        setMinHeight(Tile.SHORT_SIDE);
-        setMaxHeight(Tile.SHORT_SIDE);
-        setPadding(new Insets(5, 5, 5, 5));
-        setSpacing(10);
+        setPadding(new Insets(PADDING));
         setAlignment(Pos.CENTER);
+        setSpacing(SPACING);
     }
 }
