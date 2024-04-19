@@ -34,7 +34,8 @@ public class CurrentPlayerIndicator extends VBox implements InvalidationListener
         balance = String.valueOf(currentPlayer.getBalance());
 
         Label text = new Label("Now Playing:");
-        text.setFont(Font.font("Arial", FontWeight.MEDIUM, 15.0));
+//        text.getStylesheets().add("medium-title"); TODO cannot load stylesheets?
+        text.setFont(Font.font("Arial", FontWeight.MEDIUM, 12.0));
 
         PlayerInfo playerInfo = new PlayerInfo();
 
@@ -59,7 +60,7 @@ public class CurrentPlayerIndicator extends VBox implements InvalidationListener
             playerNameLabel.setFont(Font.font("Arial", FontWeight.BOLD, 20.0));
 
             Label balanceLabel = new Label("€" + balance);
-            balanceLabel.setFont(Font.font("Consolas", FontWeight.THIN, 15.0));
+            balanceLabel.setFont(Font.font("Consolas", FontWeight.THIN, 12.0));
 
             VBox vBox = new VBox(playerNameLabel, balanceLabel );
             vBox.setAlignment(Pos.CENTER);
@@ -81,5 +82,10 @@ public class CurrentPlayerIndicator extends VBox implements InvalidationListener
         currentPlayer = model.getCurrentPlayerMove();
         playerName = currentPlayer.getPlayerName();
         image = currentPlayer.getBadgeImage();
+        balance = String.valueOf(currentPlayer.getBalance());
+    }
+
+    public GameModel getGameModel() {
+        return gameModel;
     }
 }

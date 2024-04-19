@@ -18,10 +18,8 @@ public class FreeParkingCornerTile extends CornerTile {
 
     public FreeParkingCornerTile(TileModel model) {
         super(model);
-        this.model = model;
-        this.model.addListener(this);
         setup();
-        this.card = new BasicVerticalCard(this.image, PropertyLoader.getLabel(model.getId()));
+        card = new BasicVerticalCard(this.image, PropertyLoader.getLabel(model.getId()));
     }
 
     // TODO extract setFont and label to class. (or css?)
@@ -29,7 +27,7 @@ public class FreeParkingCornerTile extends CornerTile {
     protected void setup() {
         TileImageView image = new TileImageView(this.image, 1.7, true);
 
-        String[] text = PropertyLoader.getLabel(model.getId()).split(" ");
+        String[] text = PropertyLoader.getLabel(getModel().getId()).split(" ");
         Label textLabel1 = new Label(text[0]);
         Label textLabel2 = new Label(text[1]);
 

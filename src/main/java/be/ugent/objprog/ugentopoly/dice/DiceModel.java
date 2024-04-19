@@ -3,21 +3,18 @@ package be.ugent.objprog.ugentopoly.dice;
 import java.util.ArrayList;
 import java.util.List;
 
-import be.ugent.objprog.ugentopoly.players.PlayerModel;
-import be.ugent.objprog.ugentopoly.tiles.tileViews.Tile;
+import be.ugent.objprog.ugentopoly.GameController;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
-import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
+import javafx.beans.property.*;
 
 public class DiceModel implements Observable {
 
     private final List<InvalidationListener> listenerList = new ArrayList<>();
-    private List<List<Integer>> allThrows = new ArrayList<>();
-    private List<Integer> mostRecentRoll = new ArrayList<>();
+    private GameController controller = null;
+    private String mostRecentRoll = "";
+    private boolean rollable = true;
 
-    public DiceModel() {
-    }
 
 
     private void fireInvalidationEvent() {
@@ -34,21 +31,28 @@ public class DiceModel implements Observable {
         listenerList.add(listener);
     }
 
-    public List<Integer> getMostRecentRoll() {
+    public String getMostRecentRoll() {
         return mostRecentRoll;
     }
-
-    public void setMostRecentRoll(List<Integer> mostRecentRoll) {
-        this.mostRecentRoll = mostRecentRoll;
+    public void setMostRecentRoll(String s) {
+        mostRecentRoll = s;
         fireInvalidationEvent();
     }
 
-    public List<List<Integer>> getAllThrows() {
-        return allThrows;
+    public boolean isRollable() {
+        return rollable;
     }
 
-    public void setAllThrows(List<List<Integer>> allThrows) {
-        this.allThrows = allThrows;
+    public void setRollable(boolean rollable) {
+        this.rollable = rollable;
         fireInvalidationEvent();
+    }
+
+    public GameController getController() {
+        return controller;
+    }
+
+    public void setController(GameController controller) {
+        this.controller = controller;
     }
 }

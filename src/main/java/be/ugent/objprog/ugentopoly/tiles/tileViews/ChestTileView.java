@@ -23,8 +23,6 @@ public class ChestTileView extends SmallTile {
     // Constructor
     public ChestTileView(TileModel model){
         super(model);
-        this.model = model;
-        this.model.addListener(this);
         setup();
         this.card = new BasicVerticalCard(image, PropertyLoader.getLabel(model.getId()));
     }
@@ -34,7 +32,7 @@ public class ChestTileView extends SmallTile {
     protected void setup() {
         TileHBox hBox = new TileHBox();
         TileImageView imageView = new TileImageView(image);
-        String text = PropertyLoader.getLabel(model.getId());
+        String text = PropertyLoader.getLabel(getModel().getId());
         Label textLabel = new Label(text);
         textLabel.setFont(Font.font("Arial", FontWeight.BOLD, 10));
         textLabel.setWrapText(true);

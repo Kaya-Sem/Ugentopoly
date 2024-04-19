@@ -1,9 +1,8 @@
 package be.ugent.objprog.ugentopoly;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
+import be.ugent.objprog.ugentopoly.players.Pion;
 import be.ugent.objprog.ugentopoly.players.PlayerModel;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
@@ -12,13 +11,12 @@ public class GameModel implements Observable {
 
     private final List<InvalidationListener> listenerList = new ArrayList<>();
     private final List<PlayerModel> playerModels;
-    private PlayerModel currentPlayerMove;
+    private PlayerModel currentPlayerMove = null;
+    private final Object[] tileModels;
 
-    public GameModel(List<PlayerModel> players) {
+    public GameModel(List<PlayerModel> players, Map<String, Object[]> tileMap) {
+        tileModels = tileMap.get("models");
         playerModels = new ArrayList<>(players);
-        currentPlayerMove = playerModels.getFirst(); // assign first player to move
-
-        // NEEDSLOG
     }
 
     private void fireInvalidationEvent() {
@@ -46,5 +44,9 @@ public class GameModel implements Observable {
     public void setCurrentPlayerMove(PlayerModel currentPlayerMove) {
         this.currentPlayerMove = currentPlayerMove;
         fireInvalidationEvent();
+    }
+
+    public Object[] getTileModels() {
+        return tileModels;
     }
 }

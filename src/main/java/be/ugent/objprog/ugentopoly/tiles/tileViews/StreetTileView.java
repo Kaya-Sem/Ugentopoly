@@ -3,6 +3,7 @@ package be.ugent.objprog.ugentopoly.tiles.tileViews;
 import be.ugent.objprog.ugentopoly.tiles.tileCards.StreetCard;
 import be.ugent.objprog.ugentopoly.tiles.tileModels.StreetTileModel;
 import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -13,11 +14,11 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
-public class StreetTileView extends SmallTile implements InvalidationListener {
+public class StreetTileView extends SmallTile {
 
     private final StreetTileModel model;
     private static final int STRIP_WIDTH = 30;
-    private String owner;
+    private String owner = ""; // TODO implement owner in tilemodel and have it Simple. blah blah
 
     // Constructor
     public StreetTileView(StreetTileModel model) {
@@ -39,12 +40,12 @@ public class StreetTileView extends SmallTile implements InvalidationListener {
         label.setWrapText(true);
 
         StackPane pane = new StackPane(label);
-        pane.setPrefWidth(Tile.LONG_SIDE - 10);
-        pane.setPrefHeight(Tile.SHORT_SIDE);
+        pane.setPrefWidth(LONG_SIDE - 10);
+        pane.setPrefHeight(SHORT_SIDE);
 
         Rectangle rectangle = new Rectangle();
         rectangle.setFill(Paint.valueOf(model.getColor()));
-        rectangle.setHeight(Tile.SHORT_SIDE);
+        rectangle.setHeight(SHORT_SIDE);
         rectangle.setWidth(STRIP_WIDTH);
         setAlignment(rectangle, Pos.CENTER_RIGHT);
 
@@ -55,12 +56,10 @@ public class StreetTileView extends SmallTile implements InvalidationListener {
         getChildren().addAll(hbox, tileButton);
     }
 
-    public void invalidated(StreetTileModel observable) {
-        this.owner = observable.getOwner();
-        // NEEDSLOG
-    }
-
-    public StreetTileModel getModel() {
-        return model;
+    @Override
+    public void invalidated(Observable observable) {
+        super.invalidated(observable);
+        StreetTileModel streetTileModel = (StreetTileModel) observable;
+        owner = streetTileModel.getOwner();
     }
 }

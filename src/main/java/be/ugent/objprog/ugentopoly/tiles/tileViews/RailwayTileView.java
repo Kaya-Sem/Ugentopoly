@@ -20,8 +20,6 @@ public class RailwayTileView extends SmallTile {
     // Constructor
     public RailwayTileView(RailwayTileModel model){
         super(model);
-        setModel(model);
-        this.model.addListener(this);
         card = new RailwayCard(
                 image,
                 PropertyLoader.getLabel(model.getId()),

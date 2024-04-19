@@ -13,20 +13,17 @@ import javafx.scene.text.FontWeight;
 import java.util.Objects;
 
 public class ChanceTileView extends SmallTile {
+    // TODO can stay in the model
     private static final Image image = new Image(
             Objects.requireNonNull(
                     ChestTileView.class.getResourceAsStream(
                             "/be/ugent/objprog/ugentopoly/assets/chance.png")
             ));
 
-
-    // Constructor
     public ChanceTileView(TileModel model){
         super(model);
-        this.model = model;
-        this.model.addListener(this);
         setup();
-        this.card = new BasicVerticalCard(image, PropertyLoader.getLabel(model.getId()));
+        card = new BasicVerticalCard(image, PropertyLoader.getLabel(model.getId()));
     }
 
     // OPTIMIZE
@@ -42,7 +39,4 @@ public class ChanceTileView extends SmallTile {
         getChildren().addAll(hbox, tileButton);
     }
 
-    public TileModel getModel() {
-        return model;
-    }
 }

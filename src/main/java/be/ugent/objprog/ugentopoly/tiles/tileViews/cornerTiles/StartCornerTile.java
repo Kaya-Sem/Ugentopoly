@@ -14,30 +14,20 @@ public class StartCornerTile extends CornerTile {
 
     public StartCornerTile(TileModel model) {
         super(model);
-        this.model = model;
-        this.model.addListener(this);
         setup();
-        this.card = new BasicVerticalCard(this.startImage,PropertyLoader.getLabel(model.getId()));
+        card = new BasicVerticalCard(startImage,PropertyLoader.getLabel(model.getId()));
+        // HACK cards should be defined in the model, not the view
     }
 
     public void setup() {
         TileImageView arrowImageView = new TileImageView(arrowImage, 1.5, true);
-        TileImageView startImageView = new TileImageView(this.startImage, 1.0, true);
+        TileImageView startImageView = new TileImageView(startImage, 1.0, true);
 
         arrowImageView.setTranslateX(-20);
         arrowImageView.setRotate(90);
 
         setAlignment(arrowImageView, Pos.CENTER_LEFT);
 
-        getChildren().addAll(arrowImageView, startImageView, tileButton);
-    }
-
-    @Override
-    public void invalidated(Observable observable) {
-        // NEEDSLOG
-    }
-
-    public TileModel getModel() {
-        return model;
+        getChildren().addAll(arrowImageView, startImageView, tileButton, badgeHolders);
     }
 }

@@ -18,8 +18,6 @@ public class JailCornerTile extends CornerTile {
 
     public JailCornerTile(TileModel model){
         super(model);
-        this.setModel(model);
-        this.getModel().addListener(this);
         setup();
         this.card = createCard(PropertyLoader.getLabel(model.getId()));
     }

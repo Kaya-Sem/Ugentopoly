@@ -21,10 +21,8 @@ public class TaxTileView extends SmallTile {
     // Constructor
     public TaxTileView(TaxTileModel model) {
         super(model);
-        this.model = model;
-        this.model.addListener(this);
         setup();
-        this.card = new TaxCard(image, PropertyLoader.getLabel(model.getId()), "200"); // TODO don't hardcode this
+        card = new TaxCard(image, PropertyLoader.getLabel(model.getId()), "200"); // TODO don't hardcode this
     }
 
     // OPTIMIZE

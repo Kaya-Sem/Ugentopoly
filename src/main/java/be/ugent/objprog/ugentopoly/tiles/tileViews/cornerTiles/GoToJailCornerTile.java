@@ -19,8 +19,6 @@ public class GoToJailCornerTile extends CornerTile {
 
     public GoToJailCornerTile(TileModel model) {
         super(model);
-        this.setModel(model);
-        this.model.addListener(this);
         setup();
         this.card = new BasicVerticalCard(this.image, PropertyLoader.getLabel(model.getId()));
     }

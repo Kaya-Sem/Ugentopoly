@@ -1,16 +1,12 @@
 package be.ugent.objprog.ugentopoly.factories;
 
 import be.ugent.objprog.ugentopoly.tiles.TileTuple;
-import be.ugent.objprog.ugentopoly.tiles.tileModels.StreetTileModel;
+import be.ugent.objprog.ugentopoly.tiles.tileModels.*;
 import be.ugent.objprog.ugentopoly.tiles.tileViews.*;
 import be.ugent.objprog.ugentopoly.tiles.tileViews.cornerTiles.FreeParkingCornerTile;
 import be.ugent.objprog.ugentopoly.tiles.tileViews.cornerTiles.GoToJailCornerTile;
 import be.ugent.objprog.ugentopoly.tiles.tileViews.cornerTiles.JailCornerTile;
 import be.ugent.objprog.ugentopoly.tiles.tileViews.cornerTiles.StartCornerTile;
-import be.ugent.objprog.ugentopoly.tiles.tileModels.RailwayTileModel;
-import be.ugent.objprog.ugentopoly.tiles.tileModels.TaxTileModel;
-import be.ugent.objprog.ugentopoly.tiles.tileModels.TileModel;
-import be.ugent.objprog.ugentopoly.tiles.tileModels.UtilityTileModel;
 
 import java.util.Map;
 import java.util.Objects;
@@ -20,10 +16,12 @@ import java.util.function.Supplier;
 NON-URGENT add documentation
 */
 
+// hack create second factory for just the views?
+
 // TODO split into subfactories?
 public class TileFactory {
     private final Map<String, String> areaColors;
-    protected Map<String, String> data;
+    private Map<String, String> data = null;
 
     private final Map<String, Supplier<TileTuple>> tileMethods = Map.of(
             "START", this::createBasicTileModel,
@@ -51,15 +49,15 @@ public class TileFactory {
     public TileTuple createBasicTileModel() {
 
         // HACK
-        TileModel model = new TileModel(this.data.get("id"), Integer.parseInt(this.data.get("position")));
-        Tile view = switch (this.data.get("type")) {
+        TileModel model = new TileModel(data.get("id"), Integer.parseInt(data.get("position")));
+        Tile view = switch (data.get("type")) {
             case "START" -> new StartCornerTile(model);
             case "JAIL" -> new JailCornerTile(model);
             case "GO_TO_JAIL" -> new GoToJailCornerTile(model);
             case "FREE_PARKING" -> new FreeParkingCornerTile(model);
             case "CHEST" -> new ChestTileView(model);
             case "CHANCE" -> new ChanceTileView(model);
-            default -> throw new IllegalStateException("Unexpected type: " + this.data.get("type"));
+            default -> throw new IllegalStateException("Unexpected type: " + data.get("type"));
         };
 
         return new TileTuple(model, view);
@@ -115,5 +113,9 @@ public class TileFactory {
         StreetTileView view = new StreetTileView(model);
 
         return new TileTuple(model, view);
+    }
+
+    public Map<String, String> getData() {
+        return data;
     }
 }

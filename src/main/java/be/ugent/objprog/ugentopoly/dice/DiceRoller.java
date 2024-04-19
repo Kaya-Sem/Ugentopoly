@@ -3,54 +3,54 @@ package be.ugent.objprog.ugentopoly.dice;
 import be.ugent.objprog.dice.DicePanel;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import javafx.beans.binding.Bindings;
 
-public final class DiceRoller extends VBox implements InvalidationListener {
+import java.util.List;
+
+public class DiceRoller extends VBox implements InvalidationListener {
 
     private final DiceModel diceModel;
-
-    protected static final double SPACING = 10.0;
-    protected static final double SIZE = 300.0;
     private final DicePanel dicePanel = new DicePanel();
-    private StringProperty mostRecentRoll = new SimpleStringProperty();
+    private final SimpleBooleanProperty clickable = new SimpleBooleanProperty();
+    private final SimpleStringProperty mostRecentThrow = new SimpleStringProperty();
+
+    private static final double SPACING = 10.0;
+    private static final double SIZE = 300.0;
 
     public DiceRoller(DiceModel diceModel) {
         this.diceModel = diceModel;
-        diceModel.addListener(this);
-        Button rollButton = new Button("Gooi dobbelstenen!");
+
+        // put in HBOX for more style options?
         Label recentThrow = new Label();
+        recentThrow.textProperty().bind(mostRecentThrow);
 
-        recentThrow.textProperty().bind(mostRecentRoll);
-
-
-        rollButton.setOnAction(event -> {
-            rollButton.setDisable(true);
-            dicePanel.roll(list -> {
-                diceModel.setMostRecentRoll(list);
-                rollButton.setDisable(false);
-
-            });
-
-        });
-
+        Button rollButton = new Button("roll dice");
+        rollButton.disableProperty().bind(clickable);
+        rollButton.setOnAction(event -> dicePanel.roll(list -> diceModel.getController().rollDice(list)));
 
         setSpacing(SPACING);
         setAlignment(Pos.CENTER);
-        getChildren().addAll(dicePanel, rollButton, recentThrow);
+        getChildren().addAll(new DicePanel(), rollButton, recentThrow);
 
         setMaxSize(SIZE, SIZE);
 
     }
 
+    public DiceModel getDiceModel() {
+        return diceModel;
+    }
+
     @Override
     public void invalidated(Observable observable) {
         DiceModel model = (DiceModel) observable;
-        mostRecentRoll.set(model.getMostRecentRoll().toString());
-
+        clickable.set(model.isRollable());
+        mostRecentThrow.set(model.getMostRecentRoll());
     }
 }

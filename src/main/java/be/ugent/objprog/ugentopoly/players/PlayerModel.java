@@ -7,6 +7,8 @@ import java.util.List;
 import be.ugent.objprog.ugentopoly.tiles.tileModels.TileModel;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
@@ -16,13 +18,13 @@ public class PlayerModel implements Observable {
     private final List<InvalidationListener> listenerList;
 
     private final String playerName;
-    private int balance;
+    private IntegerProperty balance;
     private final String color;
     private final Image badgeImage;
     private final String badgeName;
     private final Pion pion;
 
-    private List<TileModel> ownedTiles; // TODO implement
+    private final List<TileModel> ownedTiles; // TODO implement
 
     public PlayerModel(String playerName, Color color, int balance, ImageTextItem badgeImage) {
         listenerList = new ArrayList<>();
@@ -30,7 +32,7 @@ public class PlayerModel implements Observable {
         ownedTiles = new ArrayList<>();
         this.playerName = playerName;
         this.color = String.valueOf(color);
-        this.balance = balance;
+        this.balance = new SimpleIntegerProperty(balance);
         this.badgeImage = badgeImage.image();
         badgeName = badgeImage.text();
         pion = new Pion(this.badgeImage);
@@ -55,14 +57,18 @@ public class PlayerModel implements Observable {
     }
 
     public int getBalance() {
-        return balance;
+        return balance.get();
     }
 
     public void setBalance(int balance) {
         if (0 != balance) {
-            this.balance = balance;
+            this.balance.set(balance);
             fireInvalidationEvent();
         }
+    }
+
+    public IntegerProperty balanceProperty() {
+        return balance;
     }
 
     public String getColor() {

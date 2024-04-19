@@ -15,10 +15,8 @@ public class UtilityTileView extends SmallTile {
     // Constructor
     public UtilityTileView(UtilityTileModel model) {
         super(model);
-        this.model = model;
-        this.model.addListener(this);
         setup();
-        this.card = new UtilityCard(this.image, String.valueOf(model.getCost()));
+        card = new UtilityCard(image, String.valueOf(model.getCost()));
     }
 
     @Override
@@ -30,8 +28,8 @@ public class UtilityTileView extends SmallTile {
 
         ImageView imageView = new ImageView(image);
 
-        imageView.setFitHeight(Tile.SHORT_SIDE - 13);
-        imageView.setFitWidth(Tile.LONG_SIDE - 13);
+        imageView.setFitHeight(SHORT_SIDE - 13);
+        imageView.setFitWidth(LONG_SIDE - 13);
         imageView.setPreserveRatio(true);
 
         StackPane pane = new StackPane(imageView);

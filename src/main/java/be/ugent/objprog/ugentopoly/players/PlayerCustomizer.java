@@ -37,14 +37,12 @@ public class PlayerCustomizer extends VBox {
 
         // Disable the selected badge for other players
         badgeComboBox.valueProperty().addListener((observable, oldValue, newValue) -> {
-            for (PlayerCustomizer customizer : creator.playerCustomizers) {
-                if (!customizer.equals(this)) {
-                    if (null != oldValue && !customizer.badgeComboBox.getItems().contains(oldValue)) {
-                        customizer.badgeComboBox.getItems().add(oldValue);
-                    }
-                    customizer.badgeComboBox.getItems().remove(newValue);
+            creator.playerCustomizers.stream().filter(customizer -> !customizer.equals(this)).forEach(customizer -> {
+                if (null != oldValue && !customizer.badgeComboBox.getItems().contains(oldValue)) {
+                    customizer.badgeComboBox.getItems().add(oldValue);
                 }
-            }
+                customizer.badgeComboBox.getItems().remove(newValue);
+            });
         });
 
 
