@@ -6,7 +6,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 
 public class Pion extends ImageView {
-    private static final double SIZE = 50.0;
+    private static final double SIZE = 30.0;
     protected static final double DROPSHADOWRADIUS = 10.0;
 
     public Pion(Image image) {
