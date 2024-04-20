@@ -53,7 +53,7 @@ public class StreetTileView extends SmallTile {
 
         hbox.getChildren().addAll(pane, rectangle);
 
-        getChildren().addAll(hbox, tileButton);
+        getChildren().addAll(hbox, tileButton, badgeHolders);
     }
 
     @Override

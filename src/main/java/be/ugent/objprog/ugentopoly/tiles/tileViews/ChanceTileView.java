@@ -36,7 +36,7 @@ public class ChanceTileView extends SmallTile {
         textLabel.setFont(Font.font("Arial", FontWeight.BOLD, 10));
         textLabel.setWrapText(true);
         hbox.getChildren().addAll(imageView, textLabel);
-        getChildren().addAll(hbox, tileButton);
+        getChildren().addAll(hbox, tileButton, badgeHolders);
     }
 
 }

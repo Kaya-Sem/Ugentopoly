@@ -42,6 +42,6 @@ public class RailwayTileView extends SmallTile {
 
         hBox.getChildren().addAll(imageView, textLabel);
 
-        getChildren().addAll(hBox, tileButton);
+        getChildren().addAll(hBox, tileButton, badgeHolders);
     }
 }

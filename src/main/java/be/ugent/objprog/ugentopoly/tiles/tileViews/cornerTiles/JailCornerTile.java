@@ -42,7 +42,7 @@ public class JailCornerTile extends CornerTile {
         // MAKE ROTATION CONSTANT
         vBox.setRotate(135);
 
-        getChildren().addAll(vBox, tileButton);
+        getChildren().addAll(vBox, tileButton, badgeHolders);
     }
 
     @Override

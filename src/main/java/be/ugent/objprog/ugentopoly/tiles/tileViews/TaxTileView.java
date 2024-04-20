@@ -35,7 +35,7 @@ public class TaxTileView extends SmallTile {
 
         hBox.getChildren().addAll(new TileImageView(image), textLabel);
 
-        getChildren().addAll(hBox, tileButton);
+        getChildren().addAll(hBox, tileButton, badgeHolders);
     }
 
     public TaxTileModel getModel() {

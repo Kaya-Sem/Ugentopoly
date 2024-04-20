@@ -40,7 +40,7 @@ public class FreeParkingCornerTile extends CornerTile {
         vBox.setAlignment(Pos.CENTER);
         vBox.setRotate(-135);
 
-        getChildren().addAll(vBox, tileButton );
+        getChildren().addAll(vBox, tileButton, badgeHolders );
     }
 
     @Override

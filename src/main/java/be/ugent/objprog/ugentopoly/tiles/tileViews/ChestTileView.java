@@ -38,7 +38,7 @@ public class ChestTileView extends SmallTile {
         textLabel.setWrapText(true);
         hBox.getChildren().addAll(imageView, textLabel);
 
-        getChildren().addAll(hBox, tileButton);
+        getChildren().addAll(hBox, tileButton, badgeHolders);
     }
 
 }

@@ -37,7 +37,7 @@ public class UtilityTileView extends SmallTile {
         pane.setPrefHeight(Double.MAX_VALUE);
         pane.setPadding(new Insets(10, 10, 10, 10));
 
-        getChildren().addAll(pane, tileButton);
+        getChildren().addAll(pane, tileButton, badgeHolders);
     }
 
     public UtilityTileModel getModel() {
