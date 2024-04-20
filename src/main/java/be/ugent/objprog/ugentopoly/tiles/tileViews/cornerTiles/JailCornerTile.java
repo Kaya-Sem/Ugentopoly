@@ -19,11 +19,11 @@ public class JailCornerTile extends CornerTile {
     public JailCornerTile(TileModel model){
         super(model);
         setup();
-        this.card = createCard(PropertyLoader.getLabel(model.getId()));
+        card = createCard(PropertyLoader.getLabel(model.getId()));
     }
 
     private BasicVerticalCard createCard(String text) {
-        return new BasicVerticalCard(this.image, text
+        return new BasicVerticalCard(image, text
         );
     }
 
@@ -36,17 +36,13 @@ public class JailCornerTile extends CornerTile {
         TileImageView tileImageView= new TileImageView(image, 1.5, true);
 
         vBox.getChildren().addAll(tileImageView, textLabel);
-        vBox.setMaxHeight(Tile.LONG_SIDE - 30);
-        vBox.setMaxWidth(Tile.LONG_SIDE - 30);
+        vBox.setMaxHeight(LONG_SIDE - 30);
+        vBox.setMaxWidth(LONG_SIDE - 30);
         vBox.setAlignment(Pos.CENTER);
         // MAKE ROTATION CONSTANT
         vBox.setRotate(135);
 
-        getChildren().addAll(vBox, tileButton, badgeHolders);
+        getChildren().addAll(vBox, badgeHolders, tileButton);
     }
 
-    @Override
-    public void invalidated(Observable observable) {
-// NEEDSLOG
-    }
 }

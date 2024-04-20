@@ -28,6 +28,6 @@ public class StartCornerTile extends CornerTile {
 
         setAlignment(arrowImageView, Pos.CENTER_LEFT);
 
-        getChildren().addAll(arrowImageView, startImageView, tileButton, badgeHolders);
+        getChildren().addAll(arrowImageView, startImageView, badgeHolders, tileButton);
     }
 }

@@ -45,12 +45,7 @@ public class GoToJailCornerTile extends CornerTile {
         vBox.setAlignment(Pos.CENTER);
         vBox.setRotate(ROTATION);
 
-        getChildren().addAll(vBox, tileButton);
-    }
-
-    @Override
-    public void invalidated(Observable observable) {
-        // NEEDSLOG
+        getChildren().addAll(vBox, badgeHolders, tileButton);
     }
 
 }

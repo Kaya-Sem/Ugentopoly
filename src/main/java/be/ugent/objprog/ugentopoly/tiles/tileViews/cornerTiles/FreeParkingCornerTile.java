@@ -19,7 +19,7 @@ public class FreeParkingCornerTile extends CornerTile {
     public FreeParkingCornerTile(TileModel model) {
         super(model);
         setup();
-        card = new BasicVerticalCard(this.image, PropertyLoader.getLabel(model.getId()));
+        card = new BasicVerticalCard(image, PropertyLoader.getLabel(model.getId()));
     }
 
     // TODO extract setFont and label to class. (or css?)
@@ -35,16 +35,12 @@ public class FreeParkingCornerTile extends CornerTile {
         textLabel2.setFont(Font.font("Arial", FontWeight.BOLD, 10));
 
         VBox vBox = new VBox(textLabel1, image, textLabel2);
-        vBox.setMaxWidth(Tile.LONG_SIDE - 30);
-        vBox.setMaxHeight(Tile.LONG_SIDE - 30);
+        vBox.setMaxWidth(LONG_SIDE - 30);
+        vBox.setMaxHeight(LONG_SIDE - 30);
         vBox.setAlignment(Pos.CENTER);
         vBox.setRotate(-135);
 
-        getChildren().addAll(vBox, tileButton, badgeHolders );
+        getChildren().addAll(vBox, badgeHolders, tileButton );
     }
 
-    @Override
-    public void invalidated(Observable observable) {
-
-    }
 }
