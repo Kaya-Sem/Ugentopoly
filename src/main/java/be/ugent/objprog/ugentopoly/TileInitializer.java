@@ -42,12 +42,21 @@ public class TileInitializer {
 
         return Map.of(
                 "models", tileModelArray,
-                "left", Arrays.copyOfRange(tileViewArray, 1, 10),
+                "left", reverse(Arrays.copyOfRange(tileViewArray, 1, 10)),
                 "top", Arrays.copyOfRange(tileViewArray, 11, 20),
                 "right", Arrays.copyOfRange(tileViewArray, 21, 30),
-                "bottom", Arrays.copyOfRange(tileViewArray, 31, 40),
+                "bottom", reverse(Arrays.copyOfRange(tileViewArray, 31, 40)),
                 "corners", new Tile[] { tileViewArray[0], tileViewArray[10], tileViewArray[20], tileViewArray[30] }
-
         );
+    }
+
+    private Tile[] reverse(Tile[] array) {
+        int length = array.length;
+        for (int i = 0; i < length / 2; i++) {
+            Tile temp = array[i];
+            array[i] = array[array.length - 1 - i];
+            array[array.length - 1 - i] = temp;
+        }
+        return array;
     }
 }
