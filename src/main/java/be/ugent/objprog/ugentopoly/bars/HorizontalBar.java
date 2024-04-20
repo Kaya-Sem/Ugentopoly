@@ -15,30 +15,29 @@ import javafx.scene.layout.GridPane;
 */
 
 public class HorizontalBar extends GridPane implements Bar {
-    private static final int NUM_COLS = 8;
+    private static final int NUMTILES = 9;
     private static final double COL_WIDTH = Tile.SHORT_SIDE;
-
     private final List<? extends Tile> tiles;
 
-    private void initializeColumnConstraints() {
-        IntStream.range(0, NUM_COLS).forEach(i -> getColumnConstraints().add(new ColumnConstraints(COL_WIDTH)));
-    }
 
-    public HorizontalBar(Tile[] tiles) {
-        this.tiles = List.of(tiles);
-        setPrefWidth(MiddleSection.getSize());
-        setPrefHeight(Tile.LONG_SIDE);
+
+    public HorizontalBar(List<Tile> tiles) {
+        this.tiles = tiles;
+        setMinWidth(MiddleSection.getSize());
+        setMaxWidth(MiddleSection.getSize());
+        setMinHeight(Tile.LONG_SIDE);
+        setMaxHeight(Tile.LONG_SIDE);
 
         initializeColumnConstraints();
         populate();
     }
 
+    private void initializeColumnConstraints() {
+        IntStream.range(1, NUMTILES).forEach(i -> getColumnConstraints().add(new ColumnConstraints(COL_WIDTH)));
+    }
+
     public void populate() {
-        assert tiles.size() == 9 : "tileViews size expected: 9 but got " + tiles.size();
-        IntStream.range(0, 9).forEach(i -> {
-            Tile tile = tiles.get(i);
-            add(tile, i, 0);
-        });
+        IntStream.range(0, NUMTILES).forEach(i -> add(tiles.get(i), i, 0));
     }
 
     public void applyRotation(double angle) {

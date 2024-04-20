@@ -15,30 +15,27 @@ import javafx.scene.layout.RowConstraints;
 */
 
 public class VerticalBar extends GridPane implements Bar {
-    private static final int NUM_ROWS = 8;
+    private static final int NUMTILES = 9;
     private static final double ROW_HEIGHT = Tile.SHORT_SIDE;
-
     private final List<? extends Tile> tiles;
 
-    public VerticalBar(Tile[] tiles) {
-        this.tiles = List.of(tiles);
-        setPrefWidth(Tile.LONG_SIDE);
-        setPrefHeight(MiddleSection.getSize());
+    public VerticalBar(List<Tile> tiles) {
+        this.tiles = tiles;
+        setMinWidth(Tile.LONG_SIDE);
+        setMaxWidth(Tile.LONG_SIDE);
+        setMinHeight(MiddleSection.getSize());
+        setMaxHeight(MiddleSection.getSize());
 
         initializeRowConstraints();
         populate();
     }
 
     private void initializeRowConstraints() {
-        IntStream.range(0, NUM_ROWS).forEach(i -> getRowConstraints().add(new RowConstraints(ROW_HEIGHT)));
+        IntStream.range(1, NUMTILES).forEach(i -> getRowConstraints().add(new RowConstraints(ROW_HEIGHT)));
     }
 
     public void populate() {
-        assert tiles.size() == 9 : "tileViews size expected: 9 but got " + tiles.size();
-        IntStream.range(0, 9).forEach(i -> {
-            Tile tile = tiles.get(i);
-            add(tile, 0, i);
-        });
+        IntStream.range(0, NUMTILES).forEach(i -> add(tiles.get(i), 0, i));
     }
 
     public void applyRotation(double angle) {
