@@ -17,11 +17,12 @@ import java.util.*;
 
 public class PlayerCreatorStage extends Stage {
 
+    // HACK
     private static final ObservableList<ImageTextItem> badgeOptions = FXCollections.observableArrayList(
             new ImageTextItem("WINA", new Image("be/ugent/objprog/ugentopoly/assets/token1.png")),
             new ImageTextItem("V.T.K.", new Image("be/ugent/objprog/ugentopoly/assets/token2.png")),
             new ImageTextItem("CHEMICA", new Image("be/ugent/objprog/ugentopoly/assets/token3.png")),
-            new ImageTextItem("FILOLOGICA", new Image("be/ugent/objprog/ugentopoly/assets/token4.png")), // TODO wie zijn dit
+            new ImageTextItem("FILOLOGICA", new Image("be/ugent/objprog/ugentopoly/assets/token4.png")),
             new ImageTextItem("GEOLOGICA", new Image("be/ugent/objprog/ugentopoly/assets/token5.png")),
             new ImageTextItem("V.B.K.", new Image("be/ugent/objprog/ugentopoly/assets/token6.png")),
             new ImageTextItem("V.E.K.", new Image("be/ugent/objprog/ugentopoly/assets/token7.png")),
@@ -51,8 +52,6 @@ public class PlayerCreatorStage extends Stage {
             }
         });
 
-        HBox hBox = new HBox();
-
         playerCustomizers = List.of(new PlayerCustomizer[]{
                 new PlayerCustomizer(this, "Kris Koolsaet", "1"),
                 new PlayerCustomizer(this, "Bart De Bruyn", "2"),
@@ -60,11 +59,10 @@ public class PlayerCreatorStage extends Stage {
                 new PlayerCustomizer(this, "Veerle Fack", "4")
         });
 
-
-
         playerCustomizers.forEach(customizer -> customizer.getBadgeComboBox().getItems().addAll(badgeOptions));
         playerCustomizers.forEach(item -> item.getBadgeComboBox().setCellFactory(param -> new ImageTextListCell()));
 
+        HBox hBox = new HBox();
         hBox.getChildren().addAll(playerCustomizers);
         hBox.setSpacing(SPACING);
         hBox.setAlignment(Pos.CENTER);
@@ -81,7 +79,6 @@ public class PlayerCreatorStage extends Stage {
 
     public List<PlayerModel> showAndWaitForPlayers() {
         showAndWait();
-
         return new ArrayList<>(players.values());
     }
 }
