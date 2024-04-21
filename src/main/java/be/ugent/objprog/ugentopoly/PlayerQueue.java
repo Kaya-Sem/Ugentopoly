@@ -10,7 +10,6 @@ public class PlayerQueue extends ArrayDeque<PlayerModel> {
         addAll(playerModels);
     }
 
-    // TODO why asking to delete method?
     public PlayerModel getNextPlayer() {
         rotate();
         return getFirst();
