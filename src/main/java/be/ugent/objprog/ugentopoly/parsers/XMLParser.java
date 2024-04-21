@@ -2,6 +2,7 @@ package be.ugent.objprog.ugentopoly.parsers;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,19 +28,21 @@ public class XMLParser {
     public XMLParser() {
         InputStream inputStream = getClass().getResourceAsStream(XML_PATH);
         try {
-            this.document = new SAXBuilder().build(inputStream);
+            document = new SAXBuilder().build(inputStream);
+            root = document.getRootElement();
         } catch (JDOMException | IOException e) {
-            throw new RuntimeException("Error occurred in creating document in XMLParser" + e);
+            e.printStackTrace();
         }
-
-        this.root = document.getRootElement();
-        // NEEDSLOG
     }
 
     public String getStartingBalance() {
         Element settings = root.getChild("settings");
-        String balance = settings.getAttributeValue("balance");
-        return balance;
+        return settings.getAttributeValue("balance");
+    }
+
+    public int getStartAmount() {
+        Element settings = root.getChild("settings");
+        return Integer.parseInt(settings.getAttributeValue("start"));
     }
 
     // load tileViews information
@@ -62,19 +65,15 @@ public class XMLParser {
         return tiles;
     }
 
-    // NEED HELP linkedHashMap incorrect order even when XML is correct. 1 element
-    // wrong
     private static Map<String, String> parseTile(Element tileElement) {
         Map<String, String> tileMap = new HashMap<>();
         tileMap.put("position", tileElement.getAttributeValue("position"));
         tileMap.put("id", tileElement.getAttributeValue("id"));
         tileMap.put("type", tileElement.getAttributeValue("type"));
 
-        for (String attr : XMLParser.ATTRIBUTES) {
-            tileMap.put(attr, tileElement.getAttributeValue(attr));
-        }
+        Arrays.stream(ATTRIBUTES).forEach(attr -> tileMap.put(attr, tileElement.getAttributeValue(attr)));
 
-        tileMap.entrySet().removeIf(entry -> entry.getValue() == null);
+        tileMap.entrySet().removeIf(entry -> null == entry.getValue());
 
         return tileMap;
     }
@@ -83,31 +82,26 @@ public class XMLParser {
         Map<String, String> colors = new HashMap<>();
         List<Element> colorElements = root.getChildren("areas").getFirst().getChildren("area");
 
-        for (Element colorElement : colorElements) {
+        colorElements.forEach(colorElement -> {
             String colorId = colorElement.getAttributeValue("id");
             String color = colorElement.getAttributeValue("color");
             colors.put(colorId, color);
-        }
-
-        if (colors.isEmpty()) {
-            throw new IllegalStateException("\n area color map was empty unexpectedly...\n");
-        }
+        });
 
         return colors;
     }
 
+    // REMOVE
     private static void test() {
         XMLParser parser = new XMLParser();
         Map<String, Map<String, String>> tilesData = parser.parseAllTileData();
 
         System.out.println(tilesData.size());
 
-        for (Map.Entry<?, ?> entry : tilesData.entrySet()) {
-            System.out.printf("%-15s : %s%n", entry.getKey(), entry.getValue());
-        }
+        tilesData.entrySet().forEach(entry -> System.out.printf("%-15s : %s%n", entry.getKey(), entry.getValue()));
 
         System.out.println("Starting balance: " + parser.getStartingBalance());
-
+        System.out.println("Start tile amount: " + parser.getStartAmount());
         System.out.println(parser.areaColors());
     }
 
