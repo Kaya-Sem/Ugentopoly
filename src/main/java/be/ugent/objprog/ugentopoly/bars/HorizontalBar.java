@@ -19,8 +19,6 @@ public class HorizontalBar extends GridPane implements Bar {
     private static final double COL_WIDTH = Tile.SHORT_SIDE;
     private final List<? extends Tile> tiles;
 
-
-
     public HorizontalBar(List<Tile> tiles) {
         this.tiles = tiles;
         setMinWidth(MiddleSection.getSize());
