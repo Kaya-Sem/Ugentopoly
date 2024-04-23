@@ -12,7 +12,7 @@ public class GameCard extends VerticalCard {
 
     public GameCard() {
         cardAction = (gameModel, chanceCard) -> {
-            throw new RuntimeException("cardmethod asked but had none");
+            throw new IllegalStateException("cardmethod asked but had none");
         };
     }
 
