@@ -20,7 +20,8 @@ public class GameCard extends VerticalCard {
         cardAction = consumer;
     }
 
-    public BiConsumer getCardAction() {
-        return cardAction;
+    public void performAction(GameModel model, GameCard gameCard) {
+        cardAction.accept(model, gameCard);
     }
+
 }
