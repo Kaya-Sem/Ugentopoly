@@ -1,12 +1,12 @@
-package be.ugent.objprog.ugentopoly.bars;
+package be.ugent.objprog.ugentopoly.gameBoard.bars;
 
 import java.util.List;
 import java.util.stream.IntStream;
 
 import be.ugent.objprog.ugentopoly.gameBoard.MiddleSection;
 import be.ugent.objprog.ugentopoly.tiles.tileViews.Tile;
-import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
 
 /*
     initializeRowConstraints() : fill the bar with 8 rows, as to create 8 places for tiles.
@@ -14,32 +14,31 @@ import javafx.scene.layout.GridPane;
     NON-URGENT write documentation for BARS
 */
 
-public class HorizontalBar extends GridPane implements Bar {
+public class VerticalBar extends GridPane implements Bar {
     private static final int NUMTILES = 9;
-    private static final double COL_WIDTH = Tile.SHORT_SIDE;
+    private static final double ROW_HEIGHT = Tile.SHORT_SIDE;
     private final List<? extends Tile> tiles;
 
-    public HorizontalBar(List<Tile> tiles) {
+    public VerticalBar(List<Tile> tiles) {
         this.tiles = tiles;
-        setMinWidth(MiddleSection.getSize());
-        setMaxWidth(MiddleSection.getSize());
-        setMinHeight(Tile.LONG_SIDE);
-        setMaxHeight(Tile.LONG_SIDE);
+        setMinWidth(Tile.LONG_SIDE);
+        setMaxWidth(Tile.LONG_SIDE);
+        setMinHeight(MiddleSection.getSize());
+        setMaxHeight(MiddleSection.getSize());
 
-        initializeColumnConstraints();
+        initializeRowConstraints();
         populate();
     }
 
-    private void initializeColumnConstraints() {
-        IntStream.range(1, NUMTILES).forEach(i -> getColumnConstraints().add(new ColumnConstraints(COL_WIDTH)));
+    private void initializeRowConstraints() {
+        IntStream.range(1, NUMTILES).forEach(i -> getRowConstraints().add(new RowConstraints(ROW_HEIGHT)));
     }
 
     public void populate() {
-        IntStream.range(0, NUMTILES).forEach(i -> add(tiles.get(i), i, 0));
+        IntStream.range(0, NUMTILES).forEach(i -> add(tiles.get(i), 0, i));
     }
 
     public void applyRotation(double angle) {
         tiles.forEach(tile -> tile.applyRotation(angle));
     }
-
 }
