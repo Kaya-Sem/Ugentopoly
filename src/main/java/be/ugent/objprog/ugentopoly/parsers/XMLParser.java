@@ -42,12 +42,12 @@ public class XMLParser {
     Document document = null;
     Element root = null;
 
-    public XMLParser() throws JDOMException {
+    public XMLParser()  {
         InputStream inputStream = getClass().getResourceAsStream(XML_PATH);
         try {
             document = new SAXBuilder().build(inputStream);
             root = document.getRootElement();
-        } catch (IOException e) {
+        } catch (IOException | JDOMException e) {
             e.printStackTrace();
         }
     }
