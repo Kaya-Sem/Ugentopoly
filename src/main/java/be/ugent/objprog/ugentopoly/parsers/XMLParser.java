@@ -11,13 +11,30 @@ import org.jdom2.Element;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 
-/*
- * NON-URGENT: write out XMLParser documentation
+// DRAFT
+/**
+ * XMLParser is a utility class designed to parse configurations and data from the ugentopoly.xml file
+ * <p>
+ * Key Features:
+ * - The parser uses JDOM2, a Java library for parsing, modifying, and outputting XML data using DOM.
+ * - It provides methods to fetch the starting balance of players, details of chance and community chest cards,
+ *   start amounts, tile details, and area colors for the board.
+ * - The parsing is done at initialization, storing the root element of the XML for efficient data retrieval.
+ * - Each parsing method is tailored to specific sections of the game's XML configuration to ensure modular,
+ *   reusable, and easily understandable code.
+ * <p>
+ * Design Justifications:
+ * - The XML file is parsed only once when the XMLParser object is created, improving performance by avoiding
+ *   repeated file reading and parsing operations.
+ * - Use of the static array `ATTRIBUTES` allows dynamic parsing of known attributes, enhancing
+ *   maintainability. If new attributes are added to the XML schema, only this array needs an update.
+ * - Methods are designed to be specific to components (e.g., getChanceCards, getChestCards, parseAllTileData)
+ *   which makes the API user-friendly and segregated based on usage, supporting the single responsibility principle.
+ * - Filtering null values during the map construction ensures that the returned data structures are clean
+ *   and contain only valid data, preventing the propagation of nulls that might lead to null pointer exceptions.
  */
 
 public class XMLParser {
-    // TODO parse make parsers for other xml data
-
     private static final String XML_PATH = "/be/ugent/objprog/ugentopoly/ugentopoly.xml";
     static final String[] ATTRIBUTES = { "area", "cost", "rent", "rent0", "rent1",
                                         "rent2", "rent3", "rent4", "rent5",
@@ -71,7 +88,6 @@ public class XMLParser {
 
             });
         });
-        ;
 
         return cards;
     }
