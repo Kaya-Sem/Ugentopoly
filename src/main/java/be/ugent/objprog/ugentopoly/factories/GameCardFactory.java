@@ -10,7 +10,9 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-public class ChanceCardFactory<T> {
+// HACK create interface for the factories?
+// HACK add an alert for each one
+public class GameCardFactory<T> {
     protected static final int TILES = 40;
     private Map<String, String> data = null;
 
@@ -25,7 +27,7 @@ public class ChanceCardFactory<T> {
     public GameCard forge(Map<String, String> tileData) {
         // add id to chancecard
         data = tileData;
-        Supplier action = actions.get(tileData.get("id"));
+        Supplier action = actions.get(tileData.get("type"));
         GameCard card = new GameCard();
         card.setCardAction((BiConsumer<GameModel, GameCard>) action.get());
         return card;
@@ -33,10 +35,9 @@ public class ChanceCardFactory<T> {
 
     private BiConsumer<GameModel, GameCard> jail() {
         return (gameModel, chanceCard) -> {
-                PlayerModel player =gameModel.getCurrentPlayerMove();
-                player.setGetOutOfJailCard(chanceCard);
-                gameModel.getChanceCardDeck().removeCard(chanceCard);
-                // TODO show card via gamemodel
+                PlayerModel player = gameModel.getCurrentPlayerMove();
+                player.changeGetOutOfJailCards(1);
+                // TODO show card via alert
             };
     }
 
@@ -87,7 +88,5 @@ public class ChanceCardFactory<T> {
             gameModel.getPlayerModels().forEach(player -> player.changeBalance(-amount));
         }));
     }
-
-    // create methods that takes gamemodel and shows it on the board
 
 }
