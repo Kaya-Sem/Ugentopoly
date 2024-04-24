@@ -39,8 +39,8 @@ public class XMLParser {
     static final String[] ATTRIBUTES = { "area", "cost", "rent", "rent0", "rent1",
                                         "rent2", "rent3", "rent4", "rent5",
                                         "amount" };
-    Document document;
-    Element root;
+    Document document = null;
+    Element root = null;
 
     public XMLParser() throws JDOMException {
         InputStream inputStream = getClass().getResourceAsStream(XML_PATH);
@@ -48,7 +48,7 @@ public class XMLParser {
             document = new SAXBuilder().build(inputStream);
             root = document.getRootElement();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
 
