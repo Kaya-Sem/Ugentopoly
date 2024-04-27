@@ -12,7 +12,7 @@ public class GameCard extends VerticalCard {
 
     public GameCard() {
         cardAction = (gameModel, chanceCard) -> {
-            throw new IllegalStateException("cardmethod asked but had none");
+            gameModel.addLog(gameModel.getCurrentPlayerMove().getPlayerName(), " landed on a tile with no action");
         };
     }
 
