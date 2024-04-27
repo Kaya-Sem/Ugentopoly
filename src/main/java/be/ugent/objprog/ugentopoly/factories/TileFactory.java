@@ -3,10 +3,9 @@ package be.ugent.objprog.ugentopoly.factories;
 import be.ugent.objprog.ugentopoly.tiles.TileTuple;
 import be.ugent.objprog.ugentopoly.tiles.tileModels.*;
 import be.ugent.objprog.ugentopoly.tiles.tileViews.*;
-import be.ugent.objprog.ugentopoly.tiles.tileViews.cornerTiles.FreeParkingCornerTile;
-import be.ugent.objprog.ugentopoly.tiles.tileViews.cornerTiles.GoToJailCornerTile;
-import be.ugent.objprog.ugentopoly.tiles.tileViews.cornerTiles.JailCornerTile;
-import be.ugent.objprog.ugentopoly.tiles.tileViews.cornerTiles.StartCornerTile;
+import be.ugent.objprog.ugentopoly.tiles.tileViews.cornerTiles.*;
+import be.ugent.objprog.ugentopoly.tiles.tileViews.cornerTiles.JailCornerTileView;
+import be.ugent.objprog.ugentopoly.tiles.tileViews.cornerTiles.StartCornerTileViewView;
 
 import java.util.Map;
 import java.util.Objects;
@@ -16,49 +15,76 @@ import java.util.function.Supplier;
 NON-URGENT add documentation
 */
 
-// hack create second factory for just the views?
-
-// TODO split into subfactories?
+// HACK split into subfactories?
 public class TileFactory {
     private final Map<String, String> areaColors;
     private Map<String, String> data = null;
+    private final int startAmount;
 
     private final Map<String, Supplier<TileTuple>> tileMethods = Map.of(
-            "START", this::createBasicTileModel,
-            "FREE_PARKING", this::createBasicTileModel,
-            "JAIL", this::createBasicTileModel,
-            "GO_TO_JAIL", this::createBasicTileModel,
+            "START", this::createStartTile,
+            "FREE_PARKING", this::createFreeParkingTile,
+            "JAIL", this::createJailTile,
+            "GO_TO_JAIL", this::createGoToJailTile,
             "STREET", this::createStreetModel,
-            "CHEST", this::createBasicTileModel,
-            "TAX", this::createTax,
+            "CHEST", this::createChestTile,
+            "TAX", this::createTaxTile,
             "RAILWAY", this::createRailway,
-            "CHANCE", this::createBasicTileModel,
+            "CHANCE", this::createChanceTile,
             "UTILITY", this::createUtility);
 
-
-    public TileFactory(Map<String, String> areaColors) {
+    public TileFactory(Map<String, String> areaColors, int startAmount) {
         this.areaColors = Objects.requireNonNull(areaColors);
-        // NEEDSLOG
+        this.startAmount = startAmount;
     }
 
+    // TODO explain why
     public TileTuple forge(Map<String, String> tileData) {
         data = tileData;
         return tileMethods.get(data.get("type")).get();
     }
 
-    public TileTuple createBasicTileModel() {
+    private TileTuple createChanceTile() {
+        ChanceTileModel model = new ChanceTileModel(
+                data.get("id"), Integer.parseInt(data.get("position"))
+        );
+        ChanceTileView view = new ChanceTileView(model);
 
-        // HACK
-        TileModel model = new TileModel(data.get("id"), Integer.parseInt(data.get("position")));
-        Tile view = switch (data.get("type")) {
-            case "START" -> new StartCornerTile(model);
-            case "JAIL" -> new JailCornerTile(model);
-            case "GO_TO_JAIL" -> new GoToJailCornerTile(model);
-            case "FREE_PARKING" -> new FreeParkingCornerTile(model);
-            case "CHEST" -> new ChestTileView(model);
-            case "CHANCE" -> new ChanceTileView(model);
-            default -> throw new IllegalStateException("Unexpected type: " + data.get("type"));
-        };
+        return new TileTuple(model, view);
+    }
+
+    private TileTuple createFreeParkingTile() {
+        FreeParkingModel model = new FreeParkingModel(
+                data.get("id"),
+                Integer.parseInt(data.get("position")));
+        FreeParkingCornerTileView view = new FreeParkingCornerTileView(model);
+
+        return new TileTuple(model, view);
+    }
+
+    private TileTuple createGoToJailTile() {
+        GoToJailTileModel model = new GoToJailTileModel(
+                data.get("id"), Integer.parseInt(data.get("position"))
+        );
+        GoToJailCornerTileView view = new GoToJailCornerTileView(model);
+
+        return new TileTuple(model, view);
+    }
+
+    private TileTuple createJailTile() {
+        JailTileModel model = new JailTileModel(
+                data.get("id"), Integer.parseInt(data.get("position"))
+        );
+        JailCornerTileView view = new JailCornerTileView(model);
+
+        return new TileTuple(model, view);
+    }
+
+    private TileTuple createChestTile() {
+        ChestTileModel model = new ChestTileModel(
+                data.get("id"), Integer.parseInt(data.get("position"))
+        );
+        ChestTileView view = new ChestTileView(model);
 
         return new TileTuple(model, view);
     }
@@ -68,18 +94,28 @@ public class TileFactory {
                 data.get("id"),
                 Integer.parseInt(data.get("position")),
                 Integer.parseInt(data.get("cost")));
-
         UtilityTileView view = new UtilityTileView(model);
+
         return new TileTuple(model, view);
     }
 
-    private TileTuple createTax() {
+    private TileTuple createTaxTile() {
         TaxTileModel model = new TaxTileModel(
                 data.get("id"),
                 Integer.parseInt(data.get("position")),
                 Integer.parseInt(data.get("amount")));
-
         TaxTileView view = new TaxTileView(model);
+
+        return new TileTuple(model, view);
+    }
+
+    private TileTuple createStartTile() {
+        StartTileModel model = new StartTileModel(
+                data.get("id"),
+                Integer.parseInt(data.get("position")),
+               startAmount
+        );
+        StartCornerTileViewView view = new StartCornerTileViewView(model);
 
         return new TileTuple(model, view);
     }
@@ -90,7 +126,6 @@ public class TileFactory {
                 Integer.parseInt(data.get("position")),
                 Integer.parseInt(data.get("cost")),
                 Integer.parseInt(data.get("rent")));
-
         RailwayTileView view = new RailwayTileView(model);
 
         return new TileTuple(model, view);
@@ -103,19 +138,10 @@ public class TileFactory {
                 areaColors.get(data.get("area")),
                 data.get("area"),
                 data.get("cost"),
-                data.get("rent0"),
-                data.get("rent1"),
-                data.get("rent2"),
-                data.get("rent3"),
-                data.get("rent4"),
-                data.get("rent5"));
-
+                data.get("rent0"));
         StreetTileView view = new StreetTileView(model);
 
         return new TileTuple(model, view);
     }
 
-    public Map<String, String> getData() {
-        return data;
-    }
 }
