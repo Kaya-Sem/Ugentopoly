@@ -4,9 +4,9 @@ import be.ugent.objprog.ugentopoly.tiles.tileModels.TileModel;
 import javafx.beans.Observable;
 
 // TODO make abstract?
-public class SmallTile extends Tile {
+public abstract class SmallTileView extends TileView {
 
-    protected SmallTile(TileModel model) {
+    protected SmallTileView(TileModel model) {
         super(model);
         setMinHeight(SHORT_SIDE);
         setMaxHeight(SHORT_SIDE);
