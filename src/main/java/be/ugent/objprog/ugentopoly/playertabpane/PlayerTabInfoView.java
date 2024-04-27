@@ -16,6 +16,9 @@ public class PlayerTabInfoView extends VBox implements InvalidationListener {
     public PlayerTabInfoView(PlayerModel playerModel) {
         this.playerModel = playerModel;
         playerModel.addListener(this);
+
+        playerBalance.set(String.valueOf(this.playerModel.getBalance()));
+
         Label balance = new Label();
         balance.textProperty().bind(playerBalance);
 
