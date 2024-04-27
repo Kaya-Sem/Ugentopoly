@@ -8,7 +8,7 @@ import javafx.scene.text.FontWeight;
 
 
 public class LogElement extends HBox {
-    private static final int SPACING = 9;
+    private static final int SPACING = 7;
 
     public LogElement(String playerName, String actionPerformed) {
         Label name = new Label(playerName);
