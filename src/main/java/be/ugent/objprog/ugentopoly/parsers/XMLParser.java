@@ -36,9 +36,7 @@ import org.jdom2.input.SAXBuilder;
 
 public class XMLParser {
     private static final String XML_PATH = "/be/ugent/objprog/ugentopoly/ugentopoly.xml";
-    static final String[] ATTRIBUTES = { "area", "cost", "rent", "rent0", "rent1",
-                                        "rent2", "rent3", "rent4", "rent5",
-                                        "amount" };
+    static final String[] ATTRIBUTES = {"area", "cost", "rent", "rent0", "amount"};
     Document document = null;
     Element root = null;
 
