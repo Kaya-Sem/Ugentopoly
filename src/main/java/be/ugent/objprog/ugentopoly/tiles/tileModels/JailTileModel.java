@@ -12,9 +12,7 @@ public class JailTileModel extends TileModel{
 
     @Override
     public Consumer<GameModel> getPlayerTileInteraction() {
-        return gameModel -> {
-            gameModel.addLog(gameModel.getCurrentPlayerMove().getPlayerName(), "bezoekt Overpoort");
-        };
+        return gameModel -> gameModel.addLog(gameModel.getCurrentPlayerMove().getPlayerName(), "bezoekt Overpoort");
     }
 
 }
