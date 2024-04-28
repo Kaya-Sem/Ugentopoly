@@ -1,8 +1,10 @@
 package be.ugent.objprog.ugentopoly.tiles;
 
-import be.ugent.objprog.ugentopoly.tiles.tileViews.Tile;
+import be.ugent.objprog.ugentopoly.tiles.tileViews.TileView;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 
 public class TileHBox extends HBox {
@@ -10,13 +12,22 @@ public class TileHBox extends HBox {
     private static final int PADDING = 5;
 
     public TileHBox(){
-        setMinHeight(Tile.SHORT_SIDE);
-        setMaxHeight(Tile.SHORT_SIDE);
-        setMinWidth(Tile.LONG_SIDE);
-        setMaxWidth(Tile.LONG_SIDE);
+        applySettings();
+    }
+
+    private void applySettings() {
+        setMinHeight(TileView.SHORT_SIDE);
+        setMaxHeight(TileView.SHORT_SIDE);
+        setMinWidth(TileView.LONG_SIDE);
+        setMaxWidth(TileView.LONG_SIDE);
 
         setPadding(new Insets(PADDING));
         setAlignment(Pos.CENTER);
         setSpacing(SPACING);
+    }
+
+    public TileHBox(Node... nodes) {
+        super(nodes);
+        applySettings();
     }
 }
