@@ -31,7 +31,6 @@ public class PlayerCustomizer extends VBox {
         field.setPromptText(textFieldHint);
         field.setAlignment(Pos.CENTER);
 
-
         badgeComboBox.setPromptText("Select badge");
         colorPicker.setPromptText("Select color");
 
@@ -51,6 +50,7 @@ public class PlayerCustomizer extends VBox {
     }
 
 
+    // HACK smelly
     private class button extends ToggleButton {
         private button() {
             setAlignment(Pos.CENTER);
@@ -68,11 +68,12 @@ public class PlayerCustomizer extends VBox {
                         ));
                         children.forEach(child -> child.setDisable(true));
 
+                        // remove
                         System.out.println("Current map: " + creator.players);
                 } else {
                     creator.players.remove(playerNumber);
                     children.forEach(child -> child.setDisable(false));
-                    System.out.println("Current map: " + creator.players);
+                    System.out.println("Current map: " + creator.players); // remove
                 }
             });
         }

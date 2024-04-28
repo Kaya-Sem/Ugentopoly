@@ -1,6 +1,6 @@
 package be.ugent.objprog.ugentopoly.tiles.tileCards;
 
-import be.ugent.objprog.ugentopoly.tiles.tileViews.Tile;
+import be.ugent.objprog.ugentopoly.tiles.tileViews.TileView;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -16,8 +16,8 @@ public class TaxCard extends VerticalCard {
 
         ImageView imageView = new ImageView(image);
         imageView.setPreserveRatio(true);
-        imageView.setFitHeight(Tile.LONG_SIDE);
-        imageView.setFitWidth(Tile.LONG_SIDE);
+        imageView.setFitHeight(TileView.LONG_SIDE);
+        imageView.setFitWidth(TileView.LONG_SIDE);
 
         Label textLabel = new Label(text);
         textLabel.setFont(Font.font("Arial", FontWeight.BOLD, 14));

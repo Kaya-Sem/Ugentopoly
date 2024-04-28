@@ -1,9 +1,11 @@
 package be.ugent.objprog.ugentopoly.tiles.tileViews;
 
+import be.ugent.objprog.ugentopoly.players.PlayerModel;
 import be.ugent.objprog.ugentopoly.tiles.tileCards.StreetCard;
 import be.ugent.objprog.ugentopoly.tiles.tileModels.StreetTileModel;
-import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -14,27 +16,21 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
-public class StreetTileView extends SmallTile {
+public class StreetTileView extends SmallTileView {
 
-    private final StreetTileModel model;
     private static final int STRIP_WIDTH = 30;
-    private String owner = ""; // TODO implement owner in tilemodel and have it Simple. blah blah
 
-    // Constructor
     public StreetTileView(StreetTileModel model) {
         super(model);
-        this.model = model;
-        this.model.addListener(this);
-        card = new StreetCard(this.model);
         setup();
-        // NEEDSLOG
     }
 
     @Override
     public void setup() {
+        StreetTileModel model = (StreetTileModel) this.model;
         HBox hbox = new HBox();
 
-        Label label = new Label(model.getStreetName());
+        Label label = new Label(model.getTileName());
         label.setAlignment(Pos.CENTER);
         label.setFont(Font.font("Arial", FontWeight.BOLD, 11));
         label.setWrapText(true);
@@ -53,13 +49,7 @@ public class StreetTileView extends SmallTile {
 
         hbox.getChildren().addAll(pane, rectangle);
 
-        getChildren().addAll(hbox, tileButton, badgeHolders);
+        getChildren().addAll(hbox, badgeHolders, tileButton);
     }
 
-    @Override
-    public void invalidated(Observable observable) {
-        super.invalidated(observable);
-        StreetTileModel streetTileModel = (StreetTileModel) observable;
-        owner = streetTileModel.getOwner();
-    }
 }

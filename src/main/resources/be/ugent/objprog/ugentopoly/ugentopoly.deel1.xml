@@ -14,7 +14,7 @@
         <area id="area8" color="#000080" house="200"/>
     </areas>
 
-    <tiles>
+    <tileViews>
         <tile type="START" position="0" id="tile.start"/>
         <tile type="STREET" position="1" area="area1" id="tile.street01" cost="60" rent0="2" rent1="10" rent2="30" rent3="90" rent4="160" rent5="250"/>
         <tile type="CHEST" position="2" id="tile.chest"/>
@@ -55,5 +55,5 @@
         <tile type="STREET" position="37" area="area8" id="tile.street21" cost="350" rent0="35" rent1="175" rent2="500" rent3="1100" rent4="1300" rent5="1500"/>
         <tile type="TAX" position="38" id="tile.tax2" amount="75"/>
         <tile type="STREET" position="39" area="area8" id="tile.street22" cost="400" rent0="50" rent1="200" rent2="600" rent3="1400" rent4="1700" rent5="2000"/>
-    </tiles>
+    </tileViews>
 </board>

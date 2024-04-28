@@ -2,10 +2,9 @@ package be.ugent.objprog.ugentopoly.tiles.tileViews.cornerTiles;
 
 import be.ugent.objprog.ugentopoly.parsers.PropertyLoader;
 import be.ugent.objprog.ugentopoly.tiles.tileCards.BasicVerticalCard;
-import be.ugent.objprog.ugentopoly.tiles.tileViews.Tile;
 import be.ugent.objprog.ugentopoly.tiles.TileImageView;
+import be.ugent.objprog.ugentopoly.tiles.tileModels.JailTileModel;
 import be.ugent.objprog.ugentopoly.tiles.tileModels.TileModel;
-import javafx.beans.Observable;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -13,34 +12,28 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
-public class JailCornerTile extends CornerTile {
-    private final Image image = new Image("/be/ugent/objprog/ugentopoly/assets/jail.png");
+public class JailCornerTileView extends CornerTileView {
+    protected static final int ROTATIONANGLE = 135; // TODO extract to connertile?
 
-    public JailCornerTile(TileModel model){
+    public JailCornerTileView(TileModel model){
         super(model);
         setup();
-        card = createCard(PropertyLoader.getLabel(model.getId()));
-    }
-
-    private BasicVerticalCard createCard(String text) {
-        return new BasicVerticalCard(image, text
-        );
     }
 
     public void setup() {
+        JailTileModel model = (JailTileModel) this.model;
         VBox vBox = new VBox();
 
         Label textLabel = new Label(PropertyLoader.getLabel(getModel().getId()));
         textLabel.setFont(Font.font("Arial", FontWeight.BOLD, 10));
 
-        TileImageView tileImageView= new TileImageView(image, 1.5, true);
+        TileImageView tileImageView= new TileImageView(model.getImage(), 1.5, true);
 
         vBox.getChildren().addAll(tileImageView, textLabel);
         vBox.setMaxHeight(LONG_SIDE - 30);
         vBox.setMaxWidth(LONG_SIDE - 30);
         vBox.setAlignment(Pos.CENTER);
-        // MAKE ROTATION CONSTANT
-        vBox.setRotate(135);
+        vBox.setRotate(ROTATIONANGLE);
 
         getChildren().addAll(vBox, badgeHolders, tileButton);
     }

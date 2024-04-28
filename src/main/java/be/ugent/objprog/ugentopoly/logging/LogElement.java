@@ -20,4 +20,9 @@ public class LogElement extends HBox {
 
         getChildren().addAll(name, action);
     }
+
+    public LogElement(String message) {
+        Label messageLabel = new Label(message);
+        getChildren().addAll(messageLabel);
+    }
 }

@@ -1,5 +1,6 @@
 package be.ugent.objprog.ugentopoly.tiles.tileCards;
 
+import be.ugent.objprog.ugentopoly.gameBoard.BoardModel;
 import be.ugent.objprog.ugentopoly.gameBoard.MiddleSection;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.Background;
@@ -8,8 +9,8 @@ import javafx.scene.shape.Rectangle;
 
 public class HorizontalCard extends TemplateCard {
 
-    public static final Double WIDTH = MiddleSection.getSize() / 2;
-    public static final Double HEIGHT = MiddleSection.getSize() / 3;
+    public static final Double WIDTH = BoardModel.MIDDLE_AREA_SIZE / 2;
+    public static final Double HEIGHT = BoardModel.MIDDLE_AREA_SIZE / 3;
 
     public HorizontalCard() {
         setMinHeight(HEIGHT);

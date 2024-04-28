@@ -1,6 +1,6 @@
 package be.ugent.objprog.ugentopoly.factories;
 
-import be.ugent.objprog.ugentopoly.DisplayedCardController;
+import be.ugent.objprog.ugentopoly.DisplayCardController;
 import be.ugent.objprog.ugentopoly.tiles.TileTuple;
 import be.ugent.objprog.ugentopoly.tiles.tileModels.*;
 import be.ugent.objprog.ugentopoly.tiles.tileViews.*;
@@ -21,7 +21,7 @@ public class TileFactory {
     private final Map<String, String> areaColors;
     private Map<String, String> data = null;
     private final int startAmount;
-    private final DisplayedCardController controller;
+    private final DisplayCardController controller;
 
     private final Map<String, Supplier<TileTuple>> tileMethods = Map.of(
             "START", this::createStartTile,
@@ -35,7 +35,7 @@ public class TileFactory {
             "CHANCE", this::createChanceTile,
             "UTILITY", this::createUtility);
 
-    public TileFactory(Map<String, String> areaColors, int startAmount, DisplayedCardController cardController) {
+    public TileFactory(Map<String, String> areaColors, int startAmount, DisplayCardController cardController) {
         this.areaColors = Objects.requireNonNull(areaColors);
         this.startAmount = startAmount;
         controller = cardController;

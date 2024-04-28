@@ -1,6 +1,6 @@
 package be.ugent.objprog.ugentopoly.tiles;
 
-import be.ugent.objprog.ugentopoly.tiles.tileViews.Tile;
+import be.ugent.objprog.ugentopoly.tiles.tileViews.TileView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -10,8 +10,8 @@ public class TileImageView extends ImageView {
     public TileImageView(Image image){
         super(image);
 
-        setFitHeight(Tile.SHORT_SIDE / 1.5);
-        setFitWidth(Tile.SHORT_SIDE / 1.5);
+        setFitHeight(TileView.SHORT_SIDE / 1.5);
+        setFitWidth(TileView.SHORT_SIDE / 1.5);
         setPreserveRatio(true);
     }
 
@@ -19,7 +19,7 @@ public class TileImageView extends ImageView {
     public TileImageView(Image image, Double scalar, boolean isCorner){
         super(image);
 
-        double value = (isCorner) ? Tile.LONG_SIDE / scalar : Tile.SHORT_SIDE / scalar;
+        double value = (isCorner) ? TileView.LONG_SIDE / scalar : TileView.SHORT_SIDE / scalar;
         setFitHeight(value);
         setFitWidth(value);
 

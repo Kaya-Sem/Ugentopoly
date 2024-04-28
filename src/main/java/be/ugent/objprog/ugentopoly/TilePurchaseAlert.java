@@ -8,11 +8,11 @@ public class TilePurchaseAlert extends Alert {
     private final ButtonType buttonYes = new ButtonType("BUY");
     private final ButtonType buttonNo = new ButtonType("No");
 
-    public TilePurchaseAlert(String header) {
+    public TilePurchaseAlert(String header, String cost) {
         super(AlertType.CONFIRMATION);
         setTitle("Koop Tile");
         setHeaderText(header);
-        setContentText(header + " kopen?");
+        setContentText(header + " kopen voor €" + cost + "?"  );
         getButtonTypes().setAll(buttonNo, buttonYes);
     }
 

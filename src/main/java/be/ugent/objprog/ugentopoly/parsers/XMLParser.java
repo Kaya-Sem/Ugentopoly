@@ -36,7 +36,7 @@ import org.jdom2.input.SAXBuilder;
 
 public class XMLParser {
     private static final String XML_PATH = "/be/ugent/objprog/ugentopoly/ugentopoly.xml";
-    static final String[] ATTRIBUTES = {"area", "cost", "rent", "rent0", "amount"};
+    static final String[] ATTRIBUTES = {"area", "cost", "rent", "rent0", "amount", "position"};
     Document document = null;
     Element root = null;
 
@@ -73,6 +73,7 @@ public class XMLParser {
             cardElements.forEach(card -> {
                 Map<String, String> cardAttributes = new HashMap<>();
 
+                // Each tile has this in common
                 String cardId = card.getAttributeValue("id");
                 cardAttributes.put("id", cardId);
                 cardAttributes.put("type", card.getAttributeValue("type"));
@@ -117,7 +118,6 @@ public class XMLParser {
 
     private static Map<String, String> parseTile(Element tileElement) {
         Map<String, String> tileMap = new HashMap<>();
-        tileMap.put("position", tileElement.getAttributeValue("position"));
         tileMap.put("id", tileElement.getAttributeValue("id"));
         tileMap.put("type", tileElement.getAttributeValue("type"));
 

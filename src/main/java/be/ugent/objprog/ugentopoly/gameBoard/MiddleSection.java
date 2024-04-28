@@ -1,53 +1,48 @@
 package be.ugent.objprog.ugentopoly.gameBoard;
 
+import be.ugent.objprog.ugentopoly.CustomImage;
+import be.ugent.objprog.ugentopoly.CustomImageView;
 import be.ugent.objprog.ugentopoly.Ugentopoly;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 
-public class MiddleSection extends StackPane {
-    public static final int SMALL_TILES = 13;
-    static final double SIZE = (Ugentopoly.BOARD_SIZE / SMALL_TILES) * 9;
+public class MiddleSection extends StackPane implements InvalidationListener {
 
-    private static final Image BACKGROUND = new Image(
-            MiddleSection.class
-                    .getResourceAsStream("/be/ugent/objprog/ugentopoly/gent3.jpg"));
-    private static final Image LOGO = new Image(
-            MiddleSection.class.getResourceAsStream("/be/ugent/objprog/ugentopoly/assets/logo.png"));
+   private static final Image BACKGROUND = new CustomImage("gent3.jpg");
+    private static final Image LOGO = new CustomImage("logo.png");
+
     protected static final double ROTATION = 45.0;
     protected static final double SCALAR = 0.15;
 
-    private final StackPane displayedCard;
+    private final BoardModel boardModel;
+    private final StackPane cardHolder;
 
-    public MiddleSection() {
-        setMinSize(SIZE, SIZE);
-        setMaxSize(SIZE, SIZE);
+    public MiddleSection(BoardModel boardModel) {
+        this.boardModel = boardModel;
+        this.boardModel.addListener(this);
 
-        displayedCard = new StackPane();
+        double size = BoardModel.MIDDLE_AREA_SIZE;
+        setMinSize(size, size);
+        setMaxSize(size, size);
 
-        ImageView background = new ImageView(BACKGROUND);
-        ImageView logo = new ImageView(LOGO);
-        background.setFitHeight(SIZE);
-        background.setFitWidth(SIZE);
-        background.setPreserveRatio(true);
+        cardHolder = new StackPane();
 
-        logo.setPreserveRatio(true);
-        logo.setFitWidth(Board.BOARD_SIZE);
-        logo.setFitHeight(SIZE * SCALAR);
+        CustomImageView background = new CustomImageView(size , boardModel.BOARD_SIZE, BACKGROUND);
+        CustomImageView logo = new CustomImageView(BoardModel.BOARD_SIZE * SCALAR, size, LOGO);
+
         logo.setRotate(ROTATION);
 
-        getChildren().addAll(background, logo, displayedCard);
+        getChildren().addAll(background, logo, cardHolder);
     }
 
-    // HACK do this with MVC
-    public void updateDisplayedCard(StackPane card) {
-        displayedCard.getChildren().clear();
-        if (null != card) {
-            displayedCard.getChildren().addAll(card);
+    @Override
+    public void invalidated(Observable observable) {
+        cardHolder.getChildren().clear();
+        if (null != boardModel.getDisplayedCard()) {
+            cardHolder.getChildren().add(boardModel.getDisplayedCard());
         }
-    }
-
-    public static double getSize() {
-        return SIZE;
     }
 }

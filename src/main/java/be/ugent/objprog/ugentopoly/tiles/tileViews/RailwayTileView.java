@@ -12,36 +12,29 @@ import javafx.scene.text.FontWeight;
 
 import java.util.Objects;
 
-public class RailwayTileView extends SmallTile {
-    private static final Image image = new Image(Objects.requireNonNull(SmallTile.class.getResourceAsStream(
-            "/be/ugent/objprog/ugentopoly/assets/railway.png"))
-            );
+public class RailwayTileView extends SmallTileView {
+
 
     // Constructor
     public RailwayTileView(RailwayTileModel model){
         super(model);
-        card = new RailwayCard(
-                image,
-                PropertyLoader.getLabel(model.getId()),
-                String.valueOf(model.getCost()),
-                String.valueOf(model.getRent()));
         setup();
     }
 
     // OPTIMIZE
     @Override
     protected void setup() {
-        TileImageView imageView = new TileImageView(image);
-        // TODO create extra constructor to call with children
-        TileHBox hBox = new TileHBox();
+        RailwayTileModel model = (RailwayTileModel) this.model;
+        TileImageView imageView = new TileImageView(model.getImage());
 
-        String text = PropertyLoader.getLabel(model.getId());
+        // HACK use tileName
+        String text = model.getTileName();
         Label textLabel = new Label(text);
         textLabel.setFont(Font.font("Arial", FontWeight.BOLD, 10));
         textLabel.setWrapText(true);
 
-        hBox.getChildren().addAll(imageView, textLabel);
+        TileHBox hBox = new TileHBox(imageView, textLabel);
 
-        getChildren().addAll(hBox, tileButton, badgeHolders);
+        getChildren().addAll(hBox, badgeHolders, tileButton);
     }
 }

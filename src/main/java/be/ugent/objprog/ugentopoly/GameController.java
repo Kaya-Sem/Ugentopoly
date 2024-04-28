@@ -1,91 +1,113 @@
 package be.ugent.objprog.ugentopoly;
 
+import be.ugent.objprog.ugentopoly.cardDeck.GameCard;
 import be.ugent.objprog.ugentopoly.dice.DiceModel;
+import be.ugent.objprog.ugentopoly.parsers.PropertyLoader;
+import be.ugent.objprog.ugentopoly.players.Pion;
 import be.ugent.objprog.ugentopoly.players.PlayerModel;
 import be.ugent.objprog.ugentopoly.tiles.tileModels.TileModel;
-import javafx.beans.Observable;
 import javafx.stage.Stage;
 
 import java.util.List;
+import java.util.Queue;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
 /*
+NON-URGENT write class documentation
 Functions as the controller for GameModel, so performs all the updates for it
-
  */
 
 public class GameController {
     private final Stage primaryStage;
     private final GameModel gameModel;
-    private final DiceModel diceModel;
 
     public GameController(Stage primaryStage, GameModel gameModel, DiceModel diceModel) {
         this.primaryStage = primaryStage;
         this.gameModel = gameModel;
-        this.diceModel = diceModel;
-        this.diceModel.setController(this);
+        diceModel.setController(this);
 
         initializeGame();
     }
-
-    // TODO add nextMove() method to switch to next player
 
     private void initializeGame() {
         List<PlayerModel> players = gameModel.getPlayerModels();
         players.forEach(this::gameOverCondition);
         gameModel.setCurrentPlayerMove(players.getFirst());
 
-         TileModel startTile = (TileModel) gameModel.getTileModels()[0];
-
-         players.forEach(player -> {
-             startTile.addPion(player.getPion());
-         });
-
+        TileModel startTile = gameModel.getTileModels()[0];
+        players.forEach(player -> {
+            Pion pion = player.getPion();
+            pion.setPosition(0);
+            startTile.addPion(pion);
+        });
+        gameModel.addLog(gameModel.getCurrentPlayerMove().getPlayerName(), "zal als eerste spelen!");
     }
 
-    private void nextMove() {
-        // change current move user to next in line, if they are not in jail. Create a boolean for that? implement a queue?
-        // allow them to roll
+    // TODO
+    public void nextMove()  {
+        int moves = gameModel.getDiceModel().getMostRecentRoll();
+        PlayerModel currentPlayer = gameModel.getCurrentPlayerMove();
 
-        // according to outcome, disable the button or allow them to move again
+        Pion currentPion = currentPlayer.getPion();
 
-        // moves according to outcome -> update step by step tile position (fade in/fade out)?
-        // perform a call to a method to perform a tile's action.
-        // execute that action
-        // repeat
-    }
-
-        public void rollDice(List<Integer> list) {
-        diceModel.setRollable(false);
-        diceModel.setMostRecentRoll(String.valueOf(list.getFirst() + list.getLast()));
-
-        if (list.getFirst().equals(list.getLast())) {
-            diceModel.setRollable(true);
-            return;
+        for (int i = 0; i < moves; i++) {
+                movePion(currentPion);
         }
 
-        // perform move
+        TileModel currentTile = gameModel.getTileModels()[currentPion.getPosition()];
+        gameModel.addLog(currentPlayer.getPlayerName(), "belande op " + PropertyLoader.getLabel(currentTile.getId()));
+        Consumer<GameModel> action = currentTile.getPlayerTileInteraction();
+        action.accept(gameModel);
 
-
-            // next move
-        diceModel.setRollable(true);
+        nextPlayer();
     }
 
+    private void nextPlayer() {
+        PlayerModel playerModel = gameModel.getPlayerModelQueue().getNextPlayer();
+        if (playerModel.isInJail()) {
+
+            if (playerModel.getLeaveJailCards() > 0) {
+                gameModel.addLog(playerModel.getPlayerName(), "geraakt thuis van de Overpoort");
+                playerModel.changeGetOutOfJailCards(-1);
+            } else {
+                gameModel.addLog(playerModel.getPlayerName(), "is stomdronken, en zal dus moeten dobbelen tot deze nuchter is");
+                // implement rolling
+            }
+        }
+        gameModel.setCurrentPlayerMove(playerModel);
+        gameModel.addLog(playerModel.getPlayerName(), "is aan de beurt!");
+    }
+
+    private void movePion(Pion pion) {
+        int position = pion.getPosition();
+        TileModel[] tileModels = gameModel.getTileModels();
+
+        TileModel currentModel = tileModels[position];
+        currentModel.removePion(pion);
+
+        int newPosition = (position + 1) % tileModels.length;
+
+        pion.setPosition(newPosition);
+
+        TileModel newModel = tileModels[newPosition];
+        newModel.addPion(pion);
+    }
+
+    // HACK to fix.
     private void gameOverCondition(PlayerModel model) {
-        model.balanceProperty().addListener(
+    /*    model.balanceProperty().addListener(
                 (observableValue, oldValue, newValue) -> {
-                    if (newValue.intValue() <= 0) {
-                        System.out.println("Player " + model.getPlayerName() + " is bankrupt!");
+                    if (0 >= newValue.intValue()) {
                         primaryStage.close();
                         // TODO add closing window / dialog popup
                     }
                 }
-        );
+        );*/
     }
 
     public GameModel getGameModel() {
         return gameModel;
     }
-    public DiceModel getDiceModel() {
-        return diceModel;
-    }
+
 }

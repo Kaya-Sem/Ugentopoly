@@ -6,7 +6,7 @@ import java.util.Map;
 import be.ugent.objprog.ugentopoly.factories.TileFactory;
 import be.ugent.objprog.ugentopoly.parsers.XMLParser;
 import be.ugent.objprog.ugentopoly.tiles.tileModels.TileModel;
-import be.ugent.objprog.ugentopoly.tiles.tileViews.Tile;
+import be.ugent.objprog.ugentopoly.tiles.tileViews.TileView;
 
 /**
  * Initializes the tiles for the game.
@@ -16,13 +16,13 @@ import be.ugent.objprog.ugentopoly.tiles.tileViews.Tile;
 
 public class TileInitializer {
     private final TileModel[] tileModelArray;
-    private final Tile[] tileViewArray;
+    private final TileView[] tileViewArray;
     private final XMLParser parser;
     private final TileFactory factory;
 
     public TileInitializer(XMLParser parser, TileFactory factory) {
         tileModelArray = new TileModel[40];
-        tileViewArray = new Tile[40];
+        tileViewArray = new TileView[40];
 
         this.parser = parser;
         this.factory = factory;
@@ -34,26 +34,27 @@ public class TileInitializer {
 
         tileData.values().stream().map(factory::forge).forEach(tuple -> {
             TileModel model = tuple.tileModel();
-            Tile view = tuple.tileView();
+            TileView view = tuple.tileView();
             int position = model.getPosition();
             tileModelArray[position] = model;
             tileViewArray[position] = view;
         });
 
+        // HACK return a record with the correct types to minimize casting
         return Map.of(
                 "models", tileModelArray,
                 "left", reverse(Arrays.copyOfRange(tileViewArray, 1, 10)),
                 "top", Arrays.copyOfRange(tileViewArray, 11, 20),
                 "right", Arrays.copyOfRange(tileViewArray, 21, 30),
                 "bottom", reverse(Arrays.copyOfRange(tileViewArray, 31, 40)),
-                "corners", new Tile[] { tileViewArray[0], tileViewArray[10], tileViewArray[20], tileViewArray[30] }
+                "corners", new TileView[] { tileViewArray[0], tileViewArray[10], tileViewArray[20], tileViewArray[30] }
         );
     }
 
-    private Tile[] reverse(Tile[] array) {
+    private static TileView[] reverse(TileView[] array) {
         int length = array.length;
         for (int i = 0; i < length / 2; i++) {
-            Tile temp = array[i];
+            TileView temp = array[i];
             array[i] = array[array.length - 1 - i];
             array[array.length - 1 - i] = temp;
         }

@@ -17,8 +17,8 @@ import javafx.scene.layout.GridPane;
 
 public class HorizontalBar extends GridPane implements Bar {
     private static final double COL_WIDTH = TileView.SHORT_SIDE;
+    private static final double OFFSET = 14.5;
     private final List<? extends TileView> tiles;
-
     public HorizontalBar(List<TileView> tileViews) {
         tiles = tileViews;
         setMinWidth(BoardModel.MIDDLE_AREA_SIZE);
@@ -39,6 +39,8 @@ public class HorizontalBar extends GridPane implements Bar {
     }
 
     public void applyRotation(double angle) {
+        setTranslateX(-OFFSET);
+        setTranslateY(+OFFSET);
         tiles.forEach(tile -> tile.applyRotation(angle));
     }
 

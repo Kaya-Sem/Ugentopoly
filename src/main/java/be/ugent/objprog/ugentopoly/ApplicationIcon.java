@@ -5,6 +5,7 @@ import javafx.scene.image.Image;
 public enum ApplicationIcon {
     ;
 
+    // TODO add custom icon?
     public static Image icon() {
         return new Image(ApplicationIcon.class.getResourceAsStream("/be/ugent/objprog/ugentopoly/assets/chest.png"));
     }

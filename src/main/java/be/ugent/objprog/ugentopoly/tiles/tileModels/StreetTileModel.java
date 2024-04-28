@@ -1,102 +1,91 @@
 package be.ugent.objprog.ugentopoly.tiles.tileModels;
 
+import be.ugent.objprog.ugentopoly.DisplayCardController;
+import be.ugent.objprog.ugentopoly.GameModel;
+import be.ugent.objprog.ugentopoly.TilePurchaseAlert;
 import be.ugent.objprog.ugentopoly.parsers.PropertyLoader;
+import be.ugent.objprog.ugentopoly.players.PlayerModel;
+import be.ugent.objprog.ugentopoly.tiles.tileCards.StreetCard;
+import javafx.collections.ObservableList;
+
+import java.util.function.Consumer;
 
 public class StreetTileModel extends TileModel {
 
-    private final String defaultOwner = "no owner";
-
+    private PlayerModel owner = null;
     private final String area;
     private final String cost;
-    private final String rent0;
-    private final String rent1;
-    private final String rent2;
-    private final String rent3;
-    private final String rent4;
-    private final String rent5;
-    private String owner;
+    private final String rent;
     private final String color;
-    private final String streetName;
 
     public StreetTileModel(
-            String id,
-            int position,
+            String tileID,
+            int tilePosition,
             String color,
             String area,
             String cost,
-            String rent0,
-            String rent1,
-            String rent2,
-            String rent3,
-            String rent4,
-            String rent5) {
-        super(id, position);
-        this.streetName = PropertyLoader.getLabel(id);
+            String rent,
+            DisplayCardController controller
+            ) {
+        super(tileID, tilePosition, controller);
         this.color = color;
         this.area = area;
-        this.owner = "no owner";
         this.cost = cost;
-        this.rent0 = rent0;
-        this.rent1 = rent1;
-        this.rent2 = rent2;
-        this.rent3 = rent3;
-        this.rent4 = rent4;
-        this.rent5 = rent5;
-
+        this.rent = rent;
+        card = new StreetCard(this);
     }
 
-    public String getOwner() {
+    public PlayerModel getOwner() {
         return owner;
     }
 
-    public void setOwner(String owner) {
-        if (! this.owner.equals(defaultOwner)) {
-            System.err.println("Owner is already set...");
-        } else {
+    public void setOwner(PlayerModel owner) {
             this.owner = owner;
             fireInvalidationEvent();
         }
-        // NEEDSLOG
-    }
-
 
     public String getColor() {
         return color;
-    }
-
-    public String getStreetName() {
-        return streetName;
     }
 
     public String getCost() {
         return cost;
     }
 
-    public String getRent0() {
-        return rent0;
-    }
-
-    public String getRent1() {
-        return rent1;
-    }
-
-    public String getRent2() {
-        return rent2;
-    }
-
-    public String getRent3() {
-        return rent3;
-    }
-
-    public String getRent4() {
-        return rent4;
-    }
-
-    public String getRent5() {
-        return rent5;
+    public String getRent() {
+        return rent;
     }
 
     public String getArea() {
         return area;
+    }
+
+    @Override
+    public Consumer<GameModel> getPlayerTileInteraction() {
+        return (gameModel -> {
+            PlayerModel currentPlayer = gameModel.getCurrentPlayerMove();
+            String currentPlayerName = currentPlayer.getPlayerName();
+            ObservableList<TileModel> ownedTiles = currentPlayer.getOwnedTiles();
+
+            if (ownedTiles.contains(this)) {
+                gameModel.addLog(currentPlayer.getPlayerName(), "landed on his own tile!");
+            } else if (owner == null) {
+                boolean result = new TilePurchaseAlert(tileName, cost).showAndAwaitResponse();
+
+                if (result) {
+                    currentPlayer.changeBalance(-Integer.parseInt(cost));
+                    currentPlayer.addTile(this);
+                    setOwner(currentPlayer);
+                    gameModel.addLog(currentPlayerName, "kocht " + tileName + " voor €"+ cost + "!");
+                } else {
+                    gameModel.addLog(currentPlayerName, "kocht " + tileName +  " niet.");
+                }
+            } else {
+                owner.changeBalance(Integer.parseInt(rent));
+                currentPlayer.changeBalance(Integer.parseInt(rent));
+                gameModel.addLog(currentPlayer.getPlayerName(), "betaald €" + rent + "aan " + owner.getPlayerName());
+                // TODO add check to see if the owner contains the other areas
+            }
+        });
     }
 }

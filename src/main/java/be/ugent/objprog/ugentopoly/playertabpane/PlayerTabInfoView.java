@@ -1,12 +1,23 @@
 package be.ugent.objprog.ugentopoly.playertabpane;
 
 import be.ugent.objprog.ugentopoly.players.PlayerModel;
+import be.ugent.objprog.ugentopoly.tiles.tileModels.TileModel;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.scene.control.Label;
+
 
 public class PlayerTabInfoView extends VBox implements InvalidationListener {
 
@@ -19,14 +30,26 @@ public class PlayerTabInfoView extends VBox implements InvalidationListener {
 
         playerBalance.set(String.valueOf(this.playerModel.getBalance()));
 
-        Label balance = new Label();
-        balance.textProperty().bind(playerBalance);
+        ListView<TileModel> playerOwnedTiles = new ListView<>(playerModel.getOwnedTiles());
 
-        // TODO add player position and style balance better
-        // TODO add listview of tiles
+        getChildren().addAll(getPlayerNameLabel(), getBalanceLabel(), playerOwnedTiles);
+        setPadding(new Insets(20));
+    }
 
-        // ObservableList<TileModel> observableList = FXCollections.observableArrayList(playerModel.getOwnedTiles());
-        getChildren().addAll(balance);
+    private Label getPlayerNameLabel() {
+        Label playerName = new Label(playerModel.getPlayerName());
+        playerName.setFont(Font.font("Arial", FontWeight.BOLD, 17));
+        playerName.setAlignment(Pos.CENTER);
+        return playerName;
+    }
+
+    private Label getBalanceLabel() {
+        Label balanceLabel = new Label();
+        balanceLabel.textProperty().bind(Bindings.createStringBinding(
+                () -> "€" + playerBalance.get(),
+                playerBalance
+        ));
+        return balanceLabel;
     }
 
     @Override
