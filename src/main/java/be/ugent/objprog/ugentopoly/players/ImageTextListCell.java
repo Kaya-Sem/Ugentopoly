@@ -1,6 +1,8 @@
 package be.ugent.objprog.ugentopoly.players;
 
+import be.ugent.objprog.ugentopoly.CustomImageView;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
@@ -22,12 +24,10 @@ public class ImageTextListCell extends ListCell<ImageTextItem> {
             setGraphic(null);
         } else {
 
-            ImageView view = new ImageView(item.image());
-            view.setFitWidth(IMAGESIZE);
-            view.setFitHeight(IMAGESIZE);
-            view.setPreserveRatio(true);
+            ImageView view = new CustomImageView(IMAGESIZE, IMAGESIZE, item.image());
 
             HBox hBox = new HBox(SPACING);
+            hBox.setAlignment(Pos.CENTER);
             hBox.setPadding(new Insets(PADDING));
 
             Label textLabel = new Label(item.text());
