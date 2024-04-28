@@ -27,7 +27,7 @@ public class ImageTextListCell extends ListCell<ImageTextItem> {
             ImageView view = new CustomImageView(IMAGESIZE, IMAGESIZE, item.image());
 
             HBox hBox = new HBox(SPACING);
-            hBox.setAlignment(Pos.CENTER);
+            hBox.setAlignment(Pos.CENTER_LEFT);
             hBox.setPadding(new Insets(PADDING));
 
             Label textLabel = new Label(item.text());
