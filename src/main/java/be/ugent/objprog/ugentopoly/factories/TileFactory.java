@@ -1,11 +1,12 @@
 package be.ugent.objprog.ugentopoly.factories;
 
+import be.ugent.objprog.ugentopoly.DisplayedCardController;
 import be.ugent.objprog.ugentopoly.tiles.TileTuple;
 import be.ugent.objprog.ugentopoly.tiles.tileModels.*;
 import be.ugent.objprog.ugentopoly.tiles.tileViews.*;
 import be.ugent.objprog.ugentopoly.tiles.tileViews.cornerTiles.*;
 import be.ugent.objprog.ugentopoly.tiles.tileViews.cornerTiles.JailCornerTileView;
-import be.ugent.objprog.ugentopoly.tiles.tileViews.cornerTiles.StartCornerTileViewView;
+import be.ugent.objprog.ugentopoly.tiles.tileViews.cornerTiles.StartCornerTileView;
 
 import java.util.Map;
 import java.util.Objects;
@@ -20,6 +21,7 @@ public class TileFactory {
     private final Map<String, String> areaColors;
     private Map<String, String> data = null;
     private final int startAmount;
+    private final DisplayedCardController controller;
 
     private final Map<String, Supplier<TileTuple>> tileMethods = Map.of(
             "START", this::createStartTile,
@@ -33,12 +35,12 @@ public class TileFactory {
             "CHANCE", this::createChanceTile,
             "UTILITY", this::createUtility);
 
-    public TileFactory(Map<String, String> areaColors, int startAmount) {
+    public TileFactory(Map<String, String> areaColors, int startAmount, DisplayedCardController cardController) {
         this.areaColors = Objects.requireNonNull(areaColors);
         this.startAmount = startAmount;
+        controller = cardController;
     }
 
-    // TODO explain why
     public TileTuple forge(Map<String, String> tileData) {
         data = tileData;
         return tileMethods.get(data.get("type")).get();
@@ -46,78 +48,64 @@ public class TileFactory {
 
     private TileTuple createChanceTile() {
         ChanceTileModel model = new ChanceTileModel(
-                data.get("id"), Integer.parseInt(data.get("position"))
+                data.get("id"), Integer.parseInt(data.get("position")), controller
         );
-        ChanceTileView view = new ChanceTileView(model);
-
-        return new TileTuple(model, view);
+        return new TileTuple(model, new ChanceTileView(model));
     }
 
     private TileTuple createFreeParkingTile() {
         FreeParkingModel model = new FreeParkingModel(
                 data.get("id"),
-                Integer.parseInt(data.get("position")));
-        FreeParkingCornerTileView view = new FreeParkingCornerTileView(model);
-
-        return new TileTuple(model, view);
+                Integer.parseInt(data.get("position")),
+                controller);
+        return new TileTuple(model, new FreeParkingCornerTileView(model));
     }
 
     private TileTuple createGoToJailTile() {
         GoToJailTileModel model = new GoToJailTileModel(
-                data.get("id"), Integer.parseInt(data.get("position"))
+                data.get("id"), Integer.parseInt(data.get("position")), controller
         );
-        GoToJailCornerTileView view = new GoToJailCornerTileView(model);
-
-        return new TileTuple(model, view);
+        return new TileTuple(model, new GoToJailCornerTileView(model));
     }
 
     private TileTuple createJailTile() {
         JailTileModel model = new JailTileModel(
-                data.get("id"), Integer.parseInt(data.get("position"))
+                data.get("id"), Integer.parseInt(data.get("position")), controller
         );
-        JailCornerTileView view = new JailCornerTileView(model);
-
-        return new TileTuple(model, view);
+        return new TileTuple(model, new JailCornerTileView(model));
     }
 
     private TileTuple createChestTile() {
         ChestTileModel model = new ChestTileModel(
-                data.get("id"), Integer.parseInt(data.get("position"))
+                data.get("id"), Integer.parseInt(data.get("position")), controller
         );
-        ChestTileView view = new ChestTileView(model);
-
-        return new TileTuple(model, view);
+        return new TileTuple(model, new ChestTileView(model));
     }
 
     private TileTuple createUtility() {
        UtilityTileModel model = new UtilityTileModel(
                 data.get("id"),
                 Integer.parseInt(data.get("position")),
-                Integer.parseInt(data.get("cost")));
-        UtilityTileView view = new UtilityTileView(model);
-
-        return new TileTuple(model, view);
+                Integer.parseInt(data.get("cost")), controller);
+        return new TileTuple(model, new UtilityTileView(model));
     }
 
     private TileTuple createTaxTile() {
         TaxTileModel model = new TaxTileModel(
                 data.get("id"),
                 Integer.parseInt(data.get("position")),
-                Integer.parseInt(data.get("amount")));
-        TaxTileView view = new TaxTileView(model);
-
-        return new TileTuple(model, view);
+                Integer.parseInt(data.get("amount")), controller);
+        return new TileTuple(model, new TaxTileView(model));
     }
 
     private TileTuple createStartTile() {
         StartTileModel model = new StartTileModel(
                 data.get("id"),
                 Integer.parseInt(data.get("position")),
-               startAmount
+               startAmount,
+                controller
         );
-        StartCornerTileViewView view = new StartCornerTileViewView(model);
-
-        return new TileTuple(model, view);
+        return new TileTuple(model, new StartCornerTileView(model));
     }
 
     private TileTuple createRailway() {
@@ -125,10 +113,9 @@ public class TileFactory {
                 data.get("id"),
                 Integer.parseInt(data.get("position")),
                 Integer.parseInt(data.get("cost")),
-                Integer.parseInt(data.get("rent")));
-        RailwayTileView view = new RailwayTileView(model);
-
-        return new TileTuple(model, view);
+                Integer.parseInt(data.get("rent")),
+                controller);
+        return new TileTuple(model, new RailwayTileView(model));
     }
 
     private TileTuple createStreetModel() {
@@ -138,10 +125,9 @@ public class TileFactory {
                 areaColors.get(data.get("area")),
                 data.get("area"),
                 data.get("cost"),
-                data.get("rent0"));
-        StreetTileView view = new StreetTileView(model);
-
-        return new TileTuple(model, view);
+                data.get("rent0"),
+                controller);
+        return new TileTuple(model, new StreetTileView(model));
     }
 
 }
