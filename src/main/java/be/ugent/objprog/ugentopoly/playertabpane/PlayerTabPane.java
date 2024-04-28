@@ -22,7 +22,7 @@ public class PlayerTabPane extends TabPane {
             getTabs().add(tab);
         });
 
-        // TODO
+        // HACK
         setMaxHeight(845);
         setMaxWidth(400);
     }
