@@ -3,6 +3,7 @@ package be.ugent.objprog.ugentopoly.cardDeck;
 import be.ugent.objprog.ugentopoly.tiles.tileCards.VerticalCard;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class CardDeck {
@@ -10,6 +11,7 @@ public class CardDeck {
 
     public CardDeck(List<GameCard> cards) {
         this.cards = new ArrayList<>(cards);
+        Collections.shuffle(this.cards);
     }
 
     public VerticalCard getNextCard() {
