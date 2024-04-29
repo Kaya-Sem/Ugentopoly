@@ -24,18 +24,18 @@ public class CurrentPlayerIndicator extends VBox implements InvalidationListener
     private final GameModel gameModel;
     private PlayerModel currentPlayer;
 
-    private final StringProperty playerName;
-    private final ObjectProperty<Image> image;
-    private final StringProperty balance;
+    private final SimpleStringProperty playerName = new SimpleStringProperty();
+    private final SimpleObjectProperty<Image> image = new SimpleObjectProperty<>();
+    private final StringProperty balance = new SimpleStringProperty();
 
     public CurrentPlayerIndicator(GameModel gameModel) {
         this.gameModel = gameModel;
         this.gameModel.addListener(this);
         currentPlayer = gameModel.getCurrentPlayerMove();
 
-        playerName = new SimpleStringProperty(currentPlayer.getPlayerName());
-        image = new SimpleObjectProperty<>(currentPlayer.getBadgeImage());
-        balance = new SimpleStringProperty(String.valueOf(currentPlayer.getBalance()));
+        playerName.set(currentPlayer.getName());
+        image.set(currentPlayer.getBadgeImage());
+        balance.set(String.valueOf(currentPlayer.getBalance()));
 
         Label text = new Label("Now Playing:");
 //        text.getStylesheets().add("medium-title"); TODO cannot load stylesheets?
@@ -62,7 +62,7 @@ public class CurrentPlayerIndicator extends VBox implements InvalidationListener
 
             Label balanceLabel = new Label();
             balanceLabel.textProperty().bind(Bindings.createStringBinding(
-                    () -> "€" + balance.get(),
+                    () -> "€" + balance.getValue(),
                     balance
             ));
 
@@ -71,7 +71,7 @@ public class CurrentPlayerIndicator extends VBox implements InvalidationListener
             VBox vBox = new VBox(playerNameLabel, balanceLabel );
             vBox.setAlignment(Pos.CENTER);
 
-            ImageView imageView = new CustomImageView(HEIGHT, HEIGHT);
+            ImageView imageView = new CustomImageView(HEIGHT);
             imageView.imageProperty().bind(image);
 
             getChildren().addAll(imageView, vBox);
@@ -83,7 +83,7 @@ public class CurrentPlayerIndicator extends VBox implements InvalidationListener
     @Override
     public void invalidated(Observable observable) {
         currentPlayer = gameModel.getCurrentPlayerMove();
-        playerName.set(currentPlayer.getPlayerName());
+        playerName.set(currentPlayer.getName());
         image.set(currentPlayer.getBadgeImage());
         balance.set(String.valueOf(currentPlayer.getBalance()));
     }
