@@ -5,7 +5,7 @@ import be.ugent.objprog.ugentopoly.GameController;
 
 public class DiceModel extends CustomObservable {
 
-    private GameController controller = null;
+    private GameController gameController = null;
     private int mostRecentRoll = 0;
     private boolean disabled = false;
 
@@ -27,12 +27,12 @@ public class DiceModel extends CustomObservable {
         fireInvalidationEvent();
     }
 
-    public GameController getController() {
-        return controller;
+    public GameController getGameController() {
+        return gameController;
     }
 
-    public void setController(GameController controller) {
-        this.controller = controller;
+    public void setGameController(GameController gameController) {
+        this.gameController = gameController;
         fireInvalidationEvent();
     }
 }
