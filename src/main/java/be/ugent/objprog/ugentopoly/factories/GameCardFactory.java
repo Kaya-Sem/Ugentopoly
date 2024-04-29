@@ -7,52 +7,55 @@ import be.ugent.objprog.ugentopoly.players.PlayerModel;
 
 import java.util.List;
 import java.util.Map;
-import java.util.function.BiConsumer;
 import java.util.function.Consumer;
-import java.util.function.Supplier;
+import java.util.function.Function;
 
 // HACK add an alert for each one
-// HACK create the actual card and give the properties with it
 public class GameCardFactory<T> {
     protected static final int TILES = 40;
-    private Map<String, String> data = null;
+    private final Map<String, Function<Map<String, String>, Consumer<GameModel>>> actionMap;
 
-    private final Map<String, Supplier<BiConsumer<GameModel, GameCard>>> actions = Map.of(
-            "JAIL", GameCardFactory::jail,
-            "MOVE", this::move,
-            "MOVEREL", this::moveRel,
-            "MONEY", this::money,
-            "PLAYERS_MONEY", this::playersMoney
-    );
+    public GameCardFactory() {
+        actionMap = Map.of(
+                "JAIL", GameCardFactory::jail,
+                "MOVE", GameCardFactory::move,
+                "MOVEREL", GameCardFactory::moveRel,
+                "MONEY", GameCardFactory::money,
+                "PLAYERS_MONEY", GameCardFactory::playersMoney
+        );
+    }
 
     public GameCard forge(Map<String, String> tileData) {
-        data = tileData;
-        Supplier action = actions.get(tileData.get("type"));
+        String cardType = tileData.get("type");
+        Consumer<GameModel> action = actionMap.get(cardType).apply(tileData);
+
         GameCard card = new GameCard();
-        card.setCardAction((BiConsumer<GameModel, GameCard>) action.get());
+        card.setCardAction(action);
         return card;
     }
 
-    private static BiConsumer<GameModel, GameCard> jail() {
-        return (gameModel, chanceCard) -> {
+    private static Consumer<GameModel> jail(Map<String, String> data) {
+        return (gameModel) -> {
                 PlayerModel player = gameModel.getCurrentPlayerMove();
                 player.changeGetOutOfJailCards(1);
                 // TODO show card via alert
-            gameModel.addLog(player.getPlayerName(), "kreeg een get out of jail kaart");
+            gameModel.addLog(player.getName(), "kreeg een get out of jail kaart");
             };
     }
 
-    private BiConsumer<GameModel, GameCard> move() {
-        return ((gameModel, chanceCard) -> {
-            boolean collect = Boolean.parseBoolean(data.get("collect"));
-            int newPosition = Integer.parseInt(data.get("position"));
+    private static Consumer<GameModel> move(Map<String, String> data) {
+        int newPosition = Integer.parseInt(data.get("position"));
+        boolean collect = Boolean.parseBoolean(data.get("collect"));
 
+        return ((gameModel) -> {
             PlayerModel currentPlayer = gameModel.getCurrentPlayerMove();
             Pion pion = currentPlayer.getPion();
             gameModel.getTileModels()[pion.getPosition()].removePion(pion);
 
+            // TODO utilize gameControllers movePion
+
             // if it would pass start, call start tile's action
-            if (TILES < newPosition + pion.getPosition() && collect) {
+            if ((TILES <= (newPosition + pion.getPosition())) && collect) {
                 Consumer<GameModel> action = gameModel.getTileModels()[0].getPlayerTileInteraction();
                 action.accept(gameModel);
             }
@@ -60,14 +63,14 @@ public class GameCardFactory<T> {
             pion.setPosition(newPosition);
             gameModel.getTileModels()[newPosition].addPion(pion);
 
-            gameModel.addLog(currentPlayer.getPlayerName(), "moved to tile unknown!"); // TODO
+            gameModel.addLog(currentPlayer.getName(), "moved to tile unknown!"); // TODO
         });
     }
 
-    private BiConsumer<GameModel, GameCard> moveRel() {
-        return ((gameModel, chanceCard) -> {
-            int relPosition = Integer.parseInt(data.get("relative"));
+    private static Consumer<GameModel> moveRel(Map<String, String> data) {
+        int relPosition = Integer.parseInt(data.get("relative"));
 
+        return ((gameModel) -> {
             PlayerModel currentPlayer = gameModel.getCurrentPlayerMove();
 
             Pion pion = currentPlayer.getPion();
@@ -78,35 +81,31 @@ public class GameCardFactory<T> {
 
             String message;
 
-            if (0 < relPosition) {
-                message = "gaat " + relPosition + " stappen voorwaarts";
-            } else {
-                message = "moest " + Math.abs(relPosition) + " stappen naar achter";
-            }
-            gameModel.addLog(currentPlayer.getPlayerName(), message);
+            message = (0 < relPosition) ?
+                    "gaat " + relPosition + " stappen voorwaarts" :
+                    "moest " + Math.abs(relPosition) + " stappen naar achter";
+            gameModel.addLog(currentPlayer.getName(), message);
         });
     }
 
-    private BiConsumer<GameModel, GameCard> money() {
-        return (((gameModel, chanceCard) -> {
-            int amount = Integer.parseInt(data.get("amount"));
+    private static Consumer<GameModel> money(Map<String, String> data) {
+        int amount = Integer.parseInt(data.get("amount"));
+        return (gameModel) -> {
             PlayerModel currentPlayer = gameModel.getCurrentPlayerMove();
             currentPlayer.changeBalance(amount);
-            String message;
 
-            if (0 < amount) {
-                message = "received " + amount;
-            } else {
-                amount = Math.abs(amount);
-                message = "moest €" + amount + " betalen";
-            }
-            gameModel.addLog(currentPlayer.getPlayerName(), message);
-        }));
+            String message = (0 < amount) ?
+                    ("kreeg  €" + amount) :
+                    ("moest €" + Math.abs(amount) + " betalen");
+
+            gameModel.addLog(currentPlayer.getName(), message);
+        };
     }
 
-    private BiConsumer<GameModel, GameCard> playersMoney() {
-        return (((gameModel, chanceCard) -> {
-            int amount = Integer.parseInt(data.get("amount"));
+    private static Consumer<GameModel> playersMoney(Map<String, String> data) {
+        int amount = Integer.parseInt(data.get("amount"));
+
+        return (((gameModel) -> {
             PlayerModel currentPlayer = gameModel.getCurrentPlayerMove();
             List<PlayerModel> playerModelList = gameModel.getPlayerModels();
 
@@ -116,7 +115,7 @@ public class GameCardFactory<T> {
                 currentPlayer.changeBalance(amount);
             });
 
-            gameModel.addLog(currentPlayer.getPlayerName(), "krijgt " + amount + " van elke speler");
+            gameModel.addLog(currentPlayer.getName(), "krijgt €" + amount + " van elke speler");
         }));
     }
 
