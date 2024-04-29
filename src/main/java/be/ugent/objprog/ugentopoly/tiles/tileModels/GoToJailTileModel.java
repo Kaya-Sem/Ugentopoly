@@ -22,7 +22,7 @@ public class GoToJailTileModel extends TileModel{
         return gameModel -> {
             PlayerModel currentPlayer = gameModel.getCurrentPlayerMove();
             gameModel.getGameController().moveCurrentPlayerToJail();
-            gameModel.addLog(currentPlayer.getPlayerName(), "moet een nachtje in de Overpoort spenderen");
+            gameModel.addLog(currentPlayer.getName(), "moet een nachtje in de Overpoort spenderen");
         };
     }
 
