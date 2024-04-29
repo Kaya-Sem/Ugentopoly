@@ -4,24 +4,21 @@ import be.ugent.objprog.ugentopoly.GameModel;
 import be.ugent.objprog.ugentopoly.tiles.tileCards.VerticalCard;
 
 import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
 public class GameCard extends VerticalCard {
-    private BiConsumer<GameModel, GameCard> cardAction;
-    // Kanskaart heeft een BiConsumer? neemt een playermodel en een card.
-    // de biconsumer bepaalt een bepaalde actie die moet gebeuren, met
+    private Consumer<GameModel> cardAction = null;
 
-    public GameCard() {
-        cardAction = (gameModel, chanceCard) -> {
-            gameModel.addLog(gameModel.getCurrentPlayerMove().getPlayerName(), " landed on a tile with no action");
-        };
-    }
-
-    public void setCardAction(BiConsumer<GameModel, GameCard> consumer) {
+    public void setCardAction(Consumer<GameModel> consumer) {
         cardAction = consumer;
     }
 
-    public void performAction(GameModel model, GameCard gameCard) {
-        cardAction.accept(model, gameCard);
+    public Consumer<GameModel> getCardAction() {
+        return cardAction;
+    }
+
+    public void performAction(GameModel model) {
+        cardAction.accept(model);
     }
 
 }
