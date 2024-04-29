@@ -17,6 +17,10 @@ public class CustomImageView extends ImageView {
         applyCommonSettings(fitHeight, fitWidth);
     }
 
+    public CustomImageView(double fitSize) {
+        applyCommonSettings(fitSize, fitSize);
+    }
+
     private void applyCommonSettings(double height, double width) {
         setPreserveRatio(true);
         setFitHeight(height);
