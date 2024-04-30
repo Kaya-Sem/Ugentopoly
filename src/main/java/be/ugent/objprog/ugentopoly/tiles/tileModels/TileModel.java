@@ -56,6 +56,10 @@ public class TileModel extends CustomObservable {
         }
     }
 
+    protected void setCard(TemplateCard card) {
+       this.card = card;
+    }
+
     public List<Pion> getPionnen() {
         return Collections.unmodifiableList(pionnen);
     }
