@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 import be.ugent.objprog.ugentopoly.gameBoard.BoardModel;
-import be.ugent.objprog.ugentopoly.gameBoard.MiddleSection;
 import be.ugent.objprog.ugentopoly.tiles.tileViews.TileView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
@@ -21,6 +20,16 @@ public class VerticalBar extends GridPane implements Bar {
 
     public VerticalBar(List<TileView> tileViews) {
         tiles = tileViews;
+        applyDefaults();
+    }
+
+    public VerticalBar(List<TileView> tileViews, int direction) {
+        tiles = tileViews;
+        applyDefaults();
+        setRotate(direction);
+    }
+
+    private void applyDefaults() {
         setMinWidth(TileView.LONG_SIDE);
         setMaxWidth(TileView.LONG_SIDE);
         setMinHeight(BoardModel.MIDDLE_AREA_SIZE);

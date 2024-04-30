@@ -18,8 +18,19 @@ public class HorizontalBar extends GridPane implements Bar {
     private static final double COL_WIDTH = TileView.SHORT_SIDE;
     private static final double OFFSET = 14.5;
     private final List<? extends TileView> tiles;
+
     public HorizontalBar(List<TileView> tileViews) {
         tiles = tileViews;
+        applyDefaults();
+    }
+
+    public HorizontalBar(List<TileView> tileViews, int direction) {
+        tiles = tileViews;
+        applyDefaults();
+        applyRotation(direction);
+    }
+
+    private void applyDefaults() {
         setMinWidth(BoardModel.MIDDLE_AREA_SIZE);
         setMaxWidth(BoardModel.MIDDLE_AREA_SIZE);
         setMinHeight(TileView.LONG_SIDE);
