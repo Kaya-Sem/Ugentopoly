@@ -1,34 +1,34 @@
 package be.ugent.objprog.ugentopoly.players;
 
 import be.ugent.objprog.ugentopoly.CustomObservable;
+import be.ugent.objprog.ugentopoly.factories.PionFactory;
 import be.ugent.objprog.ugentopoly.tiles.tileModels.TileModel;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
 
 public class PlayerModel extends CustomObservable {
 
-    private final String playerName;
-    private int balance;
+    private final ObservableList<TileModel> ownedTiles = FXCollections.observableArrayList();
+    private final SimpleIntegerProperty balance = new SimpleIntegerProperty();
     private final Image badgeImage;
     private final String badgeName;
-    private final Pion pion;
     private boolean inJail = false;
     private int leaveJailCards = 0;
+    private final String name;
+    private int position = 0;
+    private final Pion pion;
 
-    private final ObservableList<TileModel> ownedTiles = FXCollections.observableArrayList();
-
-    public PlayerModel(String playerName, Color color, int balance, ImageTextItem badgeImage) {
-
-        this.balance = balance;
-        this.playerName = playerName;
+    public PlayerModel(String name, int balance, ImageTextItem badgeImage) {
+        this.balance.set(balance);
+        this.name = name;
         this.badgeImage = badgeImage.image();
         badgeName = badgeImage.text();
-        pion = new Pion(this.badgeImage); // TODO create pionfactory?
+        pion = PionFactory.createPion(this.badgeImage);
     }
 
-    public void addTile(TileModel tileModel) {
+    public void addBuyable(TileModel tileModel) {
         ownedTiles.add(tileModel);
         fireInvalidationEvent();
     }
@@ -37,25 +37,25 @@ public class PlayerModel extends CustomObservable {
         return ownedTiles;
     }
 
-    public String getPlayerName() {
-        return playerName;
+    public String getName() {
+        return name;
     }
 
     public int getBalance() {
-        return balance;
+        return balance.getValue();
     }
 
     public void setBalance(int balance) {
-        this.balance = balance;
+        this.balance.set(balance);
         fireInvalidationEvent();
     }
 
     public void changeBalance(int balance) {
-        this.balance += balance;
+        this.balance.set(this.balance.getValue() + balance);
         fireInvalidationEvent();
     }
 
-    public int balanceProperty() {
+    public SimpleIntegerProperty balanceProperty() {
         return balance;
     }
 
@@ -86,6 +86,15 @@ public class PlayerModel extends CustomObservable {
 
     public void changeGetOutOfJailCards(int increment) {
         leaveJailCards += increment;
+        fireInvalidationEvent();
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
         fireInvalidationEvent();
     }
 }
