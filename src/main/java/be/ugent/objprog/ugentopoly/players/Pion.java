@@ -8,7 +8,6 @@ import javafx.scene.paint.Color;
 public class Pion extends ImageView {
     private static final double SIZE = 30.0;
     protected static final double DROPSHADOWRADIUS = 10.0;
-    private int position = 0;
 
     public Pion(Image image) {
         setImage(image);
@@ -16,20 +15,10 @@ public class Pion extends ImageView {
         setFitHeight(SIZE);
         setFitWidth(SIZE);
 
-        // Create a drop shadow effect
         DropShadow dropShadow = new DropShadow();
         dropShadow.setRadius(DROPSHADOWRADIUS);
         dropShadow.setColor(Color.BLACK);
 
-        // Apply the drop shadow effect to the ImageView
         setEffect(dropShadow);
-    }
-
-    public int getPosition() {
-        return position;
-    }
-
-    public void setPosition(int position) {
-        this.position = position;
     }
 }
