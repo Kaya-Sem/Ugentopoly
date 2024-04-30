@@ -1,6 +1,7 @@
 package be.ugent.objprog.ugentopoly.tiles.tileViews;
 
 import be.ugent.objprog.ugentopoly.DisplayCardController;
+import be.ugent.objprog.ugentopoly.GameModel;
 import be.ugent.objprog.ugentopoly.gameBoard.BoardModel;
 import be.ugent.objprog.ugentopoly.tiles.PionHolder;
 import be.ugent.objprog.ugentopoly.tiles.tileCards.TemplateCard;
@@ -15,10 +16,7 @@ public class TileView extends StackPane implements InvalidationListener{
     public final static double LONG_SIDE = ((BoardModel.BOARD_SIZE / BoardModel.getSmallTilesInBar()) * 2);
     public final static double SHORT_SIDE = ((BoardModel.BOARD_SIZE / BoardModel.getSmallTilesInBar()));
     private static final double OFFSET = 32.5;
-    protected static final int RIGHT = 90;
-    protected static final int BOTTOM = 270;
 
-    protected TemplateCard card = null;
     protected final TileButton tileButton = new TileButton();
     protected final TileModel model;
     protected final PionHolder badgeHolders = new PionHolder();
@@ -35,11 +33,11 @@ public class TileView extends StackPane implements InvalidationListener{
 
     protected void setup() {}
 
-    public void applyRotation(double angle){
+    public void applyRotation(int angle){
         setTranslateX(getWidth() / 2);
         setTranslateY(getHeight() / 2);
         setRotate(angle);
-        if (angle == 90 || angle == 270) {
+        if (BoardModel.TOPANGLE == angle || BoardModel.BOTTOMANGLE == angle) {
             setTranslateX(- OFFSET);
             setTranslateY(OFFSET);
         }
@@ -54,6 +52,6 @@ public class TileView extends StackPane implements InvalidationListener{
     @Override
     public void invalidated(Observable observable) {
         badgeHolders.getChildren().clear();
-        badgeHolders.getChildren().addAll(getModel().getPionnen());
+        badgeHolders.getChildren().addAll(model.getPionnen());
     }
 }
