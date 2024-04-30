@@ -15,13 +15,9 @@ import javafx.scene.text.FontWeight;
 public class JailCornerTileView extends CornerTileView {
     protected static final int ROTATIONANGLE = 135; // TODO extract to connertile?
 
-    public JailCornerTileView(TileModel model){
+    public JailCornerTileView(JailTileModel model){
         super(model);
-        setup();
-    }
 
-    public void setup() {
-        JailTileModel model = (JailTileModel) this.model;
         VBox vBox = new VBox();
 
         Label textLabel = new Label(PropertyLoader.getLabel(getModel().getId()));

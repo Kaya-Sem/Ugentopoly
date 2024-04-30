@@ -15,19 +15,14 @@ import javafx.scene.text.FontWeight;
 public class GoToJailCornerTileView extends CornerTileView {
     private static final double ROTATION = -45;
 
-    public GoToJailCornerTileView(TileModel model) {
+    public GoToJailCornerTileView(GoToJailTileModel model) {
         super(model);
-        setup();
-    }
 
-    // TODO extract setFont and label to class. (or css?)
-    @Override
-    protected void setup() {
-        GoToJailTileModel model = (GoToJailTileModel) this.model;
         VBox vBox = new VBox();
 
+        // TODO
         // make more versatile. What if they add a string with no newline? it will crash the program
-        String[] text = PropertyLoader.getLabel(getModel().getId()).split("\\n");
+        String[] text = model.getTileName().split("\\n");
 
         Label textLabel1 = new Label(text[0]);
         Label textLabel2 = new Label(text[1]);

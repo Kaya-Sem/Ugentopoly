@@ -13,12 +13,7 @@ public class UtilityTileView extends SmallTileView {
 
     public UtilityTileView(UtilityTileModel model) {
         super(model);
-        setup();
-    }
 
-    @Override
-    protected void setup() {
-        UtilityTileModel model = (UtilityTileModel) this.model;
         ImageView imageView = new ImageView(model.getImage());
 
         imageView.setFitHeight(SHORT_SIDE - 13);

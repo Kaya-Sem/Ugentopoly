@@ -18,13 +18,7 @@ public class ChanceTileView extends SmallTileView {
 
     public ChanceTileView(ChanceTileModel model){
         super(model);
-        setup();
-    }
 
-    // OPTIMIZE
-    @Override
-    protected void setup() {
-        ChanceTileModel model = (ChanceTileModel) this.model; // HACK
         TileImageView imageView = new TileImageView(model.getImage());
         String text = model.getTileName();
         Label textLabel = new Label(text);

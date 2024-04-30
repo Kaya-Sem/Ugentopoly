@@ -14,14 +14,9 @@ import javafx.scene.text.FontWeight;
 
 public class TaxTileView extends SmallTileView {
 
-    // Constructor
     public TaxTileView(TaxTileModel model) {
         super(model);
-        setup();
-    }
 
-    // OPTIMIZE
-    protected void setup() {
         TileHBox hBox = new TileHBox();
         String text = PropertyLoader.getLabel(model.getId());
         Label textLabel = new Label(text);
@@ -29,7 +24,6 @@ public class TaxTileView extends SmallTileView {
         textLabel.setWrapText(true);
 
         hBox.getChildren().addAll(new TileImageView(TaxTileModel.getImage()), textLabel);
-
         getChildren().addAll(hBox, badgeHolders, tileButton);
     }
 

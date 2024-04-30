@@ -11,11 +11,8 @@ public class StartCornerTileView extends CornerTileView {
 
     public StartCornerTileView(StartTileModel model) {
         super(model);
-        setup();
-    }
 
-    public void setup() {
-        StartTileModel model = (StartTileModel) this.model;
+        // TODO
         TileImageView arrowImageView = new TileImageView(model.getArrowImage(), 1.5, true);
         TileImageView startImageView = new TileImageView(model.getStartImage(), 1.0, true);
 

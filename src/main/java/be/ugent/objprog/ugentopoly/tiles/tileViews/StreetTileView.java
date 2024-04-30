@@ -22,13 +22,6 @@ public class StreetTileView extends SmallTileView {
 
     public StreetTileView(StreetTileModel model) {
         super(model);
-        setup();
-    }
-
-    @Override
-    public void setup() {
-        StreetTileModel model = (StreetTileModel) this.model;
-        HBox hbox = new HBox();
 
         Label label = new Label(model.getTileName());
         label.setAlignment(Pos.CENTER);
@@ -47,8 +40,7 @@ public class StreetTileView extends SmallTileView {
 
         HBox.setHgrow(pane, Priority.ALWAYS);
 
-        hbox.getChildren().addAll(pane, rectangle);
-
+        HBox hbox = new HBox(pane, rectangle);
         getChildren().addAll(hbox, badgeHolders, tileButton);
     }
 

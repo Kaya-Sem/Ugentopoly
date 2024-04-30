@@ -16,15 +16,10 @@ public class FreeParkingCornerTileView extends CornerTileView {
 
     protected static final int VALUE = -135; // TODO extract to parent class
 
-    public FreeParkingCornerTileView(TileModel model) {
+    public FreeParkingCornerTileView(FreeParkingModel model) {
         super(model);
-        setup();
-    }
 
-    // TODO extract setFont and label to class. (or css?)
-    @Override
-    protected void setup() {
-        FreeParkingModel model = (FreeParkingModel) this.model;
+        // TODO
         TileImageView image = new TileImageView(model.getImage(), 1.7, true);
 
         String[] text = PropertyLoader.getLabel(getModel().getId()).split(" ");
