@@ -1,4 +1,4 @@
-package be.ugent.objprog.ugentopoly;
+package be.ugent.objprog.ugentopoly.tiles;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -28,7 +28,7 @@ public class TileInitializer {
         this.factory = factory;
     }
 
-    public <T extends TileModel> Map<String, Object[]> TileModelInitializer() {
+    public <T extends TileModel> InitializedTilesObject TileModelInitializer() {
 
         Map<String, Map<String, String>> tileData = parser.parseAllTileData();
 
@@ -40,14 +40,13 @@ public class TileInitializer {
             tileViewArray[position] = view;
         });
 
-        // HACK return a record with the correct types to minimize casting
-        return Map.of(
-                "models", tileModelArray,
-                "left", reverse(Arrays.copyOfRange(tileViewArray, 1, 10)),
-                "top", Arrays.copyOfRange(tileViewArray, 11, 20),
-                "right", Arrays.copyOfRange(tileViewArray, 21, 30),
-                "bottom", reverse(Arrays.copyOfRange(tileViewArray, 31, 40)),
-                "corners", new TileView[] { tileViewArray[0], tileViewArray[10], tileViewArray[20], tileViewArray[30] }
+        return new InitializedTilesObject(
+                tileModelArray,
+                reverse(Arrays.copyOfRange(tileViewArray, 1, 10)),
+                Arrays.copyOfRange(tileViewArray, 11, 20),
+                Arrays.copyOfRange(tileViewArray, 21, 30),
+                reverse(Arrays.copyOfRange(tileViewArray, 31, 40)),
+                new TileView[] { tileViewArray[0], tileViewArray[10], tileViewArray[20], tileViewArray[30]}
         );
     }
 
