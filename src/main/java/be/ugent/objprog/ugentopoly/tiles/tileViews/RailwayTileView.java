@@ -13,7 +13,6 @@ public class RailwayTileView extends SmallTileView {
     // Constructor
     public RailwayTileView(RailwayTileModel model){
         super(model);
-        setup();
 
         TileImageView imageView = new TileImageView(RailwayTileModel.getImage());
 
