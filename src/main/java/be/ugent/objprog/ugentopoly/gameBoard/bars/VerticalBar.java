@@ -38,7 +38,7 @@ public class VerticalBar extends GridPane implements Bar {
         IntStream.range(0, BoardModel.getSmallTilesInBar()).forEach(i -> add(tiles.get(i), 0, i));
     }
 
-    public void applyRotation(double angle) {
+    public void applyRotation(int angle) {
         tiles.forEach(tile -> tile.applyRotation(angle));
     }
 }

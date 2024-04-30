@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 import be.ugent.objprog.ugentopoly.gameBoard.BoardModel;
-import be.ugent.objprog.ugentopoly.gameBoard.MiddleSection;
 import be.ugent.objprog.ugentopoly.tiles.tileViews.TileView;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -38,7 +37,7 @@ public class HorizontalBar extends GridPane implements Bar {
         IntStream.range(0, BoardModel.getSmallTilesInBar()).forEach(i -> add(tiles.get(i), i, 0));
     }
 
-    public void applyRotation(double angle) {
+    public void applyRotation(int angle) {
         setTranslateX(-OFFSET);
         setTranslateY(+OFFSET);
         tiles.forEach(tile -> tile.applyRotation(angle));
