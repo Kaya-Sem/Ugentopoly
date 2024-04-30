@@ -80,11 +80,7 @@ public class XMLParser {
 
                 card.getAttributes().forEach(attribute -> cardAttributes.put(attribute.getName(), attribute.getValue()));
 
-                // Filter out null values before putting the card in the map
-                cards.put(cardId, cardAttributes.entrySet().stream()
-                        .filter(e -> null != e.getValue())
-                        .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)));
-
+                cards.put(cardId, cardAttributes);
             });
         });
 
