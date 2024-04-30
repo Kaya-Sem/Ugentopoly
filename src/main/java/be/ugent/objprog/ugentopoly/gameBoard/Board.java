@@ -1,12 +1,10 @@
 package be.ugent.objprog.ugentopoly.gameBoard;
 
-// TODO create a separate MVC board model with the data
-
 import java.util.List;
-import java.util.Map;
 
 import be.ugent.objprog.ugentopoly.gameBoard.bars.HorizontalBar;
 import be.ugent.objprog.ugentopoly.gameBoard.bars.VerticalBar;
+import be.ugent.objprog.ugentopoly.tiles.InitializedTilesObject;
 import be.ugent.objprog.ugentopoly.tiles.tileViews.TileView;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
@@ -16,14 +14,11 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 
-public class Board extends GridPane implements InvalidationListener {
+public class Board extends GridPane {
 
-    private final BoardModel boardModel;
     public final MiddleSection middleSection;
 
-    public Board(BoardModel boardModel, Map<String, Object[]> tileViews) {
-        this.boardModel = boardModel;
-        this.boardModel.addListener(this);
+    public Board(BoardModel boardModel, InitializedTilesObject tileViews) {
         double size = BoardModel.BOARD_SIZE;
         middleSection = new MiddleSection(boardModel);
         setPrefSize(size, size);
@@ -41,16 +36,10 @@ public class Board extends GridPane implements InvalidationListener {
                 new RowConstraints(BoardModel.MIDDLE_AREA_SIZE) // Mid-section row
         );
 
-        // HACK create constructor with preapplied rotation
-        // initialize tileholders // HACK fixx issue with casting...
-        HorizontalBar topRow = new HorizontalBar(List.of((TileView[]) tileViews.get("top")));
-        HorizontalBar bottomRow = new HorizontalBar(List.of((TileView[]) tileViews.get("bottom")));
-        VerticalBar leftBar = new VerticalBar(List.of((TileView[]) tileViews.get("left")));
-        VerticalBar rightBar = new VerticalBar(List.of((TileView[]) tileViews.get("right")));
-
-        topRow.applyRotation(BoardModel.TOPANGLE);
-        rightBar.applyRotation(BoardModel.RIGHTANGLE);
-        bottomRow.applyRotation(BoardModel.BOTTOMANGLE);
+        HorizontalBar topRow = new HorizontalBar(List.of(tileViews.topTilesViewArray()), BoardModel.TOPANGLE);
+        HorizontalBar bottomRow = new HorizontalBar(List.of(tileViews.bottomTilesViewArray()), BoardModel.BOTTOMANGLE);
+        VerticalBar leftBar = new VerticalBar(List.of(tileViews.leftTilesViewArray()));
+        VerticalBar rightBar = new VerticalBar(List.of(tileViews.rightTilesViewArray()), BoardModel.RIGHTANGLE);
 
         add(topRow, 1, 0);
         add(rightBar, 2, 1);
@@ -59,13 +48,10 @@ public class Board extends GridPane implements InvalidationListener {
 
         add(middleSection, 1, 1);
 
-        add((Node) tileViews.get("corners")[0], 0, 2); // bottom left
-        add((Node) tileViews.get("corners")[1], 0, 0); // top left
-        add((Node) tileViews.get("corners")[2], 2, 0); // top right
-        add((Node) tileViews.get("corners")[3], 2, 2); // bottom right
+        add(tileViews.cornerTilesViewArray()[0], 0, 2); // bottom left
+        add(tileViews.cornerTilesViewArray()[1], 0, 0); // top left
+        add(tileViews.cornerTilesViewArray()[2], 2, 0); // top right
+        add(tileViews.cornerTilesViewArray()[3], 2, 2); // bottom right
     }
 
-    @Override
-    // OPTIMIZE
-    public void invalidated(Observable observable) {}
 }
