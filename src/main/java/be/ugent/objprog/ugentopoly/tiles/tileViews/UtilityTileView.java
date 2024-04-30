@@ -11,13 +11,15 @@ import java.util.Objects;
 
 public class UtilityTileView extends SmallTileView {
 
+    protected static final int SIZE = 13;
+
     public UtilityTileView(UtilityTileModel model) {
         super(model);
 
         ImageView imageView = new ImageView(model.getImage());
 
-        imageView.setFitHeight(SHORT_SIDE - 13);
-        imageView.setFitWidth(LONG_SIDE - 13);
+        imageView.setFitHeight(SHORT_SIDE - SIZE);
+        imageView.setFitWidth(LONG_SIDE - SIZE);
         imageView.setPreserveRatio(true);
 
         StackPane pane = new StackPane(imageView);
