@@ -14,12 +14,12 @@ public class JailTileModel extends TileModel{
 
     public JailTileModel(String tileID, int tilePosition, DisplayCardController controller) {
         super(tileID, tilePosition, controller);
-        card = new BasicVerticalCard(image, tileName);
+        setCard(new BasicVerticalCard(image, tileName));
     }
 
     @Override
     public Consumer<GameModel> getPlayerTileInteraction() {
-        return gameModel -> gameModel.addLog(gameModel.getCurrentPlayerMove().getPlayerName(), "bezoekt op Overpoort");
+        return gameModel -> gameModel.addLog(gameModel.getCurrentPlayerMove().getName(), " zuipt zich ladderzat");
     }
 
     public CustomImage getImage() {
