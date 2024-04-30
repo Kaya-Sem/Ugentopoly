@@ -5,129 +5,125 @@ import be.ugent.objprog.ugentopoly.tiles.TileTuple;
 import be.ugent.objprog.ugentopoly.tiles.tileModels.*;
 import be.ugent.objprog.ugentopoly.tiles.tileViews.*;
 import be.ugent.objprog.ugentopoly.tiles.tileViews.cornerTiles.*;
-import be.ugent.objprog.ugentopoly.tiles.tileViews.cornerTiles.JailCornerTileView;
-import be.ugent.objprog.ugentopoly.tiles.tileViews.cornerTiles.StartCornerTileView;
 
 import java.util.Map;
 import java.util.Objects;
-import java.util.function.Supplier;
+import java.util.function.Function;
 
-/*
-NON-URGENT add documentation
-*/
-
-// HACK split into subfactories?
 public class TileFactory {
-    private final Map<String, String> areaColors;
-    private Map<String, String> data = null;
-    private final int startAmount;
+    private final Map<String, Function<Map<String, String>, TileTuple>> tileCreationMethods;
     private final DisplayCardController controller;
+    private final Map<String, String> areaColors;
+    private final int startAmount;
 
-    private final Map<String, Supplier<TileTuple>> tileMethods = Map.of(
-            "START", this::createStartTile,
-            "FREE_PARKING", this::createFreeParkingTile,
-            "JAIL", this::createJailTile,
-            "GO_TO_JAIL", this::createGoToJailTile,
-            "STREET", this::createStreetModel,
-            "CHEST", this::createChestTile,
-            "TAX", this::createTaxTile,
-            "RAILWAY", this::createRailway,
-            "CHANCE", this::createChanceTile,
-            "UTILITY", this::createUtility);
-
-    public TileFactory(Map<String, String> areaColors, int startAmount, DisplayCardController cardController) {
+    public TileFactory(Map<String, String> areaColors, int startAmount, DisplayCardController controller) {
         this.areaColors = Objects.requireNonNull(areaColors);
         this.startAmount = startAmount;
-        controller = cardController;
+        this.controller = controller;
+
+        tileCreationMethods = Map.of(
+                "START", this::createStartTile,
+                "FREE_PARKING", this::createFreeParkingTile,
+                "JAIL", this::createJailTile,
+                "GO_TO_JAIL", this::createGoToJailTile,
+                "STREET", this::createStreetModel,
+                "CHEST", this::createChestTile,
+                "TAX", this::createTaxTile,
+                "RAILWAY", this::createRailway,
+                "CHANCE", this::createChanceTile,
+                "UTILITY", this::createUtility
+        );
     }
 
     public TileTuple forge(Map<String, String> tileData) {
-        data = tileData;
-        return tileMethods.get(data.get("type")).get();
+        String tileType = tileData.get("type");
+        Function<Map<String, String>, TileTuple> tileCreator = tileCreationMethods.get(tileType);
+        return tileCreator.apply(tileData);
     }
 
-    private TileTuple createChanceTile() {
+    private TileTuple createChanceTile(Map<String, String> tileData) {
         ChanceTileModel model = new ChanceTileModel(
-                data.get("id"), Integer.parseInt(data.get("position")), controller
+                tileData.get("id"), Integer.parseInt(tileData.get("position")), controller
         );
         return new TileTuple(model, new ChanceTileView(model));
     }
 
-    private TileTuple createFreeParkingTile() {
+    private TileTuple createFreeParkingTile(Map<String, String> tileData) {
         FreeParkingModel model = new FreeParkingModel(
-                data.get("id"),
-                Integer.parseInt(data.get("position")),
-                controller);
+                tileData.get("id"), Integer.parseInt(tileData.get("position")), controller
+        );
         return new TileTuple(model, new FreeParkingCornerTileView(model));
     }
 
-    private TileTuple createGoToJailTile() {
+    private TileTuple createGoToJailTile(Map<String, String> tileData) {
         GoToJailTileModel model = new GoToJailTileModel(
-                data.get("id"), Integer.parseInt(data.get("position")), controller
+                tileData.get("id"), Integer.parseInt(tileData.get("position")), controller
         );
         return new TileTuple(model, new GoToJailCornerTileView(model));
     }
 
-    private TileTuple createJailTile() {
+    private TileTuple createJailTile(Map<String, String> tileData) {
         JailTileModel model = new JailTileModel(
-                data.get("id"), Integer.parseInt(data.get("position")), controller
+                tileData.get("id"), Integer.parseInt(tileData.get("position")), controller
         );
         return new TileTuple(model, new JailCornerTileView(model));
     }
 
-    private TileTuple createChestTile() {
+    private TileTuple createChestTile(Map<String, String> tileData) {
         ChestTileModel model = new ChestTileModel(
-                data.get("id"), Integer.parseInt(data.get("position")), controller
+                tileData.get("id"), Integer.parseInt(tileData.get("position")), controller
         );
         return new TileTuple(model, new ChestTileView(model));
     }
 
-    private TileTuple createUtility() {
-       UtilityTileModel model = new UtilityTileModel(
-                data.get("id"),
-                Integer.parseInt(data.get("position")),
-                Integer.parseInt(data.get("cost")), controller);
+    private TileTuple createUtility(Map<String, String> tileData) {
+        UtilityTileModel model = new UtilityTileModel(
+                tileData.get("id"),
+                Integer.parseInt(tileData.get("position")),
+                Integer.parseInt(tileData.get("cost")), controller
+        );
         return new TileTuple(model, new UtilityTileView(model));
     }
 
-    private TileTuple createTaxTile() {
+    private TileTuple createTaxTile(Map<String, String> tileData) {
         TaxTileModel model = new TaxTileModel(
-                data.get("id"),
-                Integer.parseInt(data.get("position")),
-                Integer.parseInt(data.get("amount")), controller);
+                tileData.get("id"),
+                Integer.parseInt(tileData.get("position")),
+                Integer.parseInt(tileData.get("amount")), controller
+        );
         return new TileTuple(model, new TaxTileView(model));
     }
 
-    private TileTuple createStartTile() {
+    private TileTuple createStartTile(Map<String, String> tileData) {
         StartTileModel model = new StartTileModel(
-                data.get("id"),
-                Integer.parseInt(data.get("position")),
-               startAmount,
-                controller
+                tileData.get("id"),
+                Integer.parseInt(tileData.get("position")),
+                startAmount, controller
         );
         return new TileTuple(model, new StartCornerTileView(model));
     }
 
-    private TileTuple createRailway() {
+    private TileTuple createRailway(Map<String, String> tileData) {
         RailwayTileModel model = new RailwayTileModel(
-                data.get("id"),
-                Integer.parseInt(data.get("position")),
-                Integer.parseInt(data.get("cost")),
-                Integer.parseInt(data.get("rent")),
-                controller);
+                tileData.get("id"),
+                Integer.parseInt(tileData.get("position")),
+                Integer.parseInt(tileData.get("cost")),
+                Integer.parseInt(tileData.get("rent")),
+                controller
+        );
         return new TileTuple(model, new RailwayTileView(model));
     }
 
-    private TileTuple createStreetModel() {
+    private TileTuple createStreetModel(Map<String, String> tileData) {
         StreetTileModel model = new StreetTileModel(
-                data.get("id"),
-                Integer.parseInt(data.get("position")),
-                areaColors.get(data.get("area")),
-                data.get("area"),
-                data.get("cost"),
-                data.get("rent0"),
-                controller);
+                tileData.get("id"),
+                Integer.parseInt(tileData.get("position")),
+                areaColors.get(tileData.get("area")),
+                tileData.get("area"),
+                tileData.get("cost"),
+                tileData.get("rent0"),
+                controller
+        );
         return new TileTuple(model, new StreetTileView(model));
     }
-
 }
