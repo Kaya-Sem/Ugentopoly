@@ -3,8 +3,7 @@ package be.ugent.objprog.ugentopoly.tiles.tileModels;
 import be.ugent.objprog.ugentopoly.CustomObservable;
 import be.ugent.objprog.ugentopoly.DisplayCardController;
 import be.ugent.objprog.ugentopoly.GameModel;
-import be.ugent.objprog.ugentopoly.factories.TileNameFactory;
-import be.ugent.objprog.ugentopoly.parsers.PropertyLoader;
+import be.ugent.objprog.ugentopoly.factories.PropertyFactory;
 import be.ugent.objprog.ugentopoly.players.Pion;
 import be.ugent.objprog.ugentopoly.tiles.tileCards.TemplateCard;
 
@@ -26,7 +25,7 @@ public class TileModel extends CustomObservable {
    protected TileModel(String tileID, int tilePosition, DisplayCardController controller){
         id = tileID;
         position = tilePosition;
-        tileName = TileNameFactory.getTileName(tileID);
+        tileName = PropertyFactory.getString(tileID);
        this.controller = controller;
     }
 

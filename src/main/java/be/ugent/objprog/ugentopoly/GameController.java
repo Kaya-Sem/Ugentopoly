@@ -1,16 +1,15 @@
 package be.ugent.objprog.ugentopoly;
 
-import be.ugent.objprog.ugentopoly.cardDeck.GameCard;
 import be.ugent.objprog.ugentopoly.dice.DiceModel;
 import be.ugent.objprog.ugentopoly.parsers.PropertyLoader;
 import be.ugent.objprog.ugentopoly.players.Pion;
 import be.ugent.objprog.ugentopoly.players.PlayerModel;
 import be.ugent.objprog.ugentopoly.tiles.tileModels.TileModel;
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
+import java.util.Comparator;
 import java.util.List;
-import java.util.Queue;
-import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 /*
@@ -25,7 +24,7 @@ public class GameController {
     public GameController(Stage primaryStage, GameModel gameModel, DiceModel diceModel) {
         this.primaryStage = primaryStage;
         this.gameModel = gameModel;
-        diceModel.setController(this);
+        diceModel.setGameController(this);
 
         initializeGame();
     }
@@ -36,75 +35,121 @@ public class GameController {
         gameModel.setCurrentPlayerMove(players.getFirst());
 
         TileModel startTile = gameModel.getTileModels()[0];
-        players.forEach(player -> {
-            Pion pion = player.getPion();
-            pion.setPosition(0);
-            startTile.addPion(pion);
-        });
-        gameModel.addLog(gameModel.getCurrentPlayerMove().getPlayerName(), "zal als eerste spelen!");
+        players.forEach(player -> startTile.addPion(player.getPion()));
+
+        gameModel.addLog(gameModel.getCurrentPlayerMove().getName(), "zal als eerste spelen!");
     }
 
     // TODO
     public void nextMove()  {
-        int moves = gameModel.getDiceModel().getMostRecentRoll();
+        DiceModel diceModel = gameModel.getDiceModel();
+        diceModel.setDisabled(true);
+
+        int moves = diceModel.getMostRecentRoll();
         PlayerModel currentPlayer = gameModel.getCurrentPlayerMove();
 
-        Pion currentPion = currentPlayer.getPion();
-
         for (int i = 0; i < moves; i++) {
-                movePion(currentPion);
+                movePion(currentPlayer);
         }
 
-        TileModel currentTile = gameModel.getTileModels()[currentPion.getPosition()];
-        gameModel.addLog(currentPlayer.getPlayerName(), "belande op " + PropertyLoader.getLabel(currentTile.getId()));
+        TileModel currentTile = gameModel.getTileModels()[currentPlayer.getPosition()];
+        gameModel.addLog(currentPlayer.getName(), "belande op " + PropertyLoader.getLabel(currentTile.getId()));
+
+        // Retrieve the tile's action and execute it
         Consumer<GameModel> action = currentTile.getPlayerTileInteraction();
         action.accept(gameModel);
 
         nextPlayer();
+        gameModel.getDiceModel().setDisabled(true);
     }
 
-    private void nextPlayer() {
+    public void nextPlayer() {
         PlayerModel playerModel = gameModel.getPlayerModelQueue().getNextPlayer();
         if (playerModel.isInJail()) {
 
             if (playerModel.getLeaveJailCards() > 0) {
-                gameModel.addLog(playerModel.getPlayerName(), "geraakt thuis van de Overpoort");
+                gameModel.addLog(playerModel.getName(), "geraakt thuis van de Overpoort");
                 playerModel.changeGetOutOfJailCards(-1);
             } else {
-                gameModel.addLog(playerModel.getPlayerName(), "is stomdronken, en zal dus moeten dobbelen tot deze nuchter is");
+                gameModel.addLog(playerModel.getName(), "is stomdronken, en zal dus moeten dobbelen tot deze nuchter is");
                 // implement rolling
             }
         }
         gameModel.setCurrentPlayerMove(playerModel);
-        gameModel.addLog(playerModel.getPlayerName(), "is aan de beurt!");
+        gameModel.addLog(playerModel.getName(), "is aan de beurt!");
     }
 
-    private void movePion(Pion pion) {
-        int position = pion.getPosition();
+    private void movePion(PlayerModel model) {
+        int position = model.getPosition();
         TileModel[] tileModels = gameModel.getTileModels();
 
         TileModel currentModel = tileModels[position];
-        currentModel.removePion(pion);
+        currentModel.removePion(model.getPion());
 
         int newPosition = (position + 1) % tileModels.length;
 
-        pion.setPosition(newPosition);
-
-        TileModel newModel = tileModels[newPosition];
-        newModel.addPion(pion);
+        model.setPosition(newPosition);
+        tileModels[newPosition].addPion(model.getPion());
     }
 
-    // HACK to fix.
+    public void moveCurrentPlayerToPosition(int newPosition) {
+        PlayerModel playerModel = gameModel.getCurrentPlayerMove();
+        Pion pion = playerModel.getPion();
+
+        TileModel[] tileModels = gameModel.getTileModels();
+
+        tileModels[playerModel.getPosition()].removePion(pion);
+        playerModel.setPosition(newPosition);
+        tileModels[newPosition].addPion(pion);
+        gameModel.addLog(playerModel.getName(), "moest naar " + tileModels[newPosition].getTileName());
+    }
+
+    public void moveCurrentPlayerToJail() {
+        moveCurrentPlayerToPosition(10); // TODO make constant?
+    }
+
+    public void addLog(String text) {
+        gameModel.addLog(text);
+    }
+
     private void gameOverCondition(PlayerModel model) {
-    /*    model.balanceProperty().addListener(
+        model.balanceProperty().addListener(
                 (observableValue, oldValue, newValue) -> {
                     if (0 >= newValue.intValue()) {
+                        showGameOverDialog(model, gameModel.getPlayerModels());
                         primaryStage.close();
-                        // TODO add closing window / dialog popup
                     }
                 }
-        );*/
+        );
     }
+
+    // extract to own alert
+    private void showGameOverDialog(PlayerModel loser, List<PlayerModel> allPlayers) {
+        // Filter out the losing player and sort remaining players by balance in descending order
+        List<PlayerModel> sortedPlayers = allPlayers.stream()
+                .filter(player -> !player.equals(loser))
+                .sorted(Comparator.comparing(PlayerModel::getBalance, Comparator.reverseOrder()))
+                .toList();        // Building the ranking message
+
+        StringBuilder rankingMessage = new StringBuilder();
+        rankingMessage.append("You have lost the game!\n\n");
+        rankingMessage.append("Rankings:\n");
+        int rank = 1;
+        for (PlayerModel player : sortedPlayers) {
+            rankingMessage.append(rank).append(". ")
+                    .append(player.getName()).append(" - $")
+                    .append(player.getBalance()).append("\n");
+            rank++;
+        }
+
+        // Create and display the alert
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Game Over");
+        alert.setHeaderText("Game Over!");
+        alert.setContentText(rankingMessage.toString());
+        alert.showAndWait();
+    }
+
 
     public GameModel getGameModel() {
         return gameModel;

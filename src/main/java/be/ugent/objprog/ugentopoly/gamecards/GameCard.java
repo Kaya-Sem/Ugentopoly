@@ -1,9 +1,8 @@
-package be.ugent.objprog.ugentopoly.cardDeck;
+package be.ugent.objprog.ugentopoly.gamecards;
 
 import be.ugent.objprog.ugentopoly.GameModel;
 import be.ugent.objprog.ugentopoly.tiles.tileCards.VerticalCard;
 
-import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 public class GameCard extends VerticalCard {

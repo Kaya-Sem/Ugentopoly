@@ -44,7 +44,7 @@ public class TileInitializer {
                 tileModelArray,
                 reverse(Arrays.copyOfRange(tileViewArray, 1, 10)),
                 Arrays.copyOfRange(tileViewArray, 11, 20),
-                Arrays.copyOfRange(tileViewArray, 21, 30),
+                reverse(Arrays.copyOfRange(tileViewArray, 21, 30)),
                 reverse(Arrays.copyOfRange(tileViewArray, 31, 40)),
                 new TileView[] { tileViewArray[0], tileViewArray[10], tileViewArray[20], tileViewArray[30]}
         );

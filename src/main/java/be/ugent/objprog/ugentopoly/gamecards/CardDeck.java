@@ -1,4 +1,4 @@
-package be.ugent.objprog.ugentopoly.cardDeck;
+package be.ugent.objprog.ugentopoly.gamecards;
 
 import be.ugent.objprog.ugentopoly.tiles.tileCards.VerticalCard;
 

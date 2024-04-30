@@ -2,7 +2,7 @@ package be.ugent.objprog.ugentopoly;
 
 import java.util.*;
 
-import be.ugent.objprog.ugentopoly.cardDeck.CardDeck;
+import be.ugent.objprog.ugentopoly.gamecards.CardDeck;
 import be.ugent.objprog.ugentopoly.dice.DiceModel;
 import be.ugent.objprog.ugentopoly.logging.LogElement;
 import be.ugent.objprog.ugentopoly.players.Pion;
@@ -24,6 +24,8 @@ public class GameModel extends CustomObservable {
     private final CardDeck chestCardDeck;
 
     private final DiceModel diceModel;
+
+    private GameController gameController;
 
     private int bonusPot = 0;
     private final ObservableList<LogElement> logs = FXCollections.observableArrayList();
@@ -77,18 +79,22 @@ public class GameModel extends CustomObservable {
 
     public void setBonusPot(int bonusPot) {
         this.bonusPot = bonusPot;
+        fireInvalidationEvent();
     }
 
     public void changeBonusPot(int amount) {
         bonusPot += amount;
+        fireInvalidationEvent();
     }
 
     public void addLog(String player, String action) {
         logs.add(new LogElement(player, action));
+        fireInvalidationEvent();
     }
 
     public void addLog(String message) {
         logs.add(new LogElement(message));
+        fireInvalidationEvent();
     }
 
     public ObservableList<LogElement> getLogs() {
@@ -97,5 +103,13 @@ public class GameModel extends CustomObservable {
 
     public DiceModel getDiceModel() {
         return diceModel;
+    }
+
+    public GameController getGameController() {
+        return gameController;
+    }
+
+    public void setGameController(GameController gameController) {
+        this.gameController = gameController;
     }
 }

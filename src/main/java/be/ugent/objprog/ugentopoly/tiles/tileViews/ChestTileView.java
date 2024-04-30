@@ -15,14 +15,9 @@ import java.util.Objects;
 
 public class ChestTileView extends SmallTileView {
 
-    public ChestTileView(TileModel model){
+    public ChestTileView(ChestTileModel model){
         super(model);
-        setup();
-    }
 
-    // HACK remove setup and model casting
-    protected void setup() {
-        ChestTileModel model = (ChestTileModel) this.model;
         TileImageView imageView = new TileImageView(model.getImage());
         String text = PropertyLoader.getLabel(getModel().getId());
         Label textLabel = new Label(text);

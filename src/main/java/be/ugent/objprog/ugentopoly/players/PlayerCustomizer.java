@@ -2,16 +2,13 @@ package be.ugent.objprog.ugentopoly.players;
 
 import java.util.List;
 
+import be.ugent.objprog.ugentopoly.CustomImage;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.ColorPicker;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleButton;
+import javafx.scene.control.*;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
-
-// TODO put a limit on name length
-// TODO mark in red when somehting is not filled in
 
 public class PlayerCustomizer extends VBox {
     protected static final double PADDING = 20.0;
@@ -20,9 +17,8 @@ public class PlayerCustomizer extends VBox {
 
     private final String playerNumber;
     private final TextField field = new TextField();
-    private final ColorPicker colorPicker = new ColorPicker();
     private final PlayerCreatorStage creator;
-    private final List<Node> children = List.of(field, badgeComboBox, colorPicker);
+    private final List<Node> children = List.of(field, badgeComboBox );
 
     PlayerCustomizer(PlayerCreatorStage creator, String textFieldHint, String playerNumber) {
         this.creator = creator;
@@ -32,52 +28,65 @@ public class PlayerCustomizer extends VBox {
         field.setAlignment(Pos.CENTER);
 
         badgeComboBox.setPromptText("Select badge");
-        colorPicker.setPromptText("Select color");
 
         // Disable the selected badge for other players
-        badgeComboBox.valueProperty().addListener((observable, oldValue, newValue) -> {
-            creator.playerCustomizers.stream().filter(customizer -> !customizer.equals(this)).forEach(customizer -> {
-                if (null != oldValue && !customizer.badgeComboBox.getItems().contains(oldValue)) {
-                    customizer.badgeComboBox.getItems().add(oldValue);
-                }
-                customizer.badgeComboBox.getItems().remove(newValue);
-            });
-        });
+        badgeComboBox.valueProperty().addListener((observable, oldValue, newValue) -> creator.playerCustomizers.stream().filter(customizer -> !customizer.equals(this)).forEach(customizer -> {
+            if (null != oldValue && !customizer.badgeComboBox.getItems().contains(oldValue)) {
+                customizer.badgeComboBox.getItems().add(oldValue);
+            }
+            customizer.badgeComboBox.getItems().remove(newValue);
+        }));
 
-
-        getChildren().addAll(field, badgeComboBox, colorPicker, new button());
+setupComboBoxContextMenu();
+        getChildren().addAll(field, badgeComboBox, new CustomButton());
         setSpacing(PADDING);
     }
 
+    private void setupComboBoxContextMenu() {
+        ContextMenu contextMenu = new ContextMenu();
+        MenuItem addItem = new MenuItem("secret Noah badge");
+        addItem.setOnAction(event -> {
+            badgeComboBox.getItems().add(new ImageTextItem("Noah", new CustomImage("noah.png")));
+        });
+        contextMenu.getItems().add(addItem);
 
-    // HACK smelly
-    private class button extends ToggleButton {
-        private button() {
+        badgeComboBox.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            if (MouseButton.SECONDARY == event.getButton()) {
+                contextMenu.show(badgeComboBox, event.getScreenX(), event.getScreenY());
+            } else {
+                contextMenu.hide();
+            }
+        });
+    }
+
+    private class CustomButton extends Button {
+        protected static final int MAXNAMELENGTH = 12;
+
+        private CustomButton() {
             setAlignment(Pos.CENTER);
             setText("READY");
 
             setOnAction(event -> {
-                if (isSelected()) {
-
-                        creator.players.put(playerNumber, new PlayerModel(
-                                field.getText(),
-                                colorPicker.getValue(),
-                                Integer.parseInt(creator.balance),
-                                getBadgeComboBox().getValue()
-
-                        ));
-                        children.forEach(child -> child.setDisable(true));
-
-                        // remove
-                        System.out.println("Current map: " + creator.players);
+                if (field.getText().isBlank() || MAXNAMELENGTH < field.getText().length() || null == getBadgeComboBox().getValue()) {
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.initOwner(PlayerCustomizer.this.getScene().getWindow()); // Set owner to the PlayerCreatorStage
+                    alert.setTitle("Incomplete Information");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Please fill in names, select a badge and \n make sure player name is less than 12 characters.");
+                    alert.showAndWait();
                 } else {
-                    creator.players.remove(playerNumber);
-                    children.forEach(child -> child.setDisable(false));
-                    System.out.println("Current map: " + creator.players); // remove
+                    setDisabled(true);
+                    creator.players.put(playerNumber, new PlayerModel(
+                            field.getText(),
+                            Integer.parseInt(creator.balance),
+                            getBadgeComboBox().getValue()
+                    ));
+                    children.forEach(child -> child.setDisable(true));
                 }
             });
         }
     }
+
 
     ComboBox<ImageTextItem> getBadgeComboBox() {
         return badgeComboBox;
