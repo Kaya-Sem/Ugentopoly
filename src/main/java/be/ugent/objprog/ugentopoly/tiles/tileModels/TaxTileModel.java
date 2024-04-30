@@ -15,7 +15,7 @@ public class TaxTileModel extends TileModel{
     public TaxTileModel(String tileID, int tilePosition, int amount, DisplayCardController controller) {
         super(tileID, tilePosition, controller);
         this.amount = amount;
-        card = (new TaxCard(image, tileName, String.valueOf(amount)));
+        setCard(new TaxCard(image, tileName, String.valueOf(amount)));
     }
 
     public int getAmount() {
@@ -28,7 +28,7 @@ public class TaxTileModel extends TileModel{
             gameModel.changeBonusPot(amount);
             PlayerModel currentPlayer = gameModel.getCurrentPlayerMove();
             currentPlayer.changeBalance(-amount);
-            gameModel.addLog(currentPlayer.getPlayerName(), "betaald €" + amount);
+            gameModel.addLog(currentPlayer.getName(), "betaald €" + amount);
         });
     }
 

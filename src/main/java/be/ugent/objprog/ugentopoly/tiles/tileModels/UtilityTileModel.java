@@ -23,7 +23,7 @@ public class UtilityTileModel extends TileModel{
         super(tileID, tilePosition, controller);
         this.cost = cost;
         image = new CustomImage(id.substring(5) + ".png");
-        card = new UtilityCard(image, String.valueOf(cost));
+        setCard(new UtilityCard(image, String.valueOf(cost)));
     }
 
     public int getCost() {
@@ -34,17 +34,17 @@ public class UtilityTileModel extends TileModel{
     public Consumer<GameModel> getPlayerTileInteraction() {
          return (gameModel -> {
             PlayerModel currentPlayer = gameModel.getCurrentPlayerMove();
-            String currentPlayerName = currentPlayer.getPlayerName();
+            String currentPlayerName = currentPlayer.getName();
             ObservableList<TileModel> ownedTiles = currentPlayer.getOwnedTiles();
 
             if (ownedTiles.contains(this)) {
-                gameModel.addLog(currentPlayer.getPlayerName(), "landed on his own tile!");
+                gameModel.addLog(currentPlayer.getName(), "landed on his own tile!");
             } else if (null == owner) {
                 boolean result = new TilePurchaseAlert(tileName, String.valueOf(cost)).showAndAwaitResponse();
 
                 if (result) {
                     currentPlayer.changeBalance(-cost);
-                    currentPlayer.addTile(this);
+                    currentPlayer.addBuyable(this);
                     owner = currentPlayer;
                     gameModel.addLog(currentPlayerName, "kocht " + tileName + " voor €"+ cost + "!");
                 } else {
@@ -54,7 +54,7 @@ public class UtilityTileModel extends TileModel{
                 int price = calculatePrice(gameModel.getDiceModel().getMostRecentRoll(), ownedTiles);
                 owner.changeBalance(price);
                 currentPlayer.changeBalance(price);
-                gameModel.addLog(currentPlayer.getPlayerName(), "payed " + owner.getPlayerName() + " " + price + " euro rent");
+                gameModel.addLog(currentPlayer.getName(), "payed " + owner.getName() + " " + price + " euro rent");
             }
 
         });

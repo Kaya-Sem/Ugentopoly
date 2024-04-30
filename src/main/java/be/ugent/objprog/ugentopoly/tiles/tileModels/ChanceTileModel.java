@@ -14,7 +14,7 @@ public class ChanceTileModel extends TileModel{
 
     public ChanceTileModel(String tileID, int tilePosition, DisplayCardController controller) {
         super(tileID, tilePosition, controller);
-        card = new BasicVerticalCard(image, tileName); // HACK
+        setCard(new BasicVerticalCard(image, tileName));
     }
 
     public Image getImage() {
@@ -24,9 +24,9 @@ public class ChanceTileModel extends TileModel{
     @Override
     public Consumer<GameModel> getPlayerTileInteraction() {
         return (((gameModel) -> {
-            gameModel.addLog(gameModel.getCurrentPlayerMove().getPlayerName(), "trekt een kanskaart!");
+            gameModel.addLog(gameModel.getCurrentPlayerMove().getName(), "trekt een kanskaart!");
             GameCard gameCard = (GameCard) gameModel.getChanceCardDeck().getNextCard();
-            gameCard.performAction(gameModel,gameCard);
+            gameCard.performAction(gameModel);
         }));
     }
 }

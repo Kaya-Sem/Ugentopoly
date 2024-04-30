@@ -3,7 +3,6 @@ package be.ugent.objprog.ugentopoly.tiles.tileModels;
 import be.ugent.objprog.ugentopoly.CustomImage;
 import be.ugent.objprog.ugentopoly.DisplayCardController;
 import be.ugent.objprog.ugentopoly.GameModel;
-import be.ugent.objprog.ugentopoly.parsers.PropertyLoader;
 import be.ugent.objprog.ugentopoly.players.PlayerModel;
 import be.ugent.objprog.ugentopoly.tiles.tileCards.BasicVerticalCard;
 import javafx.scene.image.Image;
@@ -14,9 +13,9 @@ public class FreeParkingModel extends TileModel{
 
     private final Image image = new CustomImage("free_parking.png");
 
-    public FreeParkingModel(String id, int position, DisplayCardController controller) {
-        super(id, position, controller);
-        card = new BasicVerticalCard(image, tileName);
+    public FreeParkingModel(String tileID, int tilePosition, DisplayCardController controller) {
+        super(tileID, tilePosition, controller);
+        setCard(new BasicVerticalCard(image, tileName));
     }
 
     public Image getImage() {
@@ -31,7 +30,7 @@ public class FreeParkingModel extends TileModel{
             gameModel.setBonusPot(0);
             currentPlayer.changeBalance(amount);
 
-            gameModel.addLog(currentPlayer.getPlayerName(), (0 == amount) ?
+            gameModel.addLog(currentPlayer.getName(), (0 == amount) ?
                     "krijgt niets, want de bonuspot is leeg..." : "krijgt " + amount + "€ uit de bonuspot!"
                     );
         };

@@ -14,7 +14,7 @@ public class GoToJailTileModel extends TileModel{
 
     public GoToJailTileModel(String tileID, int tilePosition, DisplayCardController controller) {
         super(tileID, tilePosition, controller);
-        card = new BasicVerticalCard(image, tileName); // HACK
+        setCard(new BasicVerticalCard(image, tileName));
     }
 
     @Override
