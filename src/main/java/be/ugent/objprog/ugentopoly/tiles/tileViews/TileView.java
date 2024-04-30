@@ -25,13 +25,11 @@ public class TileView extends StackPane implements InvalidationListener{
         return model;
     }
 
-    public TileView(TileModel model){
+    protected TileView(TileModel model){
         this.model = model;
         this.model.addListener(this);
         tileButton.setOnAction(this::handleButton);
     }
-
-    protected void setup() {}
 
     public void applyRotation(int angle){
         setTranslateX(getWidth() / 2);
