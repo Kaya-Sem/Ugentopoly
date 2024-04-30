@@ -4,61 +4,43 @@ import be.ugent.objprog.ugentopoly.tiles.tileModels.StreetTileModel;
 import be.ugent.objprog.ugentopoly.tiles.tileViews.TileView;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
-import static javafx.geometry.Pos.CENTER_LEFT;
-import static javafx.geometry.Pos.CENTER_RIGHT;
+import static javafx.geometry.Pos.*;
 
 public class StreetCard extends HorizontalCard {
+    protected static final int ROUNDING = 20;
+    protected static final int PADDING = 35;
+
     public StreetCard(StreetTileModel model) {
         Label textLabel = new Label(model.getTileName());
         textLabel.setFont(Font.font("Raleway", FontWeight.EXTRA_BOLD, 15));
 
-        Label cost = new Label(model.getCost());
-        cost.setFont(Font.font("Arial", FontWeight.THIN, 11));
+        Label costLabel = new Label("€" + model.getCost());
+        costLabel.setFont(Font.font("Arial", FontWeight.THIN, 11));
 
         VBox info = new VBox(
                 textLabel,
-                cost,
+                costLabel,
                 new Label("\n"),
-                new rentLabel("rent ", model.getRent())
+                new Label("rent: €" + model.getRent())
         );
 
-        info.setAlignment(CENTER_LEFT);
-        info.setPadding(new Insets(20));
+        info.setAlignment(TOP_LEFT);
+        info.setPadding(new Insets(PADDING));
 
-        Rectangle bar = new Rectangle(TileView.SHORT_SIDE - 3, HEIGHT - 3);
-        bar.setFill(Paint.valueOf(model.getColor()));
-        bar.setArcHeight(20);
-        bar.setArcWidth(20);
+        Rectangle coloredBar = new Rectangle(TileView.SHORT_SIDE - 3, HEIGHT - 3);
+        coloredBar.setFill(Paint.valueOf(model.getColor()));
+        coloredBar.setArcHeight(ROUNDING);
+        coloredBar.setArcWidth(ROUNDING);
 
-        setAlignment(bar, CENTER_RIGHT);
+        setAlignment(coloredBar, CENTER_RIGHT);
 
-        getChildren().addAll(info, bar);
-
+        getChildren().addAll(info, coloredBar);
     }
 
-
-    public static class rentLabel extends HBox {
-        public rentLabel(String preText, String rentAmount){
-            Label text = new Label(preText);
-            Label amount = new Label(rentAmount + "€");
-            amount.setFont(Font.font("Arial", FontWeight.BOLD, 13));
-            Region region = new Region();
-
-            setHgrow(region, Priority.SOMETIMES);
-
-            setAlignment(CENTER_LEFT);
-
-            setMaxWidth(WIDTH /3);
-            getChildren().addAll(text, region, amount);
-        }
-    }
 }
