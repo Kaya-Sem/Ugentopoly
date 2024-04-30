@@ -3,7 +3,7 @@ package be.ugent.objprog.ugentopoly.tiles.tileModels;
 import be.ugent.objprog.ugentopoly.CustomImage;
 import be.ugent.objprog.ugentopoly.DisplayCardController;
 import be.ugent.objprog.ugentopoly.GameModel;
-import be.ugent.objprog.ugentopoly.TilePurchaseAlert;
+import be.ugent.objprog.ugentopoly.tiles.TilePurchaseAlert;
 import be.ugent.objprog.ugentopoly.parsers.PropertyLoader;
 import be.ugent.objprog.ugentopoly.players.PlayerModel;
 import be.ugent.objprog.ugentopoly.tiles.tileCards.RailwayCard;
@@ -53,7 +53,7 @@ public class RailwayTileModel extends TileModel{
             } else {
                 boolean result = new TilePurchaseAlert(
                         PropertyLoader.getLabel(id),
-                        String.valueOf(cost)).showAndAwaitResponse();
+                        String.valueOf(cost), card).wasBought();
 
                 if (result) {
                     currentPlayer.changeBalance(-cost);
@@ -62,7 +62,7 @@ public class RailwayTileModel extends TileModel{
                     gameModel.addLog(currentPlayerName, "kocht " + PropertyLoader.getLabel(id) + "!");
 
                 } else {
-                    gameModel.addLog(currentPlayerName, "kocht" + PropertyLoader.getLabel(id) +  " niet.");
+                    gameModel.addLog(currentPlayerName, "kocht " + PropertyLoader.getLabel(id) +  " niet.");
                 }
             }
         };
