@@ -80,10 +80,10 @@ public class Ugentopoly extends Application {
     }
 
     private static void applySettings(Stage primaryStage) {
-        primaryStage.getIcons().add(ApplicationIcon.icon());
+        primaryStage.getIcons().add(new CustomImage("chest.png"));
         primaryStage.setFullScreen(true);
-        primaryStage.setMinWidth(WINDOW_WIDTH); // Set minimum width of the window
-        primaryStage.setMinHeight(WINDOW_HEIGHT); // Set minimum height of the window
+        primaryStage.setMinWidth(WINDOW_WIDTH);
+        primaryStage.setMinHeight(WINDOW_HEIGHT);
         primaryStage.setTitle(APPLICATIONNAME);
     }
 

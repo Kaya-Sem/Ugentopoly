@@ -33,7 +33,7 @@ public class GameOverDialog {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Game Over");
         alert.setHeaderText("Game Over!");
-        alert.setContentText(message.toString());
+        alert.setContentText(message);
         alert.showAndWait();
     }
 }

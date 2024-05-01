@@ -66,7 +66,7 @@ public class GameController {
         PlayerModel playerModel = gameModel.getPlayerModelQueue().getNextPlayer();
         if (playerModel.isInJail()) {
 
-            if (playerModel.getLeaveJailCards() > 0) {
+            if (0 < playerModel.getLeaveJailCards()) {
                 gameModel.addLog(playerModel.getName(), "geraakt thuis van de Overpoort");
                 playerModel.changeGetOutOfJailCards(-1);
             } else {
@@ -87,24 +87,26 @@ public class GameController {
 
         int newPosition = (position + 1) % tileModels.length;
 
+        // passing start
+        if (0 == newPosition) {
+            tileModels[0].getPlayerTileInteraction();
+        }
+
         model.setPosition(newPosition);
         tileModels[newPosition].addPion(model.getPion());
     }
 
-    public void moveCurrentPlayerToPosition(int newPosition, boolean collect) {
+    public void moveCurrentPlayerToPosition(int newPosition) {
         PlayerModel playerModel = gameModel.getCurrentPlayerMove();
-        int moves = Math.abs(newPosition - playerModel.getPosition());
+        TileModel[] tileModels = gameModel.getTileModels();
 
-        IntStream.rangeClosed(0, moves).mapToObj(i -> playerModel).forEach(this::movePion);
-
-        if ((BoardModel.TOTALTILES <= (newPosition + playerModel.getPosition()) && collect)) {
-            Consumer<GameModel> action = gameModel.getTileModels()[0].getPlayerTileInteraction();
-            action.accept(gameModel);
-        }
+        tileModels[playerModel.getPosition()].removePion(playerModel.getPion());
+        playerModel.setPosition(newPosition);
+        tileModels[playerModel.getPosition()].addPion(playerModel.getPion());
     }
 
     public void moveCurrentPlayerToJail() {
-        moveCurrentPlayerToPosition(10, false);
+        moveCurrentPlayerToPosition(10);
     }
 
     public void addLog(String text) {

@@ -45,21 +45,23 @@ public class DiceRoller extends VBox implements InvalidationListener {
         Integer dice1 = list.getFirst();
         Integer dice2 = list.getLast();
 
-
-
         if (dice1.equals(dice2)) {
             diceModel.getGameController().addLog("a double was rolled!");
+
             if (MAXDOUBLEROLLS == doubleRolledCounter) {
                 diceModel.getGameController().moveCurrentPlayerToJail();
                 doubleRolledCounter = 0;
                 diceModel.getGameController().nextPlayer();
                 diceModel.getGameController().addLog("3 doubles in a row, went to jail!");
+                diceModel.setDisabled(false);
             } else {
             doubleRolledCounter += 1;
             diceModel.setDisabled(false);
             }
             return;
         }
+
+        doubleRolledCounter = 0;
 
         diceModel.setMostRecentRoll(dice1 + dice2);
 
