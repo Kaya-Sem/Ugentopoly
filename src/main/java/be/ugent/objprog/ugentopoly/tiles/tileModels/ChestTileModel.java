@@ -4,10 +4,11 @@ import be.ugent.objprog.ugentopoly.CustomImage;
 import be.ugent.objprog.ugentopoly.GameModel;
 import be.ugent.objprog.ugentopoly.gamecards.GameCard;
 import be.ugent.objprog.ugentopoly.tiles.tileCards.BasicVerticalCard;
+import be.ugent.objprog.ugentopoly.tiles.tileinterface.ImageTile;
 
 import java.util.function.Consumer;
 
-public class ChestTileModel extends TileModel{
+public class ChestTileModel extends TileModel implements ImageTile {
 
     private final CustomImage image = new CustomImage("chest.png");
 
@@ -20,7 +21,7 @@ public class ChestTileModel extends TileModel{
     public Consumer<GameModel> getPlayerTileInteraction() {
         return (((gameModel) -> {
             gameModel.addLog(gameModel.getCurrentPlayer().getName(), "trekt een algemeen fonds kaart!");
-            GameCard gameCard = (GameCard) gameModel.getChestCardDeck().getNextCard();
+            GameCard gameCard = gameModel.getChestCardDeck().getNextCard();
             gameCard.performAction(gameModel);
         }));
     }

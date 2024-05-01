@@ -4,10 +4,11 @@ import be.ugent.objprog.ugentopoly.CustomImage;
 import be.ugent.objprog.ugentopoly.GameModel;
 import be.ugent.objprog.ugentopoly.players.PlayerModel;
 import be.ugent.objprog.ugentopoly.tiles.tileCards.BasicVerticalCard;
+import be.ugent.objprog.ugentopoly.tiles.tileinterface.ImageTile;
 
 import java.util.function.Consumer;
 
-public class GoToJailTileModel extends TileModel{
+public class GoToJailTileModel extends TileModel implements ImageTile {
 
     private final CustomImage image = new CustomImage("go_to_jail.png");
 

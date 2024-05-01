@@ -4,10 +4,12 @@ import be.ugent.objprog.ugentopoly.CustomImage;
 import be.ugent.objprog.ugentopoly.GameModel;
 import be.ugent.objprog.ugentopoly.players.PlayerModel;
 import be.ugent.objprog.ugentopoly.tiles.tileCards.RailwayCard;
+import be.ugent.objprog.ugentopoly.tiles.tileinterface.ImageTile;
+import javafx.scene.image.Image;
 
 import java.util.function.Consumer;
 
-public class RailwayTileModel extends BuyableModel{
+public class RailwayTileModel extends BuyableModel implements ImageTile {
 
     private final int rent;
     private static final CustomImage image = new CustomImage("railway.png");
@@ -46,7 +48,8 @@ public class RailwayTileModel extends BuyableModel{
         };
     }
 
-    public static CustomImage getImage() {
+    @Override
+    public CustomImage getImage() {
         return image;
     }
 }

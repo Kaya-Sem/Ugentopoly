@@ -4,15 +4,16 @@ import be.ugent.objprog.ugentopoly.CustomImage;
 import be.ugent.objprog.ugentopoly.GameModel;
 import be.ugent.objprog.ugentopoly.players.PlayerModel;
 import be.ugent.objprog.ugentopoly.tiles.tileCards.UtilityCard;
+import be.ugent.objprog.ugentopoly.tiles.tileinterface.ImageTile;
 import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
 
 import java.util.Set;
 import java.util.function.Consumer;
 
-public class UtilityTileModel extends BuyableModel{
+public class UtilityTileModel extends BuyableModel implements ImageTile {
 
-    private final Image image;
+    private final CustomImage image;
 
     public UtilityTileModel(String tileID, int tilePosition, int cost) {
         super(tileID, tilePosition, cost);
@@ -52,7 +53,8 @@ public class UtilityTileModel extends BuyableModel{
         return (2 == countOfUtilities) ? aantalOgen * 10 : aantalOgen << 2;
     }
 
-    public Image getImage() {
+    @Override
+    public CustomImage getImage() {
         return image;
     }
 }

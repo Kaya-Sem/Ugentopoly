@@ -4,15 +4,16 @@ import be.ugent.objprog.ugentopoly.CustomImage;
 import be.ugent.objprog.ugentopoly.GameModel;
 import be.ugent.objprog.ugentopoly.players.PlayerModel;
 import be.ugent.objprog.ugentopoly.tiles.tileCards.BasicVerticalCard;
+import be.ugent.objprog.ugentopoly.tiles.tileinterface.ImageTile;
 import javafx.scene.image.Image;
 
 import java.util.function.Consumer;
 
-public class StartTileModel extends TileModel {
+public class StartTileModel extends TileModel implements ImageTile {
     private final int startAmount;
 
-    private final Image startImage = new CustomImage("start.png");
-    private final Image arrowImage = new CustomImage("start-arrow.png");
+    private final CustomImage startImage = new CustomImage("start.png");
+    private final CustomImage arrowImage = new CustomImage("start-arrow.png");
 
     public StartTileModel(String tileID, int tilePosition, int startAmount) {
         super(tileID, tilePosition);
@@ -38,5 +39,10 @@ public class StartTileModel extends TileModel {
             currentPlayer.changeBalance(startAmount);
             gameModel.addLog(currentPlayer.getName(), "passeert START, en krijgt €" + startAmount + " zakgeld van zijn ouders");
         });
+    }
+
+    @Override
+    public CustomImage getImage() {
+        return startImage;
     }
 }

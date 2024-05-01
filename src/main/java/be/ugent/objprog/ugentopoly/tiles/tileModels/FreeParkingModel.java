@@ -4,20 +4,21 @@ import be.ugent.objprog.ugentopoly.CustomImage;
 import be.ugent.objprog.ugentopoly.GameModel;
 import be.ugent.objprog.ugentopoly.players.PlayerModel;
 import be.ugent.objprog.ugentopoly.tiles.tileCards.BasicVerticalCard;
+import be.ugent.objprog.ugentopoly.tiles.tileinterface.ImageTile;
 import javafx.scene.image.Image;
 
 import java.util.function.Consumer;
 
-public class FreeParkingModel extends TileModel{
+public class FreeParkingModel extends TileModel implements ImageTile {
 
-    private final Image image = new CustomImage("free_parking.png");
+    private final CustomImage image = new CustomImage("free_parking.png");
 
     public FreeParkingModel(String tileID, int tilePosition) {
         super(tileID, tilePosition);
         setCard(new BasicVerticalCard(image, tileName));
     }
 
-    public Image getImage() {
+    public CustomImage getImage() {
         return image;
     }
 

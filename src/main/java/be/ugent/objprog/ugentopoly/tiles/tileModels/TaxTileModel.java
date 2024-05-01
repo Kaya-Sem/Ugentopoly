@@ -4,10 +4,11 @@ import be.ugent.objprog.ugentopoly.CustomImage;
 import be.ugent.objprog.ugentopoly.GameModel;
 import be.ugent.objprog.ugentopoly.players.PlayerModel;
 import be.ugent.objprog.ugentopoly.tiles.tileCards.TaxCard;
+import be.ugent.objprog.ugentopoly.tiles.tileinterface.ImageTile;
 
 import java.util.function.Consumer;
 
-public class TaxTileModel extends TileModel{
+public class TaxTileModel extends TileModel implements ImageTile {
     private static final CustomImage image = new CustomImage("tax.png");
     private final int amount;
 
@@ -31,7 +32,8 @@ public class TaxTileModel extends TileModel{
         });
     }
 
-    public static CustomImage getImage() {
+    @Override
+    public CustomImage getImage() {
         return image;
     }
 }

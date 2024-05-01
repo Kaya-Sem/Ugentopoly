@@ -3,10 +3,11 @@ package be.ugent.objprog.ugentopoly.tiles.tileModels;
 import be.ugent.objprog.ugentopoly.GameModel;
 import be.ugent.objprog.ugentopoly.players.PlayerModel;
 import be.ugent.objprog.ugentopoly.tiles.tileCards.StreetCard;
+import be.ugent.objprog.ugentopoly.tiles.tileinterface.ColorTile;
 
 import java.util.function.Consumer;
 
-public class StreetTileModel extends BuyableModel {
+public class StreetTileModel extends BuyableModel  implements ColorTile {
 
     private final String area;
     private final String rent;
