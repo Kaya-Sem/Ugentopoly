@@ -34,7 +34,7 @@ public class RailwayTileModel extends BuyableModel implements ImageTile {
         return gameModel -> {
             // Execute the parent interaction first
             parentInteraction.accept(gameModel);
-            if (null != owner) {
+            if (owner != null) {
                 PlayerModel currentPlayer = gameModel.getCurrentPlayer();
 
                 if (!owner.equals(currentPlayer)) {
