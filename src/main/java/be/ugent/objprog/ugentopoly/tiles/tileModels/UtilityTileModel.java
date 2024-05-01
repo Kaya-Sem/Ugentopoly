@@ -28,12 +28,11 @@ public class UtilityTileModel extends BuyableModel implements ImageTile {
         return gameModel -> {
             // Execute the parent interaction first
             parentInteraction.accept(gameModel);
-            if (null != owner) {
+            if (owner != null) {
                 PlayerModel currentPlayer = gameModel.getCurrentPlayer();
 
                 if (!owner.equals(currentPlayer)) {
-                    // WTF HACK
-                    int amount = calculatePrice(gameModel.getGameController().getDiceRoller().getMostRecentRoll(), currentPlayer.getOwnedTiles());
+                    int amount = calculatePrice(gameModel.getLastRoll(), currentPlayer.getOwnedTiles());
                     currentPlayer.changeBalance(-amount);
                     owner.changeBalance(amount);
                     gameModel.addLog(currentPlayer.getName(), "betaalt €" + amount + " huur aan " + owner.getName());
@@ -50,7 +49,7 @@ public class UtilityTileModel extends BuyableModel implements ImageTile {
                 .filter(tileModel -> requiredIds.contains(tileModel.getId()))
                 .count();
 
-        return (2 == countOfUtilities) ? aantalOgen * 10 : aantalOgen << 2;
+        return (countOfUtilities == 2) ? aantalOgen * 10 : aantalOgen << 2;
     }
 
     @Override
