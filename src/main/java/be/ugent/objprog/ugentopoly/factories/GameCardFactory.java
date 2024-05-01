@@ -57,11 +57,14 @@ public class GameCardFactory<T> {
         int newPosition = Integer.parseInt(data.get("position"));
         boolean collect = Boolean.parseBoolean(data.get("collect"));
 
+
         return gameModel -> {
+            PlayerModel currentPlayer = gameModel.getCurrentPlayer();
+            TileModel currentTileModel = gameModel.getTileModels()[newPosition];
+            gameModel.addLog(currentPlayer.getName(), "moet naar " + currentTileModel.getName());
+
             GameCardAlert alert = new GameCardAlert(message);
             alert.showAndWait();
-
-            PlayerModel currentPlayer = gameModel.getCurrentPlayer();
 
             gameModel.getGameController().moveCurrentPlayerToPosition(newPosition);
 
@@ -70,9 +73,6 @@ public class GameCardFactory<T> {
                 Consumer<GameModel> action = gameModel.getTileModels()[0].getPlayerTileInteraction();
                 action.accept(gameModel);
             }
-
-            TileModel currentTileModel = gameModel.getTileModels()[newPosition];
-            gameModel.addLog(currentPlayer.getName(), "moet naar " + currentTileModel.getName());
 
             Consumer<GameModel> action = currentTileModel.getPlayerTileInteraction();
             action.accept(gameModel);
