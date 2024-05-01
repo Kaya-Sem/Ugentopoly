@@ -20,38 +20,44 @@ public class PlayerTabInfoView extends VBox implements InvalidationListener {
 
     private final PlayerModel playerModel;
     private final StringProperty playerBalance = new SimpleStringProperty();
+    private final StringProperty playerPosition = new SimpleStringProperty();
+    private final StringProperty playerFreeJailCards = new SimpleStringProperty();
 
     public PlayerTabInfoView(PlayerModel playerModel) {
         this.playerModel = playerModel;
         playerModel.addListener(this);
 
-        playerBalance.set(String.valueOf(this.playerModel.getBalance()));
-
         ListView<TileModel> playerOwnedTiles = new ListView<>(playerModel.getOwnedTiles());
 
-        getChildren().addAll(getPlayerNameLabel(), getBalanceLabel(), playerOwnedTiles);
+        getChildren().addAll(
+                getPlayerNameLabel(),
+                getLabel(playerBalance, "€"),
+                getLabel(playerPosition, "Positie: "),
+                getLabel(playerFreeJailCards, "Jail kaarten: "),
+                playerOwnedTiles);
         setPadding(new Insets(5));
+        setSpacing(5);
     }
 
     private Label getPlayerNameLabel() {
         Label playerName = new Label(playerModel.getName());
-        playerName.setFont(Font.font("Arial", FontWeight.BOLD, 17));
+        playerName.setFont(Font.font("Arial", FontWeight.BOLD, 17)); // TODO
         playerName.setAlignment(Pos.CENTER);
         return playerName;
     }
 
-private Label getBalanceLabel() {
-        Label balanceLabel = new Label();
-        balanceLabel.textProperty().bind(Bindings.createStringBinding(
-                () -> "€" + playerBalance.get(),
-                playerBalance
+    private static Label getLabel(StringProperty property, String pretext) {
+        Label newLabel = new Label();
+        newLabel.textProperty().bind(Bindings.createStringBinding(
+                () -> pretext + property.get(), property
         ));
-        return balanceLabel;
+        return newLabel;
     }
 
     @Override
     public void invalidated(Observable observable) {
-        // TODO
         playerBalance.set(String.valueOf(playerModel.getBalance()));
+        playerPosition.set(String.valueOf(playerModel.getPosition()));
+        playerFreeJailCards.set(String.valueOf(playerModel.getLeaveJailCards()));
     }
 }
