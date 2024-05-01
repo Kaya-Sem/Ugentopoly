@@ -10,6 +10,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -28,10 +29,16 @@ public class PlayerTabInfoView extends VBox implements InvalidationListener {
         playerModel.addListener(this);
 
         ListView<TileModel> playerOwnedTiles = new ListView<>(playerModel.getOwnedTiles());
+        playerOwnedTiles.setCellFactory(listView -> new TileCell());
+        playerOwnedTiles.setFocusTraversable(false);
+        playerOwnedTiles.setMouseTransparent(true);
+
+        HBox title = new HBox(getPlayerNameLabel(), getLabel(playerBalance, "€"));
+        title.setSpacing(10);
+        title.setAlignment(Pos.CENTER_LEFT);
 
         getChildren().addAll(
-                getPlayerNameLabel(),
-                getLabel(playerBalance, "€"),
+                title,
                 getLabel(playerPosition, "Positie: "),
                 getLabel(playerFreeJailCards, "Jail kaarten: "),
                 playerOwnedTiles);
