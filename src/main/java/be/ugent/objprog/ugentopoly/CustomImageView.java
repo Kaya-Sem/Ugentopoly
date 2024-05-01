@@ -8,10 +8,6 @@ public class CustomImageView extends ImageView {
         setPreserveRatio(true);
     }
 
-    public CustomImageView(double fitHeight, double fitWidth ) {
-        applyCommonSettings(fitHeight, fitWidth);
-    }
-
     public CustomImageView(double fitHeight, double fitWidth, Image image) {
         setImage(image);
         applyCommonSettings(fitHeight, fitWidth);
