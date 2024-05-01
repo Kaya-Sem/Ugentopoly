@@ -24,73 +24,75 @@ public class TileFactory {
 
         tileCreationMethods = Map.of(
                 "START", this::createStartTile,
-                "FREE_PARKING", this::createFreeParkingTile,
-                "JAIL", this::createJailTile,
-                "GO_TO_JAIL", this::createGoToJailTile,
+                "FREE_PARKING", TileFactory::createFreeParkingTile,
+                "JAIL", TileFactory::createJailTile,
+                "GO_TO_JAIL", TileFactory::createGoToJailTile,
                 "STREET", this::createStreetModel,
-                "CHEST", this::createChestTile,
-                "TAX", this::createTaxTile,
-                "RAILWAY", this::createRailway,
-                "CHANCE", this::createChanceTile,
-                "UTILITY", this::createUtility
+                "CHEST", TileFactory::createChestTile,
+                "TAX", TileFactory::createTaxTile,
+                "RAILWAY", TileFactory::createRailway,
+                "CHANCE", TileFactory::createChanceTile,
+                "UTILITY", TileFactory::createUtility
         );
     }
 
     public TileTuple forge(Map<String, String> tileData) {
         String tileType = tileData.get("type");
         Function<Map<String, String>, TileTuple> tileCreator = tileCreationMethods.get(tileType);
-        return tileCreator.apply(tileData);
+        TileTuple tileTuple = tileCreator.apply(tileData);
+        tileTuple.tileModel().setController(controller);
+        return tileTuple;
     }
 
-    private TileTuple createChanceTile(Map<String, String> tileData) {
+    private static TileTuple createChanceTile(Map<String, String> tileData) {
         ChanceTileModel model = new ChanceTileModel(
-                tileData.get("id"), Integer.parseInt(tileData.get("position")), controller
+                tileData.get("id"), Integer.parseInt(tileData.get("position"))
         );
         return new TileTuple(model, new ChanceTileView(model));
     }
 
-    private TileTuple createFreeParkingTile(Map<String, String> tileData) {
+    private static TileTuple createFreeParkingTile(Map<String, String> tileData) {
         FreeParkingModel model = new FreeParkingModel(
-                tileData.get("id"), Integer.parseInt(tileData.get("position")), controller
+                tileData.get("id"), Integer.parseInt(tileData.get("position"))
         );
         return new TileTuple(model, new FreeParkingCornerTileView(model));
     }
 
-    private TileTuple createGoToJailTile(Map<String, String> tileData) {
+    private static TileTuple createGoToJailTile(Map<String, String> tileData) {
         GoToJailTileModel model = new GoToJailTileModel(
-                tileData.get("id"), Integer.parseInt(tileData.get("position")), controller
+                tileData.get("id"), Integer.parseInt(tileData.get("position"))
         );
         return new TileTuple(model, new GoToJailCornerTileView(model));
     }
 
-    private TileTuple createJailTile(Map<String, String> tileData) {
+    private static TileTuple createJailTile(Map<String, String> tileData) {
         JailTileModel model = new JailTileModel(
-                tileData.get("id"), Integer.parseInt(tileData.get("position")), controller
+                tileData.get("id"), Integer.parseInt(tileData.get("position"))
         );
         return new TileTuple(model, new JailCornerTileView(model));
     }
 
-    private TileTuple createChestTile(Map<String, String> tileData) {
+    private static TileTuple createChestTile(Map<String, String> tileData) {
         ChestTileModel model = new ChestTileModel(
-                tileData.get("id"), Integer.parseInt(tileData.get("position")), controller
+                tileData.get("id"), Integer.parseInt(tileData.get("position"))
         );
         return new TileTuple(model, new ChestTileView(model));
     }
 
-    private TileTuple createUtility(Map<String, String> tileData) {
+    private static TileTuple createUtility(Map<String, String> tileData) {
         UtilityTileModel model = new UtilityTileModel(
                 tileData.get("id"),
                 Integer.parseInt(tileData.get("position")),
-                Integer.parseInt(tileData.get("cost")), controller
+                Integer.parseInt(tileData.get("cost"))
         );
         return new TileTuple(model, new UtilityTileView(model));
     }
 
-    private TileTuple createTaxTile(Map<String, String> tileData) {
+    private static TileTuple createTaxTile(Map<String, String> tileData) {
         TaxTileModel model = new TaxTileModel(
                 tileData.get("id"),
                 Integer.parseInt(tileData.get("position")),
-                Integer.parseInt(tileData.get("amount")), controller
+                Integer.parseInt(tileData.get("amount"))
         );
         return new TileTuple(model, new TaxTileView(model));
     }
@@ -99,18 +101,17 @@ public class TileFactory {
         StartTileModel model = new StartTileModel(
                 tileData.get("id"),
                 Integer.parseInt(tileData.get("position")),
-                startAmount, controller
+                startAmount
         );
         return new TileTuple(model, new StartCornerTileView(model));
     }
 
-    private TileTuple createRailway(Map<String, String> tileData) {
+    private static TileTuple createRailway(Map<String, String> tileData) {
         RailwayTileModel model = new RailwayTileModel(
                 tileData.get("id"),
                 Integer.parseInt(tileData.get("position")),
                 Integer.parseInt(tileData.get("cost")),
-                Integer.parseInt(tileData.get("rent")),
-                controller
+                Integer.parseInt(tileData.get("rent"))
         );
         return new TileTuple(model, new RailwayTileView(model));
     }
@@ -122,8 +123,7 @@ public class TileFactory {
                 areaColors.get(tileData.get("area")),
                 tileData.get("area"),
                 Integer.parseInt(tileData.get("cost")),
-                tileData.get("rent0"),
-                controller
+                tileData.get("rent0")
         );
         return new TileTuple(model, new StreetTileView(model));
     }
