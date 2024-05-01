@@ -9,15 +9,12 @@ import javafx.scene.text.FontWeight;
 
 public class RailwayTileView extends SmallTileView {
 
-
-    // Constructor
     public RailwayTileView(RailwayTileModel model){
         super(model);
 
         TileImageView imageView = new TileImageView(model.getImage());
 
-        String text = model.getTileName();
-        Label textLabel = new Label(text);
+        Label textLabel = new Label(model.getTileName());
         textLabel.setFont(Font.font("Arial", FontWeight.BOLD, 10));
         textLabel.setWrapText(true);
 
