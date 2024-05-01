@@ -21,6 +21,7 @@ public class MiddleSection extends StackPane implements InvalidationListener {
     private final StackPane cardHolder;
 
     public MiddleSection(BoardModel boardModel) {
+        cardHolder = new StackPane();
         this.boardModel = boardModel;
         this.boardModel.addListener(this);
 
@@ -28,9 +29,7 @@ public class MiddleSection extends StackPane implements InvalidationListener {
         setMinSize(size, size);
         setMaxSize(size, size);
 
-        cardHolder = new StackPane();
-
-        CustomImageView background = new CustomImageView(size , boardModel.BOARD_SIZE, BACKGROUND);
+        CustomImageView background = new CustomImageView(size , BoardModel.BOARD_SIZE, BACKGROUND);
         CustomImageView logo = new CustomImageView(BoardModel.BOARD_SIZE * SCALAR, size, LOGO);
 
         logo.setRotate(ROTATION);
@@ -41,7 +40,7 @@ public class MiddleSection extends StackPane implements InvalidationListener {
     @Override
     public void invalidated(Observable observable) {
         cardHolder.getChildren().clear();
-        if (null != boardModel.getDisplayedCard()) {
+        if (boardModel.getDisplayedCard() != null) {
             cardHolder.getChildren().add(boardModel.getDisplayedCard());
         }
     }
