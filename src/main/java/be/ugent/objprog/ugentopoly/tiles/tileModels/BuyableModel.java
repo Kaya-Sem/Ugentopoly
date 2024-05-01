@@ -32,7 +32,7 @@ public class BuyableModel extends TileModel {
 
     @Override
     public Consumer<GameModel> getPlayerTileInteraction() {
-        return (gameModel -> {
+        return gameModel -> {
             PlayerModel currentPlayer = gameModel.getCurrentPlayer();
             String currentPlayerName = currentPlayer.getName();
             ObservableList<TileModel> ownedTiles = currentPlayer.getOwnedTiles();
@@ -42,7 +42,12 @@ public class BuyableModel extends TileModel {
                 return;
             }
 
-            if (null == owner && currentPlayer.getBalance() >= cost) {
+            if (owner == null) {
+                if (currentPlayer.getBalance() < cost) {
+                    gameModel.addLog(currentPlayerName, "heeft te weinig geld om deze tile te kopen");
+                    return;
+                }
+
                 boolean wasBought = new TilePurchaseAlert(name, String.valueOf(cost), card).wasBought();
 
                 if (wasBought) {
@@ -53,9 +58,7 @@ public class BuyableModel extends TileModel {
                 } else {
                     gameModel.addLog(currentPlayerName, "kocht " + name +  " niet.");
                 }
-            } else {
-            gameModel.addLog(currentPlayerName, "heeft niet genoeg geld om\n" + name + " te kopen");
             }
-        });
+        };
     }
 }
