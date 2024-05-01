@@ -15,7 +15,7 @@ import java.util.Map;
 
 public class TileCell extends ListCell<TileModel> {
     private final Map<Class<?>, TileGraphicGenerator> generatorMap = new HashMap<>();
-    private static final double GRAPHICSIZE = 40;
+    private static final double GRAPHICSIZE = 33;
 
     public TileCell() {
         generatorMap.put(ColorTile.class, TileCell::generateColorView);
