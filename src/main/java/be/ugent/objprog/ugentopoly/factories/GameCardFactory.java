@@ -5,7 +5,6 @@ import be.ugent.objprog.ugentopoly.GameModel;
 import be.ugent.objprog.ugentopoly.gamecards.GameCard;
 import be.ugent.objprog.ugentopoly.gameBoard.BoardModel;
 import be.ugent.objprog.ugentopoly.gamecards.GameCardAlert;
-import be.ugent.objprog.ugentopoly.players.Pion;
 import be.ugent.objprog.ugentopoly.players.PlayerModel;
 import be.ugent.objprog.ugentopoly.tiles.tileModels.TileModel;
 
@@ -64,19 +63,17 @@ public class GameCardFactory<T> {
             alert.showAndWait();
 
             GameController controller = gameModel.getGameController();
-
             PlayerModel currentPlayer = gameModel.getCurrentPlayerMove();
 
             controller.moveCurrentPlayerToPosition(newPosition);
 
-            TileModel currentTileModel = gameModel.getTileModels()[newPosition];
-
             // if it would pass start, call start tile's action
-            if ((BoardModel.TOTALTILES <= (newPosition + currentPlayer.getPosition())) && collect) {
+            if (newPosition < currentPlayer.getPosition() && collect) {
                 Consumer<GameModel> action = gameModel.getTileModels()[0].getPlayerTileInteraction();
                 action.accept(gameModel);
             }
 
+            TileModel currentTileModel = gameModel.getTileModels()[newPosition];
             gameModel.addLog(currentPlayer.getName(), "moet naar " + currentTileModel.getTileName());
 
             Consumer<GameModel> action = currentTileModel.getPlayerTileInteraction();
@@ -93,19 +90,18 @@ public class GameCardFactory<T> {
             alert.showAndWait();
 
             GameController controller = gameModel.getGameController();
-
             PlayerModel currentPlayer = gameModel.getCurrentPlayerMove();
-
             int newPosition = currentPlayer.getPosition() + relPosition;
 
             controller.moveCurrentPlayerToPosition(newPosition);
 
             TileModel currentTile = gameModel.getTileModels()[newPosition];
 
-
             String message = (0 < relPosition) ?
                     "zet " + relPosition + " stappen voorwaarts" :
                     "moest " + Math.abs(relPosition) + " stappen naar achter";
+
+            gameModel.addLog(currentPlayer.getName(), message);
 
             Consumer<GameModel> action = currentTile.getPlayerTileInteraction();
             action.accept(gameModel);
@@ -142,7 +138,6 @@ public class GameCardFactory<T> {
             PlayerModel currentPlayer = gameModel.getCurrentPlayerMove();
             List<PlayerModel> playerModelList = gameModel.getPlayerModels();
 
-            // add a transfer method?
             playerModelList.forEach(player -> {
                 player.changeBalance(-amount);
                 currentPlayer.changeBalance(amount);
