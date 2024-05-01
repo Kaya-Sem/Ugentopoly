@@ -30,7 +30,6 @@ public class GameOverDialog {
     }
 
     public void show() {
-        // Create and display the alert
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Game Over");
         alert.setHeaderText("Game Over!");
