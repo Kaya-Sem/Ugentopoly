@@ -9,7 +9,7 @@ import java.util.List;
 
 public class CustomObservable implements Observable {
 
-    // prevent instatiation. Abstract would not make any sense since I have no abstract methods. TODO
+    // prevent instatiation. Abstract would not make any sense because it has no have no abstract methods. TODO
     protected CustomObservable(){}
 
     protected final List<InvalidationListener> listenerList = new ArrayList<>();
