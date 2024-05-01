@@ -1,16 +1,15 @@
 package be.ugent.objprog.ugentopoly;
 
 import be.ugent.objprog.ugentopoly.dice.DiceModel;
+import be.ugent.objprog.ugentopoly.gameBoard.BoardModel;
 import be.ugent.objprog.ugentopoly.parsers.PropertyLoader;
-import be.ugent.objprog.ugentopoly.players.Pion;
 import be.ugent.objprog.ugentopoly.players.PlayerModel;
 import be.ugent.objprog.ugentopoly.tiles.tileModels.TileModel;
-import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.stream.IntStream;
 
 /*
 NON-URGENT write class documentation
@@ -92,19 +91,20 @@ public class GameController {
         tileModels[newPosition].addPion(model.getPion());
     }
 
-    public void moveCurrentPlayerToPosition(int newPosition) {
+    public void moveCurrentPlayerToPosition(int newPosition, boolean collect) {
         PlayerModel playerModel = gameModel.getCurrentPlayerMove();
-        Pion pion = playerModel.getPion();
+        int moves = Math.abs(newPosition - playerModel.getPosition());
 
-        TileModel[] tileModels = gameModel.getTileModels();
+        IntStream.rangeClosed(0, moves).mapToObj(i -> playerModel).forEach(this::movePion);
 
-        tileModels[playerModel.getPosition()].removePion(pion);
-        playerModel.setPosition(newPosition);
-        tileModels[newPosition].addPion(pion);
+        if ((BoardModel.TOTALTILES <= (newPosition + playerModel.getPosition()) && collect)) {
+            Consumer<GameModel> action = gameModel.getTileModels()[0].getPlayerTileInteraction();
+            action.accept(gameModel);
+        }
     }
 
     public void moveCurrentPlayerToJail() {
-        moveCurrentPlayerToPosition(10);
+        moveCurrentPlayerToPosition(10, false);
     }
 
     public void addLog(String text) {
@@ -115,40 +115,13 @@ public class GameController {
         model.balanceProperty().addListener(
                 (observableValue, oldValue, newValue) -> {
                     if (0 >= newValue.intValue()) {
-                        showGameOverDialog(model, gameModel.getPlayerModels());
+                        GameOverDialog dialog = new GameOverDialog(model, gameModel.getPlayerModels());
+                        dialog.show();
                         primaryStage.close();
                     }
                 }
         );
     }
-
-    // extract to own alert
-    private void showGameOverDialog(PlayerModel loser, List<PlayerModel> allPlayers) {
-        // Filter out the losing player and sort remaining players by balance in descending order
-        List<PlayerModel> sortedPlayers = allPlayers.stream()
-                .filter(player -> !player.equals(loser))
-                .sorted(Comparator.comparing(PlayerModel::getBalance, Comparator.reverseOrder()))
-                .toList();        // Building the ranking message
-
-        StringBuilder rankingMessage = new StringBuilder();
-        rankingMessage.append("You have lost the game!\n\n");
-        rankingMessage.append("Rankings:\n");
-        int rank = 1;
-        for (PlayerModel player : sortedPlayers) {
-            rankingMessage.append(rank).append(". ")
-                    .append(player.getName()).append(" - $")
-                    .append(player.getBalance()).append("\n");
-            rank++;
-        }
-
-        // Create and display the alert
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Game Over");
-        alert.setHeaderText("Game Over!");
-        alert.setContentText(rankingMessage.toString());
-        alert.showAndWait();
-    }
-
 
     public GameModel getGameModel() {
         return gameModel;
