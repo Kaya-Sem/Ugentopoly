@@ -12,8 +12,8 @@ public class ChestTileModel extends TileModel{
 
     private final CustomImage image = new CustomImage("chest.png");
 
-    public ChestTileModel(String tileID, int tilePosition, DisplayCardController controller) {
-        super(tileID, tilePosition, controller);
+    public ChestTileModel(String tileID, int tilePosition) {
+        super(tileID, tilePosition);
         setCard(new BasicVerticalCard(image, tileName));
     }
 
@@ -23,7 +23,6 @@ public class ChestTileModel extends TileModel{
             gameModel.addLog(gameModel.getCurrentPlayerMove().getName(), "trekt een algemeen fonds kaart!");
             GameCard gameCard = (GameCard) gameModel.getChestCardDeck().getNextCard();
             gameCard.performAction(gameModel);
-            // TODO raise alert
         }));
     }
 

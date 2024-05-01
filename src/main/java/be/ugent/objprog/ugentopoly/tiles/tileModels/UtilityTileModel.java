@@ -16,8 +16,8 @@ public class UtilityTileModel extends BuyableModel{
 
     private final Image image;
 
-    public UtilityTileModel(String tileID, int tilePosition, int cost, DisplayCardController controller) {
-        super(tileID, tilePosition, controller, cost);
+    public UtilityTileModel(String tileID, int tilePosition, int cost) {
+        super(tileID, tilePosition, cost);
         image = new CustomImage(id.substring(5) + ".png"); // not robust
         setCard(new UtilityCard(image, String.valueOf(cost)));
     }
@@ -42,6 +42,7 @@ public class UtilityTileModel extends BuyableModel{
         };
     }
 
+    // TODO test
     private static int calculatePrice(int aantalOgen, ObservableList<TileModel> tileModels) {
         Set<String> requiredIds = Set.of("tile.utility1", "tile.utility2");
 

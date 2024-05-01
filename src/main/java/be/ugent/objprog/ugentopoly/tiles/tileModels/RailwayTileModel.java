@@ -16,8 +16,8 @@ public class RailwayTileModel extends BuyableModel{
     private final int rent;
     private static final CustomImage image = new CustomImage("railway.png");
 
-    public RailwayTileModel(String tileID, int tilePosition, int cost, int rent, DisplayCardController controller) {
-        super(tileID, tilePosition, controller, cost);
+    public RailwayTileModel(String tileID, int tilePosition, int cost, int rent) {
+        super(tileID, tilePosition, cost);
         this.rent = rent;
         setCard(new RailwayCard(
                 image,

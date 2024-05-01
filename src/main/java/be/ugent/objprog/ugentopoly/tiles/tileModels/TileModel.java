@@ -18,15 +18,14 @@ public class TileModel extends CustomObservable {
     protected final int position;
     protected String tileName;
     protected final List<Pion> pionnen = new ArrayList<>();
-    protected final DisplayCardController controller;
+    protected DisplayCardController controller = null;
 
     protected TemplateCard card = null;
 
-   protected TileModel(String tileID, int tilePosition, DisplayCardController controller){
+   protected TileModel(String tileID, int tilePosition){
         id = tileID;
         position = tilePosition;
         tileName = PropertyFactory.getString(tileID);
-       this.controller = controller;
     }
 
     public DisplayCardController getController() {
@@ -53,6 +52,10 @@ public class TileModel extends CustomObservable {
             pionnen.remove(pion);
             fireInvalidationEvent();
         }
+    }
+
+    public void setController(DisplayCardController controller) {
+       this.controller = controller;
     }
 
     protected void setCard(TemplateCard card) {

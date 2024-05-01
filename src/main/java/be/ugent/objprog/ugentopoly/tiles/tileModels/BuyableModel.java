@@ -13,8 +13,8 @@ public class BuyableModel extends TileModel {
     protected PlayerModel owner = null;
     protected final int cost;
 
-    protected BuyableModel(String tileID, int tilePosition, DisplayCardController controller, int cost) {
-        super(tileID, tilePosition, controller);
+    protected BuyableModel(String tileID, int tilePosition, int cost) {
+        super(tileID, tilePosition);
         this.cost = cost;
 
     }

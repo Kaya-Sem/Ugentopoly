@@ -12,8 +12,8 @@ import java.util.function.Consumer;
 public class ChanceTileModel extends TileModel{
     private final Image image = new CustomImage("chance.png");
 
-    public ChanceTileModel(String tileID, int tilePosition, DisplayCardController controller) {
-        super(tileID, tilePosition, controller);
+    public ChanceTileModel(String tileID, int tilePosition) {
+        super(tileID, tilePosition);
         setCard(new BasicVerticalCard(image, tileName));
     }
 

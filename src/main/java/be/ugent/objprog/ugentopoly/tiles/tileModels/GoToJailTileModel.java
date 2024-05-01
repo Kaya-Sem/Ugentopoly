@@ -12,8 +12,8 @@ public class GoToJailTileModel extends TileModel{
 
     private final CustomImage image = new CustomImage("go_to_jail.png");
 
-    public GoToJailTileModel(String tileID, int tilePosition, DisplayCardController controller) {
-        super(tileID, tilePosition, controller);
+    public GoToJailTileModel(String tileID, int tilePosition) {
+        super(tileID, tilePosition);
         setCard(new BasicVerticalCard(image, tileName));
     }
 

@@ -13,8 +13,8 @@ public class FreeParkingModel extends TileModel{
 
     private final Image image = new CustomImage("free_parking.png");
 
-    public FreeParkingModel(String tileID, int tilePosition, DisplayCardController controller) {
-        super(tileID, tilePosition, controller);
+    public FreeParkingModel(String tileID, int tilePosition) {
+        super(tileID, tilePosition);
         setCard(new BasicVerticalCard(image, tileName));
     }
 

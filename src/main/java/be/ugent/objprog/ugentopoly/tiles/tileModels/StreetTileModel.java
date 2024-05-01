@@ -18,13 +18,12 @@ public class StreetTileModel extends BuyableModel {
     public StreetTileModel(
             String tileID,
             int tilePosition,
-            String color,
+            String color, // pass to streettile view directly?
             String area,
             int cost,
-            String rent,
-            DisplayCardController controller
+            String rent
             ) {
-        super(tileID, tilePosition, controller, cost);
+        super(tileID, tilePosition, cost);
         this.color = color;
         this.area = area;
         this.rent = rent;

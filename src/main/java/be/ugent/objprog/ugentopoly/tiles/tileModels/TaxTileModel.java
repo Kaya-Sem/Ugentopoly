@@ -12,8 +12,8 @@ public class TaxTileModel extends TileModel{
     private static final CustomImage image = new CustomImage("tax.png");
     private final int amount;
 
-    public TaxTileModel(String tileID, int tilePosition, int amount, DisplayCardController controller) {
-        super(tileID, tilePosition, controller);
+    public TaxTileModel(String tileID, int tilePosition, int amount) {
+        super(tileID, tilePosition);
         this.amount = amount;
         setCard(new TaxCard(image, tileName, String.valueOf(amount)));
     }

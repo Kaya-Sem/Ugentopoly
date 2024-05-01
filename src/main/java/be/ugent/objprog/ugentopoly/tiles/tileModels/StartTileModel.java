@@ -15,8 +15,8 @@ public class StartTileModel extends TileModel {
     private final Image startImage = new CustomImage("start.png");
     private final Image arrowImage = new CustomImage("start-arrow.png");
 
-    public StartTileModel(String tileID, int tilePosition, int startAmount, DisplayCardController controller) {
-        super(tileID, tilePosition, controller);
+    public StartTileModel(String tileID, int tilePosition, int startAmount) {
+        super(tileID, tilePosition);
         setCard(new BasicVerticalCard(startImage, tileName));
         this.startAmount = startAmount;
     }
@@ -37,7 +37,7 @@ public class StartTileModel extends TileModel {
         return ((gameModel) -> {
             PlayerModel currentPlayer = gameModel.getCurrentPlayerMove();
             currentPlayer.changeBalance(startAmount);
-            gameModel.addLog(currentPlayer.getName(), "krijgt €" + startAmount + " zakgeld van zijn ouders"); // TODO add to custom propertie?
+            gameModel.addLog(currentPlayer.getName(), "passeert START, en krijgt €" + startAmount + " zakgeld van zijn ouders");
         });
     }
 }
