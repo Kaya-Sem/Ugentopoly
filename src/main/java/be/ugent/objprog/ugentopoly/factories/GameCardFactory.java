@@ -14,6 +14,7 @@ import java.util.function.Function;
 
 public class GameCardFactory<T> {
     private final Map<String, Function<Map<String, String>, Consumer<GameModel>>> actionMap;
+    private static final int TILES = 40;
 
     public GameCardFactory() {
         actionMap = Map.of(
@@ -89,7 +90,8 @@ public class GameCardFactory<T> {
 
             GameController controller = gameModel.getGameController();
             PlayerModel currentPlayer = gameModel.getCurrentPlayer();
-            int newPosition = currentPlayer.getPosition() + relPosition;
+            // handle negative position situations
+            int newPosition = (currentPlayer.getPosition() + relPosition + TILES) % TILES;
 
             controller.moveCurrentPlayerToPosition(newPosition);
 
