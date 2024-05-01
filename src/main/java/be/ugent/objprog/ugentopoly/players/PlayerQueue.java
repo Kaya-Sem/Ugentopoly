@@ -1,6 +1,4 @@
-package be.ugent.objprog.ugentopoly;
-
-import be.ugent.objprog.ugentopoly.players.PlayerModel;
+package be.ugent.objprog.ugentopoly.players;
 
 import java.util.ArrayDeque;
 import java.util.List;

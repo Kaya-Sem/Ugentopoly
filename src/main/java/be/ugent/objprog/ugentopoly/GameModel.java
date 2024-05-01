@@ -5,6 +5,7 @@ import java.util.*;
 import be.ugent.objprog.ugentopoly.gamecards.CardDeck;
 import be.ugent.objprog.ugentopoly.logging.LogElement;
 import be.ugent.objprog.ugentopoly.players.PlayerModel;
+import be.ugent.objprog.ugentopoly.players.PlayerQueue;
 import be.ugent.objprog.ugentopoly.tiles.tileModels.TileModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

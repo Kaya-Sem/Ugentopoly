@@ -1,7 +1,5 @@
-package be.ugent.objprog.ugentopoly;
+package be.ugent.objprog.ugentopoly.gamecards;
 
-import be.ugent.objprog.ugentopoly.gamecards.CardDeck;
-import be.ugent.objprog.ugentopoly.gamecards.GameCard;
 import be.ugent.objprog.ugentopoly.factories.GameCardFactory;
 import be.ugent.objprog.ugentopoly.parsers.XMLParser;
 

@@ -4,6 +4,7 @@ import be.ugent.objprog.ugentopoly.factories.GameCardFactory;
 import be.ugent.objprog.ugentopoly.factories.TileFactory;
 import be.ugent.objprog.ugentopoly.gameBoard.BoardModel;
 import be.ugent.objprog.ugentopoly.gamecards.CardDeck;
+import be.ugent.objprog.ugentopoly.gamecards.GameCardInitializer;
 import be.ugent.objprog.ugentopoly.parsers.XMLParser;
 import be.ugent.objprog.ugentopoly.players.PlayerModel;
 import be.ugent.objprog.ugentopoly.tiles.InitializedTilesObject;
