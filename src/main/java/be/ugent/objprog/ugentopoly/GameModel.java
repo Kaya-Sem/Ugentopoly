@@ -19,6 +19,7 @@ public class GameModel extends CustomObservable {
     private final PlayerQueue playerModelQueue;
     private final TileModel[] tileModels;
     private int bonusPot = 0;
+    private int lastRoll = 1; // neutral element for multiplication utility
 
     private final CardDeck chanceCardDeck;
     private final CardDeck chestCardDeck;
@@ -28,7 +29,6 @@ public class GameModel extends CustomObservable {
                      CardDeck chanceCardDeck,
                      CardDeck chestCardDeck
                      ) {
-
         this.tileModels = tileModels;
         playerModels = new ArrayList<>(players);
         playerModelQueue = new PlayerQueue(playerModels);
@@ -100,5 +100,13 @@ public class GameModel extends CustomObservable {
     public void setGameController(GameController gameController) {
         this.gameController = gameController;
         fireInvalidationEvent();
+    }
+
+    public int getLastRoll() {
+        return lastRoll;
+    }
+
+    public void setLastRoll(int lastRoll) {
+        this.lastRoll = lastRoll;
     }
 }
