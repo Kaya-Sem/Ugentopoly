@@ -14,7 +14,7 @@ import static java.lang.String.valueOf;
 public class DiceRoller extends VBox {
 
     private final DicePanel dicePanel = new DicePanel();
-    private final SimpleBooleanProperty disabled = new SimpleBooleanProperty();
+    private final SimpleBooleanProperty isDisabled = new SimpleBooleanProperty();
 
     private static final double SPACING = 10.0;
     private static final double SIZE = 300.0;
@@ -26,12 +26,9 @@ public class DiceRoller extends VBox {
     public DiceRoller(GameController controller) {
         this.controller = controller;
         Button rollButton = new Button("roll dice");
-        rollButton.disableProperty().bind(disabled);
-        rollButton.setOnAction(event -> {
-            disabled.set(true);
-            dicePanel.roll(this::handleRoll
-            );
-        });
+        rollButton.disableProperty().bind(isDisabled);
+
+        rollButton.setOnAction(event ->  rollDice());
 
         setSpacing(SPACING);
         setAlignment(Pos.CENTER);
@@ -40,12 +37,9 @@ public class DiceRoller extends VBox {
         setMaxSize(SIZE, SIZE);
     }
 
-    public void setDisabled(Boolean value) {
-        disabled.set(value);
-    }
-
-    public Boolean getDisabled() {
-        return disabled.getValue();
+    private void rollDice() {
+        isDisabled.set(true);
+        dicePanel.roll(this::handleRoll);
     }
 
     private void handleRoll(List<Integer> list) {
@@ -56,14 +50,14 @@ public class DiceRoller extends VBox {
             doubleRolledCounter += 1;
             controller.addLog("dubbel gegooid!");
 
-            if (MAXDOUBLEROLLS == doubleRolledCounter) {
+            if (doubleRolledCounter == MAXDOUBLEROLLS) {
                 controller.addLog("Er werd " + MAXDOUBLEROLLS + " keer dubbel gegooid.\nDat wordt Overpoort!");
                 controller.moveCurrentPlayerToJail();
                 doubleRolledCounter = 0;
                 controller.nextPlayer();
             }
 
-            disabled.set(false);
+            isDisabled.set(false);
             return;
         }
 
@@ -71,25 +65,33 @@ public class DiceRoller extends VBox {
         mostRecentRoll = dice1 + dice2;
 
         controller.nextMove();
-        disabled.set(false);
+        isDisabled.set(false);
     }
 
+
     public void rollToGetFree() {
-        disabled.set(Boolean.FALSE);
+        isDisabled.set(false);
+        Button rollButton = (Button) getChildren().get(1); // second child
 
-        dicePanel.roll(diceResult -> {
-            Integer dice1 = diceResult.getFirst();
-            Integer dice2 = diceResult.getLast();
+        rollButton.setOnAction(event -> {
+            isDisabled.set(true);
+            rollButton.setOnAction(e -> rollDice());
 
-            if (dice1.equals(dice2)) {
-                controller.freePlayerFromJail(dice1 + dice2);
-            } else {
-                controller.addLog("Geen dubbel, je zal nog een nachtje moeten doordoen");
+            dicePanel.roll(diceResult -> {
+                Integer dice1 = diceResult.getFirst();
+                Integer dice2 = diceResult.getLast();
+
+                if (dice1.equals(dice2)) {
+                    controller.freePlayerFromJail(dice1 + dice2);
+
+                } else {
+                    controller.addLog("Geen dubbel, je zal nog een nachtje moeten doordoen");
+                }
+
+                isDisabled.set(false);
                 controller.nextPlayer();
-            }
+            });
         });
-
-        disabled.set(Boolean.TRUE);
     }
 
     public int getMostRecentRoll() {
@@ -98,5 +100,13 @@ public class DiceRoller extends VBox {
 
     public void setMostRecentRoll(int mostRecentRoll) {
         this.mostRecentRoll = mostRecentRoll;
+    }
+
+    public void setIsDisabled(Boolean value) {
+        isDisabled.set(value);
+    }
+
+    public Boolean getIsDisabled() {
+        return isDisabled.getValue();
     }
 }

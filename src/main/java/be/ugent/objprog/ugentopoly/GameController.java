@@ -28,7 +28,7 @@ public class GameController {
 
     private void initializeGame() {
         List<PlayerModel> players = gameModel.getPlayerModels();
-        players.forEach(this::gameOverCondition);
+        players.forEach(this::applygGameOverCondition);
         gameModel.setCurrentPlayer(players.getFirst());
 
         TileModel startTile = gameModel.getTileModels()[0];
@@ -39,7 +39,7 @@ public class GameController {
 
     // TODO
     public void nextMove()  {
-        diceRoller.setDisabled(Boolean.TRUE);
+        diceRoller.setIsDisabled(Boolean.TRUE);
 
         int moves = diceRoller.getMostRecentRoll();
         PlayerModel currentPlayer = gameModel.getCurrentPlayer();
@@ -51,10 +51,9 @@ public class GameController {
         TileModel currentTile = gameModel.getTileModels()[currentPlayer.getPosition()];
         gameModel.addLog(currentPlayer.getName(), "belande op " + currentTile.getName() );
 
-        Consumer<GameModel> tileInteraction = currentTile.getPlayerTileInteraction();
-        tileInteraction.accept(gameModel);
+        currentTile.executePlayerTileInteraction(gameModel);
 
-        diceRoller.setDisabled(Boolean.TRUE);
+        diceRoller.setIsDisabled(Boolean.TRUE);
 
         gameModel.getPlayerModels().forEach(PlayerModel::updateBalanceHistory);
 
@@ -63,17 +62,18 @@ public class GameController {
 
     public void nextPlayer() {
         PlayerModel playerModel = gameModel.getPlayerModelQueue().getNextPlayer();
+        gameModel.setCurrentPlayer(playerModel);
+        gameModel.addLog(playerModel.getName(), "is aan de beurt!");
+
         if (playerModel.isInJail()) {
-            if (0 < playerModel.getLeaveJailCards()) {
+            if (playerModel.getLeaveJailCards() > 0) {
                 gameModel.addLog(playerModel.getName(), "gebruikt een get-out-of-jail kaart\nen geraakt thuis van de Overpoort");
                 playerModel.changeGetOutOfJailCards(-1);
             } else {
-                gameModel.addLog(playerModel.getName(), "is stomdronken, en zal dus moeten dobbelen tot deze nuchter is");
+                gameModel.addLog(playerModel.getName(), "is stomdronken, en zal dus moeten\ndobbelen tot deze nuchter is");
                 diceRoller.rollToGetFree();
             }
         }
-        gameModel.setCurrentPlayer(playerModel);
-        gameModel.addLog(playerModel.getName(), "is aan de beurt!");
     }
 
     private void movePion(PlayerModel model) {
@@ -86,7 +86,7 @@ public class GameController {
         int newPosition = (position + 1) % tileModels.length;
 
         // passing start
-        if (0 == newPosition) {
+        if (newPosition == 0) {
             tileModels[0].getPlayerTileInteraction();
         }
 
@@ -101,12 +101,15 @@ public class GameController {
         tileModels[playerModel.getPosition()].removePion(playerModel.getPion());
         playerModel.setPosition(newPosition);
         TileModel finalTile = tileModels[newPosition];
+        if (finalTile.getPosition() == 10) {
+            playerModel.setInJail(true);
+        }
         finalTile.addPion(playerModel.getPion());
-        finalTile.executePlayerTileInteraction(gameModel);
     }
 
     public void freePlayerFromJail(int moves) {
         PlayerModel freePlayer = gameModel.getCurrentPlayer();
+        freePlayer.setInJail(false);
         gameModel.addLog(freePlayer.getName(), "gooide een dubbel en ontsnapt uit de Overpoort!");
         moveCurrentPlayerToPosition(gameModel.getCurrentPlayer().getPosition() + moves);
     }
@@ -119,10 +122,10 @@ public class GameController {
         gameModel.addLog(text);
     }
 
-    private void gameOverCondition(PlayerModel model) {
+    private void applygGameOverCondition(PlayerModel model) {
         model.balanceProperty().addListener(
                 (observableValue, oldValue, newValue) -> {
-                    if (0 >= newValue.intValue()) {
+                    if (newValue.intValue() <= 0) {
                         gameModel.getPlayerModels().forEach(PlayerModel::updateBalanceHistory);
                         GameOverDialog dialog = new GameOverDialog(model, gameModel.getPlayerModels());
                         dialog.show();
