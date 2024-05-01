@@ -17,6 +17,7 @@ public class CustomObservable implements Observable {
     @Override
     public void addListener(InvalidationListener listener) {
         listenerList.add(listener);
+        fireInvalidationEvent();
     }
 
     protected void fireInvalidationEvent() {
