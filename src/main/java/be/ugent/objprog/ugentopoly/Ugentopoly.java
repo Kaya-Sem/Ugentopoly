@@ -5,6 +5,7 @@ import java.util.List;
 import be.ugent.objprog.ugentopoly.dice.DiceRoller;
 import be.ugent.objprog.ugentopoly.gameBoard.Board;
 import be.ugent.objprog.ugentopoly.gameBoard.BoardModel;
+import be.ugent.objprog.ugentopoly.logs.LogListView;
 import be.ugent.objprog.ugentopoly.parsers.XMLParser;
 import be.ugent.objprog.ugentopoly.players.PlayerCreatorStage;
 import be.ugent.objprog.ugentopoly.players.PlayerModel;
@@ -41,17 +42,14 @@ public class Ugentopoly extends Application {
          verticalComponents.setAlignment(Pos.CENTER);
         PlayerTabPane playerTabPane = new PlayerTabPane(gameModel.getPlayerModels());
 
-        ListView logListView = new ListView();
-        logListView.setItems(gameModel.getLogs());
-        logListView.setSelectionModel(null);
-
          verticalComponents.getChildren().addAll(
                  new CurrentPlayerIndicator(gameModel),
                  playerTabPane,
-                 logListView,
+                 new LogListView(gameModel.getLogs()),
                  gameController.getDiceRoller());
 
         HBox horizontalLayout = new HBox();
+        horizontalLayout.setSpacing(20);
         horizontalLayout.setAlignment(Pos.CENTER);
 
         horizontalLayout.getChildren().addAll(
