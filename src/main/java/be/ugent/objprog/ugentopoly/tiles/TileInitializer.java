@@ -1,6 +1,7 @@
 package be.ugent.objprog.ugentopoly.tiles;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Map;
 
 import be.ugent.objprog.ugentopoly.factories.TileFactory;
@@ -51,12 +52,7 @@ public class TileInitializer {
     }
 
     private static TileView[] reverse(TileView[] array) {
-        int length = array.length;
-        for (int i = 0; i < length / 2; i++) {
-            TileView temp = array[i];
-            array[i] = array[array.length - 1 - i];
-            array[array.length - 1 - i] = temp;
-        }
+        Collections.reverse(Arrays.asList(array));
         return array;
     }
 }
