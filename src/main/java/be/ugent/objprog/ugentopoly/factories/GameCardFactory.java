@@ -42,7 +42,7 @@ public class GameCardFactory<T> {
     private static Consumer<GameModel> jail(Map<String, String> data) {
         String alertMessage = getAlertMessage(data.get("id"));
 
-        return (gameModel) -> {
+        return gameModel -> {
                 PlayerModel player = gameModel.getCurrentPlayer();
                 player.changeGetOutOfJailCards(1);
             GameCardAlert alert = new GameCardAlert(alertMessage);
@@ -57,14 +57,13 @@ public class GameCardFactory<T> {
         int newPosition = Integer.parseInt(data.get("position"));
         boolean collect = Boolean.parseBoolean(data.get("collect"));
 
-        return ((gameModel) -> {
+        return gameModel -> {
             GameCardAlert alert = new GameCardAlert(message);
             alert.showAndWait();
 
-            GameController controller = gameModel.getGameController();
             PlayerModel currentPlayer = gameModel.getCurrentPlayer();
 
-            controller.moveCurrentPlayerToPosition(newPosition);
+            gameModel.getGameController().moveCurrentPlayerToPosition(newPosition);
 
             // if it would pass start, call start tile's action
             if (newPosition < currentPlayer.getPosition() && collect) {
@@ -77,14 +76,14 @@ public class GameCardFactory<T> {
 
             Consumer<GameModel> action = currentTileModel.getPlayerTileInteraction();
             action.accept(gameModel);
-        });
+        };
     }
 
     private static Consumer<GameModel> moveRel(Map<String, String> data) {
         int relPosition = Integer.parseInt(data.get("relative"));
         String alertMessage = getAlertMessage(data.get("id"));
 
-        return ((gameModel) -> {
+        return gameModel -> {
             GameCardAlert alert = new GameCardAlert(alertMessage);
             alert.showAndWait();
 
@@ -96,7 +95,7 @@ public class GameCardFactory<T> {
 
             TileModel currentTile = gameModel.getTileModels()[newPosition];
 
-            String message = (0 < relPosition) ?
+            String message = (relPosition > 0) ?
                     "zet " + relPosition + " stappen voorwaarts" :
                     "moest " + Math.abs(relPosition) + " stappen naar achter";
 
@@ -104,21 +103,21 @@ public class GameCardFactory<T> {
 
             Consumer<GameModel> action = currentTile.getPlayerTileInteraction();
             action.accept(gameModel);
-        });
+        };
     }
 
     private static Consumer<GameModel> money(Map<String, String> data) {
         int amount = Integer.parseInt(data.get("amount"));
         String alertMessage = getAlertMessage(data.get("id"));
 
-        return (gameModel) -> {
+        return gameModel -> {
             GameCardAlert alert = new GameCardAlert(alertMessage);
             alert.showAndWait();
 
             PlayerModel currentPlayer = gameModel.getCurrentPlayer();
             currentPlayer.changeBalance(amount);
 
-            String message = (0 < amount) ?
+            String message = (amount > 0) ?
                     ("kreeg  €" + amount) :
                     ("moest €" + Math.abs(amount) + " betalen");
 
@@ -130,7 +129,7 @@ public class GameCardFactory<T> {
         int amount = Integer.parseInt(data.get("amount"));
         String alertMessage = getAlertMessage(data.get("id"));
 
-        return (gameModel -> {
+        return gameModel -> {
             GameCardAlert alert = new GameCardAlert(alertMessage);
             alert.showAndWait();
 
@@ -143,7 +142,7 @@ public class GameCardFactory<T> {
             });
 
             gameModel.addLog(currentPlayer.getName(), "kreeg €" + amount + " van elke speler");
-        });
+        };
     }
 
 }
