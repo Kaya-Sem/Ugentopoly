@@ -2,21 +2,19 @@ package be.ugent.objprog.ugentopoly.gamecards;
 
 import be.ugent.objprog.ugentopoly.tiles.tileCards.VerticalCard;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class CardDeck {
-    private final List<GameCard> cards;
+    private final Deque<GameCard> cards;
 
-    public CardDeck(List<GameCard> cards) {
-        this.cards = new ArrayList<>(cards);
-        Collections.shuffle(this.cards);
+    public CardDeck(List<GameCard> initialCards) {
+        Collections.shuffle(initialCards);
+        cards = new ArrayDeque<>(initialCards);
     }
 
-    public VerticalCard getNextCard() {
+    public GameCard getNextCard() {
         GameCard nextCard = cards.removeFirst();
-        cards.add(nextCard);
+        cards.addLast(nextCard);
         return nextCard;
     }
 
