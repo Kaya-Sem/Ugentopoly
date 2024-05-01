@@ -9,7 +9,6 @@ import java.util.List;
 public class PlayerTabPane extends TabPane {
 
     public PlayerTabPane(List<PlayerModel> playerModels) {
-
         playerModels.forEach(playerModel -> {
             Tab tab = new Tab(playerModel.getName());
             tab.setClosable(false);
