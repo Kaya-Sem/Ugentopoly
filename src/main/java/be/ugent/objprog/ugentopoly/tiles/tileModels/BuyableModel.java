@@ -1,6 +1,5 @@
 package be.ugent.objprog.ugentopoly.tiles.tileModels;
 
-import be.ugent.objprog.ugentopoly.DisplayCardController;
 import be.ugent.objprog.ugentopoly.GameModel;
 import be.ugent.objprog.ugentopoly.players.PlayerModel;
 import be.ugent.objprog.ugentopoly.tiles.TilePurchaseAlert;
@@ -34,7 +33,7 @@ public class BuyableModel extends TileModel {
     @Override
     public Consumer<GameModel> getPlayerTileInteraction() {
         return (gameModel -> {
-            PlayerModel currentPlayer = gameModel.getCurrentPlayerMove();
+            PlayerModel currentPlayer = gameModel.getCurrentPlayer();
             String currentPlayerName = currentPlayer.getName();
             ObservableList<TileModel> ownedTiles = currentPlayer.getOwnedTiles();
 

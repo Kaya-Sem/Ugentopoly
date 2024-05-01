@@ -1,7 +1,6 @@
 package be.ugent.objprog.ugentopoly.tiles.tileModels;
 
 import be.ugent.objprog.ugentopoly.CustomImage;
-import be.ugent.objprog.ugentopoly.DisplayCardController;
 import be.ugent.objprog.ugentopoly.GameModel;
 import be.ugent.objprog.ugentopoly.players.PlayerModel;
 import be.ugent.objprog.ugentopoly.tiles.tileCards.BasicVerticalCard;
@@ -20,7 +19,7 @@ public class GoToJailTileModel extends TileModel{
     @Override
     public Consumer<GameModel> getPlayerTileInteraction() {
         return gameModel -> {
-            PlayerModel currentPlayer = gameModel.getCurrentPlayerMove();
+            PlayerModel currentPlayer = gameModel.getCurrentPlayer();
             gameModel.getGameController().moveCurrentPlayerToJail();
             gameModel.addLog(currentPlayer.getName(), "moet een nachtje in de Overpoort spenderen");
         };

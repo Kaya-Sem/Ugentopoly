@@ -1,11 +1,8 @@
 package be.ugent.objprog.ugentopoly.tiles.tileModels;
 
-import be.ugent.objprog.ugentopoly.DisplayCardController;
 import be.ugent.objprog.ugentopoly.GameModel;
-import be.ugent.objprog.ugentopoly.tiles.TilePurchaseAlert;
 import be.ugent.objprog.ugentopoly.players.PlayerModel;
 import be.ugent.objprog.ugentopoly.tiles.tileCards.StreetCard;
-import javafx.collections.ObservableList;
 
 import java.util.function.Consumer;
 
@@ -50,7 +47,7 @@ public class StreetTileModel extends BuyableModel {
             // Execute the parent interaction first
             parentInteraction.accept(gameModel);
             if (null != owner) {
-                PlayerModel currentPlayer = gameModel.getCurrentPlayerMove();
+                PlayerModel currentPlayer = gameModel.getCurrentPlayer();
 
                 if (!owner.equals(currentPlayer)) {
                     int rentAmount = Integer.parseInt(rent);

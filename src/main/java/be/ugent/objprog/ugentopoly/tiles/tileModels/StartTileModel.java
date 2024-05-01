@@ -1,7 +1,6 @@
 package be.ugent.objprog.ugentopoly.tiles.tileModels;
 
 import be.ugent.objprog.ugentopoly.CustomImage;
-import be.ugent.objprog.ugentopoly.DisplayCardController;
 import be.ugent.objprog.ugentopoly.GameModel;
 import be.ugent.objprog.ugentopoly.players.PlayerModel;
 import be.ugent.objprog.ugentopoly.tiles.tileCards.BasicVerticalCard;
@@ -35,7 +34,7 @@ public class StartTileModel extends TileModel {
     @Override
     public Consumer<GameModel> getPlayerTileInteraction() {
         return ((gameModel) -> {
-            PlayerModel currentPlayer = gameModel.getCurrentPlayerMove();
+            PlayerModel currentPlayer = gameModel.getCurrentPlayer();
             currentPlayer.changeBalance(startAmount);
             gameModel.addLog(currentPlayer.getName(), "passeert START, en krijgt €" + startAmount + " zakgeld van zijn ouders");
         });

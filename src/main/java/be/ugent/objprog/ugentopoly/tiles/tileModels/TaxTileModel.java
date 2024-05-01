@@ -1,7 +1,6 @@
 package be.ugent.objprog.ugentopoly.tiles.tileModels;
 
 import be.ugent.objprog.ugentopoly.CustomImage;
-import be.ugent.objprog.ugentopoly.DisplayCardController;
 import be.ugent.objprog.ugentopoly.GameModel;
 import be.ugent.objprog.ugentopoly.players.PlayerModel;
 import be.ugent.objprog.ugentopoly.tiles.tileCards.TaxCard;
@@ -26,7 +25,7 @@ public class TaxTileModel extends TileModel{
     public Consumer<GameModel> getPlayerTileInteraction() {
         return (gameModel -> {
             gameModel.changeBonusPot(amount);
-            PlayerModel currentPlayer = gameModel.getCurrentPlayerMove();
+            PlayerModel currentPlayer = gameModel.getCurrentPlayer();
             currentPlayer.changeBalance(-amount);
             gameModel.addLog(currentPlayer.getName(), "betaald €" + amount);
         });

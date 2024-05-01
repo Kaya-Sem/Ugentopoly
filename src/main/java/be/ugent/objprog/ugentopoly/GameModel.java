@@ -13,7 +13,7 @@ public class GameModel extends CustomObservable {
 
     private final ObservableList<LogElement> logs = FXCollections.observableArrayList();
     private GameController gameController = null;
-    private PlayerModel currentPlayerMove = null;
+    private PlayerModel currentPlayer = null;
     private final List<PlayerModel> playerModels;
     private final PlayerQueue playerModelQueue;
     private final TileModel[] tileModels;
@@ -35,12 +35,12 @@ public class GameModel extends CustomObservable {
         this.chestCardDeck = chestCardDeck;
     }
 
-    public PlayerModel getCurrentPlayerMove() {
-        return currentPlayerMove;
+    public PlayerModel getCurrentPlayer() {
+        return currentPlayer;
     }
 
-    public void setCurrentPlayerMove(PlayerModel currentPlayerMove) {
-        this.currentPlayerMove = currentPlayerMove;
+    public void setCurrentPlayer(PlayerModel currentPlayer) {
+        this.currentPlayer = currentPlayer;
         fireInvalidationEvent();
     }
 

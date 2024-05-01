@@ -1,7 +1,6 @@
 package be.ugent.objprog.ugentopoly.tiles.tileModels;
 
 import be.ugent.objprog.ugentopoly.CustomImage;
-import be.ugent.objprog.ugentopoly.DisplayCardController;
 import be.ugent.objprog.ugentopoly.GameModel;
 import be.ugent.objprog.ugentopoly.gamecards.GameCard;
 import be.ugent.objprog.ugentopoly.tiles.tileCards.BasicVerticalCard;
@@ -24,7 +23,7 @@ public class ChanceTileModel extends TileModel{
     @Override
     public Consumer<GameModel> getPlayerTileInteraction() {
         return (((gameModel) -> {
-            gameModel.addLog(gameModel.getCurrentPlayerMove().getName(), "trekt een kanskaart!");
+            gameModel.addLog(gameModel.getCurrentPlayer().getName(), "trekt een kanskaart!");
             GameCard gameCard = (GameCard) gameModel.getChanceCardDeck().getNextCard();
             gameCard.performAction(gameModel);
         }));

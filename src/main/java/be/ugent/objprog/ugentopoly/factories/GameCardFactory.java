@@ -3,7 +3,6 @@ package be.ugent.objprog.ugentopoly.factories;
 import be.ugent.objprog.ugentopoly.GameController;
 import be.ugent.objprog.ugentopoly.GameModel;
 import be.ugent.objprog.ugentopoly.gamecards.GameCard;
-import be.ugent.objprog.ugentopoly.gameBoard.BoardModel;
 import be.ugent.objprog.ugentopoly.gamecards.GameCardAlert;
 import be.ugent.objprog.ugentopoly.players.PlayerModel;
 import be.ugent.objprog.ugentopoly.tiles.tileModels.TileModel;
@@ -44,7 +43,7 @@ public class GameCardFactory<T> {
         String alertMessage = getAlertMessage(data.get("id"));
 
         return (gameModel) -> {
-                PlayerModel player = gameModel.getCurrentPlayerMove();
+                PlayerModel player = gameModel.getCurrentPlayer();
                 player.changeGetOutOfJailCards(1);
             GameCardAlert alert = new GameCardAlert(alertMessage);
             alert.showAndWait();
@@ -63,7 +62,7 @@ public class GameCardFactory<T> {
             alert.showAndWait();
 
             GameController controller = gameModel.getGameController();
-            PlayerModel currentPlayer = gameModel.getCurrentPlayerMove();
+            PlayerModel currentPlayer = gameModel.getCurrentPlayer();
 
             controller.moveCurrentPlayerToPosition(newPosition);
 
@@ -90,7 +89,7 @@ public class GameCardFactory<T> {
             alert.showAndWait();
 
             GameController controller = gameModel.getGameController();
-            PlayerModel currentPlayer = gameModel.getCurrentPlayerMove();
+            PlayerModel currentPlayer = gameModel.getCurrentPlayer();
             int newPosition = currentPlayer.getPosition() + relPosition;
 
             controller.moveCurrentPlayerToPosition(newPosition);
@@ -116,7 +115,7 @@ public class GameCardFactory<T> {
             GameCardAlert alert = new GameCardAlert(alertMessage);
             alert.showAndWait();
 
-            PlayerModel currentPlayer = gameModel.getCurrentPlayerMove();
+            PlayerModel currentPlayer = gameModel.getCurrentPlayer();
             currentPlayer.changeBalance(amount);
 
             String message = (0 < amount) ?
@@ -135,7 +134,7 @@ public class GameCardFactory<T> {
             GameCardAlert alert = new GameCardAlert(alertMessage);
             alert.showAndWait();
 
-            PlayerModel currentPlayer = gameModel.getCurrentPlayerMove();
+            PlayerModel currentPlayer = gameModel.getCurrentPlayer();
             List<PlayerModel> playerModelList = gameModel.getPlayerModels();
 
             playerModelList.forEach(player -> {

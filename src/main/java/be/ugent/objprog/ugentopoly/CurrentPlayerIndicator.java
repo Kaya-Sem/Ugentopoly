@@ -4,7 +4,6 @@ import be.ugent.objprog.ugentopoly.players.PlayerModel;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
-import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -31,7 +30,7 @@ public class CurrentPlayerIndicator extends VBox implements InvalidationListener
     public CurrentPlayerIndicator(GameModel gameModel) {
         this.gameModel = gameModel;
         this.gameModel.addListener(this);
-        currentPlayer = gameModel.getCurrentPlayerMove();
+        currentPlayer = gameModel.getCurrentPlayer();
 
         playerName.set(currentPlayer.getName());
         image.set(currentPlayer.getBadgeImage());
@@ -82,7 +81,7 @@ public class CurrentPlayerIndicator extends VBox implements InvalidationListener
 
     @Override
     public void invalidated(Observable observable) {
-        currentPlayer = gameModel.getCurrentPlayerMove();
+        currentPlayer = gameModel.getCurrentPlayer();
         playerName.set(currentPlayer.getName());
         image.set(currentPlayer.getBadgeImage());
         balance.set(String.valueOf(currentPlayer.getBalance()));
