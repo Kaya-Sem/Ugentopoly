@@ -40,6 +40,10 @@ public class TileModel extends CustomObservable {
         throw new IllegalStateException("base TileModel interaction called");
     }
 
+    public void executePlayerTileInteraction(GameModel gameModel) {
+       getPlayerTileInteraction().accept(gameModel);
+    }
+
     public void addPion(Pion pion) {
         if (!pionnen.contains(pion)) {
             pionnen.add(pion);
