@@ -101,11 +101,10 @@ public class GameController {
         tileModels[playerModel.getPosition()].removePion(pion);
         playerModel.setPosition(newPosition);
         tileModels[newPosition].addPion(pion);
-        gameModel.addLog(playerModel.getName(), "moest naar " + tileModels[newPosition].getTileName());
     }
 
     public void moveCurrentPlayerToJail() {
-        moveCurrentPlayerToPosition(10); // TODO make constant?
+        moveCurrentPlayerToPosition(10);
     }
 
     public void addLog(String text) {
