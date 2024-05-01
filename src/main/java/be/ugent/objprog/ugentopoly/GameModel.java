@@ -13,35 +13,30 @@ import javafx.collections.ObservableList;
 
 public class GameModel extends CustomObservable {
 
-    // TODO can't playerModels be removed?
+    private final ObservableList<LogElement> logs = FXCollections.observableArrayList();
+    private GameController gameController = null;
+    private PlayerModel currentPlayerMove = null;
     private final List<PlayerModel> playerModels;
     private final PlayerQueue playerModelQueue;
-    private PlayerModel currentPlayerMove = null;
     private final TileModel[] tileModels;
-    private final List<Pion> pionnen = new ArrayList<>();
+    private final DiceModel diceModel;
+    private int bonusPot = 0;
 
     private final CardDeck chanceCardDeck;
     private final CardDeck chestCardDeck;
 
-    private final DiceModel diceModel;
+    public GameModel(List<PlayerModel> players,
+                     TileModel[] tileModels,
+                     CardDeck chanceCardDeck,
+                     CardDeck chestCardDeck,
+                     DiceModel diceModel ) {
 
-    private GameController gameController;
-
-    private int bonusPot = 0;
-    private final ObservableList<LogElement> logs = FXCollections.observableArrayList();
-
-    public GameModel(List<PlayerModel> players, Object[] tileModelMap, CardDeck chanceCardDeck, CardDeck chestCardDeck, DiceModel diceModel ) {
-        tileModels = (TileModel[]) tileModelMap;
+        this.tileModels = tileModels;
         playerModels = new ArrayList<>(players);
         playerModelQueue = new PlayerQueue(playerModels);
         this.chanceCardDeck = chanceCardDeck;
         this.chestCardDeck = chestCardDeck;
         this.diceModel = diceModel;
-        addPionsFromPlayers();
-    }
-
-    private void addPionsFromPlayers() {
-        playerModels.forEach(model -> pionnen.add(model.getPion()));
     }
 
     public PlayerModel getCurrentPlayerMove() {
@@ -111,5 +106,6 @@ public class GameModel extends CustomObservable {
 
     public void setGameController(GameController gameController) {
         this.gameController = gameController;
+        fireInvalidationEvent();
     }
 }
