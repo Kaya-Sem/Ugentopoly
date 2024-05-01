@@ -21,8 +21,8 @@ public class GoToJailTileModel extends TileModel implements ImageTile {
     public Consumer<GameModel> getPlayerTileInteraction() {
         return gameModel -> {
             PlayerModel currentPlayer = gameModel.getCurrentPlayer();
-            gameModel.getGameController().moveCurrentPlayerToJail();
             gameModel.addLog(currentPlayer.getName(), "moet een nachtje in de Overpoort spenderen");
+            gameModel.getGameController().moveCurrentPlayerToJail();
         };
     }
 
