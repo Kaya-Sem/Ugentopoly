@@ -53,18 +53,17 @@ public class DiceRoller extends VBox {
         Integer dice2 = list.getLast();
 
         if (dice1.equals(dice2)) {
-            controller.addLog("a double was rolled!");
+            doubleRolledCounter += 1;
+            controller.addLog("dubbel gegooid!");
 
             if (MAXDOUBLEROLLS == doubleRolledCounter) {
+                controller.addLog("Er werd " + MAXDOUBLEROLLS + " keer dubbel gegooid.\nDat wordt Overpoort!");
                 controller.moveCurrentPlayerToJail();
                 doubleRolledCounter = 0;
                 controller.nextPlayer();
-                controller.addLog("3 doubles in a row, went to jail!");
-                disabled.set(false);
-            } else {
-            doubleRolledCounter += 1;
-            disabled.set(false);
             }
+
+            disabled.set(false);
             return;
         }
 
@@ -73,6 +72,24 @@ public class DiceRoller extends VBox {
 
         controller.nextMove();
         disabled.set(false);
+    }
+
+    public void rollToGetFree() {
+        disabled.set(Boolean.FALSE);
+
+        dicePanel.roll(diceResult -> {
+            Integer dice1 = diceResult.getFirst();
+            Integer dice2 = diceResult.getLast();
+
+            if (dice1.equals(dice2)) {
+                controller.freePlayerFromJail(dice1 + dice2);
+            } else {
+                controller.addLog("Geen dubbel, je zal nog een nachtje moeten doordoen");
+                controller.nextPlayer();
+            }
+        });
+
+        disabled.set(Boolean.TRUE);
     }
 
     public int getMostRecentRoll() {

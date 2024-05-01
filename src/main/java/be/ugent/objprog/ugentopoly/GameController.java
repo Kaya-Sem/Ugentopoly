@@ -1,7 +1,6 @@
 package be.ugent.objprog.ugentopoly;
 
 import be.ugent.objprog.ugentopoly.dice.DiceRoller;
-import be.ugent.objprog.ugentopoly.parsers.PropertyLoader;
 import be.ugent.objprog.ugentopoly.players.PlayerModel;
 import be.ugent.objprog.ugentopoly.tiles.tileModels.TileModel;
 import javafx.stage.Stage;
@@ -30,12 +29,12 @@ public class GameController {
     private void initializeGame() {
         List<PlayerModel> players = gameModel.getPlayerModels();
         players.forEach(this::gameOverCondition);
-        gameModel.setCurrentPlayerMove(players.getFirst());
+        gameModel.setCurrentPlayer(players.getFirst());
 
         TileModel startTile = gameModel.getTileModels()[0];
         players.forEach(player -> startTile.addPion(player.getPion()));
 
-        gameModel.addLog(gameModel.getCurrentPlayerMove().getName(), "zal als eerste spelen!");
+        gameModel.addLog(gameModel.getCurrentPlayer().getName(), "zal als eerste spelen!");
     }
 
     // TODO
@@ -43,36 +42,34 @@ public class GameController {
         diceRoller.setDisabled(Boolean.TRUE);
 
         int moves = diceRoller.getMostRecentRoll();
-        PlayerModel currentPlayer = gameModel.getCurrentPlayerMove();
+        PlayerModel currentPlayer = gameModel.getCurrentPlayer();
 
         for (int i = 0; i < moves; i++) {
                 movePion(currentPlayer);
         }
 
         TileModel currentTile = gameModel.getTileModels()[currentPlayer.getPosition()];
-        gameModel.addLog(currentPlayer.getName(), "belande op " + PropertyLoader.getLabel(currentTile.getId()));
+        gameModel.addLog(currentPlayer.getName(), "belande op " + currentTile.getTileName() );
 
-        // Retrieve the tile's action and execute it
-        Consumer<GameModel> action = currentTile.getPlayerTileInteraction();
-        action.accept(gameModel);
+        Consumer<GameModel> tileInteraction = currentTile.getPlayerTileInteraction();
+        tileInteraction.accept(gameModel);
 
-        nextPlayer();
         diceRoller.setDisabled(Boolean.TRUE);
+        nextPlayer();
     }
 
     public void nextPlayer() {
         PlayerModel playerModel = gameModel.getPlayerModelQueue().getNextPlayer();
         if (playerModel.isInJail()) {
-
             if (0 < playerModel.getLeaveJailCards()) {
-                gameModel.addLog(playerModel.getName(), "geraakt thuis van de Overpoort");
+                gameModel.addLog(playerModel.getName(), "gebruikt een get-out-of-jail kaart\nen geraakt thuis van de Overpoort");
                 playerModel.changeGetOutOfJailCards(-1);
             } else {
                 gameModel.addLog(playerModel.getName(), "is stomdronken, en zal dus moeten dobbelen tot deze nuchter is");
-                // implement rolling
+                diceRoller.rollToGetFree();
             }
         }
-        gameModel.setCurrentPlayerMove(playerModel);
+        gameModel.setCurrentPlayer(playerModel);
         gameModel.addLog(playerModel.getName(), "is aan de beurt!");
     }
 
@@ -95,12 +92,20 @@ public class GameController {
     }
 
     public void moveCurrentPlayerToPosition(int newPosition) {
-        PlayerModel playerModel = gameModel.getCurrentPlayerMove();
+        PlayerModel playerModel = gameModel.getCurrentPlayer();
         TileModel[] tileModels = gameModel.getTileModels();
 
         tileModels[playerModel.getPosition()].removePion(playerModel.getPion());
         playerModel.setPosition(newPosition);
-        tileModels[playerModel.getPosition()].addPion(playerModel.getPion());
+        TileModel finalTile = tileModels[newPosition];
+        finalTile.addPion(playerModel.getPion());
+        finalTile.executePlayerTileInteraction(gameModel);
+    }
+
+    public void freePlayerFromJail(int moves) {
+        PlayerModel freePlayer = gameModel.getCurrentPlayer();
+        gameModel.addLog(freePlayer.getName(), "gooide een dubbel en ontsnapt uit de Overpoort!");
+        moveCurrentPlayerToPosition(gameModel.getCurrentPlayer().getPosition() + moves);
     }
 
     public void moveCurrentPlayerToJail() {
