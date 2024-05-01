@@ -16,7 +16,6 @@ public class BuyableModel extends TileModel {
     protected BuyableModel(String tileID, int tilePosition, int cost) {
         super(tileID, tilePosition);
         this.cost = cost;
-
     }
 
     public PlayerModel getOwner() {
@@ -44,7 +43,7 @@ public class BuyableModel extends TileModel {
                 return;
             }
 
-            if (null == owner) {
+            if (null == owner && currentPlayer.getBalance() >= cost) {
                 boolean wasBought = new TilePurchaseAlert(tileName, String.valueOf(cost), card).wasBought();
 
                 if (wasBought) {
@@ -55,6 +54,8 @@ public class BuyableModel extends TileModel {
                 } else {
                     gameModel.addLog(currentPlayerName, "kocht " + tileName +  " niet.");
                 }
+            } else {
+            gameModel.addLog(currentPlayerName, "heeft niet genoeg geld om\n" + tileName + " te kopen");
             }
         });
     }
