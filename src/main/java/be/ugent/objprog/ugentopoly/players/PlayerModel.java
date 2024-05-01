@@ -8,6 +8,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class PlayerModel extends CustomObservable {
 
     private final ObservableList<TileModel> ownedTiles = FXCollections.observableArrayList();
@@ -20,12 +23,24 @@ public class PlayerModel extends CustomObservable {
     private int position = 0;
     private final Pion pion;
 
-    public PlayerModel(String name, int balance, ImageTextItem badgeImage) {
-        this.balance.set(balance);
+    // history for balance line chart TODO make observable for real time charting?
+    private final List<Integer> balanceHistory = new ArrayList<>();
+
+    public PlayerModel(String name, int initialBalance, ImageTextItem badgeImage) {
+        this.balance.set(initialBalance);
         this.name = name;
         this.badgeImage = badgeImage.image();
         badgeName = badgeImage.text();
         pion = PionFactory.createPion(this.badgeImage);
+        balanceHistory.add(initialBalance);
+    }
+
+    public List<Integer> getBalanceHistory() {
+        return balanceHistory;
+    }
+
+    public void updateBalanceHistory() {
+        balanceHistory.add((balance.getValue() < 0) ? 0 : balance.getValue());
     }
 
     public void addBuyable(TileModel tileModel) {

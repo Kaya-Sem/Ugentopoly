@@ -55,6 +55,9 @@ public class GameController {
         tileInteraction.accept(gameModel);
 
         diceRoller.setDisabled(Boolean.TRUE);
+
+        gameModel.getPlayerModels().forEach(PlayerModel::updateBalanceHistory);
+
         nextPlayer();
     }
 
@@ -120,6 +123,7 @@ public class GameController {
         model.balanceProperty().addListener(
                 (observableValue, oldValue, newValue) -> {
                     if (0 >= newValue.intValue()) {
+                        gameModel.getPlayerModels().forEach(PlayerModel::updateBalanceHistory);
                         GameOverDialog dialog = new GameOverDialog(model, gameModel.getPlayerModels());
                         dialog.show();
                         primaryStage.close();

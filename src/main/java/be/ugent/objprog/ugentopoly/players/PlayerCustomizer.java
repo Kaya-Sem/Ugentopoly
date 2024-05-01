@@ -60,7 +60,7 @@ setupComboBoxContextMenu();
     }
 
     private class CustomButton extends Button {
-        protected static final int MAXNAMELENGTH = 12;
+        protected static final int MAXNAMELENGTH = 20;
 
         private CustomButton() {
             setAlignment(Pos.CENTER);

@@ -1,32 +1,40 @@
 package be.ugent.objprog.ugentopoly;
 
-import be.ugent.objprog.ugentopoly.players.PlayerModel;
+import javafx.application.Platform;
+import javafx.scene.Scene;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
+import javafx.stage.Stage;
 import javafx.scene.control.Alert;
+import be.ugent.objprog.ugentopoly.players.PlayerModel;
 
-import java.util.Comparator;
+import java.util.ArrayList;
 import java.util.List;
 
 public class GameOverDialog {
     private final String message;
+    private final List<PlayerModel> players;
+    private final List<PlayerModel> winningPlayers;
 
     public GameOverDialog(PlayerModel loser, List<PlayerModel> allPlayers) {
-        // Filter out the losing player and sort remaining players by balance in descending order
-        List<PlayerModel> sortedPlayers = allPlayers.stream()
-                .filter(player -> !player.equals(loser))
-                .sorted(Comparator.comparing(PlayerModel::getBalance, Comparator.reverseOrder()))
-                .toList();
+        winningPlayers = new ArrayList<>(allPlayers.stream()
+                .filter(player -> !player.equals(loser))  // Exclude the losing player
+                .toList());
 
-        StringBuilder rankingMessage = new StringBuilder(loser.getName() + " ").append("verloor!\n\n").append("Rankings:\n");
+        players = allPlayers;
 
-        int rank = 1;
-        for (PlayerModel player : sortedPlayers) {
-            rankingMessage.append(rank).append(". ")
-                    .append(player.getName()).append("  €")
-                    .append(player.getBalance()).append("\n");
-            rank++;
+        // Construct the ranking message
+        StringBuilder rankingMessage = new StringBuilder(loser.getName()).append(" verloor!\n\nRankings:\n");
+        winningPlayers.sort((p1, p2) -> Integer.compare(p2.getBalance(), p1.getBalance()));
+        for (int i = 0; i < winningPlayers.size(); i++) {
+            rankingMessage.append(i + 1).append(". ")
+                    .append(winningPlayers.get(i).getName()).append(" €")
+                    .append(winningPlayers.get(i).getBalance()).append("\n");
         }
-
         message = rankingMessage.toString();
+        show();
+        displayChart();
     }
 
     public void show() {
@@ -35,5 +43,35 @@ public class GameOverDialog {
         alert.setHeaderText("Game Over!");
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    private void displayChart() {
+        Platform.runLater(() -> {
+            Stage chartStage = new Stage();
+            chartStage.setTitle("Balance Chart");
+
+            NumberAxis xAxis = new NumberAxis();
+            xAxis.setLabel("Move Number");
+
+            NumberAxis yAxis = new NumberAxis();
+            yAxis.setLabel("Balance");
+
+            LineChart<Number, Number> lineChart = new LineChart<>(xAxis, yAxis);
+            lineChart.setTitle("Player Balances Over Time");
+
+            for (PlayerModel player : players) {
+                XYChart.Series<Number, Number> series = new XYChart.Series<>();
+                series.setName(player.getName());
+                List<Integer> balances = player.getBalanceHistory();
+                for (int i = 0; i < balances.size(); i++) {
+                    series.getData().add(new XYChart.Data<>(i, balances.get(i)));
+                }
+                lineChart.getData().add(series);
+            }
+
+            Scene scene = new Scene(lineChart, 800, 600);
+            chartStage.setScene(scene);
+            chartStage.show();
+        });
     }
 }
