@@ -52,6 +52,22 @@ public class GameOverDialog {
 
             NumberAxis xAxis = new NumberAxis();
             xAxis.setLabel("Move Number");
+            xAxis.setAutoRanging(false);
+
+            // Calculate the range and tick unit dynamically based on the number of moves
+            int maxMoves = players.stream()
+                    .mapToInt(player -> player.getBalanceHistory().size())
+                    .max()
+                    .orElse(1) - 1;
+            xAxis.setLowerBound(0);
+            xAxis.setUpperBound(maxMoves);
+            xAxis.setTickUnit(1); // Set tick unit as 1 to display integers
+            xAxis.setTickLabelFormatter(new NumberAxis.DefaultFormatter(xAxis) {
+                @Override
+                public String toString(Number object) {
+                    return String.format("%d", object.intValue());
+                }
+            });
 
             NumberAxis yAxis = new NumberAxis();
             yAxis.setLabel("Balance");
