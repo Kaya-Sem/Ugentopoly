@@ -1,6 +1,5 @@
 package be.ugent.objprog.ugentopoly;
 
-import be.ugent.objprog.ugentopoly.dice.DiceModel;
 import be.ugent.objprog.ugentopoly.factories.GameCardFactory;
 import be.ugent.objprog.ugentopoly.factories.TileFactory;
 import be.ugent.objprog.ugentopoly.gameBoard.BoardModel;
@@ -19,7 +18,6 @@ public class ComponentInitializer {
     private final TileInitializer tileInitializer;
     private final InitializedTilesObject initializedTilesObject;
     private final GameCardInitializer gameCardInitializer;
-    private final DiceModel diceModel;
     private final CardDeck chanceCardDeck;
     private final CardDeck chestCardDeck;
     private final GameModel gameModel;
@@ -34,21 +32,17 @@ public class ComponentInitializer {
 
         gameCardInitializer = new GameCardInitializer(parser, new GameCardFactory());
 
-        diceModel = new DiceModel();
-
         chanceCardDeck = gameCardInitializer.getChanceCards();
-        chestCardDeck = gameCardInitializer.getChestCards(); // Fixed a typo here, it was getting Chance cards twice before.
+        chestCardDeck = gameCardInitializer.getChestCards();
 
         gameModel = new GameModel(
                 players,
                 initializedTilesObject.tileModelArray(),
                 chanceCardDeck,
-                chestCardDeck,
-                diceModel
+                chestCardDeck
         );
     }
 
-    // Getters
     public BoardModel getBoardModel() {
         return boardModel;
     }
@@ -67,10 +61,6 @@ public class ComponentInitializer {
 
     public GameCardInitializer getGameCardInitializer() {
         return gameCardInitializer;
-    }
-
-    public DiceModel getDiceModel() {
-        return diceModel;
     }
 
     public CardDeck getChanceCardDeck() {

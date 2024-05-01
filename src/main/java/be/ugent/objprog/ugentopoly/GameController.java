@@ -1,7 +1,6 @@
 package be.ugent.objprog.ugentopoly;
 
-import be.ugent.objprog.ugentopoly.dice.DiceModel;
-import be.ugent.objprog.ugentopoly.gameBoard.BoardModel;
+import be.ugent.objprog.ugentopoly.dice.DiceRoller;
 import be.ugent.objprog.ugentopoly.parsers.PropertyLoader;
 import be.ugent.objprog.ugentopoly.players.PlayerModel;
 import be.ugent.objprog.ugentopoly.tiles.tileModels.TileModel;
@@ -9,7 +8,6 @@ import javafx.stage.Stage;
 
 import java.util.List;
 import java.util.function.Consumer;
-import java.util.stream.IntStream;
 
 /*
 NON-URGENT write class documentation
@@ -19,11 +17,12 @@ Functions as the controller for GameModel, so performs all the updates for it
 public class GameController {
     private final Stage primaryStage;
     private final GameModel gameModel;
+    private final DiceRoller diceRoller;
 
-    public GameController(Stage primaryStage, GameModel gameModel, DiceModel diceModel) {
+    public GameController(Stage primaryStage, GameModel gameModel) {
         this.primaryStage = primaryStage;
         this.gameModel = gameModel;
-        diceModel.setGameController(this);
+        diceRoller = new DiceRoller(this);
 
         initializeGame();
     }
@@ -41,10 +40,9 @@ public class GameController {
 
     // TODO
     public void nextMove()  {
-        DiceModel diceModel = gameModel.getDiceModel();
-        diceModel.setDisabled(true);
+        diceRoller.setDisabled(Boolean.TRUE);
 
-        int moves = diceModel.getMostRecentRoll();
+        int moves = diceRoller.getMostRecentRoll();
         PlayerModel currentPlayer = gameModel.getCurrentPlayerMove();
 
         for (int i = 0; i < moves; i++) {
@@ -59,7 +57,7 @@ public class GameController {
         action.accept(gameModel);
 
         nextPlayer();
-        gameModel.getDiceModel().setDisabled(true);
+        diceRoller.setDisabled(Boolean.TRUE);
     }
 
     public void nextPlayer() {
@@ -127,6 +125,10 @@ public class GameController {
 
     public GameModel getGameModel() {
         return gameModel;
+    }
+
+    public DiceRoller getDiceRoller() {
+        return diceRoller;
     }
 
 }

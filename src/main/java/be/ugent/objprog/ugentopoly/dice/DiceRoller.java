@@ -1,8 +1,7 @@
 package be.ugent.objprog.ugentopoly.dice;
 
 import be.ugent.objprog.dice.DicePanel;
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
+import be.ugent.objprog.ugentopoly.GameController;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -12,26 +11,26 @@ import java.util.List;
 
 import static java.lang.String.valueOf;
 
-public class DiceRoller extends VBox implements InvalidationListener {
+public class DiceRoller extends VBox {
 
-    private final DiceModel diceModel;
     private final DicePanel dicePanel = new DicePanel();
     private final SimpleBooleanProperty disabled = new SimpleBooleanProperty();
 
     private static final double SPACING = 10.0;
     private static final double SIZE = 300.0;
+    private final GameController controller;
     private int doubleRolledCounter = 0;
     private static final int MAXDOUBLEROLLS = 3;
+    private int mostRecentRoll = 0;
 
-    public DiceRoller(DiceModel diceModel) {
-        this.diceModel = diceModel;
-        diceModel.addListener(this);
-
+    public DiceRoller(GameController controller) {
+        this.controller = controller;
         Button rollButton = new Button("roll dice");
         rollButton.disableProperty().bind(disabled);
         rollButton.setOnAction(event -> {
-            diceModel.setDisabled(true);
-            dicePanel.roll(this::handleRoll);
+            disabled.set(true);
+            dicePanel.roll(this::handleRoll
+            );
         });
 
         setSpacing(SPACING);
@@ -41,40 +40,46 @@ public class DiceRoller extends VBox implements InvalidationListener {
         setMaxSize(SIZE, SIZE);
     }
 
+    public void setDisabled(Boolean value) {
+        disabled.set(value);
+    }
+
+    public Boolean getDisabled() {
+        return disabled.getValue();
+    }
+
     private void handleRoll(List<Integer> list) {
         Integer dice1 = list.getFirst();
         Integer dice2 = list.getLast();
 
         if (dice1.equals(dice2)) {
-            diceModel.getGameController().addLog("a double was rolled!");
+            controller.addLog("a double was rolled!");
 
             if (MAXDOUBLEROLLS == doubleRolledCounter) {
-                diceModel.getGameController().moveCurrentPlayerToJail();
+                controller.moveCurrentPlayerToJail();
                 doubleRolledCounter = 0;
-                diceModel.getGameController().nextPlayer();
-                diceModel.getGameController().addLog("3 doubles in a row, went to jail!");
-                diceModel.setDisabled(false);
+                controller.nextPlayer();
+                controller.addLog("3 doubles in a row, went to jail!");
+                disabled.set(false);
             } else {
             doubleRolledCounter += 1;
-            diceModel.setDisabled(false);
+            disabled.set(false);
             }
             return;
         }
 
         doubleRolledCounter = 0;
+        mostRecentRoll = dice1 + dice2;
 
-        diceModel.setMostRecentRoll(dice1 + dice2);
-
-        diceModel.getGameController().nextMove();
-        diceModel.setDisabled(false);
+        controller.nextMove();
+        disabled.set(false);
     }
 
-    public DiceModel getDiceModel() {
-        return diceModel;
+    public int getMostRecentRoll() {
+        return mostRecentRoll;
     }
 
-    @Override
-    public void invalidated(Observable observable) {
-        disabled.set(diceModel.isDisabled());
+    public void setMostRecentRoll(int mostRecentRoll) {
+        this.mostRecentRoll = mostRecentRoll;
     }
 }

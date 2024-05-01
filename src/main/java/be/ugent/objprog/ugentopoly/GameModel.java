@@ -3,9 +3,7 @@ package be.ugent.objprog.ugentopoly;
 import java.util.*;
 
 import be.ugent.objprog.ugentopoly.gamecards.CardDeck;
-import be.ugent.objprog.ugentopoly.dice.DiceModel;
 import be.ugent.objprog.ugentopoly.logging.LogElement;
-import be.ugent.objprog.ugentopoly.players.Pion;
 import be.ugent.objprog.ugentopoly.players.PlayerModel;
 import be.ugent.objprog.ugentopoly.tiles.tileModels.TileModel;
 import javafx.collections.FXCollections;
@@ -19,7 +17,6 @@ public class GameModel extends CustomObservable {
     private final List<PlayerModel> playerModels;
     private final PlayerQueue playerModelQueue;
     private final TileModel[] tileModels;
-    private final DiceModel diceModel;
     private int bonusPot = 0;
 
     private final CardDeck chanceCardDeck;
@@ -28,15 +25,14 @@ public class GameModel extends CustomObservable {
     public GameModel(List<PlayerModel> players,
                      TileModel[] tileModels,
                      CardDeck chanceCardDeck,
-                     CardDeck chestCardDeck,
-                     DiceModel diceModel ) {
+                     CardDeck chestCardDeck
+                     ) {
 
         this.tileModels = tileModels;
         playerModels = new ArrayList<>(players);
         playerModelQueue = new PlayerQueue(playerModels);
         this.chanceCardDeck = chanceCardDeck;
         this.chestCardDeck = chestCardDeck;
-        this.diceModel = diceModel;
     }
 
     public PlayerModel getCurrentPlayerMove() {
@@ -94,10 +90,6 @@ public class GameModel extends CustomObservable {
 
     public ObservableList<LogElement> getLogs() {
         return logs;
-    }
-
-    public DiceModel getDiceModel() {
-        return diceModel;
     }
 
     public GameController getGameController() {

@@ -1,21 +1,14 @@
 package be.ugent.objprog.ugentopoly;
 
 import java.util.List;
-import java.util.Objects;
 
-import be.ugent.objprog.ugentopoly.gamecards.CardDeck;
-import be.ugent.objprog.ugentopoly.dice.DiceModel;
 import be.ugent.objprog.ugentopoly.dice.DiceRoller;
-import be.ugent.objprog.ugentopoly.factories.GameCardFactory;
-import be.ugent.objprog.ugentopoly.factories.TileFactory;
 import be.ugent.objprog.ugentopoly.gameBoard.Board;
 import be.ugent.objprog.ugentopoly.gameBoard.BoardModel;
 import be.ugent.objprog.ugentopoly.parsers.XMLParser;
 import be.ugent.objprog.ugentopoly.players.PlayerCreatorStage;
 import be.ugent.objprog.ugentopoly.players.PlayerModel;
 import be.ugent.objprog.ugentopoly.playertabpane.PlayerTabPane;
-import be.ugent.objprog.ugentopoly.tiles.InitializedTilesObject;
-import be.ugent.objprog.ugentopoly.tiles.TileInitializer;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -40,10 +33,8 @@ public class Ugentopoly extends Application {
         ComponentInitializer components = new ComponentInitializer(parser, players);
         GameModel gameModel = components.getGameModel();
 
-        GameController gameController = new GameController(primaryStage, components.getGameModel(), components.getDiceModel());
+        GameController gameController = new GameController(primaryStage, components.getGameModel());
         gameModel.setGameController(gameController);
-
-        DiceRoller diceRoller = new DiceRoller(components.getDiceModel());
 
         VBox verticalComponents = new VBox();
          verticalComponents.setSpacing(10);
@@ -54,7 +45,11 @@ public class Ugentopoly extends Application {
         logListView.setItems(gameModel.getLogs());
         logListView.setSelectionModel(null);
 
-         verticalComponents.getChildren().addAll(new CurrentPlayerIndicator(gameModel), playerTabPane, logListView, diceRoller);
+         verticalComponents.getChildren().addAll(
+                 new CurrentPlayerIndicator(gameModel),
+                 playerTabPane,
+                 logListView,
+                 gameController.getDiceRoller());
 
         HBox horizontalLayout = new HBox();
         horizontalLayout.setAlignment(Pos.CENTER);
@@ -65,9 +60,6 @@ public class Ugentopoly extends Application {
                           verticalComponents);
 
         StackPane root = new StackPane(horizontalLayout);
-
-        StackPane.setAlignment(playerTabPane, Pos.CENTER_RIGHT);
-        StackPane.setAlignment(diceRoller, Pos.BOTTOM_RIGHT);
 
         applySettings(primaryStage);
 
