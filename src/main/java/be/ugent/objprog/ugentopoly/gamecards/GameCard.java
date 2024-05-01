@@ -5,7 +5,7 @@ import be.ugent.objprog.ugentopoly.tiles.tileCards.VerticalCard;
 
 import java.util.function.Consumer;
 
-public class GameCard extends VerticalCard {
+public class GameCard {
     private Consumer<GameModel> cardAction = null;
 
     public void setCardAction(Consumer<GameModel> consumer) {
