@@ -1,11 +1,6 @@
 package be.ugent.objprog.ugentopoly.tiles.tileViews;
 
-import be.ugent.objprog.ugentopoly.players.PlayerModel;
-import be.ugent.objprog.ugentopoly.tiles.tileCards.StreetCard;
 import be.ugent.objprog.ugentopoly.tiles.tileModels.StreetTileModel;
-import javafx.beans.Observable;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -23,7 +18,7 @@ public class StreetTileView extends SmallTileView {
     public StreetTileView(StreetTileModel model) {
         super(model);
 
-        Label label = new Label(model.getTileName());
+        Label label = new Label(model.getName());
         label.setAlignment(Pos.CENTER);
         label.setFont(Font.font("Arial", FontWeight.BOLD, 11));
         label.setWrapText(true);

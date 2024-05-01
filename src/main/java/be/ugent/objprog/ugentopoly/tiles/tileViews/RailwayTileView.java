@@ -14,7 +14,7 @@ public class RailwayTileView extends SmallTileView {
 
         TileImageView imageView = new TileImageView(model.getImage());
 
-        Label textLabel = new Label(model.getTileName());
+        Label textLabel = new Label(model.getName());
         textLabel.setFont(Font.font("Arial", FontWeight.BOLD, 10));
         textLabel.setWrapText(true);
 

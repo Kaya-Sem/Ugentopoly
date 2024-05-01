@@ -5,7 +5,6 @@ import be.ugent.objprog.ugentopoly.GameModel;
 import be.ugent.objprog.ugentopoly.players.PlayerModel;
 import be.ugent.objprog.ugentopoly.tiles.tileCards.BasicVerticalCard;
 import be.ugent.objprog.ugentopoly.tiles.tileinterface.ImageTile;
-import javafx.scene.image.Image;
 
 import java.util.function.Consumer;
 
@@ -15,7 +14,7 @@ public class FreeParkingModel extends TileModel implements ImageTile {
 
     public FreeParkingModel(String tileID, int tilePosition) {
         super(tileID, tilePosition);
-        setCard(new BasicVerticalCard(image, tileName));
+        setCard(new BasicVerticalCard(image, name));
     }
 
     public CustomImage getImage() {

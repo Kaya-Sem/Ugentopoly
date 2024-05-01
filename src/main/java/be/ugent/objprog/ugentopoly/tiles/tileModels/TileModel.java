@@ -16,7 +16,7 @@ public class TileModel extends CustomObservable {
 
     protected final String id;
     protected final int position;
-    protected String tileName;
+    protected String name;
     protected final List<Pion> pionnen = new ArrayList<>();
     protected DisplayCardController controller = null;
 
@@ -25,7 +25,7 @@ public class TileModel extends CustomObservable {
    protected TileModel(String tileID, int tilePosition){
         id = tileID;
         position = tilePosition;
-        tileName = PropertyFactory.getString(tileID);
+        name = PropertyFactory.getString(tileID);
     }
 
     public DisplayCardController getController() {
@@ -74,8 +74,8 @@ public class TileModel extends CustomObservable {
         return id;
     }
 
-    public String getTileName() {
-       return tileName;
+    public String getName() {
+       return name;
     }
 
     public int getPosition() {

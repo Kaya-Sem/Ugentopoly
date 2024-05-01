@@ -17,7 +17,7 @@ public class StreetCard extends HorizontalCard {
     protected static final int PADDING = 35;
 
     public StreetCard(StreetTileModel model) {
-        Label textLabel = new Label(model.getTileName());
+        Label textLabel = new Label(model.getName());
         textLabel.setFont(Font.font("Raleway", FontWeight.EXTRA_BOLD, 15));
 
         Label costLabel = new Label("€" + model.getCost());

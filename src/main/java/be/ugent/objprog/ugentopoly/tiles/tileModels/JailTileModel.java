@@ -14,7 +14,7 @@ public class JailTileModel extends TileModel implements ImageTile {
 
     public JailTileModel(String tileID, int tilePosition) {
         super(tileID, tilePosition);
-        setCard(new BasicVerticalCard(image, tileName));
+        setCard(new BasicVerticalCard(image, name));
     }
 
     @Override

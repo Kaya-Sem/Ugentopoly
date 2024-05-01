@@ -73,7 +73,7 @@ public class GameCardFactory<T> {
             }
 
             TileModel currentTileModel = gameModel.getTileModels()[newPosition];
-            gameModel.addLog(currentPlayer.getName(), "moet naar " + currentTileModel.getTileName());
+            gameModel.addLog(currentPlayer.getName(), "moet naar " + currentTileModel.getName());
 
             Consumer<GameModel> action = currentTileModel.getPlayerTileInteraction();
             action.accept(gameModel);

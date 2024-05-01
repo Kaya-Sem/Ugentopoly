@@ -15,7 +15,7 @@ public class TaxTileModel extends TileModel implements ImageTile {
     public TaxTileModel(String tileID, int tilePosition, int amount) {
         super(tileID, tilePosition);
         this.amount = amount;
-        setCard(new TaxCard(image, tileName, String.valueOf(amount)));
+        setCard(new TaxCard(image, name, String.valueOf(amount)));
     }
 
     public int getAmount() {

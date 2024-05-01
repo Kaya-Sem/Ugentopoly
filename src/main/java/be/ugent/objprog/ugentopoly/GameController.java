@@ -49,7 +49,7 @@ public class GameController {
         }
 
         TileModel currentTile = gameModel.getTileModels()[currentPlayer.getPosition()];
-        gameModel.addLog(currentPlayer.getName(), "belande op " + currentTile.getTileName() );
+        gameModel.addLog(currentPlayer.getName(), "belande op " + currentTile.getName() );
 
         Consumer<GameModel> tileInteraction = currentTile.getPlayerTileInteraction();
         tileInteraction.accept(gameModel);

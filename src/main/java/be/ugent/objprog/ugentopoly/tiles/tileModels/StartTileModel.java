@@ -17,7 +17,7 @@ public class StartTileModel extends TileModel implements ImageTile {
 
     public StartTileModel(String tileID, int tilePosition, int startAmount) {
         super(tileID, tilePosition);
-        setCard(new BasicVerticalCard(startImage, tileName));
+        setCard(new BasicVerticalCard(startImage, name));
         this.startAmount = startAmount;
     }
 

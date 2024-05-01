@@ -1,13 +1,9 @@
 package be.ugent.objprog.ugentopoly.tiles.tileViews.cornerTiles;
 
-import be.ugent.objprog.ugentopoly.parsers.PropertyLoader;
-import be.ugent.objprog.ugentopoly.tiles.tileCards.BasicVerticalCard;
 import be.ugent.objprog.ugentopoly.tiles.TileImageView;
 import be.ugent.objprog.ugentopoly.tiles.tileModels.GoToJailTileModel;
-import be.ugent.objprog.ugentopoly.tiles.tileModels.TileModel;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -22,7 +18,7 @@ public class GoToJailCornerTileView extends CornerTileView {
 
         // TODO
         // make more versatile. What if they add a string with no newline? it will crash the program
-        String[] text = model.getTileName().split("\\n");
+        String[] text = model.getName().split("\\n");
 
         Label textLabel1 = new Label(text[0]);
         Label textLabel2 = new Label(text[1]);

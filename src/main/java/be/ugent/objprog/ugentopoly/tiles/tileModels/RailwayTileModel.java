@@ -5,7 +5,6 @@ import be.ugent.objprog.ugentopoly.GameModel;
 import be.ugent.objprog.ugentopoly.players.PlayerModel;
 import be.ugent.objprog.ugentopoly.tiles.tileCards.RailwayCard;
 import be.ugent.objprog.ugentopoly.tiles.tileinterface.ImageTile;
-import javafx.scene.image.Image;
 
 import java.util.function.Consumer;
 
@@ -19,7 +18,7 @@ public class RailwayTileModel extends BuyableModel implements ImageTile {
         this.rent = rent;
         setCard(new RailwayCard(
                 image,
-                tileName,
+                name,
                 String.valueOf(cost),
                 String.valueOf(rent)));
     }
