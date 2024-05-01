@@ -23,7 +23,7 @@ public class TaxTileView extends SmallTileView {
         textLabel.setFont(Font.font("Arial", FontWeight.BOLD, 10));
         textLabel.setWrapText(true);
 
-        hBox.getChildren().addAll(new TileImageView(TaxTileModel.getImage()), textLabel);
+        hBox.getChildren().addAll(new TileImageView(model.getImage()), textLabel);
         getChildren().addAll(hBox, badgeHolders, tileButton);
     }
 

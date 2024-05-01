@@ -14,7 +14,7 @@ public class RailwayTileView extends SmallTileView {
     public RailwayTileView(RailwayTileModel model){
         super(model);
 
-        TileImageView imageView = new TileImageView(RailwayTileModel.getImage());
+        TileImageView imageView = new TileImageView(model.getImage());
 
         String text = model.getTileName();
         Label textLabel = new Label(text);
