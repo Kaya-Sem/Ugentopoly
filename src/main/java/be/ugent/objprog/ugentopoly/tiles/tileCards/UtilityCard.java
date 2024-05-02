@@ -8,10 +8,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 
 public class UtilityCard extends HorizontalCard {
-    private static final double PADDING = 40;
+    private static final double IMAGEHEIGHT = HEIGHT - 10;
+    private static final double IMAGEWIDTH = HEIGHT - 10;
 
     public UtilityCard(UtilityTileModel model){
-        ImageView imageView = new CustomImageView(WIDTH - PADDING, HEIGHT - PADDING, model.getImage());
+        ImageView imageView = new CustomImageView(IMAGEHEIGHT, IMAGEWIDTH, model.getImage());
 
         Label amount = new Label("€" + model.getCost());
         Label ownerLabel = new Label();
