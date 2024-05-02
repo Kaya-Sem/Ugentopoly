@@ -1,6 +1,7 @@
 package be.ugent.objprog.ugentopoly.tiles.tileViews;
 
 import be.ugent.objprog.ugentopoly.DisplayCardController;
+import be.ugent.objprog.ugentopoly.UgentopolyScene;
 import be.ugent.objprog.ugentopoly.gameboard.BoardModel;
 import be.ugent.objprog.ugentopoly.tiles.PionHolder;
 import be.ugent.objprog.ugentopoly.tiles.TileButton;
@@ -11,8 +12,8 @@ import javafx.event.ActionEvent;
 import javafx.scene.layout.StackPane;
 
 public class TileView extends StackPane implements InvalidationListener{
-    public final static double LONG_SIDE = ((BoardModel.BOARD_SIZE / BoardModel.getSmallTilesInBar()) * 2);
-    public final static double SHORT_SIDE = ((BoardModel.BOARD_SIZE / BoardModel.getSmallTilesInBar()));
+    public final static double LONG_SIDE = ((UgentopolyScene.BOARD_SIZE / BoardModel.getSmallTilesInBar()) * 2);
+    public final static double SHORT_SIDE = ((UgentopolyScene.BOARD_SIZE / BoardModel.getSmallTilesInBar()));
     private static final double OFFSET = 32.5;
 
     protected final TileButton tileButton = new TileButton();

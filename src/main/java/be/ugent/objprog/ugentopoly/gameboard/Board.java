@@ -2,6 +2,7 @@ package be.ugent.objprog.ugentopoly.gameboard;
 
 import java.util.List;
 
+import be.ugent.objprog.ugentopoly.UgentopolyScene;
 import be.ugent.objprog.ugentopoly.gameboard.bars.HorizontalBar;
 import be.ugent.objprog.ugentopoly.gameboard.bars.VerticalBar;
 import be.ugent.objprog.ugentopoly.tiles.InitializedTilesObject;
@@ -13,10 +14,11 @@ import javafx.scene.layout.RowConstraints;
 
 public class Board extends GridPane {
 
+    public static final int RIGHTANGLE = 180;
     public final MiddleSection middleSection;
 
     public Board(BoardModel boardModel, InitializedTilesObject tileViews) {
-        double size = BoardModel.BOARD_SIZE;
+        double size = UgentopolyScene.BOARD_SIZE;
         middleSection = new MiddleSection(boardModel);
         setPrefSize(size, size);
         setMaxHeight(size);
@@ -36,7 +38,7 @@ public class Board extends GridPane {
         HorizontalBar topRow = new HorizontalBar(List.of(tileViews.topTilesViewArray()), BoardModel.TOPANGLE);
         HorizontalBar bottomRow = new HorizontalBar(List.of(tileViews.bottomTilesViewArray()), BoardModel.BOTTOMANGLE);
         VerticalBar leftBar = new VerticalBar(List.of(tileViews.leftTilesViewArray()));
-        VerticalBar rightBar = new VerticalBar(List.of(tileViews.rightTilesViewArray()), BoardModel.RIGHTANGLE);
+        VerticalBar rightBar = new VerticalBar(List.of(tileViews.rightTilesViewArray()), RIGHTANGLE);
 
         add(topRow, 1, 0);
         add(rightBar, 2, 1);

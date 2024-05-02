@@ -2,6 +2,7 @@ package be.ugent.objprog.ugentopoly.gameboard;
 
 import be.ugent.objprog.ugentopoly.CustomImage;
 import be.ugent.objprog.ugentopoly.CustomImageView;
+import be.ugent.objprog.ugentopoly.UgentopolyScene;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.scene.image.Image;
@@ -27,8 +28,8 @@ public class MiddleSection extends StackPane implements InvalidationListener {
         setMinSize(size, size);
         setMaxSize(size, size);
 
-        CustomImageView background = new CustomImageView(size , BoardModel.BOARD_SIZE, BACKGROUND);
-        CustomImageView logo = new CustomImageView(BoardModel.BOARD_SIZE * SCALAR, size, LOGO);
+        CustomImageView background = new CustomImageView(size , UgentopolyScene.BOARD_SIZE, BACKGROUND);
+        CustomImageView logo = new CustomImageView(UgentopolyScene.BOARD_SIZE * SCALAR, size, LOGO);
 
         logo.setRotate(ROTATION);
 
