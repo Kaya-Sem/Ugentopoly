@@ -4,11 +4,10 @@ import be.ugent.objprog.ugentopoly.tiles.tileModels.StreetTileModel;
 import be.ugent.objprog.ugentopoly.tiles.tileViews.TileView;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 
 import static javafx.geometry.Pos.*;
 
@@ -17,15 +16,22 @@ public class StreetCard extends HorizontalCard {
     protected static final int PADDING = 35;
 
     public StreetCard(StreetTileModel model) {
-        Label textLabel = new Label(model.getName());
-        textLabel.setFont(Font.font("Raleway", FontWeight.EXTRA_BOLD, 15));
-
+        Label nameLabel = new Label(model.getName());
         Label costLabel = new Label("€" + model.getCost());
-        costLabel.setFont(Font.font("Arial", FontWeight.THIN, 11));
+        Label ownerLabel = new Label();
+        ownerLabel.textProperty().bind(model.ownerProperty());
+
+        nameLabel.getStyleClass().add("bold-label-large");
+        ownerLabel.getStyleClass().add("bold-label-medium");
+        costLabel.getStyleClass().add("thin-label-medium");
+
+        HBox title = new HBox(nameLabel, costLabel);
+        title.setAlignment(CENTER_LEFT);
+        title.setSpacing(10);
 
         VBox info = new VBox(
-                textLabel,
-                costLabel,
+                title,
+                ownerLabel,
                 new Label("\n"),
                 new Label("rent: €" + model.getRent())
         );
