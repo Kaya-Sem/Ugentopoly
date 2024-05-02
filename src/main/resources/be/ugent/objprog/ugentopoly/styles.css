@@ -32,3 +32,28 @@
 .list-cell {
     -fx-background-color: transparent;
 }
+
+.bold-label-medium {
+    -fx-font-family: "Arial";
+    -fx-font-weight: bold;
+    -fx-font-size: 10pt;
+}
+
+.bold-label-large {
+    -fx-font-family: "Arial";
+    -fx-font-weight: bold;
+    -fx-font-size: 15pt;
+}
+
+.owner-label{
+    -fx-font-family: "Arial";
+    -fx-font-weight: bold;
+    -fx-font-size: 10pt;
+    -fx-text-fill: darkblue;
+}
+
+.thin-label-medium {
+    -fx-font-family: "Arial";
+    -fx-font-weight: lighter;
+    -fx-font-size: 10pt;
+}
