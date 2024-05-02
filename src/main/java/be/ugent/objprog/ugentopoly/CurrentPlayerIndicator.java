@@ -14,8 +14,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 
 public class CurrentPlayerIndicator extends VBox implements InvalidationListener {
     protected static final double SPACING = 20.0;
@@ -36,7 +34,7 @@ public class CurrentPlayerIndicator extends VBox implements InvalidationListener
         image.set(currentPlayer.getBadgeImage());
         balance.set(String.valueOf(currentPlayer.getBalance()));
 
-        Label text = new Label("Now Playing:");
+        Label text = new Label("Aan de beurt");
         text.getStyleClass().add("normal-label-medium");
 
         PlayerInfo playerInfo = new PlayerInfo();
@@ -54,17 +52,17 @@ public class CurrentPlayerIndicator extends VBox implements InvalidationListener
         private PlayerInfo() {
 
             Label playerNameLabel = new Label();
+            Label balanceLabel = new Label();
             playerNameLabel.textProperty().bind(playerName);
             playerNameLabel.setAlignment(Pos.CENTER);
-            playerNameLabel.setFont(Font.font("Arial", FontWeight.BOLD, 20.0)); // TODO
 
-            Label balanceLabel = new Label();
             balanceLabel.textProperty().bind(Bindings.createStringBinding(
                     () -> "€" + balance.getValue(),
                     balance
             ));
 
-            balanceLabel.setFont(Font.font("Consolas", FontWeight.THIN, 12.0)); // TODO
+            balanceLabel.getStyleClass().add("normal-label-medium");
+            playerNameLabel.getStyleClass().add("bold-label-superlarge");
 
             VBox vBox = new VBox(playerNameLabel, balanceLabel );
             vBox.setAlignment(Pos.CENTER);

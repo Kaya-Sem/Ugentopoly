@@ -51,6 +51,12 @@
     -fx-font-size: 15pt;
 }
 
+.bold-label-superlarge {
+    -fx-font-family: "Arial";
+    -fx-font-weight: bold;
+    -fx-font-size: 15pt;
+}
+
 .owner-label{
     -fx-font-family: "Arial";
     -fx-font-weight: bold;
