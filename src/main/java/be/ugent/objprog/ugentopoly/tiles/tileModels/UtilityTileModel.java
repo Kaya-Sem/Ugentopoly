@@ -6,7 +6,6 @@ import be.ugent.objprog.ugentopoly.players.PlayerModel;
 import be.ugent.objprog.ugentopoly.tiles.tileCards.UtilityCard;
 import be.ugent.objprog.ugentopoly.tiles.tileinterface.ImageTile;
 import javafx.collections.ObservableList;
-import javafx.scene.image.Image;
 
 import java.util.Set;
 import java.util.function.Consumer;
@@ -18,7 +17,7 @@ public class UtilityTileModel extends BuyableModel implements ImageTile {
     public UtilityTileModel(String tileID, int tilePosition, int cost) {
         super(tileID, tilePosition, cost);
         image = new CustomImage(id.substring(5) + ".png"); // not robust
-        setCard(new UtilityCard(image, String.valueOf(cost)));
+        setCard(new UtilityCard(this));
     }
 
     @Override

@@ -16,11 +16,7 @@ public class RailwayTileModel extends BuyableModel implements ImageTile {
     public RailwayTileModel(String tileID, int tilePosition, int cost, int rent) {
         super(tileID, tilePosition, cost);
         this.rent = rent;
-        setCard(new RailwayCard(
-                image,
-                name,
-                String.valueOf(cost),
-                String.valueOf(rent)));
+        setCard(new RailwayCard(this));
     }
 
     public int getRent() {

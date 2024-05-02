@@ -22,7 +22,7 @@ public class StreetCard extends HorizontalCard {
         ownerLabel.textProperty().bind(model.ownerProperty());
 
         nameLabel.getStyleClass().add("bold-label-large");
-        ownerLabel.getStyleClass().add("bold-label-medium");
+        ownerLabel.getStyleClass().add("owner-label");
         costLabel.getStyleClass().add("thin-label-medium");
 
         HBox title = new HBox(nameLabel, costLabel);

@@ -3,9 +3,7 @@ package be.ugent.objprog.ugentopoly.parsers;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
-import java.util.stream.Collectors;
 
-import org.jdom2.Attribute;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
@@ -119,7 +117,7 @@ public class XMLParser {
 
         Arrays.stream(ATTRIBUTES).forEach(attr -> tileMap.put(attr, tileElement.getAttributeValue(attr)));
 
-        tileMap.entrySet().removeIf(entry -> null == entry.getValue());
+        tileMap.entrySet().removeIf(entry -> entry.getValue() == null);
 
         return tileMap;
     }

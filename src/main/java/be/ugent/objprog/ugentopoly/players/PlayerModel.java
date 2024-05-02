@@ -1,12 +1,13 @@
 package be.ugent.objprog.ugentopoly.players;
 
+import be.ugent.objprog.ugentopoly.CustomImageView;
 import be.ugent.objprog.ugentopoly.CustomObservable;
-import be.ugent.objprog.ugentopoly.factories.PionFactory;
 import be.ugent.objprog.ugentopoly.tiles.tileModels.TileModel;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,17 +22,17 @@ public class PlayerModel extends CustomObservable {
     private int leaveJailCards = 0;
     private final String name;
     private int position = 0;
-    private final Pion pion;
+    private final CustomImageView pion;
 
     // history for balance line chart TODO make observable for real time charting?
     private final List<Integer> balanceHistory = new ArrayList<>();
 
     public PlayerModel(String name, int initialBalance, ImageTextItem badgeImage) {
-        this.balance.set(initialBalance);
+        balance.set(initialBalance);
         this.name = name;
         this.badgeImage = badgeImage.image();
         badgeName = badgeImage.text();
-        pion = PionFactory.createPion(this.badgeImage);
+        pion = new CustomImageView(40, 40, this.badgeImage).addDropShadow();
         balanceHistory.add(initialBalance);
     }
 
@@ -82,7 +83,7 @@ public class PlayerModel extends CustomObservable {
         return badgeName;
     }
 
-    public Pion getPion() {
+    public ImageView getPion() {
         return pion;
     }
 

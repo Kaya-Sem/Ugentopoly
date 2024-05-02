@@ -1,7 +1,6 @@
 package be.ugent.objprog.ugentopoly.gameBoard;
 
 import be.ugent.objprog.ugentopoly.CustomObservable;
-import be.ugent.objprog.ugentopoly.Ugentopoly;
 import be.ugent.objprog.ugentopoly.tiles.tileCards.TemplateCard;
 import be.ugent.objprog.ugentopoly.tiles.tileViews.TileView;
 
@@ -17,7 +16,7 @@ public class BoardModel extends CustomObservable {
     public static final int RIGHTANGLE = 180;
     public static final int BOTTOMANGLE = 270;
 
-    private TemplateCard displayedCard;
+    private TemplateCard displayedCard = null;
 
     public static int getSmallTilesInBar() {
         return SMALL_TILES_IN_BAR;

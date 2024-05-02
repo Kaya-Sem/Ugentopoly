@@ -29,7 +29,7 @@ public class FreeParkingModel extends TileModel implements ImageTile {
             gameModel.setBonusPot(0);
             currentPlayer.changeBalance(amount);
 
-            gameModel.addLog(currentPlayer.getName(), (0 == amount) ?
+            gameModel.addLog(currentPlayer.getName(), (amount == 0) ?
                     "krijgt niets, want de bonuspot is leeg..." : "krijgt " + amount + "€ uit de bonuspot!"
                     );
         };

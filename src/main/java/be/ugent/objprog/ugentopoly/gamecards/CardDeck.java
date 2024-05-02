@@ -1,7 +1,5 @@
 package be.ugent.objprog.ugentopoly.gamecards;
 
-import be.ugent.objprog.ugentopoly.tiles.tileCards.VerticalCard;
-
 import java.util.*;
 
 public class CardDeck {

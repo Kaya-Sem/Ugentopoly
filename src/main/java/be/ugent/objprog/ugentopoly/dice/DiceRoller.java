@@ -9,8 +9,6 @@ import javafx.scene.layout.VBox;
 
 import java.util.List;
 
-import static java.lang.String.valueOf;
-
 public class DiceRoller extends VBox {
 
     private final DicePanel dicePanel = new DicePanel();

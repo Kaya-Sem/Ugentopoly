@@ -15,10 +15,10 @@ import java.util.List;
 public class GameOverDialog {
     private final String message;
     private final List<PlayerModel> players;
-    private final List<PlayerModel> winningPlayers;
 
     public GameOverDialog(PlayerModel loser, List<PlayerModel> allPlayers) {
-        winningPlayers = new ArrayList<>(allPlayers.stream()
+        // Exclude the losing player
+        List<PlayerModel> winningPlayers = new ArrayList<>(allPlayers.stream()
                 .filter(player -> !player.equals(loser))  // Exclude the losing player
                 .toList());
 

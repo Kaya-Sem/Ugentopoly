@@ -7,10 +7,8 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -47,7 +45,7 @@ public class PlayerCreatorStage extends Stage {
 
         Button startGame = new Button("Start game!");
         startGame.setOnAction(e -> {
-            if (1 < players.size() && 5 > players.size()) {
+            if (players.size() > 1 && players.size() < 5) {
                 close();
             } else {
                 // TODO duplicate

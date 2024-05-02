@@ -1,14 +1,10 @@
 package be.ugent.objprog.ugentopoly.tiles.tileViews;
 
-import java.util.Objects;
-
 import be.ugent.objprog.ugentopoly.parsers.PropertyLoader;
 import be.ugent.objprog.ugentopoly.tiles.TileHBox;
 import be.ugent.objprog.ugentopoly.tiles.TileImageView;
-import be.ugent.objprog.ugentopoly.tiles.tileCards.TaxCard;
 import be.ugent.objprog.ugentopoly.tiles.tileModels.TaxTileModel;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 

@@ -18,7 +18,7 @@ public class StreetTileView extends SmallTileView {
 
         Label label = new Label(model.getName());
         label.setAlignment(Pos.CENTER);
-        label.getStyleClass().add("bold-label-street");
+        label.getStyleClass().add("bold-label-medium");
         label.setWrapText(true);
 
         StackPane pane = new StackPane(label);

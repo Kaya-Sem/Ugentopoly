@@ -11,8 +11,9 @@ import javafx.scene.text.FontWeight;
 
 public class TilePurchaseAlert extends Alert {
 
-    private final ButtonType buttonYes = new ButtonType("BUY");
+    @SuppressWarnings("FieldCanBeLocal")
     private final ButtonType buttonNo = new ButtonType("No");
+    private final ButtonType buttonYes = new ButtonType("BUY");
 
     public TilePurchaseAlert(String header, String cost, TemplateCard card) {
         super(AlertType.CONFIRMATION);

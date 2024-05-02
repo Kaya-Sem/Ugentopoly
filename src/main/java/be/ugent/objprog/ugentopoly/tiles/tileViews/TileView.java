@@ -1,10 +1,8 @@
 package be.ugent.objprog.ugentopoly.tiles.tileViews;
 
 import be.ugent.objprog.ugentopoly.DisplayCardController;
-import be.ugent.objprog.ugentopoly.GameModel;
 import be.ugent.objprog.ugentopoly.gameBoard.BoardModel;
 import be.ugent.objprog.ugentopoly.tiles.PionHolder;
-import be.ugent.objprog.ugentopoly.tiles.tileCards.TemplateCard;
 import be.ugent.objprog.ugentopoly.tiles.TileButton;
 import be.ugent.objprog.ugentopoly.tiles.tileModels.TileModel;
 import javafx.beans.InvalidationListener;
@@ -35,7 +33,7 @@ public class TileView extends StackPane implements InvalidationListener{
         setTranslateX(getWidth() / 2);
         setTranslateY(getHeight() / 2);
         setRotate(angle);
-        if (BoardModel.TOPANGLE == angle || BoardModel.BOTTOMANGLE == angle) {
+        if (angle == BoardModel.TOPANGLE || angle == BoardModel.BOTTOMANGLE) {
             setTranslateX(- OFFSET);
             setTranslateY(OFFSET);
         }

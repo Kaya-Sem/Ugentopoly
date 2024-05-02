@@ -2,11 +2,9 @@ package be.ugent.objprog.ugentopoly.gameBoard;
 
 import be.ugent.objprog.ugentopoly.CustomImage;
 import be.ugent.objprog.ugentopoly.CustomImageView;
-import be.ugent.objprog.ugentopoly.Ugentopoly;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 
 public class MiddleSection extends StackPane implements InvalidationListener {

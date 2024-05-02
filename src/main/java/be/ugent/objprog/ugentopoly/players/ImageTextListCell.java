@@ -3,12 +3,10 @@ package be.ugent.objprog.ugentopoly.players;
 import be.ugent.objprog.ugentopoly.CustomImageView;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import org.jdom2.Text;
 
 public class ImageTextListCell extends ListCell<ImageTextItem> {
     protected static final double IMAGESIZE = 60.0;
@@ -19,7 +17,7 @@ public class ImageTextListCell extends ListCell<ImageTextItem> {
     protected void updateItem(ImageTextItem item, boolean empty) {
         super.updateItem(item, empty);
 
-        if (empty || null == item) {
+        if (empty || item == null) {
             setText(null);
             setGraphic(null);
         } else {

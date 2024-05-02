@@ -10,7 +10,10 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.function.Function;
 
-// Can be split into subfactories to make everything cleaner. Would create loads more classes however
+/**
+ *
+ */
+
 public class TileFactory {
     private final Map<String, Function<Map<String, String>, TileTuple>> tileCreationMethods;
     private final DisplayCardController controller;

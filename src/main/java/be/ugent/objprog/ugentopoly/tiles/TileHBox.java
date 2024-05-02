@@ -4,7 +4,6 @@ import be.ugent.objprog.ugentopoly.tiles.tileViews.TileView;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 
 public class TileHBox extends HBox {

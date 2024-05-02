@@ -15,7 +15,7 @@ public class CustomImage extends Image {
 
     private static InputStream makeInputStream(String imageName) {
         InputStream is = CustomImage.class.getResourceAsStream("/be/ugent/objprog/ugentopoly/assets/" + imageName);
-        if (null == is) {
+        if (is == null) {
             throw new IllegalArgumentException("Image not found: " + imageName);
         }
         return is;

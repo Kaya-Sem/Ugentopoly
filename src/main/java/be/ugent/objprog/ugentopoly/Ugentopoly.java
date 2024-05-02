@@ -2,7 +2,6 @@ package be.ugent.objprog.ugentopoly;
 
 import java.util.List;
 
-import be.ugent.objprog.ugentopoly.dice.DiceRoller;
 import be.ugent.objprog.ugentopoly.gameBoard.Board;
 import be.ugent.objprog.ugentopoly.gameBoard.BoardModel;
 import be.ugent.objprog.ugentopoly.logs.LogListView;
@@ -17,7 +16,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.scene.control.ListView;
 
 public class Ugentopoly extends Application {
     private static final String APPLICATIONNAME = "Ugentopoly";

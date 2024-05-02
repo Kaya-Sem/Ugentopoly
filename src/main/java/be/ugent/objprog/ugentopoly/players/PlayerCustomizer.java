@@ -31,7 +31,7 @@ public class PlayerCustomizer extends VBox {
 
         // Disable the selected badge for other players
         badgeComboBox.valueProperty().addListener((observable, oldValue, newValue) -> creator.playerCustomizers.stream().filter(customizer -> !customizer.equals(this)).forEach(customizer -> {
-            if (null != oldValue && !customizer.badgeComboBox.getItems().contains(oldValue)) {
+            if (oldValue != null && !customizer.badgeComboBox.getItems().contains(oldValue)) {
                 customizer.badgeComboBox.getItems().add(oldValue);
             }
             customizer.badgeComboBox.getItems().remove(newValue);
@@ -51,7 +51,7 @@ setupComboBoxContextMenu();
         contextMenu.getItems().add(addItem);
 
         badgeComboBox.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-            if (MouseButton.SECONDARY == event.getButton()) {
+            if (event.getButton() == MouseButton.SECONDARY) {
                 contextMenu.show(badgeComboBox, event.getScreenX(), event.getScreenY());
             } else {
                 contextMenu.hide();
@@ -67,7 +67,7 @@ setupComboBoxContextMenu();
             setText("READY");
 
             setOnAction(event -> {
-                if (field.getText().isBlank() || MAXNAMELENGTH < field.getText().length() || null == getBadgeComboBox().getValue()) {
+                if (field.getText().isBlank() || field.getText().length() > MAXNAMELENGTH || getBadgeComboBox().getValue() == null) {
                     Alert alert = new Alert(Alert.AlertType.WARNING);
                     alert.initOwner(PlayerCustomizer.this.getScene().getWindow()); // Set owner to the PlayerCreatorStage
                     alert.setTitle("Incomplete Information");

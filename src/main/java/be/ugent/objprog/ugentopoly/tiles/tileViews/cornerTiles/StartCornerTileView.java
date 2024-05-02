@@ -1,11 +1,8 @@
 package be.ugent.objprog.ugentopoly.tiles.tileViews.cornerTiles;
 
-import be.ugent.objprog.ugentopoly.parsers.PropertyLoader;
-import be.ugent.objprog.ugentopoly.tiles.tileCards.BasicVerticalCard;
 import be.ugent.objprog.ugentopoly.tiles.TileImageView;
 import be.ugent.objprog.ugentopoly.tiles.tileModels.StartTileModel;
 import javafx.geometry.Pos;
-import javafx.scene.image.Image;
 
 public class StartCornerTileView extends CornerTileView {
 

@@ -32,7 +32,7 @@ public class BalanceChart extends Application {
         // Adding data to chart
         for (Map.Entry<PlayerModel, List<Integer>> entry : playerBalances.entrySet()) {
             XYChart.Series<Number, Number> series = new XYChart.Series<>();
-            series.setName(entry.getKey().getName()); // Assuming PlayerModel has a getName method
+            series.setName(entry.getKey().name()); // Assuming PlayerModel has a getName method
             List<Integer> balances = entry.getValue();
             for (int i = 0; i < balances.size(); i++) {
                 series.getData().add(new XYChart.Data<>(i, balances.get(i)));
@@ -46,7 +46,7 @@ public class BalanceChart extends Application {
         stage.show();
     }
 
-    private Map<PlayerModel, List<Integer>> getPlayerBalances() {
+    private static Map<PlayerModel, List<Integer>> getPlayerBalances() {
         // Mock function to represent fetching of data
         Map<PlayerModel, List<Integer>> balances = new HashMap<>();
         PlayerModel alice = new PlayerModel("Alice");
@@ -63,14 +63,5 @@ public class BalanceChart extends Application {
     }
 }
 
-class PlayerModel {
-    private String name;
-
-    public PlayerModel(String name) {
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
-    }
+record PlayerModel(String name) {
 }

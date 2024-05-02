@@ -3,6 +3,8 @@ package be.ugent.objprog.ugentopoly.tiles.tileModels;
 import be.ugent.objprog.ugentopoly.GameModel;
 import be.ugent.objprog.ugentopoly.players.PlayerModel;
 import be.ugent.objprog.ugentopoly.tiles.TilePurchaseAlert;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
 
 import java.util.function.Consumer;
@@ -11,6 +13,7 @@ public class BuyableModel extends TileModel {
 
     protected PlayerModel owner = null;
     protected final int cost;
+    protected StringProperty ownerName = new SimpleStringProperty(this, "owner", "<geen eigenaar>");
 
     protected BuyableModel(String tileID, int tilePosition, int cost) {
         super(tileID, tilePosition);
@@ -28,6 +31,10 @@ public class BuyableModel extends TileModel {
 
     public int getCost() {
         return cost;
+    }
+
+    public StringProperty ownerProperty() {
+        return ownerName;
     }
 
     @Override
@@ -54,6 +61,7 @@ public class BuyableModel extends TileModel {
                     currentPlayer.changeBalance(-cost);
                     currentPlayer.addBuyable(this);
                     setOwner(currentPlayer);
+                    ownerName.set(currentPlayerName);
                     gameModel.addLog(currentPlayerName, "kocht " + name + " voor €"+ cost + "!");
                 } else {
                     gameModel.addLog(currentPlayerName, "kocht " + name +  " niet.");

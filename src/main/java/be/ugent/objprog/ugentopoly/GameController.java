@@ -6,7 +6,6 @@ import be.ugent.objprog.ugentopoly.tiles.tileModels.TileModel;
 import javafx.stage.Stage;
 
 import java.util.List;
-import java.util.function.Consumer;
 
 /*
 NON-URGENT write class documentation
