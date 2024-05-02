@@ -8,19 +8,17 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 
 public class StreetTileView extends SmallTileView {
 
-    private static final int STRIP_WIDTH = 30;
+    private static final int COLORSTRIP_WIDTH = 30;
 
     public StreetTileView(StreetTileModel model) {
         super(model);
 
         Label label = new Label(model.getName());
         label.setAlignment(Pos.CENTER);
-        label.setFont(Font.font("Arial", FontWeight.BOLD, 11));
+        label.getStyleClass().add("bold-label-street");
         label.setWrapText(true);
 
         StackPane pane = new StackPane(label);
@@ -30,7 +28,7 @@ public class StreetTileView extends SmallTileView {
         Rectangle rectangle = new Rectangle();
         rectangle.setFill(Paint.valueOf(model.getColor()));
         rectangle.setHeight(SHORT_SIDE);
-        rectangle.setWidth(STRIP_WIDTH);
+        rectangle.setWidth(COLORSTRIP_WIDTH);
         setAlignment(rectangle, Pos.CENTER_RIGHT);
 
         HBox.setHgrow(pane, Priority.ALWAYS);
@@ -38,5 +36,4 @@ public class StreetTileView extends SmallTileView {
         HBox hbox = new HBox(pane, rectangle);
         getChildren().addAll(hbox, badgeHolders, tileButton);
     }
-
 }
