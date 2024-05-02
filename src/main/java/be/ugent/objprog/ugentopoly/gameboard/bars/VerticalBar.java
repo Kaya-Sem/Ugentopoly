@@ -17,6 +17,7 @@ import javafx.scene.layout.RowConstraints;
 public class VerticalBar extends GridPane implements Bar {
     private static final double ROW_HEIGHT = TileView.SHORT_SIDE;
     private final List<? extends TileView> tiles;
+    private static final int TILESLOTS = 9;
 
     public VerticalBar(List<TileView> tileViews) {
         tiles = tileViews;
@@ -44,7 +45,7 @@ public class VerticalBar extends GridPane implements Bar {
     }
 
     public void populate() {
-        IntStream.range(0, BoardModel.getSmallTilesInBar()).forEach(i -> add(tiles.get(i), 0, i));
+        IntStream.range(0, TILESLOTS).forEach(i -> add(tiles.get(i), 0, i));
     }
 
     public void applyRotation(int angle) {

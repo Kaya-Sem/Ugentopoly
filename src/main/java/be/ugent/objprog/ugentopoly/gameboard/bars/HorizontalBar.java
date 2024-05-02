@@ -18,11 +18,7 @@ public class HorizontalBar extends GridPane implements Bar {
     private static final double COL_WIDTH = TileView.SHORT_SIDE;
     private static final double OFFSET = 14.5;
     private final List<? extends TileView> tiles;
-
-    public HorizontalBar(List<TileView> tileViews) {
-        tiles = tileViews;
-        applyDefaults();
-    }
+    private static final int TILESLOTS = 9;
 
     public HorizontalBar(List<TileView> tileViews, int direction) {
         tiles = tileViews;
@@ -45,7 +41,7 @@ public class HorizontalBar extends GridPane implements Bar {
     }
 
     public void populate() {
-        IntStream.range(0, BoardModel.getSmallTilesInBar()).forEach(i -> add(tiles.get(i), i, 0));
+        IntStream.range(0, TILESLOTS).forEach(i -> add(tiles.get(i), i, 0));
     }
 
     public void applyRotation(int angle) {
