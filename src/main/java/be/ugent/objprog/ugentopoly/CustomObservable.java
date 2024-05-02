@@ -7,9 +7,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class CustomObservable implements Observable {
+public abstract class CustomObservable implements Observable {
 
-    // prevent instatiation. Abstract would not make any sense because it has no have no abstract methods. TODO
     protected CustomObservable(){}
 
     protected final List<InvalidationListener> listenerList = new ArrayList<>();
@@ -21,13 +20,7 @@ public class CustomObservable implements Observable {
     }
 
     protected void fireInvalidationEvent() {
-        listenerList.forEach(listener -> {
-            try {
-                listener.invalidated(this);
-            } catch (RuntimeException e) {
-                e.printStackTrace();
-            }
-        });
+        listenerList.forEach(listener -> listener.invalidated(this));
     }
 
     public List<InvalidationListener> getListenerList() {
