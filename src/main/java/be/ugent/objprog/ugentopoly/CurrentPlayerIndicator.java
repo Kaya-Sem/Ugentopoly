@@ -37,8 +37,7 @@ public class CurrentPlayerIndicator extends VBox implements InvalidationListener
         balance.set(String.valueOf(currentPlayer.getBalance()));
 
         Label text = new Label("Now Playing:");
-//        text.getStylesheets().add("medium-title"); TODO cannot load stylesheets?
-        text.setFont(Font.font("Arial", FontWeight.MEDIUM, 12.0));
+        text.getStyleClass().add("normal-label-medium");
 
         PlayerInfo playerInfo = new PlayerInfo();
 
@@ -57,7 +56,7 @@ public class CurrentPlayerIndicator extends VBox implements InvalidationListener
             Label playerNameLabel = new Label();
             playerNameLabel.textProperty().bind(playerName);
             playerNameLabel.setAlignment(Pos.CENTER);
-            playerNameLabel.setFont(Font.font("Arial", FontWeight.BOLD, 20.0));
+            playerNameLabel.setFont(Font.font("Arial", FontWeight.BOLD, 20.0)); // TODO
 
             Label balanceLabel = new Label();
             balanceLabel.textProperty().bind(Bindings.createStringBinding(
@@ -65,7 +64,7 @@ public class CurrentPlayerIndicator extends VBox implements InvalidationListener
                     balance
             ));
 
-            balanceLabel.setFont(Font.font("Consolas", FontWeight.THIN, 12.0));
+            balanceLabel.setFont(Font.font("Consolas", FontWeight.THIN, 12.0)); // TODO
 
             VBox vBox = new VBox(playerNameLabel, balanceLabel );
             vBox.setAlignment(Pos.CENTER);

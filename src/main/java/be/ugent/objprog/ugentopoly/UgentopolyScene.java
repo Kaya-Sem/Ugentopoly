@@ -1,5 +1,6 @@
 package be.ugent.objprog.ugentopoly;
 
+import be.ugent.objprog.ugentopoly.charting.ChartStage;
 import be.ugent.objprog.ugentopoly.factories.GameCardFactory;
 import be.ugent.objprog.ugentopoly.factories.TileFactory;
 import be.ugent.objprog.ugentopoly.gameboard.Board;
@@ -14,6 +15,7 @@ import be.ugent.objprog.ugentopoly.tiles.InitializedTilesObject;
 import be.ugent.objprog.ugentopoly.tiles.TileInitializer;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -47,13 +49,22 @@ public class UgentopolyScene extends Scene {
         GameController gameController = new GameController(stage, gameModel);
         gameModel.setGameController(gameController);
 
+        PlayerTabPane playerTabPane = new PlayerTabPane(gameModel.getPlayerModels());
+
+        // Charting
+        Button chartButton = new Button("Toon balansgrafiek");
+        chartButton.setOnAction(event -> {
+            ChartStage chartStage = new ChartStage(stage, playerModelList);
+            chartStage.show();
+        });
+
         VBox verticalComponents = new VBox();
         verticalComponents.setSpacing(10);
         verticalComponents.setAlignment(Pos.CENTER);
-        PlayerTabPane playerTabPane = new PlayerTabPane(gameModel.getPlayerModels());
 
         verticalComponents.getChildren().addAll(
                 new CurrentPlayerIndicator(gameModel),
+                chartButton,
                 playerTabPane,
                 new LogListView(gameModel.getLogs()),
                 gameController.getDiceRoller());

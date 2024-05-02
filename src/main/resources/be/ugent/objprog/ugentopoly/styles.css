@@ -39,6 +39,12 @@
     -fx-font-size: 10pt;
 }
 
+.normal-label-medium {
+    -fx-font-family: "Arial";
+    -fx-font-weight: normal;
+    -fx-font-size: 10pt;
+}
+
 .bold-label-large {
     -fx-font-family: "Arial";
     -fx-font-weight: bold;
