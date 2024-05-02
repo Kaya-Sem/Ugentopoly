@@ -7,6 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * The GameCardInitializer class initializes and manages card decks for chance and chest cards.
+ * dependency injection to incorporate an XMLParser and a GameCardFactory -> loose coupling and enhanced testability.
+ * a factory pattern to abstract and manage the creation of GameCard objects from parsed XML data,
+ * ensuring flexibility and modularity in card creation and initialization processes.
+ */
+
 public class GameCardInitializer {
 
     private final CardDeck chanceCards;
