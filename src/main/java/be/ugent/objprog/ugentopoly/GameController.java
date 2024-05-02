@@ -110,7 +110,9 @@ public class GameController {
         PlayerModel freePlayer = gameModel.getCurrentPlayer();
         freePlayer.setInJail(false);
         gameModel.addLog(freePlayer.getName(), "gooide een dubbel en ontsnapt uit de Overpoort!");
-        moveCurrentPlayerToPosition(gameModel.getCurrentPlayer().getPosition() + moves);
+        int position = freePlayer.getPosition() + moves;
+        moveCurrentPlayerToPosition(position);
+        gameModel.getTileModels()[position].executePlayerTileInteraction(gameModel);
     }
 
     public void moveCurrentPlayerToJail() {
