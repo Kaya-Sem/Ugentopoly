@@ -1,9 +1,9 @@
-package be.ugent.objprog.ugentopoly.gameBoard;
+package be.ugent.objprog.ugentopoly.gameboard;
 
 import java.util.List;
 
-import be.ugent.objprog.ugentopoly.gameBoard.bars.HorizontalBar;
-import be.ugent.objprog.ugentopoly.gameBoard.bars.VerticalBar;
+import be.ugent.objprog.ugentopoly.gameboard.bars.HorizontalBar;
+import be.ugent.objprog.ugentopoly.gameboard.bars.VerticalBar;
 import be.ugent.objprog.ugentopoly.tiles.InitializedTilesObject;
 import be.ugent.objprog.ugentopoly.tiles.tileViews.TileView;
 import javafx.geometry.Pos;

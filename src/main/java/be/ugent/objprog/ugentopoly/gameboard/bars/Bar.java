@@ -1,4 +1,4 @@
-package be.ugent.objprog.ugentopoly.gameBoard.bars;
+package be.ugent.objprog.ugentopoly.gameboard.bars;
 
 public interface Bar {
     void populate();

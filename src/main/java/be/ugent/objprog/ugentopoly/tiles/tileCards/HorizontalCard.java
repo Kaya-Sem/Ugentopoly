@@ -1,6 +1,6 @@
 package be.ugent.objprog.ugentopoly.tiles.tileCards;
 
-import be.ugent.objprog.ugentopoly.gameBoard.BoardModel;
+import be.ugent.objprog.ugentopoly.gameboard.BoardModel;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.Background;
 import javafx.scene.paint.Color;

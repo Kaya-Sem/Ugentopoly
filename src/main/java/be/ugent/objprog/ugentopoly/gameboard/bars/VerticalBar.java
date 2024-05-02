@@ -1,9 +1,9 @@
-package be.ugent.objprog.ugentopoly.gameBoard.bars;
+package be.ugent.objprog.ugentopoly.gameboard.bars;
 
 import java.util.List;
 import java.util.stream.IntStream;
 
-import be.ugent.objprog.ugentopoly.gameBoard.BoardModel;
+import be.ugent.objprog.ugentopoly.gameboard.BoardModel;
 import be.ugent.objprog.ugentopoly.tiles.tileViews.TileView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;

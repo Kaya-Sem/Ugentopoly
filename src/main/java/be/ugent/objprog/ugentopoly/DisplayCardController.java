@@ -1,6 +1,6 @@
 package be.ugent.objprog.ugentopoly;
 
-import be.ugent.objprog.ugentopoly.gameBoard.BoardModel;
+import be.ugent.objprog.ugentopoly.gameboard.BoardModel;
 import be.ugent.objprog.ugentopoly.tiles.tileCards.TemplateCard;
 
 public class DisplayCardController {

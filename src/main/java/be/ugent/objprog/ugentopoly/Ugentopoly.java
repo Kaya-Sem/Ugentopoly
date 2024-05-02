@@ -2,8 +2,8 @@ package be.ugent.objprog.ugentopoly;
 
 import java.util.List;
 
-import be.ugent.objprog.ugentopoly.gameBoard.Board;
-import be.ugent.objprog.ugentopoly.gameBoard.BoardModel;
+import be.ugent.objprog.ugentopoly.gameboard.Board;
+import be.ugent.objprog.ugentopoly.gameboard.BoardModel;
 import be.ugent.objprog.ugentopoly.logs.LogListView;
 import be.ugent.objprog.ugentopoly.parsers.XMLParser;
 import be.ugent.objprog.ugentopoly.players.PlayerCreatorStage;

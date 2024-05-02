@@ -1,4 +1,4 @@
-package be.ugent.objprog.ugentopoly.gameBoard;
+package be.ugent.objprog.ugentopoly.gameboard;
 
 import be.ugent.objprog.ugentopoly.CustomObservable;
 import be.ugent.objprog.ugentopoly.tiles.tileCards.TemplateCard;

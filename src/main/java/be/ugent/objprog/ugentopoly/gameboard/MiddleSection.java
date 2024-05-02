@@ -1,4 +1,4 @@
-package be.ugent.objprog.ugentopoly.gameBoard;
+package be.ugent.objprog.ugentopoly.gameboard;
 
 import be.ugent.objprog.ugentopoly.CustomImage;
 import be.ugent.objprog.ugentopoly.CustomImageView;

@@ -1,7 +1,7 @@
 package be.ugent.objprog.ugentopoly.tiles.tileViews;
 
 import be.ugent.objprog.ugentopoly.DisplayCardController;
-import be.ugent.objprog.ugentopoly.gameBoard.BoardModel;
+import be.ugent.objprog.ugentopoly.gameboard.BoardModel;
 import be.ugent.objprog.ugentopoly.tiles.PionHolder;
 import be.ugent.objprog.ugentopoly.tiles.TileButton;
 import be.ugent.objprog.ugentopoly.tiles.tileModels.TileModel;
