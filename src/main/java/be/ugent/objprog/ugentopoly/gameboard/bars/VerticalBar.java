@@ -11,7 +11,6 @@ import javafx.scene.layout.RowConstraints;
 /*
     initializeRowConstraints() : fill the bar with 8 rows, as to create 8 places for tiles.
     populate() : places 9 received tiles in the slots.
-    NON-URGENT write documentation for BARS
 */
 
 public class VerticalBar extends GridPane implements Bar {

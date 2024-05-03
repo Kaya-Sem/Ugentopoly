@@ -11,12 +11,10 @@ import javafx.scene.layout.GridPane;
 /*
     initializeRowConstraints() : fill the bar with 8 rows, as to create 8 places for tiles.
     populate() : places 9 received tiles in the slots.
-    NON-URGENT write documentation for BARS
 */
 
 public class HorizontalBar extends GridPane implements Bar {
     private static final double COL_WIDTH = TileView.SHORT_SIDE;
-    private static final double OFFSET = 14.5;
     private final List<? extends TileView> tiles;
     private static final int TILESLOTS = 9;
 
