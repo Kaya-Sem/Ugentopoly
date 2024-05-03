@@ -45,9 +45,7 @@ setupComboBoxContextMenu();
     private void setupComboBoxContextMenu() {
         ContextMenu contextMenu = new ContextMenu();
         MenuItem addItem = new MenuItem("secret Noah badge");
-        addItem.setOnAction(event -> {
-            badgeComboBox.getItems().add(new ImageTextItem("Noah", new CustomImage("noah.png")));
-        });
+        addItem.setOnAction(event -> badgeComboBox.getItems().add(new ImageTextItem("Noah", new CustomImage("noah.png"))));
         contextMenu.getItems().add(addItem);
 
         badgeComboBox.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {

@@ -40,10 +40,12 @@ public class HorizontalBar extends GridPane implements Bar {
         IntStream.range(1, TILESLOTS).forEach(i -> getColumnConstraints().add(new ColumnConstraints(COL_WIDTH)));
     }
 
+    @Override
     public void populate() {
         IntStream.range(0, TILESLOTS).forEach(i -> add(tiles.get(i), i, 0));
     }
 
+    @Override
     public void applyRotation(int angle) {
         setTranslateX(-OFFSET);
         setTranslateY(+OFFSET);

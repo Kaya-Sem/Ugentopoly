@@ -13,7 +13,7 @@ public class BuyableModel extends TileModel {
 
     protected PlayerModel owner = null;
     protected final int cost;
-    protected StringProperty ownerName = new SimpleStringProperty(this, "owner", "<geen eigenaar>");
+    protected final StringProperty ownerName = new SimpleStringProperty(this, "owner", "<geen eigenaar>");
 
     protected BuyableModel(String tileID, int tilePosition, int cost) {
         super(tileID, tilePosition);

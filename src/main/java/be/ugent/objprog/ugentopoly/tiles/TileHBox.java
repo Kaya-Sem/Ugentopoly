@@ -25,8 +25,8 @@ public class TileHBox extends HBox {
         setSpacing(SPACING);
     }
 
-    public TileHBox(Node... nodes) {
-        super(nodes);
+    public TileHBox(Node... children) {
+        super(children);
         applySettings();
     }
 }

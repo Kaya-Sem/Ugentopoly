@@ -44,10 +44,12 @@ public class VerticalBar extends GridPane implements Bar {
         IntStream.range(1, TILESLOTS).forEach(i -> getRowConstraints().add(new RowConstraints(ROW_HEIGHT)));
     }
 
+    @Override
     public void populate() {
         IntStream.range(0, TILESLOTS).forEach(i -> add(tiles.get(i), 0, i));
     }
 
+    @Override
     public void applyRotation(int angle) {
         tiles.forEach(tile -> tile.applyRotation(angle));
     }

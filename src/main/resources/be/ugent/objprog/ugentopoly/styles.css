@@ -1,21 +1,26 @@
 
+/*noinspection CssUnusedSymbol*/
 .toggle-button:selected {
     -fx-border-width: 1px 2px 1px 2px; /* top right bottom left */
 }
 
+/*noinspection CssUnusedSymbol*/
 .toggle-button:hover {
     -fx-border-width: 1px 2px 1px 2px; /* top right bottom left */
 }
 
+/*noinspection CssUnusedSymbol*/
 .toggle-button:hover:armed {
     -fx-border-width: 2px 3px 2px 3px; /* top right bottom left */
 }
 
+/*noinspection CssUnusedSymbol*/
 .toggle-button {
     -fx-border-color: black;
     -fx-border-width: 1px 1px 1px 1px; /* top right bottom left */
 }
 
+/*noinspection CssUnusedSymbol*/
 .medium-title {
     -fx-font-family: "SansSerif";
     -fx-font-size: 20px;
@@ -23,40 +28,47 @@
     -fx-text-fill: black;
 }
 
+/*noinspection CssUnusedSymbol*/
 .list-view {
     -fx-background-color: #f0f0f0;
     -fx-border-color: #333;
     -fx-border-width: 0px;
 }
 
+/*noinspection CssUnusedSymbol*/
 .list-cell {
     -fx-background-color: transparent;
 }
 
+/*noinspection CssUnusedSymbol*/
 .bold-label-medium {
     -fx-font-family: "Arial";
     -fx-font-weight: bold;
     -fx-font-size: 10pt;
 }
 
+/*noinspection CssUnusedSymbol*/
 .normal-label-medium {
     -fx-font-family: "Arial";
     -fx-font-weight: normal;
     -fx-font-size: 10pt;
 }
 
+/*noinspection CssUnusedSymbol*/
 .bold-label-large {
     -fx-font-family: "Arial";
     -fx-font-weight: bold;
     -fx-font-size: 15pt;
 }
 
+/*noinspection CssUnusedSymbol*/
 .bold-label-superlarge {
     -fx-font-family: "Arial";
     -fx-font-weight: bold;
     -fx-font-size: 15pt;
 }
 
+/*noinspection CssUnusedSymbol*/
 .owner-label{
     -fx-font-family: "Arial";
     -fx-font-weight: bold;
@@ -64,6 +76,7 @@
     -fx-text-fill: darkblue;
 }
 
+/*noinspection CssUnusedSymbol*/
 .thin-label-medium {
     -fx-font-family: "Arial";
     -fx-font-weight: lighter;

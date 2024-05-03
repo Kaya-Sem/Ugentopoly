@@ -15,6 +15,7 @@ public class BasicVerticalCard extends VerticalCard {
 
         Label textLabel = new Label(text);
         textLabel.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+        textLabel.getStyleClass().add("bold-label-large");
 
         ImageView imageView = new ImageView(image);
         imageView.setPreserveRatio(true);

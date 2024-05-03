@@ -5,17 +5,16 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class TileImageView extends ImageView {
+    private static final double SIZE = TileView.SHORT_SIDE / 1.5;
 
-    // Standard constructor, default scalar
     public TileImageView(Image image){
         super(image);
 
-        setFitHeight(TileView.SHORT_SIDE / 1.5);
-        setFitWidth(TileView.SHORT_SIDE / 1.5);
+        setFitHeight(SIZE);
+        setFitWidth(SIZE);
         setPreserveRatio(true);
     }
 
-    // Secondary constructor
     public TileImageView(Image image, Double scalar, boolean isCorner){
         super(image);
 

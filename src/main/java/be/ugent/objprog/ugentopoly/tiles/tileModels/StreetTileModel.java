@@ -4,8 +4,6 @@ import be.ugent.objprog.ugentopoly.GameModel;
 import be.ugent.objprog.ugentopoly.players.PlayerModel;
 import be.ugent.objprog.ugentopoly.tiles.tileCards.StreetCard;
 import be.ugent.objprog.ugentopoly.tiles.tileinterface.ColorTile;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 
 import java.util.Arrays;
 import java.util.function.Consumer;
