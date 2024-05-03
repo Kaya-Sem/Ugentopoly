@@ -12,6 +12,14 @@ import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
+/**
+ * GameCardFactory utilizes a Map<String, String> to receive tile data, enhancing modularity and abstraction.
+ * This design choice allows the factory to be agnostic of the data source, ensuring easy integration
+ * and future modifications where the source of data might change (for example from XML to JSON or a database). Using a map
+ * as the intermediary data format simplifies the interaction between data parsing and tile creation, maintaining clear
+ * separation of concerns and improving the adaptability of the codebase.
+ */
+
 public class GameCardFactory<T> {
     private final Map<String, Function<Map<String, String>, Consumer<GameModel>>> actionMap;
     private static final int TILES = 40;
