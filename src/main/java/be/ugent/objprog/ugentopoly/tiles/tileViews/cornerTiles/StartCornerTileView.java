@@ -6,15 +6,18 @@ import javafx.geometry.Pos;
 
 public class StartCornerTileView extends CornerTileView {
 
+    protected static final double SCALAR = 1.5;
+    protected static final int ROTATION = 90;
+    protected static final int XTRANSLATE = -20;
+
     public StartCornerTileView(StartTileModel model) {
         super(model);
 
-        // TODO
-        TileImageView arrowImageView = new TileImageView(model.getArrowImage(), 1.5, true);
+        TileImageView arrowImageView = new TileImageView(model.getArrowImage(), SCALAR, true);
         TileImageView startImageView = new TileImageView(model.getImage(), 1.0, true);
 
-        arrowImageView.setTranslateX(-20);
-        arrowImageView.setRotate(90);
+        arrowImageView.setTranslateX(XTRANSLATE);
+        arrowImageView.setRotate(ROTATION);
 
         setAlignment(arrowImageView, Pos.CENTER_LEFT);
 

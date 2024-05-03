@@ -12,7 +12,7 @@ import javafx.scene.shape.Rectangle;
 public class VerticalCard extends TemplateCard {
     public static final Double HEIGHT = BoardModel.MIDDLE_AREA_SIZE / 2;
     public static final Double WIDTH = BoardModel.MIDDLE_AREA_SIZE / 3;
-
+    protected static final int ARC = 20;
 
     public VerticalCard() {
         setMinHeight(HEIGHT);
@@ -25,15 +25,15 @@ public class VerticalCard extends TemplateCard {
         border.setStroke(Color.BLACK);
         border.setStrokeWidth(3);
         border.setFill(Color.WHITE);
-        border.setArcHeight(20);
-        border.setArcWidth(20);
+        border.setArcHeight(ARC);
+        border.setArcWidth(ARC);
 
         // Apply drop shadow effect to the rectangle
         DropShadow dropShadow = new DropShadow();
         dropShadow.setRadius(10);
         dropShadow.setOffsetX(-5);
         dropShadow.setOffsetY(5);
-        dropShadow.setColor(Color.DIMGREY); // Set the color of the drop shadow
+        dropShadow.setColor(Color.DIMGREY);
         border.setEffect(dropShadow);
 
         // TODO i think this is unneeded

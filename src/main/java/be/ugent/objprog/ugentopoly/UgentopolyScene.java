@@ -27,6 +27,7 @@ import java.util.List;
 public class UgentopolyScene extends Scene {
 
     public static final double BOARD_SIZE = 845.0;
+    protected static final double SPACING = 20.0;
 
     public UgentopolyScene(List<PlayerModel> playerModelList, XMLParser parser, Stage stage) {
         super(new StackPane(), BOARD_SIZE, BOARD_SIZE);
@@ -71,7 +72,7 @@ public class UgentopolyScene extends Scene {
                 gameController.getDiceRoller());
 
         HBox horizontalLayout = new HBox();
-        horizontalLayout.setSpacing(20); // TODO
+        horizontalLayout.setSpacing(SPACING);
         horizontalLayout.setAlignment(Pos.CENTER);
 
         horizontalLayout.getChildren().addAll(

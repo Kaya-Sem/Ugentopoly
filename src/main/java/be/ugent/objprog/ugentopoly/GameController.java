@@ -33,7 +33,7 @@ public class GameController {
         int moves = diceRoller.getMostRecentRoll();
         PlayerModel currentPlayer = gameModel.getCurrentPlayer();
 
-        int finalDestination = currentPlayer.getPosition();
+        int finalDestination = currentPlayer.getPosition() + moves;
 
         TileModel[] tileModels = gameModel.getTileModels();
 

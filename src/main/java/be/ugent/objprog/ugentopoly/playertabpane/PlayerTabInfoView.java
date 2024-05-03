@@ -12,10 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.beans.binding.Bindings;
-
 
 public class PlayerTabInfoView extends VBox implements InvalidationListener {
 
@@ -48,7 +45,7 @@ public class PlayerTabInfoView extends VBox implements InvalidationListener {
 
     private Label getPlayerNameLabel() {
         Label playerName = new Label(playerModel.getName());
-        playerName.setFont(Font.font("Arial", FontWeight.BOLD, 17)); // TODO
+        playerName.getStyleClass().add("bold-label-large");
         playerName.setAlignment(Pos.CENTER);
         return playerName;
     }

@@ -6,8 +6,6 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 
 public class TaxCard extends VerticalCard {
     public TaxCard(Image image, String text, String cost){
@@ -20,10 +18,10 @@ public class TaxCard extends VerticalCard {
         imageView.setFitWidth(TileView.LONG_SIDE);
 
         Label textLabel = new Label(text);
-        textLabel.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+        textLabel.getStyleClass().add("bold-label-large");
 
         Label costLabel = new Label(cost + "€");
-        costLabel.setFont(Font.font("Arial", FontWeight.THIN, 12));
+        costLabel.getStyleClass().add("thin-label-medium");
 
         vBox.getChildren().addAll(imageView, textLabel, costLabel);
         getChildren().addAll(vBox);

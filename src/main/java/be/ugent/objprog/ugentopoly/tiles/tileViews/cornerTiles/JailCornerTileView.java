@@ -11,6 +11,8 @@ import javafx.scene.text.FontWeight;
 
 public class JailCornerTileView extends CornerTileView {
     protected static final int ROTATIONANGLE = 135; // TODO extract to connertile?
+    protected static final double SCALAR = 1.5;
+    private static final double SIZE = LONG_SIDE - 30;
 
     public JailCornerTileView(JailTileModel model){
         super(model);
@@ -20,11 +22,11 @@ public class JailCornerTileView extends CornerTileView {
         Label textLabel = new Label(PropertyLoader.getLabel(getModel().getId()));
         textLabel.setFont(Font.font("Arial", FontWeight.BOLD, 10));
 
-        TileImageView tileImageView= new TileImageView(model.getImage(), 1.5, true);
+        TileImageView tileImageView= new TileImageView(model.getImage(), SCALAR, true);
 
         vBox.getChildren().addAll(tileImageView, textLabel);
-        vBox.setMaxHeight(LONG_SIDE - 30);
-        vBox.setMaxWidth(LONG_SIDE - 30);
+        vBox.setMaxHeight(SIZE);
+        vBox.setMaxWidth(SIZE);
         vBox.setAlignment(Pos.CENTER);
         vBox.setRotate(ROTATIONANGLE);
 

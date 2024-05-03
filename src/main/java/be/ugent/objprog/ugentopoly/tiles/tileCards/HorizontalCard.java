@@ -10,6 +10,7 @@ public class HorizontalCard extends TemplateCard {
 
     public static final Double WIDTH = BoardModel.MIDDLE_AREA_SIZE / 2;
     public static final Double HEIGHT = BoardModel.MIDDLE_AREA_SIZE / 3;
+    protected static final int ARC = 20;
 
     public HorizontalCard() {
         setMinHeight(HEIGHT);
@@ -22,8 +23,8 @@ public class HorizontalCard extends TemplateCard {
         border.setStroke(Color.BLACK);
         border.setStrokeWidth(3);
         border.setFill(Color.WHITE);
-        border.setArcHeight(20);
-        border.setArcWidth(20);
+        border.setArcHeight(ARC);
+        border.setArcWidth(ARC);
 
         DropShadow dropShadow = new DropShadow();
         dropShadow.setRadius(10);

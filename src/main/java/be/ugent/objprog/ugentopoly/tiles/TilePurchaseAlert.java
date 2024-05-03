@@ -6,11 +6,10 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 
 public class TilePurchaseAlert extends Alert {
 
+    protected static final int SPACING = 20;
     @SuppressWarnings("FieldCanBeLocal")
     private final ButtonType buttonNo = new ButtonType("No");
     private final ButtonType buttonYes = new ButtonType("BUY");
@@ -21,12 +20,12 @@ public class TilePurchaseAlert extends Alert {
         setGraphic(null);
         setHeaderText(null);
 
-        VBox contentLayout = new VBox(20);
-        contentLayout.setPadding(new Insets(20, 10, 10, 10));
+        VBox contentLayout = new VBox(SPACING);
+        contentLayout.setPadding(new Insets(SPACING, 10, 10, 10));
 
         Label contentLabel = new Label("Wilt u " + header + " kopen voor €" + cost + "?"  );
 
-        contentLabel.setFont(Font.font("Arial", FontWeight.BOLD, 14.0));
+        contentLabel.getStyleClass().add("bold-label-large");
 
         contentLayout.getChildren().addAll(card, contentLabel);
 
@@ -35,7 +34,7 @@ public class TilePurchaseAlert extends Alert {
         getButtonTypes().setAll(buttonNo, buttonYes);
     }
 
-    // Show the alert and await user response, returning true if they chose "BUY"
+    // Show the alert and await user response, returning true if they choose "BUY"
     public boolean wasBought() {
         return showAndWait().filter(response -> response == buttonYes).isPresent();
     }

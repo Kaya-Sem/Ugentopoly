@@ -10,7 +10,6 @@ public class LogListView extends ListView {
         super(logs);
         setSelectionModel(null);
         logs.addListener(this::onChanged);
-        setMinWidth(200);
     }
 
     // Always scroll down to the most recently added element, so the user does not have to scroll manually.

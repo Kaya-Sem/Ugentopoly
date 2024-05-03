@@ -6,15 +6,12 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 
 public class BasicVerticalCard extends VerticalCard {
 
     public BasicVerticalCard(Image image, String text) {
 
         Label textLabel = new Label(text);
-        textLabel.setFont(Font.font("Arial", FontWeight.BOLD, 14));
         textLabel.getStyleClass().add("bold-label-large");
 
         ImageView imageView = new ImageView(image);
