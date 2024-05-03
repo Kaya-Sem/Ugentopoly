@@ -47,8 +47,6 @@ public class HorizontalBar extends GridPane implements Bar {
 
     @Override
     public void applyRotation(int angle) {
-        //setTranslateX(-OFFSET);
-        //setTranslateY(+OFFSET);
         tiles.forEach(tile -> tile.applyRotation(angle));
     }
 
