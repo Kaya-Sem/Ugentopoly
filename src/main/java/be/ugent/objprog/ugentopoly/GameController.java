@@ -8,8 +8,9 @@ import be.ugent.objprog.ugentopoly.tiles.tileModels.TileModel;
 import java.util.List;
 
 /*
-NON-URGENT write class documentation
 Functions as the controller for GameModel, so performs all the updates for it
+It can act out moves, decide how a player should behave when they are for example, in jail, and
+has the methods and flow to update player positions and carry out tile interactions
  */
 
 public class GameController {
@@ -33,12 +34,11 @@ public class GameController {
         int moves = diceRoller.getMostRecentRoll();
         PlayerModel currentPlayer = gameModel.getCurrentPlayer();
 
-        int rawPosition = currentPlayer.getPosition() + moves;
-        int finalDestination = rawPosition % 40;
-
         TileModel[] tileModels = gameModel.getTileModels();
-
         int length = tileModels.length;
+
+        int rawPosition = currentPlayer.getPosition() + moves;
+        int finalDestination = rawPosition % length;
 
         // If a player passes start, but doesn't land on it.
         if (rawPosition >= length && finalDestination != 0) {
@@ -50,6 +50,7 @@ public class GameController {
         moveCurrentPlayerToPosition(finalDestination);
 
         diceRoller.setIsDisabled(Boolean.TRUE);
+        // create a datapoint for the chart
         gameModel.getPlayerModels().forEach(PlayerModel::updateBalanceHistory);
         nextPlayer();
     }
@@ -73,7 +74,6 @@ public class GameController {
                     gameModel.getChanceCardDeck().addCard(jailCard);
                 }
                 gameModel.addLog(playerModel.getName(), "gebruikt een get-out-of-jail kaart\nen geraakt thuis van de Overpoort");
-
             }
         }
     }
