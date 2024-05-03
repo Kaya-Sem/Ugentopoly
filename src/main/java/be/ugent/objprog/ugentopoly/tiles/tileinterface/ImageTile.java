@@ -1,7 +1,8 @@
 package be.ugent.objprog.ugentopoly.tiles.tileinterface;
 
-import be.ugent.objprog.ugentopoly.CustomImage;
+import javafx.scene.image.Image;
 
+@FunctionalInterface
 public interface ImageTile {
-    CustomImage getImage();
+    Image getImage();
 }

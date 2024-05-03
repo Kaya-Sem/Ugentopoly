@@ -2,6 +2,7 @@ package be.ugent.objprog.ugentopoly.players;
 
 import be.ugent.objprog.ugentopoly.CustomImageView;
 import be.ugent.objprog.ugentopoly.CustomObservable;
+import be.ugent.objprog.ugentopoly.gamecards.GameCard;
 import be.ugent.objprog.ugentopoly.tiles.tileModels.TileModel;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
@@ -19,12 +20,12 @@ public class PlayerModel extends CustomObservable {
     private final Image badgeImage;
     private final String badgeName;
     private boolean inJail = false;
-    private int leaveJailCards = 0;
+    private List<GameCard> leaveJailCards = new ArrayList<>();
     private final String name;
     private int position = 0;
     private final CustomImageView pion;
 
-    // history for balance line chart TODO make observable for real time charting?
+    // History for the balance chart. Could be made observable for live charting.
     private final List<Integer> balanceHistory = new ArrayList<>();
 
     public PlayerModel(String name, int initialBalance, ImageTextItem badgeImage) {
@@ -96,12 +97,17 @@ public class PlayerModel extends CustomObservable {
         fireInvalidationEvent();
     }
 
-    public int getLeaveJailCards() {
+    public List<GameCard> getLeaveJailCards() {
         return leaveJailCards;
     }
 
-    public void changeGetOutOfJailCards(int increment) {
-        leaveJailCards += increment;
+    public void addGetOutOfJailCard(GameCard card) {
+        leaveJailCards.add(card);
+        fireInvalidationEvent();
+    }
+
+    public void setGetOutOfJailCards(List<GameCard> cards) {
+        leaveJailCards = cards;
         fireInvalidationEvent();
     }
 

@@ -11,6 +11,7 @@ import be.ugent.objprog.ugentopoly.logs.LogListView;
 import be.ugent.objprog.ugentopoly.parsers.XMLParser;
 import be.ugent.objprog.ugentopoly.players.PlayerModel;
 import be.ugent.objprog.ugentopoly.playertabpane.PlayerTabPane;
+import be.ugent.objprog.ugentopoly.tiles.DisplayCardController;
 import be.ugent.objprog.ugentopoly.tiles.InitializedTilesObject;
 import be.ugent.objprog.ugentopoly.tiles.TileInitializer;
 import javafx.geometry.Pos;
@@ -46,7 +47,7 @@ public class UgentopolyScene extends Scene {
 
         GameModel gameModel = new GameModel(playerModelList, tilesObject.tileModelArray(), chanceCardDeck, chestCardDeck);
 
-        GameController gameController = new GameController(stage, gameModel);
+        GameController gameController = new GameController(gameModel);
         gameModel.setGameController(gameController);
 
         PlayerTabPane playerTabPane = new PlayerTabPane(gameModel.getPlayerModels());
@@ -70,7 +71,7 @@ public class UgentopolyScene extends Scene {
                 gameController.getDiceRoller());
 
         HBox horizontalLayout = new HBox();
-        horizontalLayout.setSpacing(20);
+        horizontalLayout.setSpacing(20); // TODO
         horizontalLayout.setAlignment(Pos.CENTER);
 
         horizontalLayout.getChildren().addAll(

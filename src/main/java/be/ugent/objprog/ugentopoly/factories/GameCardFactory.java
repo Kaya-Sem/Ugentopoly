@@ -30,7 +30,7 @@ public class GameCardFactory<T> {
         String cardType = tileData.get("type");
         Consumer<GameModel> action = actionMap.get(cardType).apply(tileData);
 
-        GameCard card = new GameCard();
+        GameCard card = new GameCard(cardType);
         card.setCardAction(action);
 
         return card;
@@ -45,7 +45,6 @@ public class GameCardFactory<T> {
 
         return gameModel -> {
                 PlayerModel player = gameModel.getCurrentPlayer();
-                player.changeGetOutOfJailCards(1);
             GameCardAlert alert = new GameCardAlert(alertMessage);
             alert.showAndWait();
             gameModel.addLog(player.getName(), "kreeg een get out of jail kaart");
@@ -54,10 +53,8 @@ public class GameCardFactory<T> {
 
     private static Consumer<GameModel> move(Map<String, String> data) {
         String message = getAlertMessage(data.get("id"));
-
         int newPosition = Integer.parseInt(data.get("position"));
         boolean collect = Boolean.parseBoolean(data.get("collect"));
-
 
         return gameModel -> {
             PlayerModel currentPlayer = gameModel.getCurrentPlayer();
@@ -67,16 +64,13 @@ public class GameCardFactory<T> {
             GameCardAlert alert = new GameCardAlert(message);
             alert.showAndWait();
 
-            gameModel.getGameController().moveCurrentPlayerToPosition(newPosition);
-
             // if it would pass start, call start tile's action
             if (newPosition < currentPlayer.getPosition() && collect) {
                 Consumer<GameModel> action = gameModel.getTileModels()[0].getPlayerTileInteraction();
                 action.accept(gameModel);
             }
 
-            Consumer<GameModel> action = currentTileModel.getPlayerTileInteraction();
-            action.accept(gameModel);
+            gameModel.getGameController().moveCurrentPlayerToPosition(newPosition);
         };
     }
 
@@ -90,21 +84,19 @@ public class GameCardFactory<T> {
 
             GameController controller = gameModel.getGameController();
             PlayerModel currentPlayer = gameModel.getCurrentPlayer();
+            TileModel[] tileModels = gameModel.getTileModels();
+
             // handle negative position situations
             int newPosition = (currentPlayer.getPosition() + relPosition + TILES) % TILES;
 
-            controller.moveCurrentPlayerToPosition(newPosition);
-
-            TileModel currentTile = gameModel.getTileModels()[newPosition];
-
             String message = (relPosition > 0) ?
-                    "zet " + relPosition + " stappen voorwaarts" :
-                    "moest " + Math.abs(relPosition) + " stappen naar achter";
+                    "zet " + relPosition + " stappen voorwaarts\nen beland op " + tileModels[newPosition].getName() :
+                    "moest " + Math.abs(relPosition) + " stappen naar achter\n" +
+                            "om op " + tileModels[newPosition].getName() + " terecht te komen";
 
             gameModel.addLog(currentPlayer.getName(), message);
 
-            Consumer<GameModel> action = currentTile.getPlayerTileInteraction();
-            action.accept(gameModel);
+            controller.moveCurrentPlayerToPosition(newPosition);
         };
     }
 
@@ -119,9 +111,13 @@ public class GameCardFactory<T> {
             PlayerModel currentPlayer = gameModel.getCurrentPlayer();
             currentPlayer.changeBalance(amount);
 
-            String message = (amount > 0) ?
-                    ("kreeg  €" + amount) :
-                    ("moest €" + Math.abs(amount) + " betalen");
+            String message;
+            if (amount > 0) {
+                message = "kreeg  €" + amount;
+            } else {
+                message = "moest €" + Math.abs(amount) + " aan de bonuspot betalen";
+                gameModel.changeBonusPot(amount);
+            }
 
             gameModel.addLog(currentPlayer.getName(), message);
         };

@@ -28,7 +28,7 @@ public class TaxTileModel extends TileModel implements ImageTile {
             gameModel.changeBonusPot(amount);
             PlayerModel currentPlayer = gameModel.getCurrentPlayer();
             currentPlayer.changeBalance(-amount);
-            gameModel.addLog(currentPlayer.getName(), "betaald €" + amount);
+            gameModel.addLog(currentPlayer.getName(), "betaald €" + amount + " aan de bonuspot");
         });
     }
 

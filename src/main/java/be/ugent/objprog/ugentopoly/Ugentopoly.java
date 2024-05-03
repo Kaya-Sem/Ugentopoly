@@ -2,6 +2,7 @@ package be.ugent.objprog.ugentopoly;
 
 import java.util.List;
 
+import be.ugent.objprog.ugentopoly.charting.ChartStage;
 import be.ugent.objprog.ugentopoly.parsers.XMLParser;
 import be.ugent.objprog.ugentopoly.players.PlayerCreatorStage;
 import be.ugent.objprog.ugentopoly.players.PlayerModel;
@@ -11,7 +12,7 @@ import javafx.stage.Stage;
 
 public class Ugentopoly extends Application {
     private static final String APPLICATIONNAME = "Ugentopoly";
-    private static final double WINDOW_WIDTH = 1700.0;
+    private static final double WINDOW_WIDTH = 1700.0; // TODO test on 1080p
     private static final double WINDOW_HEIGHT = 1200.0;
 
     @Override
@@ -20,6 +21,23 @@ public class Ugentopoly extends Application {
         XMLParser parser = new XMLParser();
         PlayerCreatorStage playerCreatorStage = new PlayerCreatorStage(parser.getStartingBalance());
         List<PlayerModel> players = playerCreatorStage.showAndWaitForPlayers();
+
+        // apply gameover condition
+        players.forEach(playerModel -> playerModel.balanceProperty().addListener(
+                (observableValue, oldValue, newValue) -> {
+                    if (newValue.intValue() <= 0) {
+                        players.forEach(PlayerModel::updateBalanceHistory);
+
+                        primaryStage.close();
+
+                        GameOverDialog dialog = new GameOverDialog(playerModel, players);
+                        dialog.show();
+
+                        Stage chartStage = new ChartStage(new Stage(), players);
+                        chartStage.show();
+                    }
+                }
+        ));
 
         Scene ugentopolyScene = new UgentopolyScene(players, parser, primaryStage);
 

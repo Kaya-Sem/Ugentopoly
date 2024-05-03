@@ -65,6 +65,6 @@ public class PlayerTabInfoView extends VBox implements InvalidationListener {
     public void invalidated(Observable observable) {
         playerBalance.set(String.valueOf(playerModel.getBalance()));
         playerPosition.set(String.valueOf(playerModel.getPosition()));
-        playerFreeJailCards.set(String.valueOf(playerModel.getLeaveJailCards()));
+        playerFreeJailCards.set(String.valueOf(playerModel.getLeaveJailCards().size()));
     }
 }

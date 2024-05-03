@@ -62,7 +62,7 @@ public class DiceRoller extends VBox {
         doubleRolledCounter = 0;
         mostRecentRoll = dice1 + dice2;
 
-        controller.nextMove();
+        controller.actMove();
         isDisabled.set(false);
     }
 

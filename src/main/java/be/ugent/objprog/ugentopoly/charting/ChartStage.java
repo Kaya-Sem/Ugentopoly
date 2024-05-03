@@ -18,6 +18,6 @@ public class ChartStage extends Stage {
         BalanceChart balanceChart = new BalanceChart(playerModelList);
         Scene chartScene = new Scene(balanceChart, CHARTSTAGEHEIGHT, CHARTSTAGEWIDTH);
         setScene(chartScene);
-        setTitle("Speler balansgrafiek");
+        setTitle("Balansgrafiek");
     }
 }

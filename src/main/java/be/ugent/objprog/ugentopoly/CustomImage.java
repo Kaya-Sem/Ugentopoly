@@ -5,10 +5,6 @@ import java.io.InputStream;
 
 public class CustomImage extends Image {
 
-    public CustomImage(InputStream is) {
-        super(is);
-    }
-
     public CustomImage(String imageName) {
         super(makeInputStream(imageName));
     }

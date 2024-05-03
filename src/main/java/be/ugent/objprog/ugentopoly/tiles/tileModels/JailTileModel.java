@@ -9,7 +9,6 @@ import java.util.function.Consumer;
 
 public class JailTileModel extends TileModel implements ImageTile {
 
-
     private final CustomImage image = new CustomImage("jail.png");
 
     public JailTileModel(String tileID, int tilePosition) {

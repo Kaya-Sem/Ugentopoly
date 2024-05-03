@@ -12,22 +12,21 @@ import java.util.function.Consumer;
 public class StartTileModel extends TileModel implements ImageTile {
     private final int startAmount;
 
-    private final CustomImage startImage = new CustomImage("start.png");
+    private final CustomImage image = new CustomImage("start.png");
     private final CustomImage arrowImage = new CustomImage("start-arrow.png");
 
     public StartTileModel(String tileID, int tilePosition, int startAmount) {
         super(tileID, tilePosition);
-        setCard(new BasicVerticalCard(startImage, name));
         this.startAmount = startAmount;
+        setCard(new BasicVerticalCard(image, name));
     }
 
     public int getStartAmount() {
         return startAmount;
     }
 
-    public Image getStartImage() {
-        return startImage;
-    }
+    public Image getImage() {return image;}
+
     public Image getArrowImage() {
         return arrowImage;
     }
@@ -36,13 +35,14 @@ public class StartTileModel extends TileModel implements ImageTile {
     public Consumer<GameModel> getPlayerTileInteraction() {
         return ((gameModel) -> {
             PlayerModel currentPlayer = gameModel.getCurrentPlayer();
-            currentPlayer.changeBalance(startAmount);
-            gameModel.addLog(currentPlayer.getName(), "passeert START, en krijgt €" + startAmount + " zakgeld van zijn ouders");
-        });
-    }
+            boolean landedOnStart = currentPlayer.getPosition() == position;
+            int calculatedAmount = (landedOnStart) ? startAmount * 2 : startAmount;
 
-    @Override
-    public CustomImage getImage() {
-        return startImage;
+            currentPlayer.changeBalance(calculatedAmount);
+            gameModel.addLog(currentPlayer.getName(), landedOnStart ?
+                    "land op START en krijgt dus\ndubbel. + " + calculatedAmount + " van zijn ouders!" :
+                    "passeert START, en krijgt €" + calculatedAmount + " zakgeld van zijn ouders"
+                    );
+        });
     }
 }

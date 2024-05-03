@@ -12,12 +12,13 @@ import javafx.scene.text.FontWeight;
 public class FreeParkingCornerTileView extends CornerTileView {
 
     protected static final int VALUE = -135; // TODO extract to parent class
+    protected static final double SCALAR = 1.7;
+    private static final double SIZE = LONG_SIDE - 30;
 
     public FreeParkingCornerTileView(FreeParkingModel model) {
         super(model);
 
-        // TODO
-        TileImageView image = new TileImageView(model.getImage(), 1.7, true);
+        TileImageView image = new TileImageView(model.getImage(), SCALAR, true);
 
         String[] text = PropertyLoader.getLabel(getModel().getId()).split(" ");
         Label textLabel1 = new Label(text[0]);
@@ -27,8 +28,8 @@ public class FreeParkingCornerTileView extends CornerTileView {
         textLabel2.setFont(Font.font("Arial", FontWeight.BOLD, 10));
 
         VBox vBox = new VBox(textLabel1, image, textLabel2);
-        vBox.setMaxWidth(LONG_SIDE - 30);
-        vBox.setMaxHeight(LONG_SIDE - 30);
+        vBox.setMaxWidth(SIZE);
+        vBox.setMaxHeight(SIZE);
         vBox.setAlignment(Pos.CENTER);
         vBox.setRotate(VALUE);
 

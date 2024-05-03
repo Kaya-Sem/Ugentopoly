@@ -10,10 +10,13 @@ public class CardDeck {
         cards = new ArrayDeque<>(initialCards);
     }
 
-    public GameCard getNextCard() {
-        GameCard nextCard = cards.removeFirst();
-        cards.addLast(nextCard);
-        return nextCard;
+    public GameCard getNextCard() {return cards.removeFirst();}
+
+    public void addCard(GameCard card) {
+        cards.addLast(card);
     }
 
+    public int getSize() {
+        return cards.size();
+    }
 }

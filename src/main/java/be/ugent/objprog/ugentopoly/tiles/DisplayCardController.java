@@ -1,4 +1,4 @@
-package be.ugent.objprog.ugentopoly;
+package be.ugent.objprog.ugentopoly.tiles;
 
 import be.ugent.objprog.ugentopoly.gameboard.BoardModel;
 import be.ugent.objprog.ugentopoly.tiles.tileCards.TemplateCard;

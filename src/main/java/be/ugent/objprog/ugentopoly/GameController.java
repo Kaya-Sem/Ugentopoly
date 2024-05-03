@@ -1,9 +1,9 @@
 package be.ugent.objprog.ugentopoly;
 
 import be.ugent.objprog.ugentopoly.dice.DiceRoller;
+import be.ugent.objprog.ugentopoly.gamecards.GameCard;
 import be.ugent.objprog.ugentopoly.players.PlayerModel;
 import be.ugent.objprog.ugentopoly.tiles.tileModels.TileModel;
-import javafx.stage.Stage;
 
 import java.util.List;
 
@@ -13,49 +13,43 @@ Functions as the controller for GameModel, so performs all the updates for it
  */
 
 public class GameController {
-    private final Stage primaryStage;
     private final GameModel gameModel;
     private final DiceRoller diceRoller;
 
-    public GameController(Stage primaryStage, GameModel gameModel) {
-        this.primaryStage = primaryStage;
+    public GameController(GameModel gameModel) {
         this.gameModel = gameModel;
         diceRoller = new DiceRoller(this);
 
-        initializeGame();
-    }
-
-    private void initializeGame() {
         List<PlayerModel> players = gameModel.getPlayerModels();
-        players.forEach(this::applygGameOverCondition);
+        players.forEach(player -> gameModel.getTileModels()[0].addPion(player.getPion()));
+
         gameModel.setCurrentPlayer(players.getFirst());
-
-        TileModel startTile = gameModel.getTileModels()[0];
-        players.forEach(player -> startTile.addPion(player.getPion()));
-
         gameModel.addLog(gameModel.getCurrentPlayer().getName(), "zal als eerste spelen!");
     }
 
-    // TODO
-    public void nextMove()  {
+    public void actMove()  {
         diceRoller.setIsDisabled(Boolean.TRUE);
 
         int moves = diceRoller.getMostRecentRoll();
         PlayerModel currentPlayer = gameModel.getCurrentPlayer();
 
-        for (int i = 0; i < moves; i++) {
-                movePion(currentPlayer);
+        int finalDestination = currentPlayer.getPosition();
+
+        TileModel[] tileModels = gameModel.getTileModels();
+
+        int length = tileModels.length;
+
+        // If a player passes start, but doesn't land on it.
+        if (finalDestination != 0 && currentPlayer.getPosition() + moves > length) {
+            tileModels[0].executePlayerTileInteraction(gameModel);
         }
 
-        TileModel currentTile = gameModel.getTileModels()[currentPlayer.getPosition()];
+        TileModel currentTile = tileModels[finalDestination];
         gameModel.addLog(currentPlayer.getName(), "belande op " + currentTile.getName() );
-
-        currentTile.executePlayerTileInteraction(gameModel);
+        moveCurrentPlayerToPosition(currentPlayer.getPosition() + moves);
 
         diceRoller.setIsDisabled(Boolean.TRUE);
-
         gameModel.getPlayerModels().forEach(PlayerModel::updateBalanceHistory);
-
         nextPlayer();
     }
 
@@ -64,33 +58,24 @@ public class GameController {
         gameModel.setCurrentPlayer(playerModel);
         gameModel.addLog(playerModel.getName(), "is aan de beurt!");
 
+        // TODO extract to own method. "Check is in jail" -> playermodel as argument
         if (playerModel.isInJail()) {
-            if (playerModel.getLeaveJailCards() > 0) {
-                gameModel.addLog(playerModel.getName(), "gebruikt een get-out-of-jail kaart\nen geraakt thuis van de Overpoort");
-                playerModel.changeGetOutOfJailCards(-1);
-            } else {
-                gameModel.addLog(playerModel.getName(), "is stomdronken, en zal dus moeten\ndobbelen tot deze nuchter is");
+            if (playerModel.getLeaveJailCards().isEmpty()) {
+                gameModel.addLog(playerModel.getName(), "is stomdronken, en zal dus moeten\ndobbelen tot die nuchter is");
                 diceRoller.rollToGetFree();
+            } else {
+                playerModel.setInJail(false);
+                GameCard jailCard = playerModel.getLeaveJailCards().removeFirst();
+                playerModel.fireInvalidationEvent(); // update count of get out of jail cards
+                if (gameModel.getChanceCardDeck().getSize() > gameModel.getChestCardDeck().getSize()) {
+                    gameModel.getChestCardDeck().addCard(jailCard);
+                } else {
+                    gameModel.getChanceCardDeck().addCard(jailCard);
+                }
+                gameModel.addLog(playerModel.getName(), "gebruikt een get-out-of-jail kaart\nen geraakt thuis van de Overpoort");
+
             }
         }
-    }
-
-    private void movePion(PlayerModel model) {
-        int position = model.getPosition();
-        TileModel[] tileModels = gameModel.getTileModels();
-
-        TileModel currentModel = tileModels[position];
-        currentModel.removePion(model.getPion());
-
-        int newPosition = (position + 1) % tileModels.length;
-
-        // passing start
-        if (newPosition == 0) {
-            tileModels[0].getPlayerTileInteraction();
-        }
-
-        model.setPosition(newPosition);
-        tileModels[newPosition].addPion(model.getPion());
     }
 
     public void moveCurrentPlayerToPosition(int newPosition) {
@@ -100,22 +85,21 @@ public class GameController {
         tileModels[playerModel.getPosition()].removePion(playerModel.getPion());
         playerModel.setPosition(newPosition);
         TileModel finalTile = tileModels[newPosition];
-        if (finalTile.getPosition() == 10) {
-            playerModel.setInJail(true);
-        }
+
         finalTile.addPion(playerModel.getPion());
+        finalTile.executePlayerTileInteraction(gameModel);
     }
 
     public void freePlayerFromJail(int moves) {
         PlayerModel freePlayer = gameModel.getCurrentPlayer();
         freePlayer.setInJail(false);
-        gameModel.addLog(freePlayer.getName(), "gooide een dubbel en ontsnapt uit de Overpoort!");
+        gameModel.addLog(freePlayer.getName(), "gooide een dubbel\nen ontsnapt uit de Overpoort!");
         int position = freePlayer.getPosition() + moves;
         moveCurrentPlayerToPosition(position);
-        gameModel.getTileModels()[position].executePlayerTileInteraction(gameModel);
     }
 
     public void moveCurrentPlayerToJail() {
+        gameModel.getCurrentPlayer().setInJail(true);
         moveCurrentPlayerToPosition(10);
     }
 
@@ -123,19 +107,7 @@ public class GameController {
         gameModel.addLog(text);
     }
 
-    private void applygGameOverCondition(PlayerModel model) {
-        model.balanceProperty().addListener(
-                (observableValue, oldValue, newValue) -> {
-                    if (newValue.intValue() <= 0) {
-                        gameModel.getPlayerModels().forEach(PlayerModel::updateBalanceHistory);
-                        GameOverDialog dialog = new GameOverDialog(model, gameModel.getPlayerModels());
-                        dialog.show();
-                        primaryStage.close();
-                    }
-                }
-        );
-    }
-
+    // remove
     public GameModel getGameModel() {
         return gameModel;
     }
@@ -143,5 +115,4 @@ public class GameController {
     public DiceRoller getDiceRoller() {
         return diceRoller;
     }
-
 }

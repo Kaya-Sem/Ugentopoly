@@ -8,19 +8,18 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class GameCardAlert extends Alert {
-    private static final int HEIGHT = 100;
-    private static final int WIDTH = 100;
 
     public GameCardAlert(String message) {
         super(AlertType.NONE);
-        setTitle("Kanskaart");
+        setTitle("");
         setHeaderText(null);
         setContentText(message);
 
-        Image image = new CustomImage("chance.png");
-        ImageView imageView = new CustomImageView(HEIGHT, WIDTH, image);
-        setGraphic(imageView);
+        setGraphic(null);
 
         ButtonType closeButton = new ButtonType("OK");
         getButtonTypes().add(closeButton);

@@ -1,12 +1,7 @@
 package be.ugent.objprog.ugentopoly;
 
-import be.ugent.objprog.ugentopoly.charting.BalanceChart;
-import be.ugent.objprog.ugentopoly.charting.ChartStage;
 import be.ugent.objprog.ugentopoly.players.PlayerModel;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +14,7 @@ public class GameOverDialog {
                 .filter(player -> !player.equals(loser))
                 .toList());
 
-        StringBuilder rankingMessage = new StringBuilder(loser.getName()).append(" verloor!\n\nRankings:\n");
+        StringBuilder rankingMessage = new StringBuilder(loser.getName()).append(" verloor!\n\nRanking:\n");
         winningPlayers.sort((p1, p2) -> Integer.compare(p2.getBalance(), p1.getBalance()));
         for (int i = 0; i < winningPlayers.size(); i++) {
             rankingMessage.append(i + 1).append(". ")
@@ -27,10 +22,6 @@ public class GameOverDialog {
                     .append(winningPlayers.get(i).getBalance()).append("\n");
         }
         message = rankingMessage.toString();
-        show();
-
-        Stage chartStage = new ChartStage(new Stage(), allPlayers);
-        chartStage.show();
     }
 
     public void show() {

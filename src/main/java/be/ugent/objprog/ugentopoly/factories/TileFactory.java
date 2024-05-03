@@ -1,6 +1,6 @@
 package be.ugent.objprog.ugentopoly.factories;
 
-import be.ugent.objprog.ugentopoly.DisplayCardController;
+import be.ugent.objprog.ugentopoly.tiles.DisplayCardController;
 import be.ugent.objprog.ugentopoly.tiles.TileTuple;
 import be.ugent.objprog.ugentopoly.tiles.tileModels.*;
 import be.ugent.objprog.ugentopoly.tiles.tileViews.*;
