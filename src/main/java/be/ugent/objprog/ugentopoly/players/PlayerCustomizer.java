@@ -37,11 +37,12 @@ public class PlayerCustomizer extends VBox {
             customizer.badgeComboBox.getItems().remove(newValue);
         }));
 
-setupComboBoxContextMenu();
+        setupComboBoxContextMenu();
         getChildren().addAll(field, badgeComboBox, new CustomButton());
         setSpacing(PADDING);
     }
 
+    // easter egg
     private void setupComboBoxContextMenu() {
         ContextMenu contextMenu = new ContextMenu();
         MenuItem addItem = new MenuItem("secret Noah badge");
