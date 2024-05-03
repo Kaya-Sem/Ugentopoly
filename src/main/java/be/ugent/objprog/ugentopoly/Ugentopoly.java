@@ -22,6 +22,7 @@ public class Ugentopoly extends Application {
         PlayerCreatorStage playerCreatorStage = new PlayerCreatorStage(primaryStage, parser.getStartingBalance());
         List<PlayerModel> players = playerCreatorStage.showAndWaitForPlayers();
 
+        // prevent program working with invalid data
         if (playerCreatorStage.isCancelled()) {
             primaryStage.close();
             return;
