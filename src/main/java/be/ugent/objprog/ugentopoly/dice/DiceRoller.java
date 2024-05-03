@@ -68,8 +68,12 @@ public class DiceRoller extends VBox {
 
     public void rollToGetFree() {
         isDisabled.set(false);
-        Button rollButton = (Button) getChildren().get(1); // second child
 
+        // second child. Creating a class field for this button would be more robust
+        Button rollButton = (Button) getChildren().get(1);
+
+        // This approach was taken to not interupt the game flow. The button is only updated with new logic, for
+        // when the player entered a "roll to get out of jail" event.
         rollButton.setOnAction(event -> {
             isDisabled.set(true);
             rollButton.setOnAction(e -> rollDice());

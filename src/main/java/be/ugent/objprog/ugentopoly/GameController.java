@@ -107,11 +107,6 @@ public class GameController {
         gameModel.addLog(text);
     }
 
-    // remove
-    public GameModel getGameModel() {
-        return gameModel;
-    }
-
     public DiceRoller getDiceRoller() {
         return diceRoller;
     }
