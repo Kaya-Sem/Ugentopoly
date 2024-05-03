@@ -1,3 +1,4 @@
+@SuppressWarnings("Java9RedundantRequiresStatement")
 open module be.ugent.objprog.ugentopoly {
     requires javafx.controls;
     requires javafx.fxml;

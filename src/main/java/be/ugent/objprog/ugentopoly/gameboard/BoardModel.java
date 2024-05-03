@@ -5,7 +5,6 @@ import be.ugent.objprog.ugentopoly.tiles.tileCards.TemplateCard;
 import be.ugent.objprog.ugentopoly.tiles.tileViews.TileView;
 
 public class BoardModel extends CustomObservable {
-    public static final int SMALL_TILES_IN_BAR = 9;
 
     public static final double MIDDLE_AREA_SIZE = 9 * TileView.SHORT_SIDE;
 
@@ -13,10 +12,6 @@ public class BoardModel extends CustomObservable {
     public static final int BOTTOMANGLE = 270;
 
     private TemplateCard displayedCard = null;
-
-    public static int getSmallTilesInBar() {
-        return SMALL_TILES_IN_BAR;
-    }
 
     public TemplateCard getDisplayedCard() {
         return displayedCard;

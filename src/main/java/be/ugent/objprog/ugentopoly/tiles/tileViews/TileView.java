@@ -12,8 +12,9 @@ import javafx.event.ActionEvent;
 import javafx.scene.layout.StackPane;
 
 public class TileView extends StackPane implements InvalidationListener{
-    public final static double LONG_SIDE = ((UgentopolyScene.BOARD_SIZE / BoardModel.getSmallTilesInBar()) * 2);
-    public final static double SHORT_SIDE = ((UgentopolyScene.BOARD_SIZE / BoardModel.getSmallTilesInBar()));
+    public static final int SMALL_TILES_IN_BAR = 9;
+    public final static double LONG_SIDE = ((UgentopolyScene.BOARD_SIZE / SMALL_TILES_IN_BAR) * 2);
+    public final static double SHORT_SIDE = ((UgentopolyScene.BOARD_SIZE / SMALL_TILES_IN_BAR));
     private static final double OFFSET = 32.5;
 
     protected final TileButton tileButton = new TileButton();

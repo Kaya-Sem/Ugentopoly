@@ -37,7 +37,7 @@ public class HorizontalBar extends GridPane implements Bar {
     }
 
     private void initializeColumnConstraints() {
-        IntStream.range(1, BoardModel.getSmallTilesInBar()).forEach(i -> getColumnConstraints().add(new ColumnConstraints(COL_WIDTH)));
+        IntStream.range(1, TILESLOTS).forEach(i -> getColumnConstraints().add(new ColumnConstraints(COL_WIDTH)));
     }
 
     public void populate() {

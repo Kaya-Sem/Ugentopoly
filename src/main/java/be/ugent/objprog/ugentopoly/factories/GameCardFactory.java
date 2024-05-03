@@ -150,5 +150,4 @@ public class GameCardFactory<T> {
             gameModel.addLog(currentPlayer.getName(), "kreeg €" + amount + " van elke speler");
         };
     }
-
 }

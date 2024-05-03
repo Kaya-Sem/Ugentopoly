@@ -41,7 +41,7 @@ public class VerticalBar extends GridPane implements Bar {
     }
 
     private void initializeRowConstraints() {
-        IntStream.range(1, BoardModel.getSmallTilesInBar()).forEach(i -> getRowConstraints().add(new RowConstraints(ROW_HEIGHT)));
+        IntStream.range(1, TILESLOTS).forEach(i -> getRowConstraints().add(new RowConstraints(ROW_HEIGHT)));
     }
 
     public void populate() {
