@@ -7,7 +7,7 @@ import be.ugent.objprog.ugentopoly.gameboard.Board;
 import be.ugent.objprog.ugentopoly.gameboard.BoardModel;
 import be.ugent.objprog.ugentopoly.gamecards.CardDeck;
 import be.ugent.objprog.ugentopoly.gamecards.GameCardInitializer;
-import be.ugent.objprog.ugentopoly.logs.LogListView;
+import be.ugent.objprog.ugentopoly.logging.LogListView;
 import be.ugent.objprog.ugentopoly.parsers.XMLParser;
 import be.ugent.objprog.ugentopoly.players.PlayerModel;
 import be.ugent.objprog.ugentopoly.playertabpane.PlayerTabPane;

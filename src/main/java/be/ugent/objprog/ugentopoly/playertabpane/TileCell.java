@@ -13,6 +13,12 @@ import javafx.scene.shape.Rectangle;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Constructs a TileCell and maps specific tile types to their corresponding graphical generators.
+ * This approach allows for flexible and dynamic generation of visuals based on tile type,
+ * adhering to the principle of separation of concerns by decoupling tile data from its presentation.
+ */
+
 public class TileCell extends ListCell<TileModel> {
     private final Map<Class<?>, TileGraphicGenerator> generatorMap = new HashMap<>();
     private static final double GRAPHICSIZE = 33;

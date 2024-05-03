@@ -1,6 +1,5 @@
-package be.ugent.objprog.ugentopoly.logs;
+package be.ugent.objprog.ugentopoly.logging;
 
-import be.ugent.objprog.ugentopoly.logging.LogElement;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ListView;

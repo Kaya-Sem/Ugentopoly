@@ -30,7 +30,7 @@ public class ChanceTileModel extends TileModel implements ImageTile {
             PlayerModel playerModel = gameModel.getCurrentPlayer();
             gameModel.addLog(playerModel.getName(), "trekt een kanskaart!");
             CardDeck chanceCardDeck = gameModel.getChanceCardDeck();
-            GameCard gameCard = chanceCardDeck.getNextCard();
+            GameCard gameCard = chanceCardDeck.getCard();
 
             // Players cannot keep non-jail cards
             if ("JAIL".equals(gameCard.getType())) {

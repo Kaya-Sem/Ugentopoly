@@ -116,5 +116,4 @@ public class XMLParser {
         });
         return colors;
     }
-
 }

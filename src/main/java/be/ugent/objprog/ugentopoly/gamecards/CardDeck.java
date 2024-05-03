@@ -10,7 +10,7 @@ public class CardDeck {
         cards = new ArrayDeque<>(initialCards);
     }
 
-    public GameCard getNextCard() {return cards.removeFirst();}
+    public GameCard getCard() {return cards.removeFirst();}
 
     public void addCard(GameCard card) {
         cards.addLast(card);

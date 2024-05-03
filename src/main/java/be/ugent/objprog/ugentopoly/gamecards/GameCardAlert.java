@@ -10,9 +10,8 @@ public class GameCardAlert extends Alert {
         super(AlertType.NONE);
         setTitle("");
         setHeaderText(null);
-        setContentText(message);
-
         setGraphic(null);
+        setContentText(message);
 
         ButtonType closeButton = new ButtonType("OK");
         getButtonTypes().add(closeButton);

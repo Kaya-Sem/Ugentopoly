@@ -8,7 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
 public class JailCornerTileView extends CornerTileView {
-    protected static final int ROTATIONANGLE = 135; // TODO extract to connertile?
+    protected static final int ROTATIONANGLE = 135;
     protected static final double SCALAR = 1.5;
     private static final double SIZE = LONG_SIDE - 30;
 

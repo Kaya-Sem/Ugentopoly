@@ -54,7 +54,6 @@ public class DiceRoller extends VBox {
                 doubleRolledCounter = 0;
                 controller.nextPlayer();
             }
-
             isDisabled.set(false);
             return;
         }
@@ -85,7 +84,6 @@ public class DiceRoller extends VBox {
                 } else {
                     controller.addLog("Geen dubbel, je zal nog een nachtje moeten doordoen");
                 }
-
                 isDisabled.set(false);
                 controller.nextPlayer();
             });
