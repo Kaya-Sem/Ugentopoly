@@ -6,8 +6,6 @@ import be.ugent.objprog.ugentopoly.tiles.tileModels.JailTileModel;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 
 public class JailCornerTileView extends CornerTileView {
     protected static final int ROTATIONANGLE = 135; // TODO extract to connertile?
