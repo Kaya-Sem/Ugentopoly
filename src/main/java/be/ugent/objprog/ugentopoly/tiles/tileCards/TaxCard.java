@@ -18,7 +18,7 @@ public class TaxCard extends VerticalCard {
         imageView.setFitWidth(TileView.LONG_SIDE);
 
         Label textLabel = new Label(text);
-        textLabel.getStyleClass().add("bold-label-large");
+        textLabel.getStyleClass().add("bold-label-medium");
 
         Label costLabel = new Label(cost + "€");
         costLabel.getStyleClass().add("thin-label-medium");

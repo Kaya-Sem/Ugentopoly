@@ -29,6 +29,7 @@ public class PlayerTabInfoView extends VBox implements InvalidationListener {
         playerOwnedTiles.setCellFactory(listView -> new TileCell());
         playerOwnedTiles.setFocusTraversable(false);
         playerOwnedTiles.setMouseTransparent(true);
+        playerOwnedTiles.setMaxHeight(250);
 
         HBox title = new HBox(getPlayerNameLabel(), getLabel(playerBalance, "€"));
         title.setSpacing(10);

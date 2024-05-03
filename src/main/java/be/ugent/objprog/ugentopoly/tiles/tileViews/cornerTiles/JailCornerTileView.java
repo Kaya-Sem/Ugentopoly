@@ -18,7 +18,7 @@ public class JailCornerTileView extends CornerTileView {
         VBox vBox = new VBox();
 
         Label textLabel = new Label(PropertyLoader.getLabel(getModel().getId()));
-        textLabel.getStyleClass().add("bold-label-medium");
+        textLabel.getStyleClass().add("bold-label-small");
 
         TileImageView tileImageView= new TileImageView(model.getImage(), SCALAR, true);
 

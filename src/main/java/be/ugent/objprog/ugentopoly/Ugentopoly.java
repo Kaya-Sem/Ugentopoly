@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 
 public class Ugentopoly extends Application {
     private static final String APPLICATIONNAME = "Ugentopoly";
-    private static final double WINDOW_WIDTH = 1700.0; // TODO test on 1080p
+    private static final double WINDOW_WIDTH = 1080.0;
     private static final double WINDOW_HEIGHT = 1200.0;
 
     @Override

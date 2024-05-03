@@ -13,8 +13,8 @@ import javafx.scene.layout.StackPane;
 
 public class TileView extends StackPane implements InvalidationListener{
     public static final int SMALL_TILES_IN_BAR = 9;
-    public final static double LONG_SIDE = ((UgentopolyScene.BOARD_SIZE / SMALL_TILES_IN_BAR) * 2);
-    public final static double SHORT_SIDE = ((UgentopolyScene.BOARD_SIZE / SMALL_TILES_IN_BAR));
+    public final static double LONG_SIDE = ((UgentopolyScene.BOARD_SIZE / 13) * 2);
+    public final static double SHORT_SIDE = ((UgentopolyScene.BOARD_SIZE / 13));
     private static final double OFFSET = 32.5;
 
     protected final TileButton tileButton = new TileButton();

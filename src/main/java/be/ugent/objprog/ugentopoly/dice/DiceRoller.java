@@ -15,7 +15,7 @@ public class DiceRoller extends VBox {
     private final SimpleBooleanProperty isDisabled = new SimpleBooleanProperty();
 
     private static final double SPACING = 10.0;
-    private static final double SIZE = 300.0;
+    private static final double SIZE = 200.0;
     private final GameController controller;
     private int doubleRolledCounter = 0;
     private static final int MAXDOUBLEROLLS = 3;

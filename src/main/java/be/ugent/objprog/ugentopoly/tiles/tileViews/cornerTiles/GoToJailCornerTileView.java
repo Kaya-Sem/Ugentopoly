@@ -23,8 +23,8 @@ public class GoToJailCornerTileView extends CornerTileView {
         Label textLabel1 = new Label(text[0]);
         Label textLabel2 = new Label(text[1]);
 
-        textLabel1.getStyleClass().add("bold-label-medium");
-        textLabel2.getStyleClass().add("bold-label-medium");
+        textLabel1.getStyleClass().add("bold-label-small");
+        textLabel2.getStyleClass().add("bold-label-small");
 
         TileImageView image = new TileImageView(model.getImage(), SCALAR, true);
 

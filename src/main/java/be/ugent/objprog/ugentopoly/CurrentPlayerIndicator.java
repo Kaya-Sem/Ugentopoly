@@ -16,8 +16,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class CurrentPlayerIndicator extends VBox implements InvalidationListener {
-    protected static final double SPACING = 20.0;
-    protected static final double HEIGHT = 70.0;
+    protected static final double SPACING = 10.0;
+    protected static final double HEIGHT = 50.0;
     private final GameModel gameModel;
     private PlayerModel currentPlayer;
 

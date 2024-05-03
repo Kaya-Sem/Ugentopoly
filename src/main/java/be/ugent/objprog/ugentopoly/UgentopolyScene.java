@@ -30,7 +30,7 @@ public class UgentopolyScene extends Scene {
     protected static final double SPACING = 20.0;
 
     public UgentopolyScene(List<PlayerModel> playerModelList, XMLParser parser, Stage stage) {
-        super(new StackPane(), BOARD_SIZE, BOARD_SIZE);
+        super(new StackPane());
         getStylesheets().add(getClass().getResource("/be/ugent/objprog/ugentopoly/styles.css").toExternalForm());
 
         BoardModel boardModel = new BoardModel();

@@ -13,7 +13,7 @@ import static javafx.geometry.Pos.*;
 
 public class StreetCard extends HorizontalCard {
     protected static final int ROUNDING = 20;
-    protected static final int PADDING = 35;
+    protected static final int PADDING = 25;
 
     public StreetCard(StreetTileModel model) {
         Label nameLabel = new Label(model.getName());

@@ -33,20 +33,21 @@ public class GameController {
         int moves = diceRoller.getMostRecentRoll();
         PlayerModel currentPlayer = gameModel.getCurrentPlayer();
 
-        int finalDestination = currentPlayer.getPosition() + moves;
+        int rawPosition = currentPlayer.getPosition() + moves;
+        int finalDestination = rawPosition % 40;
 
         TileModel[] tileModels = gameModel.getTileModels();
 
         int length = tileModels.length;
 
         // If a player passes start, but doesn't land on it.
-        if (finalDestination != 0 && currentPlayer.getPosition() + moves > length) {
+        if (rawPosition >= length && finalDestination != 0) {
             tileModels[0].executePlayerTileInteraction(gameModel);
         }
 
         TileModel currentTile = tileModels[finalDestination];
         gameModel.addLog(currentPlayer.getName(), "belande op " + currentTile.getName() );
-        moveCurrentPlayerToPosition(currentPlayer.getPosition() + moves);
+        moveCurrentPlayerToPosition(finalDestination);
 
         diceRoller.setIsDisabled(Boolean.TRUE);
         gameModel.getPlayerModels().forEach(PlayerModel::updateBalanceHistory);
@@ -58,7 +59,6 @@ public class GameController {
         gameModel.setCurrentPlayer(playerModel);
         gameModel.addLog(playerModel.getName(), "is aan de beurt!");
 
-        // TODO extract to own method. "Check is in jail" -> playermodel as argument
         if (playerModel.isInJail()) {
             if (playerModel.getLeaveJailCards().isEmpty()) {
                 gameModel.addLog(playerModel.getName(), "is stomdronken, en zal dus moeten\ndobbelen tot die nuchter is");

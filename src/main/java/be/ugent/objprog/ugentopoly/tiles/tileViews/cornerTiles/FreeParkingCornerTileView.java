@@ -22,8 +22,8 @@ public class FreeParkingCornerTileView extends CornerTileView {
         Label textLabel1 = new Label(text[0]);
         Label textLabel2 = new Label(text[1]);
 
-        textLabel1.getStyleClass().add("bold-label-medium");
-        textLabel2.getStyleClass().add("bold-label-medium");
+        textLabel1.getStyleClass().add("bold-label-small");
+        textLabel2.getStyleClass().add("bold-label-small");
 
         VBox vBox = new VBox(textLabel1, image, textLabel2);
         vBox.setMaxWidth(SIZE);

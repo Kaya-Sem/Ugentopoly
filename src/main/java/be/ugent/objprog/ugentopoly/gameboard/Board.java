@@ -20,7 +20,6 @@ public class Board extends GridPane {
     public Board(BoardModel boardModel, InitializedTilesObject tileViews) {
         double size = UgentopolyScene.BOARD_SIZE;
         middleSection = new MiddleSection(boardModel);
-        setPrefSize(size, size);
         setMaxHeight(size);
         setMaxWidth(size);
         setAlignment(Pos.CENTER);
