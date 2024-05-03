@@ -19,8 +19,13 @@ public class Ugentopoly extends Application {
     public void start(Stage primaryStage) {
 
         XMLParser parser = new XMLParser();
-        PlayerCreatorStage playerCreatorStage = new PlayerCreatorStage(parser.getStartingBalance());
+        PlayerCreatorStage playerCreatorStage = new PlayerCreatorStage(primaryStage, parser.getStartingBalance());
         List<PlayerModel> players = playerCreatorStage.showAndWaitForPlayers();
+
+        if (playerCreatorStage.isCancelled()) {
+            primaryStage.close();
+            return;
+        }
 
         // apply gameover condition
         players.forEach(playerModel -> playerModel.balanceProperty().addListener(

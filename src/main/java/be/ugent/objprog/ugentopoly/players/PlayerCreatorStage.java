@@ -16,6 +16,8 @@ import java.util.*;
 
 public class PlayerCreatorStage extends Stage {
 
+    private boolean cancelled = true; // Default to true, assuming cancel until proven otherwise
+
     private static final ObservableList<ImageTextItem> badgeOptions = FXCollections.observableArrayList(
             new ImageTextItem("WINA", new CustomImage("token1.png")),
             new ImageTextItem("V.T.K.", new CustomImage("token2.png")),
@@ -36,19 +38,25 @@ public class PlayerCreatorStage extends Stage {
     final Map<String, PlayerModel> players;
     final String balance;
 
-    public PlayerCreatorStage(String startingBalance) {
+    public PlayerCreatorStage(Stage stage, String startingBalance) {
         initModality(Modality.NONE);
         setAlwaysOnTop(true);
+
         setTitle("Add players");
         balance = startingBalance;
         players = new HashMap<>();
 
+        setOnCloseRequest(event -> {
+            cancelled = true;
+            stage.close();
+        });
+
         Button startGame = new Button("Start game!");
         startGame.setOnAction(e -> {
             if (players.size() > 1 && players.size() < 5) {
+                cancelled = false;
                 close();
             } else {
-                // TODO duplicate
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.initOwner(this);
                 alert.setTitle("Not Enough Players");
@@ -86,5 +94,9 @@ public class PlayerCreatorStage extends Stage {
     public List<PlayerModel> showAndWaitForPlayers() {
         showAndWait();
         return new ArrayList<>(players.values());
+    }
+
+    public boolean isCancelled() {
+        return cancelled;
     }
 }
