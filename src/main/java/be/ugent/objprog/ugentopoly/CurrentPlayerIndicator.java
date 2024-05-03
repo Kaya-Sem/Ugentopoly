@@ -39,12 +39,12 @@ public class CurrentPlayerIndicator extends VBox implements InvalidationListener
 
         PlayerInfo playerInfo = new PlayerInfo();
 
-       getChildren().addAll(text, playerInfo);
        setAlignment(Pos.TOP_CENTER);
        setSpacing(SPACING);
        setPadding(new Insets(SPACING));
 
        setMaxHeight(HEIGHT);
+        getChildren().addAll(text, playerInfo);
     }
 
     private class PlayerInfo extends HBox{
