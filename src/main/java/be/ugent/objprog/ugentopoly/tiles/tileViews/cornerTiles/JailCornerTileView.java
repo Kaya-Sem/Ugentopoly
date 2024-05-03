@@ -20,7 +20,7 @@ public class JailCornerTileView extends CornerTileView {
         VBox vBox = new VBox();
 
         Label textLabel = new Label(PropertyLoader.getLabel(getModel().getId()));
-        textLabel.setFont(Font.font("Arial", FontWeight.BOLD, 10));
+        textLabel.getStyleClass().add("bold-label-medium");
 
         TileImageView tileImageView= new TileImageView(model.getImage(), SCALAR, true);
 

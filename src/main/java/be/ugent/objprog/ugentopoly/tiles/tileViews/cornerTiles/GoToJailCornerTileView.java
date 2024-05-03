@@ -5,8 +5,6 @@ import be.ugent.objprog.ugentopoly.tiles.tileModels.GoToJailTileModel;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 
 import java.util.regex.Pattern;
 
@@ -25,9 +23,8 @@ public class GoToJailCornerTileView extends CornerTileView {
         Label textLabel1 = new Label(text[0]);
         Label textLabel2 = new Label(text[1]);
 
-        // TODO
-        textLabel1.setFont(Font.font("Arial", FontWeight.BOLD, 10));
-        textLabel2.setFont(Font.font("Arial", FontWeight.BOLD, 10));
+        textLabel1.getStyleClass().add("bold-label-medium");
+        textLabel2.getStyleClass().add("bold-label-medium");
 
         TileImageView image = new TileImageView(model.getImage(), SCALAR, true);
 

@@ -6,12 +6,10 @@ import be.ugent.objprog.ugentopoly.tiles.tileModels.FreeParkingModel;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 
 public class FreeParkingCornerTileView extends CornerTileView {
 
-    protected static final int VALUE = -135; // TODO extract to parent class
+    protected static final int VALUE = -135;
     protected static final double SCALAR = 1.7;
     private static final double SIZE = LONG_SIDE - 30;
 
@@ -24,8 +22,8 @@ public class FreeParkingCornerTileView extends CornerTileView {
         Label textLabel1 = new Label(text[0]);
         Label textLabel2 = new Label(text[1]);
 
-        textLabel1.setFont(Font.font("Arial", FontWeight.BOLD, 10));
-        textLabel2.setFont(Font.font("Arial", FontWeight.BOLD, 10));
+        textLabel1.getStyleClass().add("bold-label-medium");
+        textLabel2.getStyleClass().add("bold-label-medium");
 
         VBox vBox = new VBox(textLabel1, image, textLabel2);
         vBox.setMaxWidth(SIZE);
