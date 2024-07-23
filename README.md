@@ -7,6 +7,9 @@ Monopoly is a board game aimed at buying, renting, and selling real estate to in
 
 Ugentopoly was entirely created in java and JavaFX (without use of FXML). It utilises XML and properties files for loading game data.
 
+
+![promougentopoly](https://github.com/Kaya-Sem/Ugentopoly/assets/73200952/4efe4c92-be94-4b7e-9ecb-d2eb042743b4)
+
 ### Rules
 
 - The game is played with a minimum of two and a maximum of four players.
@@ -103,4 +106,3 @@ ordinary street:
 
 ## How to run
 
-![promougentopoly](https://github.com/Kaya-Sem/Ugentopoly/assets/73200952/4efe4c92-be94-4b7e-9ecb-d2eb042743b4)
